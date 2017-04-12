@@ -14,10 +14,10 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.widget.ImageView;
 
 import chingtech.library.R;
+import chingtech.library.utils.ScreenUtils;
 
 /**
  * 圆形图片、圆角图片、椭圆图片
@@ -93,7 +93,7 @@ public class RoundImageView extends ImageView {
 		type = a.getInt(R.styleable.RoundImageView_type, TYPE_OVAL);
 		mBorderColor = a.getColor(R.styleable.RoundImageView_border_color, Color.WHITE);
 		mBorderWidth = a.getDimension(R.styleable.RoundImageView_border_width, 0);
-		mCornerRadius = a.getDimension(R.styleable.RoundImageView_corner_radius, dp2px(10));
+		mCornerRadius = a.getDimension(R.styleable.RoundImageView_corner_radius, ScreenUtils.dip2px(context, 10));
 		mLeftTopCornerRadius = a.getDimension(R.styleable.RoundImageView_leftTop_corner_radius, 0);
 		mLeftBottomCornerRadius = a.getDimension(R.styleable.RoundImageView_leftBottom_corner_radius,0);
 		mRightTopCornerRadius = a.getDimension(R.styleable.RoundImageView_rightTop_corner_radius,0);
@@ -283,7 +283,7 @@ public class RoundImageView extends ImageView {
 	 * 设置圆角图片的圆角大小
 	 */
 	public RoundImageView setCornerRadius(int cornerRadius) {
-		cornerRadius = dp2px(cornerRadius);
+		cornerRadius = ScreenUtils.dip2px(getContext(), cornerRadius);
 		if (mCornerRadius != cornerRadius) {
 			mCornerRadius = cornerRadius;
 			invalidate();
@@ -295,7 +295,7 @@ public class RoundImageView extends ImageView {
 	 * 设置圆角图片的左上圆角大小
 	 */
 	public RoundImageView setLeftTopCornerRadius(int cornerRadius) {
-		cornerRadius = dp2px(cornerRadius);
+		cornerRadius = ScreenUtils.dip2px(getContext(), cornerRadius);
 		if (mLeftTopCornerRadius != cornerRadius) {
 			mLeftTopCornerRadius = cornerRadius;
 			invalidate();
@@ -307,7 +307,7 @@ public class RoundImageView extends ImageView {
 	 * 设置圆角图片的右上圆角大小
 	 */
 	public RoundImageView setRightTopCornerRadius(int cornerRadius) {
-		cornerRadius = dp2px(cornerRadius);
+		cornerRadius = ScreenUtils.dip2px(getContext(), cornerRadius);
 		if (mRightTopCornerRadius != cornerRadius) {
 			mRightTopCornerRadius = cornerRadius;
 			invalidate();
@@ -319,7 +319,7 @@ public class RoundImageView extends ImageView {
 	 * 设置圆角图片的左下圆角大小
 	 */
 	public RoundImageView setLeftBottomCornerRadius(int cornerRadius) {
-		cornerRadius = dp2px(cornerRadius);
+		cornerRadius = ScreenUtils.dip2px(getContext(), cornerRadius);
 		if (mLeftBottomCornerRadius != cornerRadius) {
 			mLeftBottomCornerRadius = cornerRadius;
 			invalidate();
@@ -331,7 +331,7 @@ public class RoundImageView extends ImageView {
 	 * 设置圆角图片的右下圆角大小
 	 */
 	public RoundImageView setRightBottomCornerRadius(int cornerRadius) {
-		cornerRadius = dp2px(cornerRadius);
+		cornerRadius = ScreenUtils.dip2px(getContext(), cornerRadius);
 		if (mRightBottomCornerRadius != cornerRadius) {
 			mRightBottomCornerRadius = cornerRadius;
 			invalidate();
@@ -343,7 +343,7 @@ public class RoundImageView extends ImageView {
 	 * 设置描边宽度
 	 */
 	public RoundImageView setBorderWidth(int borderWidth) {
-		borderWidth = dp2px(borderWidth);
+		borderWidth = ScreenUtils.dip2px(getContext(), borderWidth);
 		if (mBorderWidth != borderWidth) {
 			mBorderWidth = borderWidth;
 			invalidate();
@@ -362,10 +362,5 @@ public class RoundImageView extends ImageView {
 		}
 
 		return this;
-	}
-
-	private int dp2px(int dpVal) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				dpVal, getResources().getDisplayMetrics());
 	}
 }

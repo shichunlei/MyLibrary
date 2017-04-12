@@ -11,6 +11,7 @@
 - **RoundImageView**
 
     圆形图片、圆角图片、椭圆图片
+
     原始项目地址：https://github.com/RaphetS/RoundImageView
 
 - **SmoothCheckBox**
@@ -20,7 +21,12 @@
 - **CommonAdapter**、**CommonRecyclerAdapter**
 
     Android 轻量级适配器，简化使用，通吃所有的AbsListView、RecyclerView。支持Header与Footer
+
     原始项目地址：https://github.com/smuyyh/EasyAdapter
+
+- **工具类**
+
+    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils等
 
 **Version**
 
@@ -38,9 +44,9 @@ Step 1. Add the JitPack repository to your build file
 			maven { url 'https://jitpack.io' }
 		}
 	}
-	
+
 Step 2. Add the dependency
-	
+
     dependencies {
         compile 'com.github.shichunlei:MyLibrary:0.0.1'
     }

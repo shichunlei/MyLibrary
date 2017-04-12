@@ -35,65 +35,119 @@
             android:layout_height="wrap_content"
             android:text="Hello World!"/>
 
-        <chingtech.library.widget.RoundImageView
-            android:id="@+id/image1"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/wall04"
-            app:border_color="@color/google_green"
-            app:border_width="4dp"
-            app:type="circle" />
+        <Button
+            android:id="@+id/btn_dialog4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"/>
 
-        <chingtech.library.widget.RoundImageView
-            android:id="@+id/image2"
-            android:layout_marginTop="10dp"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            android:src="@drawable/wall04"
-            app:type="oval" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <chingtech.library.widget.RoundImageView
-            android:id="@+id/image3"
-            android:layout_marginTop="10dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/wall04"
-            app:border_color="@color/google_red"
-            app:border_width="2dp"
-            app:corner_radius="15dp"
-            app:type="round" />
+            <chingtech.library.widget.SmoothCheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:color_checked="@color/google_red"/>
 
-        <chingtech.library.widget.RoundImageView
-            android:layout_width="150dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/wall04"
-            app:border_color="@android:color/black"
-            app:border_width="2dp"
-            app:leftBottom_corner_radius="20dp"
-            app:leftTop_corner_radius="0dp"
-            app:rightBottom_corner_radius="20dp"
-            app:rightTop_corner_radius="0dp"
-            app:type="round" />
+            <chingtech.library.widget.SmoothCheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                app:color_checked="@color/google_green"/>
 
-        <chingtech.library.widget.RoundImageView
-            android:id="@+id/iv1"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:src="@drawable/wall04"
-            android:layout_marginTop="10dp" />
+            <chingtech.library.widget.SmoothCheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                app:color_checked="@color/google_blue"/>
 
-        <chingtech.library.widget.RoundImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/wall04"
-            app:border_width="3dp"
-            app:border_color="@android:color/holo_red_dark"
-            app:leftBottom_corner_radius="0dp"
-            app:leftTop_corner_radius="30dp"
-            app:rightBottom_corner_radius="30dp"
-            app:rightTop_corner_radius="0dp"
-            app:type="round" />
+            <chingtech.library.widget.SmoothCheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                app:color_checked="@color/google_yellow"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <chingtech.library.widget.RoundImageView
+                android:id="@+id/image1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/wall04"
+                app:border_color="@color/google_green"
+                app:border_width="4dp"
+                app:type="circle" />
+
+            <chingtech.library.widget.RoundImageView
+                android:id="@+id/image2"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:src="@drawable/wall04"
+                app:type="oval" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <chingtech.library.widget.RoundImageView
+                android:id="@+id/image3"
+                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/wall04"
+                app:border_color="@color/google_red"
+                app:border_width="2dp"
+                app:corner_radius="15dp"
+                app:type="round" />
+
+            <chingtech.library.widget.RoundImageView
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/wall04"
+                app:border_color="@android:color/black"
+                app:border_width="2dp"
+                android:layout_alignParentRight="true"
+                app:leftBottom_corner_radius="20dp"
+                app:leftTop_corner_radius="0dp"
+                app:rightBottom_corner_radius="20dp"
+                app:rightTop_corner_radius="0dp"
+                app:type="round" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <chingtech.library.widget.RoundImageView
+                android:id="@+id/iv1"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:src="@drawable/wall04"
+                android:layout_marginTop="10dp" />
+
+            <chingtech.library.widget.RoundImageView
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/wall04"
+                app:border_width="3dp"
+                android:layout_alignParentRight="true"
+                app:border_color="@android:color/holo_red_dark"
+                app:leftBottom_corner_radius="0dp"
+                app:leftTop_corner_radius="30dp"
+                app:rightBottom_corner_radius="30dp"
+                app:rightTop_corner_radius="0dp"
+                app:type="round" />
+        </RelativeLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

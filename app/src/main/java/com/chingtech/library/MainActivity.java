@@ -2,8 +2,11 @@ package com.chingtech.library;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -102,6 +105,33 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()], Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.btn_dialog4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View v = LayoutInflater.from(MainActivity.this).inflate(
+                        R.layout.layout, null);
+                final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
+                final EditText phone = (EditText) v.findViewById(R.id.edittxt_phone);
+                final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog
+                        .setTitle("Title")
+                        .setView(v)
+                        .setSingleChoiceItems(items)
+                        .setNegativeButton("", null)
+                        .setPositiveButton("", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.i("tag", username.getText().toString().trim());
+                                Log.i("tag", phone.getText().toString().trim());
+                                Log.i("tag", password.getText().toString().trim());
                                 Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()], Toast.LENGTH_SHORT).show();
                             }
                         })

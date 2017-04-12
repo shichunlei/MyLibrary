@@ -34,6 +34,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Checkable;
 
 import chingtech.library.R;
+import chingtech.library.utils.ScreenUtils;
 
 public class SmoothCheckBox extends View implements Checkable {
 
@@ -88,7 +89,7 @@ public class SmoothCheckBox extends View implements Checkable {
         mFloorColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked_stroke, COLOR_FLOOR_UNCHECKED);
         mCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_checked, COLOR_CHECKED);
         mUnCheckedColor = ta.getColor(R.styleable.SmoothCheckBox_color_unchecked, COLOR_UNCHECKED);
-        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, dip2px(getContext(), 0));
+        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.SmoothCheckBox_stroke_width, ScreenUtils.dip2px(getContext(), 0));
         ta.recycle();
 
         mFloorUnCheckedColor = mFloorColor;
@@ -200,7 +201,7 @@ public class SmoothCheckBox extends View implements Checkable {
     }
 
     private int measureSize(int measureSpec) {
-        int defSize = dip2px(getContext(), DEF_DRAW_SIZE);
+        int defSize = ScreenUtils.dip2px(getContext(), DEF_DRAW_SIZE);
         int specSize = MeasureSpec.getSize(measureSpec);
         int specMode = MeasureSpec.getMode(measureSpec);
 
@@ -414,10 +415,5 @@ public class SmoothCheckBox extends View implements Checkable {
 
     public interface OnCheckedChangeListener {
         void onCheckedChanged(SmoothCheckBox checkBox, boolean isChecked);
-    }
-
-    public static int dip2px(Context ctx, float dpValue) {
-        final float scale = ctx.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
     }
 }

@@ -3,7 +3,6 @@ package chingtech.library.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +22,7 @@ import java.util.List;
 import chingtech.library.R;
 import chingtech.library.adapter.ItemAdapter;
 import chingtech.library.bean.ItemBean;
+import chingtech.library.utils.StringUtils;
 
 public class AlertDialog {
 
@@ -137,7 +137,7 @@ public class AlertDialog {
         }
         if (titleId != 0) {
             txt_title.setText(context.getString(titleId));
-        } else if (!TextUtils.isEmpty(title)) {
+        } else if (StringUtils.isNotEmpty(title)) {
             txt_title.setText(title);
         } else {
             txt_title.setText("Title");
@@ -147,7 +147,7 @@ public class AlertDialog {
 
     public AlertDialog setEditText(String hint) {
         showEditText = true;
-        if (TextUtils.isEmpty(hint)) {
+        if (StringUtils.isEmpty(hint)) {
             edittxt_text.setHint("请输入内容");
         } else {
             edittxt_text.setHint(hint);
@@ -161,7 +161,7 @@ public class AlertDialog {
 
     public AlertDialog setEditText2(String hint) {
         showEditText2 = true;
-        if (TextUtils.isEmpty(hint)) {
+        if (StringUtils.isEmpty(hint)) {
             edittxt_text2.setHint("请输入内容");
         } else {
             edittxt_text2.setHint(hint);
@@ -175,7 +175,7 @@ public class AlertDialog {
 
     public AlertDialog setPassword(String hint) {
         showPwdEdit = true;
-        if (TextUtils.isEmpty(hint)) {
+        if (StringUtils.isEmpty(hint)) {
             password.setHint("请输入密码");
         } else {
             password.setHint(hint);
@@ -201,7 +201,7 @@ public class AlertDialog {
         if (msgId != 0) {
             showMsg = true;
             txt_msg.setText(context.getString(msgId));
-        } else if (!TextUtils.isEmpty(msg)) {
+        } else if (StringUtils.isNotEmpty(msg)) {
             showMsg = true;
             txt_msg.setText(msg);
         } else {
@@ -267,7 +267,7 @@ public class AlertDialog {
         showPosBtn = true;
         if (textId != 0) {
             btn_pos.setText(context.getString(textId));
-        } else if (!TextUtils.isEmpty(text)) {
+        } else if (StringUtils.isNotEmpty(text)) {
             btn_pos.setText(text);
         } else {
             btn_pos.setText("确定");
@@ -299,7 +299,7 @@ public class AlertDialog {
         showNegBtn = true;
         if (textId != 0) {
             btn_neg.setText(context.getString(textId));
-        } else if (!TextUtils.isEmpty(text)) {
+        } else if (StringUtils.isNotEmpty(text)) {
             btn_neg.setText(text);
         } else {
             btn_neg.setText("取消");
