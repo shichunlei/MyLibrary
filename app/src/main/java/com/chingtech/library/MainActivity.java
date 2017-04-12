@@ -1,0 +1,112 @@
+package com.chingtech.library;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import chingtech.library.widget.AlertDialog;
+import chingtech.library.widget.RoundImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private AlertDialog dialog;
+
+    String[] items = {"item0", "item1", "item2", "item3"};
+
+    private RoundImageView image1, image2, image3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        image1 = (RoundImageView)findViewById(R.id.image1);
+        image2 = (RoundImageView)findViewById(R.id.image2);
+        image3 = (RoundImageView)findViewById(R.id.image3);
+
+        Glide.with(this).load("http://www.5857.com/uploadfile/2015/0321/20150321103512823.jpg").centerCrop().crossFade().error(R.drawable.wall04).placeholder(R.drawable.wall04).into(image1);
+        Glide.with(this).load("http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg").centerCrop().crossFade().error(R.drawable.wall04).placeholder(R.drawable.wall04).into(image2);
+        Glide.with(this).load("http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg").centerCrop().crossFade().error(R.drawable.wall04).placeholder(R.drawable.wall04).into(image3);
+
+        findViewById(R.id.btn_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog
+                        .setTitle("这里是Title", Gravity.CENTER)
+                        .addSheetItem("item0", new AlertDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Toast.makeText(MainActivity.this, "item0", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addSheetItem("item1", new AlertDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Toast.makeText(MainActivity.this, "item1", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addSheetItem("item2", new AlertDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Toast.makeText(MainActivity.this, "item2", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addSheetItem("item3", new AlertDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Toast.makeText(MainActivity.this, "item3", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.btn_dialog2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog
+                        .setTitle("Title")
+                        .setMsg("Message")
+                        .setEditText("用户名")
+                        .setPassword("密码")
+                        .setNegativeButton("", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .setPositiveButton("", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.btn_dialog3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog
+                        .setTitle("Title")
+                        .setSingleChoiceItems(items)
+                        .setNegativeButton("", null)
+                        .setPositiveButton("", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()], Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+}

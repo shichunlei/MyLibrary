@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context="com.chingtech.library.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"/>
+
+        <Button
+            android:id="@+id/btn_dialog2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"/>
+
+        <Button
+            android:id="@+id/btn_dialog3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"/>
+
+        <chingtech.library.widget.RoundImageView
+            android:id="@+id/image1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/wall04"
+            app:border_color="@color/google_green"
+            app:border_width="4dp"
+            app:type="circle" />
+
+        <chingtech.library.widget.RoundImageView
+            android:id="@+id/image2"
+            android:layout_marginTop="10dp"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:src="@drawable/wall04"
+            app:type="oval" />
+
+        <chingtech.library.widget.RoundImageView
+            android:id="@+id/image3"
+            android:layout_marginTop="10dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/wall04"
+            app:border_color="@color/google_red"
+            app:border_width="2dp"
+            app:corner_radius="15dp"
+            app:type="round" />
+
+        <chingtech.library.widget.RoundImageView
+            android:layout_width="150dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/wall04"
+            app:border_color="@android:color/black"
+            app:border_width="2dp"
+            app:leftBottom_corner_radius="20dp"
+            app:leftTop_corner_radius="0dp"
+            app:rightBottom_corner_radius="20dp"
+            app:rightTop_corner_radius="0dp"
+            app:type="round" />
+
+        <chingtech.library.widget.RoundImageView
+            android:id="@+id/iv1"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/wall04"
+            android:layout_marginTop="10dp" />
+
+        <chingtech.library.widget.RoundImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/wall04"
+            app:border_width="3dp"
+            app:border_color="@android:color/holo_red_dark"
+            app:leftBottom_corner_radius="0dp"
+            app:leftTop_corner_radius="30dp"
+            app:rightBottom_corner_radius="30dp"
+            app:rightTop_corner_radius="0dp"
+            app:type="round" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
