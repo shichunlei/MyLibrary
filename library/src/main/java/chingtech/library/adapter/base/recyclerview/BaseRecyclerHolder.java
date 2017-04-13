@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import chingtech.library.adapter.base.helper.ViewHelper;
+import chingtech.library.utils.ENUM;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.SmoothCheckBox;
 
@@ -350,7 +351,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
      * @param viewId The view id.
      */
     @Override
-    public BaseRecyclerHolder setViewHeight(int viewId, ViewUtils.Proportion type) {
+    public BaseRecyclerHolder setViewHeight(int viewId, ENUM.Proportion type) {
         View view = getView(viewId);
         ViewUtils.setViewHeight(mContext, view, type);
         return this;
@@ -362,7 +363,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
      * @param viewId The view id.
      */
     @Override
-    public BaseRecyclerHolder setViewHeight(int viewId, ViewUtils.Proportion type, float screen) {
+    public BaseRecyclerHolder setViewHeight(int viewId, ENUM.Proportion type, float screen) {
         View view = getView(viewId);
         ViewUtils.setViewHeight(mContext, view, type, screen);
         return this;
@@ -374,7 +375,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
      * @param viewId The view id.
      */
     @Override
-    public BaseRecyclerHolder setViewWidth(int viewId, ViewUtils.Proportion type) {
+    public BaseRecyclerHolder setViewWidth(int viewId, ENUM.Proportion type) {
         View view = getView(viewId);
         ViewUtils.setViewWidth(mContext, view, type);
         return this;
@@ -386,7 +387,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
      * @param viewId The view id.
      */
     @Override
-    public BaseRecyclerHolder setViewWidth(int viewId, ViewUtils.Proportion type, float screen) {
+    public BaseRecyclerHolder setViewWidth(int viewId, ENUM.Proportion type, float screen) {
         View view = getView(viewId);
         ViewUtils.setViewWidth(mContext, view, type, screen);
         return this;

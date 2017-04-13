@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import chingtech.library.adapter.base.helper.ViewHelper;
+import chingtech.library.utils.ENUM;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.SmoothCheckBox;
 
@@ -326,7 +327,7 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
      * @param viewId The view id.
      */
     @Override
-    public BaseAbsListHolder setViewHeight(int viewId, ViewUtils.Proportion type) {
+    public BaseAbsListHolder setViewHeight(int viewId, ENUM.Proportion type) {
         View view = getView(viewId);
         ViewUtils.setViewHeight(mContext, view, type);
         return this;
@@ -338,7 +339,7 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
      * @param viewId The view id.
      */
     @Override
-    public BaseAbsListHolder setViewHeight(int viewId, ViewUtils.Proportion type, float screen) {
+    public BaseAbsListHolder setViewHeight(int viewId, ENUM.Proportion type, float screen) {
         View view = getView(viewId);
         ViewUtils.setViewHeight(mContext, view, type, screen);
         return this;

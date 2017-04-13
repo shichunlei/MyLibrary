@@ -41,4 +41,14 @@
         <attr name="eiv_animationDuration" format="integer"/>
         <attr name="eiv_padding" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="FlipView">
+        <attr name="flip_touch" format="boolean"/>
+        <attr name="flip_duration" format="integer"/>
+        <attr name="flip_enabled" format="boolean"/>
+        <attr name="flip_state" format="enum">
+            <enum name="front" value="0"/>
+            <enum name="back" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>

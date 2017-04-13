@@ -26,15 +26,21 @@
 
     Android 轻量级适配器，简化使用，通吃所有的AbsListView、RecyclerView。支持Header与Footer
 
-    原始项目地址：https://github.com/smuyyh/EasyAdapter
+    参考项目地址：https://github.com/smuyyh/EasyAdapter
+
+- **FlipView**
+
+    可翻转的View，仿支付宝-蚂蚁宝卡里流量兑换的翻转View
+
+    参考项目地址：https://github.com/wajahatkarim3/EasyFlipView
 
 - **工具类**
 
-    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils等
+    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils、FileUtils、AppUitls、IdcardUtil等
 
 **Version**
 
-    0.0.1
+    【0.0.3】
 
 # Installation
 
@@ -52,7 +58,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.2'
+        compile 'com.github.shichunlei:MyLibrary:0.0.3'
     }
 
 # Usage

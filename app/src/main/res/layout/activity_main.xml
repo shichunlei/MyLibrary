@@ -11,41 +11,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:padding="16dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Dialog 列表"/>
 
         <Button
             android:id="@+id/btn_dialog2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Dialog Editview"/>
 
         <Button
             android:id="@+id/btn_dialog3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Dialog 单选列表"/>
 
         <Button
             android:id="@+id/btn_dialog4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Dialog 单选列表 + View"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="20dp"
+            android:gravity="center">
 
             <chingtech.library.widget.SmoothCheckBox
                 android:layout_width="30dp"
@@ -149,5 +147,44 @@
                 app:rightTop_corner_radius="0dp"
                 app:type="round" />
         </RelativeLayout>
+
+        <chingtech.library.widget.FlipView
+            android:id="@+id/flipView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:flip_touch="false"
+            app:flip_state="front">
+
+            <ImageView
+                android:id="@+id/imgBackCard"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:src="@drawable/card_back" />
+
+            <ImageView
+                android:id="@+id/imgFrontCard"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:src="@drawable/card_front" />
+
+        </chingtech.library.widget.FlipView>
+
+        <chingtech.library.widget.FlipView
+            android:id="@+id/flipView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:flip_duration="1500"
+            app:flip_touch="false"
+            app:flip_state="back">
+
+            <include layout="@layout/layout_back"/>
+
+            <include layout="@layout/layout_front" />
+
+        </chingtech.library.widget.FlipView>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

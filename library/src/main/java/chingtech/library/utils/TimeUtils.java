@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import chingtech.library.R;
 
@@ -22,9 +23,13 @@ public class TimeUtils {
     public static final String TIME_SHAORT_FORMAT = "HH:mm";
     public static final String TIME_MS_FORMAT = "mm:ss";
     public static final String Y_M_FORMAT = "yyyy-MM";
-    public static final String YEAR_FORMAT = "yyyy";
-    public static final String MM_FORMAT = "MM";
-    public static final String DD_FORMAT = "dd";
+    public static final String Y_FORMAT = "yyyy";
+    public static final String M_FORMAT = "MM";
+    public static final String D_FORMAT = "dd";
+    public static final String H_24_FORMAT = "HH";
+    public static final String H_12_FORMAT = "hh";
+    public static final String MIN_FORMAT = "mm";
+    public static final String S_FORMAT = "ss";
     public static final String DATE_CALENDAR = "yyyyMMdd";
     public static final String DATE_E_FORMAT = "yyyy-MM-dd E";
     public static final String DATE_FORMAT_CN = "yyyy年MM月dd日";
@@ -365,5 +370,65 @@ public class TimeUtils {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 当前日期前几天或者后几天的日期
+     *
+     * @param days
+     * @return
+     */
+    public static String afterNDay(int days) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, days);
+        Date date = calendar.getTime();
+        return getFormat(DATE_FORMAT).format(date);
+    }
+
+    /**
+     * 某日期之后days天的日期
+     *
+     * @param days
+     * @param strDate
+     * @return
+     */
+    public static String afterNDay(String strDate, int days) {
+        Date date = strToDate(strDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, days);
+        Date afterDate = calendar.getTime();
+        return getFormat(DATE_FORMAT).format(afterDate);
+    }
+
+    /**
+     * 判断是否润年
+     *
+     * 1.被400整除是闰年
+     *
+     * 2.不能被4整除则不是闰年
+     *
+     * 3.能被4整除同时不能被100整除则是闰年
+     *
+     * 4.能被4整除同时能被100整除则不是闰年
+     *
+     * @param strDate
+     * @return
+     */
+    public static boolean isLeapYear(String strDate) {
+        Date date = strToDate(strDate);
+        GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+        gc.setTime(date);
+        int year = gc.get(Calendar.YEAR);
+        if ((year % 400) == 0)
+            return true;
+        else if ((year % 4) == 0) {
+            if ((year % 100) == 0)
+                return false;
+            else
+                return true;
+        } else
+            return false;
     }
 }

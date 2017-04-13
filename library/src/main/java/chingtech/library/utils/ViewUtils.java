@@ -75,21 +75,21 @@ public class ViewUtils {
      * @param type
      * @param screen
      */
-    public static void setViewHeight(Context context, View view, Proportion type, float screen) {
+    public static void setViewHeight(Context context, View view, ENUM.Proportion type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
         float proportion = 0f;
 
-        if (type == Proportion.P_1_1) {
+        if (type == ENUM.Proportion.P_1_1) {
             proportion = 1f;
-        } else if (type == Proportion.P_3_2) {
+        } else if (type == ENUM.Proportion.P_3_2) {
             proportion = 2f / 3f;
-        } else if (type == Proportion.P_4_3) {
+        } else if (type == ENUM.Proportion.P_4_3) {
             proportion = 3f / 4f;
-        } else if (type == Proportion.P_16_9) {
+        } else if (type == ENUM.Proportion.P_16_9) {
             proportion = 9f / 16f;
-        } else if (type == Proportion.P_2_1) {
+        } else if (type == ENUM.Proportion.P_2_1) {
             proportion = 0.5f;
-        } else if (type == Proportion.P_3_1) {
+        } else if (type == ENUM.Proportion.P_3_1) {
             proportion = 1f / 3f;
         }
 
@@ -112,7 +112,7 @@ public class ViewUtils {
      * @param view
      * @param type
      */
-    public static void setViewHeight(Context context, View view, Proportion type) {
+    public static void setViewHeight(Context context, View view, ENUM.Proportion type) {
         setViewHeight(context, view, type, 0f);
     }
 
@@ -124,23 +124,23 @@ public class ViewUtils {
      * @param type
      * @param screen
      */
-    public static void setViewWidth(Context context, View view, Proportion type, float screen) {
+    public static void setViewWidth(Context context, View view, ENUM.Proportion type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
         float proportion = 0f;
 
-        if (type == Proportion.P_1_1) {
+        if (type == ENUM.Proportion.P_1_1) {
             proportion = 1f;
-        } else if (type == Proportion.P_3_2) {
+        } else if (type == ENUM.Proportion.P_3_2) {
             proportion = 2f / 3f;
-        } else if (type == Proportion.P_4_3) {
+        } else if (type == ENUM.Proportion.P_4_3) {
             proportion = 3f / 4f;
-        } else if (type == Proportion.P_16_9) {
+        } else if (type == ENUM.Proportion.P_16_9) {
             proportion = 9f / 16f;
-        } else if (type == Proportion.P_2_1) {
+        } else if (type == ENUM.Proportion.P_2_1) {
             proportion = 0.5f;
-        } else if (type == Proportion.P_3_1) {
+        } else if (type == ENUM.Proportion.P_3_1) {
             proportion = 1f / 3f;
-        } else if (type == Proportion.P_7_1) {
+        } else if (type == ENUM.Proportion.P_7_1) {
             proportion = 1f / 7f;
         }
 
@@ -163,20 +163,7 @@ public class ViewUtils {
      * @param view
      * @param type
      */
-    public static void setViewWidth(Context context, View view, Proportion type) {
+    public static void setViewWidth(Context context, View view, ENUM.Proportion type) {
         setViewWidth(context, view, type, 0f);
-    }
-
-    /**
-     * View宽高比例
-     */
-    public enum Proportion {
-        P_1_1,
-        P_3_2,
-        P_4_3,
-        P_16_9,
-        P_2_1,
-        P_3_1,
-        P_7_1
     }
 }

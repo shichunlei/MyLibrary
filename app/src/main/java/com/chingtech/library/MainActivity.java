@@ -3,12 +3,15 @@ package com.chingtech.library;
 import static chingtech.library.utils.TimeUtils.DATE_SHAORT_FORMAT;
 import static chingtech.library.utils.TimeUtils.DATE_TIME_FORMAT;
 import static chingtech.library.utils.TimeUtils.DATE_TIME_HOUR_MIN_FORMAT;
-import static chingtech.library.utils.TimeUtils.DD_FORMAT;
-import static chingtech.library.utils.TimeUtils.MM_FORMAT;
+import static chingtech.library.utils.TimeUtils.D_FORMAT;
+import static chingtech.library.utils.TimeUtils.H_12_FORMAT;
+import static chingtech.library.utils.TimeUtils.H_24_FORMAT;
+import static chingtech.library.utils.TimeUtils.MIN_FORMAT;
+import static chingtech.library.utils.TimeUtils.M_FORMAT;
 import static chingtech.library.utils.TimeUtils.TIME_FORMAT;
 import static chingtech.library.utils.TimeUtils.TIME_MS_FORMAT;
 import static chingtech.library.utils.TimeUtils.TIME_SHAORT_FORMAT;
-import static chingtech.library.utils.TimeUtils.YEAR_FORMAT;
+import static chingtech.library.utils.TimeUtils.Y_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_M_FORMAT;
 
 import android.os.Bundle;
@@ -22,53 +25,86 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import chingtech.library.utils.AppUitls;
 import chingtech.library.utils.TimeUtils;
 import chingtech.library.widget.AlertDialog;
+import chingtech.library.widget.FlipView;
 import chingtech.library.widget.RoundImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AlertDialog dialog;
 
-    String[] items = {"item0", "item1", "item2", "item3"};
+    private String[] items = {"item0", "item1", "item2", "item3"};
 
     private RoundImageView image1, image2, image3;
+
+    private String date = "2017-04-13";
+
+    private String datetime = "2017-04-13 17:32:21";
+
+    private FlipView easyFlipView;
+    private FlipView easyFlipView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String s = TimeUtils.formatDate("2017-02-21", DATE_SHAORT_FORMAT);
+        easyFlipView = (FlipView) findViewById(R.id.flipView);
+        easyFlipView2 = (FlipView) findViewById(R.id.flipView2);
+
+        String appname = AppUitls.getAppName(MainActivity.this);
+        Log.i("tag", "appname:" + appname);
+        String pkname = AppUitls.getPkName(MainActivity.this);
+        Log.i("tag", "pkname:" + pkname);
+        String versionname = AppUitls.getVersionName(MainActivity.this);
+        Log.i("tag", "versionname:" + versionname);
+        int versioncode = AppUitls.getVersionCode(MainActivity.this);
+        Log.i("tag", "versioncode:" + versioncode);
+
+        String s = TimeUtils.formatDate(date, DATE_SHAORT_FORMAT);
         Log.i("tag", s);
 
-        String s0 = TimeUtils.formatDate("2017-02-21", YEAR_FORMAT);
+        String s0 = TimeUtils.formatDate(date, Y_FORMAT);
         Log.i("tag", s0);
 
-        String s01 = TimeUtils.formatDate("2017-02-21", Y_M_FORMAT);
+        String s01 = TimeUtils.formatDate(date, Y_M_FORMAT);
         Log.i("tag", s01);
-        String s02 = TimeUtils.formatDate("2017-02-21", DD_FORMAT);
+        String s02 = TimeUtils.formatDate(date, D_FORMAT);
         Log.i("tag", s02);
-        String s03 = TimeUtils.formatDate("2017-02-21", MM_FORMAT);
+        String s03 = TimeUtils.formatDate(date, M_FORMAT);
         Log.i("tag", s03);
 
-        String s2 = TimeUtils.formatDateTime("2017-02-21 20:23:30", TIME_FORMAT);
+        String s2 = TimeUtils.formatDateTime(datetime, TIME_FORMAT);
         Log.i("tag", s2);
 
-        String s3 = TimeUtils.formatDateTime("2017-02-21 20:23:30", TIME_SHAORT_FORMAT);
+        String s3 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
         Log.i("tag", s3);
 
-        String s4 = TimeUtils.formatDateTime("2017-02-21 20:23:30", DATE_TIME_HOUR_MIN_FORMAT);
+        String s4 = TimeUtils.formatDateTime(datetime, DATE_TIME_HOUR_MIN_FORMAT);
         Log.i("tag", s4);
 
-        String s5 = TimeUtils.formatDateTime("1970-01-01 20:23:30", TIME_SHAORT_FORMAT);
+        String s5 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
         Log.i("tag", s5);
 
-        String s6 = TimeUtils.formatDateTime("2017-01-01 20:23:30", DATE_TIME_FORMAT);
+        String s6 = TimeUtils.formatDateTime(datetime, DATE_TIME_FORMAT);
         Log.i("tag", s6);
 
-        String s7 = TimeUtils.formatDateTime("2017-01-01 20:23:30", TIME_MS_FORMAT);
+        String s7 = TimeUtils.formatDateTime(datetime, TIME_MS_FORMAT);
         Log.i("tag", s7);
+
+        String s8 = TimeUtils.formatDateTime(datetime, H_24_FORMAT);
+        Log.i("tag", s8);
+
+        String s9 = TimeUtils.formatDateTime(datetime, H_12_FORMAT);
+        Log.i("tag", s9);
+
+        String s09 = TimeUtils.formatDateTime(datetime, MIN_FORMAT);
+        Log.i("tag", s09);
+
+        String s090 = TimeUtils.formatDateTime(datetime, "HH:00");
+        Log.i("tag", s090);
 
         image1 = (RoundImageView)findViewById(R.id.image1);
         image2 = (RoundImageView)findViewById(R.id.image2);
@@ -179,6 +215,40 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .show();
+            }
+        });
+
+        easyFlipView.setFlipDuration(1000);
+
+        findViewById(R.id.imgFrontCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Front Card", Toast.LENGTH_SHORT).show();
+                easyFlipView.flipTheView();
+            }
+        });
+
+        findViewById(R.id.imgBackCard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Back Card", Toast.LENGTH_SHORT).show();
+                easyFlipView.flipTheView();
+            }
+        });
+
+        findViewById(R.id.cardview_front).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Front Card", Toast.LENGTH_SHORT).show();
+                easyFlipView2.flipTheView();
+            }
+        });
+
+        findViewById(R.id.cardview_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Back Card", Toast.LENGTH_SHORT).show();
+                easyFlipView2.flipTheView();
             }
         });
     }

@@ -18,4 +18,17 @@ public class ENUM {
         WEEKS_EN_ABB,
         WEEKS_EN_LET
     }
+
+    /**
+     * View宽高比例
+     */
+    public enum Proportion {
+        P_1_1,
+        P_3_2,
+        P_4_3,
+        P_16_9,
+        P_2_1,
+        P_3_1,
+        P_7_1
+    }
 }

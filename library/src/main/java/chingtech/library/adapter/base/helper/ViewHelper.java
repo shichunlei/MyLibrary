@@ -12,7 +12,7 @@ import android.widget.Adapter;
 
 import chingtech.library.adapter.base.abslistview.BaseAbsListHolder;
 import chingtech.library.adapter.base.recyclerview.BaseRecyclerHolder;
-import chingtech.library.utils.ViewUtils;
+import chingtech.library.utils.ENUM;
 import chingtech.library.widget.SmoothCheckBox;
 
 public interface ViewHelper {
@@ -254,7 +254,7 @@ public interface ViewHelper {
          * @param type
          * @return
          */
-        VH setViewHeight(int viewId, ViewUtils.Proportion type);
+        VH setViewHeight(int viewId, ENUM.Proportion type);
 
         /**
          * 设置控件的高度
@@ -265,7 +265,7 @@ public interface ViewHelper {
          * @param screen
          * @return
          */
-        VH setViewHeight(int viewId, ViewUtils.Proportion type, float screen);
+        VH setViewHeight(int viewId, ENUM.Proportion type, float screen);
 
         /**
          * 设置监听
@@ -559,7 +559,7 @@ public interface ViewHelper {
          * @param type
          * @return
          */
-        VH setViewHeight(int viewId, ViewUtils.Proportion type);
+        VH setViewHeight(int viewId, ENUM.Proportion type);
 
         /**
          * 设置控件的高度
@@ -570,7 +570,7 @@ public interface ViewHelper {
          * @param screen
          * @return
          */
-        VH setViewHeight(int viewId, ViewUtils.Proportion type, float screen);
+        VH setViewHeight(int viewId, ENUM.Proportion type, float screen);
 
         /**
          * 设置控件的宽度
@@ -580,7 +580,7 @@ public interface ViewHelper {
          * @param type
          * @return
          */
-        VH setViewWidth(int viewId, ViewUtils.Proportion type);
+        VH setViewWidth(int viewId, ENUM.Proportion type);
 
         /**
          * 设置控件的宽度
@@ -591,6 +591,6 @@ public interface ViewHelper {
          * @param screen
          * @return
          */
-        VH setViewWidth(int viewId, ViewUtils.Proportion type, float screen);
+        VH setViewWidth(int viewId, ENUM.Proportion type, float screen);
     }
 }
