@@ -1,10 +1,13 @@
 package chingtech.library.utils;
 
+import android.content.Context;
+
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import chingtech.library.R;
 
 public class TimeUtils {
 
@@ -17,14 +20,15 @@ public class TimeUtils {
     public static final String DATE_SHAORT_FORMAT = "MM-dd";
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String TIME_SHAORT_FORMAT = "HH:mm";
-
+    public static final String TIME_MS_FORMAT = "mm:ss";
+    public static final String Y_M_FORMAT = "yyyy-MM";
+    public static final String YEAR_FORMAT = "yyyy";
+    public static final String MM_FORMAT = "MM";
+    public static final String DD_FORMAT = "dd";
     public static final String DATE_CALENDAR = "yyyyMMdd";
-
     public static final String DATE_E_FORMAT = "yyyy-MM-dd E";
-
     public static final String DATE_FORMAT_CN = "yyyy年MM月dd日";
     public static final String DATE_SHAORT_FORMAT_CN = "MM月dd日";
-
     public static final String DAY_FORMAT = "MM/dd";
     public static final String DAY_YMD_FORMAT = "yyyy/MM/dd";
 
@@ -39,8 +43,20 @@ public class TimeUtils {
      * @param format
      * @return
      */
-    public static String formatDateTime(String strDateTime, String format) {
+    public static String formatDate(String strDateTime, String format) {
         Date date = strToDate(strDateTime);
+        return getFormat(format).format(date);
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param strDateTime
+     * @param format
+     * @return
+     */
+    public static String formatDateTime(String strDateTime, String format) {
+        Date date = strToDateTime(strDateTime);
         return getFormat(format).format(date);
     }
 
@@ -74,8 +90,12 @@ public class TimeUtils {
      * @return date型 yyyy-MM-dd
      */
     public static Date strToDate(String strDate) {
-        ParsePosition pos = new ParsePosition(0);
-        Date date = getFormat(DATE_FORMAT).parse(strDate, pos);
+        Date date = null;
+        try {
+            date = getFormat(DATE_FORMAT).parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return date;
     }
 
@@ -86,8 +106,12 @@ public class TimeUtils {
      * @return date yyyy-MM-dd HH:mm:ss
      */
     public static Date strToDateTime(String strDateTime) {
-        ParsePosition pos = new ParsePosition(0);
-        Date datetime = getFormat(DATE_TIME_FORMAT).parse(strDateTime, pos);
+        Date datetime = null;
+        try {
+            datetime = getFormat(DATE_TIME_FORMAT).parse(strDateTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return datetime;
     }
 
@@ -100,6 +124,31 @@ public class TimeUtils {
      */
     public static String dateToStr(Date date, String formatType) {
         return getFormat(formatType).format(date);
+    }
+
+    /**
+     * 将String类型转化为Date类型
+     *
+     * @param strDate
+     * @param formatType
+     * @return
+     * @throws ParseException
+     */
+    public static Date strToDate(String strDate, String formatType)
+            throws ParseException {
+        return getFormat(formatType).parse(strDate);
+    }
+
+    /**
+     * 将String类型的日期 时间转换成long型
+     *
+     * @param strDateTime
+     * @return
+     * @throws ParseException
+     */
+    public static long strToLong(String strDateTime) throws ParseException {
+        Date date = strToDateTime(strDateTime);
+        return date.getTime();
     }
 
     /**
@@ -120,6 +169,35 @@ public class TimeUtils {
      */
     public static long getNowDateTime(){
         return System.currentTimeMillis();
+    }
+
+    /**
+     * 根据日期取得星期几
+     *
+     * @param strDate
+     * @return
+     */
+    public static String getWeek(Context context, String strDate, ENUM.Week type){
+        String[] weeks = null;
+        if (type == ENUM.Week.WEEKS) {
+            weeks = context.getResources().getStringArray(R.array.weekdays);
+        } else if (type == ENUM.Week.WEEKS_CN) {
+            weeks = context.getResources().getStringArray(R.array.weekdays_cn);
+        } else if (type == ENUM.Week.WEEKS_EN_ABB) {
+            weeks = context.getResources().getStringArray(R.array.weekdays_en_abb);
+        } else if (type == ENUM.Week.WEEKS_EN) {
+            weeks = context.getResources().getStringArray(R.array.weekdays_en);
+        } else if (type == ENUM.Week.WEEKS_EN_LET) {
+            weeks = context.getResources().getStringArray(R.array.weekdays_en_let);
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(strToDate(strDate));
+        int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if(week_index < 0){
+            week_index = 0;
+        }
+        return weeks[week_index];
     }
 
     /**

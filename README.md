@@ -18,6 +18,10 @@
 
     原始项目地址：https://github.com/andyxialm/SmoothCheckBox
 
+- **ExpandIconView**
+
+    原始项目地址：https://github.com/zagum/Android-ExpandIcon
+
 - **CommonAdapter**、**CommonRecyclerAdapter**
 
     Android 轻量级适配器，简化使用，通吃所有的AbsListView、RecyclerView。支持Header与Footer
@@ -48,7 +52,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.1'
+        compile 'com.github.shichunlei:MyLibrary:0.0.2'
     }
 
 # Usage

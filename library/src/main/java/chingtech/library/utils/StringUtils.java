@@ -167,6 +167,20 @@ public class StringUtils {
 	}
 
 	/**
+	 * 分钟数转小时：分钟
+	 *
+	 * @param mins
+	 * @return
+	 */
+	public static String formatTime(int mins){
+
+		int hour = mins / 60;
+		int min = mins % 60;
+
+		return hour + "小时" + min + "分钟";
+	}
+
+	/**
 	 * 判断一个数字是奇数还是偶数
 	 *
 	 * @param number

@@ -1,5 +1,16 @@
 package com.chingtech.library;
 
+import static chingtech.library.utils.TimeUtils.DATE_SHAORT_FORMAT;
+import static chingtech.library.utils.TimeUtils.DATE_TIME_FORMAT;
+import static chingtech.library.utils.TimeUtils.DATE_TIME_HOUR_MIN_FORMAT;
+import static chingtech.library.utils.TimeUtils.DD_FORMAT;
+import static chingtech.library.utils.TimeUtils.MM_FORMAT;
+import static chingtech.library.utils.TimeUtils.TIME_FORMAT;
+import static chingtech.library.utils.TimeUtils.TIME_MS_FORMAT;
+import static chingtech.library.utils.TimeUtils.TIME_SHAORT_FORMAT;
+import static chingtech.library.utils.TimeUtils.YEAR_FORMAT;
+import static chingtech.library.utils.TimeUtils.Y_M_FORMAT;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import chingtech.library.utils.TimeUtils;
 import chingtech.library.widget.AlertDialog;
 import chingtech.library.widget.RoundImageView;
 
@@ -26,6 +38,37 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String s = TimeUtils.formatDate("2017-02-21", DATE_SHAORT_FORMAT);
+        Log.i("tag", s);
+
+        String s0 = TimeUtils.formatDate("2017-02-21", YEAR_FORMAT);
+        Log.i("tag", s0);
+
+        String s01 = TimeUtils.formatDate("2017-02-21", Y_M_FORMAT);
+        Log.i("tag", s01);
+        String s02 = TimeUtils.formatDate("2017-02-21", DD_FORMAT);
+        Log.i("tag", s02);
+        String s03 = TimeUtils.formatDate("2017-02-21", MM_FORMAT);
+        Log.i("tag", s03);
+
+        String s2 = TimeUtils.formatDateTime("2017-02-21 20:23:30", TIME_FORMAT);
+        Log.i("tag", s2);
+
+        String s3 = TimeUtils.formatDateTime("2017-02-21 20:23:30", TIME_SHAORT_FORMAT);
+        Log.i("tag", s3);
+
+        String s4 = TimeUtils.formatDateTime("2017-02-21 20:23:30", DATE_TIME_HOUR_MIN_FORMAT);
+        Log.i("tag", s4);
+
+        String s5 = TimeUtils.formatDateTime("1970-01-01 20:23:30", TIME_SHAORT_FORMAT);
+        Log.i("tag", s5);
+
+        String s6 = TimeUtils.formatDateTime("2017-01-01 20:23:30", DATE_TIME_FORMAT);
+        Log.i("tag", s6);
+
+        String s7 = TimeUtils.formatDateTime("2017-01-01 20:23:30", TIME_MS_FORMAT);
+        Log.i("tag", s7);
 
         image1 = (RoundImageView)findViewById(R.id.image1);
         image2 = (RoundImageView)findViewById(R.id.image2);
