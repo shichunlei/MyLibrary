@@ -31,4 +31,29 @@ public class ENUM {
         P_3_1,
         P_7_1
     }
+
+    public enum SheetItemColor {
+        Blue("#037BFF"),
+        Red("#FD4A2E"),
+        Yellow("#F8D411"),
+        Orange("#FA9301"),
+        Pink("#FF308E"),
+        Purple("#6F26FA"),
+        Green("#49CC56"),
+        Cyan("#009ad6");
+
+        private String name;
+
+        SheetItemColor(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 }

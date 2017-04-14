@@ -22,6 +22,8 @@ import java.util.List;
 import chingtech.library.R;
 import chingtech.library.adapter.ItemAdapter;
 import chingtech.library.bean.ItemBean;
+import chingtech.library.bean.SheetItem;
+import chingtech.library.interfaces.OnSheetItemClickListener;
 import chingtech.library.utils.StringUtils;
 
 public class AlertDialog {
@@ -74,7 +76,7 @@ public class AlertDialog {
     public AlertDialog builder() {
         // 获取Dialog布局
         View view = LayoutInflater.from(context).inflate(
-                R.layout.layout_dialog, null);
+                R.layout.layout_alert_dialog, null);
 
         // 获取自定义Dialog布局中的控件
         lLayout_bg = (LinearLayout) view.findViewById(R.id.lLayout_bg);
@@ -397,20 +399,6 @@ public class AlertDialog {
         return null;
     }
 
-    public interface OnSheetItemClickListener {
-        void onClick(int which);
-    }
-
-    public class SheetItem {
-        String name;
-        OnSheetItemClickListener itemClickListener;
-
-        public SheetItem(String name, OnSheetItemClickListener itemClickListener) {
-            this.name = name;
-            this.itemClickListener = itemClickListener;
-        }
-    }
-
     private void setSheetItems() {
         if (sheetItemList == null || sheetItemList.size() <= 0) {
             return;
@@ -422,8 +410,8 @@ public class AlertDialog {
         for (int i = 1; i <= size; i++) {
             final int index = i;
             SheetItem sheetItem = sheetItemList.get(i - 1);
-            String strItem = sheetItem.name;
-            final OnSheetItemClickListener listener = sheetItem.itemClickListener;
+            String strItem = sheetItem.getName();
+            final OnSheetItemClickListener listener = sheetItem.getItemClickListener();
 
             TextView textView = new TextView(context);
             textView.setText(strItem);

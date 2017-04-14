@@ -51,4 +51,13 @@
             <enum name="back" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="NumberAnimTextView">
+        <attr name="enable_anim" format="boolean"/>
+        <attr name="start_number" format="string"/>
+        <attr name="end_number" format="string"/>
+        <attr name="number_duration" format="integer"/>
+        <attr name="postfix" format="string"/>
+        <attr name="prefix" format="string"/>
+    </declare-styleable>
 </resources>

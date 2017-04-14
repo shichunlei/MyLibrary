@@ -192,4 +192,15 @@ public class StringUtils {
 		}
 		return false;
 	}
+
+	/**
+	 * 检测一个String类型的数字是否为整数
+	 *
+	 * @param number
+	 * @return
+     */
+	public static boolean checkNumInt(String number){
+		String regexInteger = "-?\\d*";
+		return number.matches(regexInteger);
+	}
 }

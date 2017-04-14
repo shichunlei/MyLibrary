@@ -25,10 +25,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import chingtech.library.interfaces.OnSheetItemClickListener;
 import chingtech.library.utils.AppUitls;
+import chingtech.library.utils.ENUM;
 import chingtech.library.utils.TimeUtils;
 import chingtech.library.widget.AlertDialog;
+import chingtech.library.widget.BottomDialog;
 import chingtech.library.widget.FlipView;
+import chingtech.library.widget.NumberAnimTextView;
+import chingtech.library.widget.ProgressDialog;
 import chingtech.library.widget.RoundImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,10 +51,21 @@ public class MainActivity extends AppCompatActivity {
     private FlipView easyFlipView;
     private FlipView easyFlipView2;
 
+    private NumberAnimTextView number;
+
+    private ProgressDialog progress;
+
+    private BottomDialog mBottomDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progress = new ProgressDialog(this);
+        progress.setTitle("正在登录");
+
+        number = (NumberAnimTextView)findViewById(R.id.tv_number);
+        number.startNumber();
 
         easyFlipView = (FlipView) findViewById(R.id.flipView);
         easyFlipView2 = (FlipView) findViewById(R.id.flipView2);
@@ -120,25 +136,25 @@ public class MainActivity extends AppCompatActivity {
                 dialog = new AlertDialog(MainActivity.this).builder();
                 dialog
                         .setTitle("这里是Title", Gravity.CENTER)
-                        .addSheetItem("item0", new AlertDialog.OnSheetItemClickListener() {
+                        .addSheetItem("item0", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
                                 Toast.makeText(MainActivity.this, "item0", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .addSheetItem("item1", new AlertDialog.OnSheetItemClickListener() {
+                        .addSheetItem("item1", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
                                 Toast.makeText(MainActivity.this, "item1", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .addSheetItem("item2", new AlertDialog.OnSheetItemClickListener() {
+                        .addSheetItem("item2", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
                                 Toast.makeText(MainActivity.this, "item2", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .addSheetItem("item3", new AlertDialog.OnSheetItemClickListener() {
+                        .addSheetItem("item3", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
                                 Toast.makeText(MainActivity.this, "item3", Toast.LENGTH_SHORT).show();
@@ -208,12 +224,114 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                progress.show();
                                 Log.i("tag", username.getText().toString().trim());
                                 Log.i("tag", phone.getText().toString().trim());
                                 Log.i("tag", password.getText().toString().trim());
                                 Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()], Toast.LENGTH_SHORT).show();
                             }
                         })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.bottom_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBottomDialog = new BottomDialog(MainActivity.this).builder();
+                mBottomDialog.setTitle("这里是Title", 0, R.color.google_red)
+                        .setCancel("取消", null)
+                        .addSheetItem("item0", ENUM.SheetItemColor.Red, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item0");
+                            }
+                        })
+                        .addSheetItem("item1", ENUM.SheetItemColor.Blue, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item1");
+                            }
+                        })
+                        .addSheetItem("item2", ENUM.SheetItemColor.Green, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item2");
+                            }
+                        })
+                        .addSheetItem("item3", ENUM.SheetItemColor.Pink, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item3");
+                            }
+                        })
+                        .addSheetItem("item4", ENUM.SheetItemColor.Purple, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item4");
+                            }
+                        })
+                        .addSheetItem("item5", ENUM.SheetItemColor.Orange, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item5");
+                            }
+                        })
+                        .addSheetItem("item6", ENUM.SheetItemColor.Yellow, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item6");
+                            }
+                        })
+                        .addSheetItem("item7", ENUM.SheetItemColor.Cyan, new OnSheetItemClickListener(){
+
+                            @Override
+                            public void onClick(int which) {
+                                Log.i("TAG", "item7");
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.bottom_dialog2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View v = LayoutInflater.from(MainActivity.this).inflate(
+                        R.layout.layout, null);
+                final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
+                final EditText phone = (EditText) v.findViewById(R.id.edittxt_phone);
+                final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
+                mBottomDialog = new BottomDialog(MainActivity.this).builder();
+                mBottomDialog
+                        .setView(v)
+                        .setPositiveButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Log.i("tag", username.getText().toString().trim());
+                                Log.i("tag", phone.getText().toString().trim());
+                                Log.i("tag", password.getText().toString().trim());
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
+            }
+        });
+
+        findViewById(R.id.bottom_dialog3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBottomDialog = new BottomDialog(MainActivity.this).builder();
+                mBottomDialog
+                        .setTitle("这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题", Gravity.LEFT, R.color.gray_6)
+                        .setCancel("取消", null)
                         .show();
             }
         });

@@ -14,6 +14,18 @@
         android:padding="16dp"
         android:orientation="vertical">
 
+        <chingtech.library.widget.NumberAnimTextView
+            android:id="@+id/tv_number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            app:enable_anim="true"
+            app:start_number="23434"
+            app:end_number="2103134322"
+            app:number_duration="1000"
+            app:prefix="￥"
+            app:postfix="元"/>
+
         <Button
             android:id="@+id/btn_dialog"
             android:layout_width="match_parent"
@@ -37,6 +49,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dialog 单选列表 + View"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bottom_dialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bottom\nDialog"/>
+
+            <Button
+                android:id="@+id/bottom_dialog2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bottom\nDialog"/>
+
+            <Button
+                android:id="@+id/bottom_dialog3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bottom\nDialog"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +124,6 @@
             <chingtech.library.widget.RoundImageView
                 android:id="@+id/image2"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
                 android:layout_width="100dp"
                 android:layout_height="150dp"
                 android:src="@drawable/wall04"
@@ -94,14 +132,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <chingtech.library.widget.RoundImageView
                 android:id="@+id/image3"
-                android:layout_marginTop="10dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/wall04"
+                android:layout_centerVertical="true"
                 app:border_color="@color/google_red"
                 app:border_width="2dp"
                 app:corner_radius="15dp"
@@ -110,7 +149,6 @@
             <chingtech.library.widget.RoundImageView
                 android:layout_width="150dp"
                 android:layout_height="180dp"
-                android:layout_marginTop="10dp"
                 android:src="@drawable/wall04"
                 app:border_color="@android:color/black"
                 app:border_width="2dp"
@@ -161,14 +199,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:src="@drawable/card_back" />
+                android:src="@mipmap/card_back" />
 
             <ImageView
                 android:id="@+id/imgFrontCard"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:gravity="center"
-                android:src="@drawable/card_front" />
+                android:src="@mipmap/card_front" />
 
         </chingtech.library.widget.FlipView>
 

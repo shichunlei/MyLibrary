@@ -6,6 +6,8 @@
 
 - **AlertDialog**
 
+- **BottomDialog**
+
 - **ProgressDialog**
 
 - **RoundImageView**
@@ -34,13 +36,19 @@
 
     参考项目地址：https://github.com/wajahatkarim3/EasyFlipView
 
+- **NumberAnimTextView**
+
+    带数字增加动画的TextView
+
+    参考项目地址：https://github.com/Bakumon/NumberAnimTextView
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils、FileUtils、AppUitls、IdcardUtil等
 
 **Version**
 
-    【0.0.3】
+    【0.0.4】
 
 # Installation
 
@@ -58,7 +66,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.3'
+        compile 'com.github.shichunlei:MyLibrary:0.0.4'
     }
 
 # Usage

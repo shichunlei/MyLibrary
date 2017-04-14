@@ -112,9 +112,9 @@
             android:layout_height="43dp"
             android:gravity="center"
             android:textSize="16sp"
-            android:background="@drawable/recycler_bg"
-            android:textColor="@color/colorAccent"
-            android:text="取消"/>
+            android:textColor="@color/gray_9"
+            android:text="取消"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
 
         <Button
             android:id="@+id/btn_pos"
@@ -122,8 +122,8 @@
             android:layout_height="43dp"
             android:gravity="center"
             android:textSize="16sp"
-            android:background="@drawable/recycler_bg"
-            android:textColor="@color/colorAccent"
-            android:text="确定" />
+            android:textColor="#037BFF"
+            android:text="确定"
+            style="@style/Widget.AppCompat.Button.Borderless" />
     </LinearLayout>
 </LinearLayout>
