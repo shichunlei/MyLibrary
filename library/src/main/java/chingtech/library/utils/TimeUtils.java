@@ -182,17 +182,17 @@ public class TimeUtils {
      * @param strDate
      * @return
      */
-    public static String getWeek(Context context, String strDate, ENUM.Week type){
+    public static String getWeek(Context context, String strDate, int type){
         String[] weeks = null;
-        if (type == ENUM.Week.WEEKS) {
+        if (type == ENUM.WEEKS) {
             weeks = context.getResources().getStringArray(R.array.weekdays);
-        } else if (type == ENUM.Week.WEEKS_CN) {
+        } else if (type == ENUM.WEEKS_CN) {
             weeks = context.getResources().getStringArray(R.array.weekdays_cn);
-        } else if (type == ENUM.Week.WEEKS_EN_ABB) {
+        } else if (type == ENUM.WEEKS_EN_ABB) {
             weeks = context.getResources().getStringArray(R.array.weekdays_en_abb);
-        } else if (type == ENUM.Week.WEEKS_EN) {
+        } else if (type == ENUM.WEEKS_EN) {
             weeks = context.getResources().getStringArray(R.array.weekdays_en);
-        } else if (type == ENUM.Week.WEEKS_EN_LET) {
+        } else if (type == ENUM.WEEKS_EN_LET) {
             weeks = context.getResources().getStringArray(R.array.weekdays_en_let);
         }
 

@@ -22,7 +22,6 @@ import java.util.List;
 import chingtech.library.R;
 import chingtech.library.bean.SheetItem;
 import chingtech.library.interfaces.OnSheetItemClickListener;
-import chingtech.library.utils.ENUM;
 
 public class BottomDialog {
 
@@ -191,14 +190,30 @@ public class BottomDialog {
      * @param listener
      * @return
      */
-    public BottomDialog addSheetItem(String strItem, ENUM.SheetItemColor color,
-            OnSheetItemClickListener listener) {
+    public BottomDialog addSheetItem(String strItem, int color, OnSheetItemClickListener listener) {
         showSheet = true;
         scrollContent.setVisibility(View.VISIBLE);
         if (sheetItemList == null) {
             sheetItemList = new ArrayList<>();
         }
         sheetItemList.add(new SheetItem(strItem, color, listener));
+        return this;
+    }
+
+    /**
+     *
+     * @param strItem
+     *            条目名称
+     * @param listener
+     * @return
+     */
+    public BottomDialog addSheetItem(String strItem, OnSheetItemClickListener listener) {
+        showSheet = true;
+        scrollContent.setVisibility(View.VISIBLE);
+        if (sheetItemList == null) {
+            sheetItemList = new ArrayList<>();
+        }
+        sheetItemList.add(new SheetItem(strItem, 0, listener));
         return this;
     }
 
@@ -224,7 +239,7 @@ public class BottomDialog {
             final int index = i;
             SheetItem sheetItem = sheetItemList.get(i - 1);
             String strItem = sheetItem.getName();
-            ENUM.SheetItemColor color = sheetItem.getColor();
+            int color = sheetItem.getColor();
             final OnSheetItemClickListener listener = sheetItem.getItemClickListener();
 
             TextView textView = new TextView(context);
@@ -234,10 +249,10 @@ public class BottomDialog {
             textView.setGravity(Gravity.CENTER);
 
             // 字体颜色
-            if (color == null) {
-                textView.setTextColor(Color.parseColor(ENUM.SheetItemColor.Blue.getName()));
+            if (color == 0) {
+                textView.setTextColor(Color.parseColor("#037BFF"));
             } else {
-                textView.setTextColor(Color.parseColor(color.getName()));
+                textView.setTextColor(ContextCompat.getColor(context, color));
             }
 
             // 高度

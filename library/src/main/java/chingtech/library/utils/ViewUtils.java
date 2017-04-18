@@ -75,25 +75,10 @@ public class ViewUtils {
      * @param type
      * @param screen
      */
-    public static void setViewHeight(Context context, View view, ENUM.Proportion type, float screen) {
+    public static void setViewHeight(Context context, View view, float type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
-        float proportion = 0f;
 
-        if (type == ENUM.Proportion.P_1_1) {
-            proportion = 1f;
-        } else if (type == ENUM.Proportion.P_3_2) {
-            proportion = 2f / 3f;
-        } else if (type == ENUM.Proportion.P_4_3) {
-            proportion = 3f / 4f;
-        } else if (type == ENUM.Proportion.P_16_9) {
-            proportion = 9f / 16f;
-        } else if (type == ENUM.Proportion.P_2_1) {
-            proportion = 0.5f;
-        } else if (type == ENUM.Proportion.P_3_1) {
-            proportion = 1f / 3f;
-        }
-
-        int height = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * proportion);
+        int height = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
@@ -112,7 +97,7 @@ public class ViewUtils {
      * @param view
      * @param type
      */
-    public static void setViewHeight(Context context, View view, ENUM.Proportion type) {
+    public static void setViewHeight(Context context, View view, float type) {
         setViewHeight(context, view, type, 0f);
     }
 
@@ -124,27 +109,10 @@ public class ViewUtils {
      * @param type
      * @param screen
      */
-    public static void setViewWidth(Context context, View view, ENUM.Proportion type, float screen) {
+    public static void setViewWidth(Context context, View view, float type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
-        float proportion = 0f;
 
-        if (type == ENUM.Proportion.P_1_1) {
-            proportion = 1f;
-        } else if (type == ENUM.Proportion.P_3_2) {
-            proportion = 2f / 3f;
-        } else if (type == ENUM.Proportion.P_4_3) {
-            proportion = 3f / 4f;
-        } else if (type == ENUM.Proportion.P_16_9) {
-            proportion = 9f / 16f;
-        } else if (type == ENUM.Proportion.P_2_1) {
-            proportion = 0.5f;
-        } else if (type == ENUM.Proportion.P_3_1) {
-            proportion = 1f / 3f;
-        } else if (type == ENUM.Proportion.P_7_1) {
-            proportion = 1f / 7f;
-        }
-
-        int height = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * proportion);
+        int height = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
@@ -163,7 +131,7 @@ public class ViewUtils {
      * @param view
      * @param type
      */
-    public static void setViewWidth(Context context, View view, ENUM.Proportion type) {
+    public static void setViewWidth(Context context, View view, float type) {
         setViewWidth(context, view, type, 0f);
     }
 }

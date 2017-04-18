@@ -47,4 +47,13 @@
         <item name="android:windowEnterAnimation">@anim/bottom_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/bottom_dialog_out</item>
     </style>
+
+    <!-- 横向加载对话框 -->
+    <style name="HorizontalProgressStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:progressDrawable">@drawable/shape_progressbar</item>
+    </style>
 </resources>

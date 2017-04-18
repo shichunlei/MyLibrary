@@ -224,5 +224,36 @@
             <include layout="@layout/layout_front" />
 
         </chingtech.library.widget.FlipView>
+
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:background="@color/google_blue">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/google_pink"
+                android:text="1/2"/>
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="@color/google_purple"
+                android:text="1/7"/>
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

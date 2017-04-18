@@ -10,6 +10,8 @@
 
 - **ProgressDialog**
 
+- **HorizontalProgressDialog**
+
 - **RoundImageView**
 
     圆形图片、圆角图片、椭圆图片
@@ -44,11 +46,11 @@
 
 - **工具类**
 
-    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils、FileUtils、AppUitls、IdcardUtil等
+    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper等
 
 **Version**
 
-    【0.0.4】
+    【0.0.5】
 
 # Installation
 
@@ -66,7 +68,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.4'
+        compile 'com.github.shichunlei:MyLibrary:0.0.5'
     }
 
 # Usage
