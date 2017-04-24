@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         ViewUtils.setViewWidth(this, tv1, 1 / 2f);
 
         progress = new ProgressDialog(this);
-        progress.setTitle("正在登录");
+        progress.setTitleText("正在登录");
 
         number.startNumber();
 
@@ -173,25 +173,25 @@ public class MainActivity extends AppCompatActivity {
                         .addSheetItem("item0", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Toast.makeText(MainActivity.this, "item0", Toast.LENGTH_SHORT).show();
+                                showToast("item0");
                             }
                         })
                         .addSheetItem("item1", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Toast.makeText(MainActivity.this, "item1", Toast.LENGTH_SHORT).show();
+                                showToast("item1");
                             }
                         })
                         .addSheetItem("item2", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Toast.makeText(MainActivity.this, "item2", Toast.LENGTH_SHORT).show();
+                                showToast("item2");
                             }
                         })
                         .addSheetItem("item3", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Toast.makeText(MainActivity.this, "item3", Toast.LENGTH_SHORT).show();
+                                showToast("item3");
                             }
                         })
                         .show();
@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.imgFrontCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Front Card", Toast.LENGTH_SHORT).show();
+                showToast("Front Card");
                 easyFlipView.flipTheView();
             }
         });
@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.imgBackCard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Back Card", Toast.LENGTH_SHORT).show();
+                showToast("Back Card");
                 easyFlipView.flipTheView();
             }
         });
@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cardview_front).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Front Card", Toast.LENGTH_SHORT).show();
+                showToast("Front Card");
                 easyFlipView2.flipTheView();
             }
         });
@@ -399,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cardview_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Back Card", Toast.LENGTH_SHORT).show();
+                showToast("Back Card");
                 easyFlipView2.flipTheView();
             }
         });
@@ -430,14 +430,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(File result) {
-                Toast.makeText(MainActivity.this, "下载成功", Toast.LENGTH_SHORT).show();
+                showToast("下载成功");
                 hpd.dismiss();
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 ex.printStackTrace();
-                Toast.makeText(MainActivity.this, "下载失败，请检查网络和SD卡", Toast.LENGTH_SHORT).show();
+                showToast("下载失败，请检查网络和SD卡");
                 hpd.dismiss();
             }
 
@@ -449,5 +449,9 @@ public class MainActivity extends AppCompatActivity {
             public void onFinished() {
             }
         });
+    }
+
+    private void showToast(String string){
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 }

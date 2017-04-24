@@ -50,7 +50,7 @@
 
 **Version**
 
-    【0.0.5】
+    【0.0.6】
 
 # Installation
 
@@ -68,7 +68,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.5'
+        compile 'com.github.shichunlei:MyLibrary:0.0.6'
     }
 
 # Usage

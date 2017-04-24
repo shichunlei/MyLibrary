@@ -37,6 +37,12 @@ public class TimeUtils {
     public static final String DAY_FORMAT = "MM/dd";
     public static final String DAY_YMD_FORMAT = "yyyy/MM/dd";
 
+    public static final int WEEKS = 0;
+    public static final int WEEKS_CN = 1;
+    public static final int WEEKS_EN = 2;
+    public static final int WEEKS_EN_ABB = 3;
+    public static final int WEEKS_EN_LET = 4;
+
     public static SimpleDateFormat getFormat(String format){
         return new SimpleDateFormat(format);
     }
@@ -163,8 +169,7 @@ public class TimeUtils {
      * @return
      */
     public static String getNowDateTime(String formatType){
-        Date date = new Date();
-        return dateToStr(date, formatType);
+        return dateToStr(new Date(), formatType);
     }
 
     /**
@@ -183,17 +188,26 @@ public class TimeUtils {
      * @return
      */
     public static String getWeek(Context context, String strDate, int type){
-        String[] weeks = null;
-        if (type == ENUM.WEEKS) {
-            weeks = context.getResources().getStringArray(R.array.weekdays);
-        } else if (type == ENUM.WEEKS_CN) {
-            weeks = context.getResources().getStringArray(R.array.weekdays_cn);
-        } else if (type == ENUM.WEEKS_EN_ABB) {
-            weeks = context.getResources().getStringArray(R.array.weekdays_en_abb);
-        } else if (type == ENUM.WEEKS_EN) {
-            weeks = context.getResources().getStringArray(R.array.weekdays_en);
-        } else if (type == ENUM.WEEKS_EN_LET) {
-            weeks = context.getResources().getStringArray(R.array.weekdays_en_let);
+        String[] weeks;
+        switch (type) {
+            case WEEKS:
+                weeks = context.getResources().getStringArray(R.array.weekdays);
+                break;
+            case WEEKS_CN:
+                weeks = context.getResources().getStringArray(R.array.weekdays_cn);
+                break;
+            case WEEKS_EN_ABB:
+                weeks = context.getResources().getStringArray(R.array.weekdays_en_abb);
+                break;
+            case WEEKS_EN:
+                weeks = context.getResources().getStringArray(R.array.weekdays_en);
+                break;
+            case WEEKS_EN_LET:
+                weeks = context.getResources().getStringArray(R.array.weekdays_en_let);
+                break;
+            default:
+                weeks = context.getResources().getStringArray(R.array.weekdays);
+                break;
         }
 
         Calendar cal = Calendar.getInstance();
@@ -387,6 +401,21 @@ public class TimeUtils {
     }
 
     /**
+     * 当前日期前几天或者后几天的日期
+     *
+     * @param days
+     * @param format
+     * @return
+     */
+    public static String afterNDay(int days, String format) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, days);
+        Date date = calendar.getTime();
+        return getFormat(format).format(date);
+    }
+
+    /**
      * 某日期之后days天的日期
      *
      * @param days
@@ -400,6 +429,23 @@ public class TimeUtils {
         calendar.add(Calendar.DATE, days);
         Date afterDate = calendar.getTime();
         return getFormat(DATE_FORMAT).format(afterDate);
+    }
+
+    /**
+     * 某日期之后days天的日期
+     *
+     * @param days
+     * @param strDate
+     * @param format
+     * @return
+     */
+    public static String afterNDay(String strDate, int days, String format) {
+        Date date = strToDate(strDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, days);
+        Date afterDate = calendar.getTime();
+        return getFormat(format).format(afterDate);
     }
 
     /**

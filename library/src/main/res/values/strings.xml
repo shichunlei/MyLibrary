@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Library</string>
-
     <string name="download_progress_bar">%1$s/%2$s(M)</string>
     <string name="left_rate_value">0%</string>
 </resources>
