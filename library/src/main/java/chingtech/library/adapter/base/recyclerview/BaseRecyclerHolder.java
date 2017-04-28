@@ -391,4 +391,42 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
         ViewUtils.setViewWidth(mContext, view, type, screen);
         return this;
     }
+
+    /**
+     * 设置控件的大小
+     *
+     * @param viewId The view id.
+     */
+    @Override
+    public BaseRecyclerHolder setViewSize(int viewId, float type) {
+        View view = getView(viewId);
+        ViewUtils.setViewSize(mContext, view, type);
+        return this;
+    }
+
+    /**
+     * 设置控件的大小
+     *
+     * @param viewId The view id.
+     */
+    @Override
+    public BaseRecyclerHolder setViewSize(int viewId, float type, float screen) {
+        View view = getView(viewId);
+        ViewUtils.setViewSize(mContext, view, type, screen);
+        return this;
+    }
+
+    /**
+     * 设置控件的尺寸
+     *
+     * @param viewId The view id.
+     * @param width  The view width.
+     * @param height The view height.
+     */
+    @Override
+    public BaseRecyclerHolder setViewSize(int viewId, int width, int height) {
+        View view = getView(viewId);
+        ViewUtils.setViewSize(mContext, view, width, height);
+        return this;
+    }
 }

@@ -44,13 +44,19 @@
 
     参考项目地址：https://github.com/Bakumon/NumberAnimTextView
 
+- **SwipeToLoadLayout**
+
+    SwipeToLoadLayout is a reusable pull-to-refresh and pull-to-load-more widget.
+
+    原始项目地址：https://github.com/Aspsine/SwipeToLoadLayout
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper等
 
 **Version**
 
-    【0.0.6】
+    【0.0.7】
 
 # Installation
 
@@ -68,8 +74,44 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.6'
+        compile 'com.github.shichunlei:MyLibrary:0.0.7'
     }
 
 # Usage
 
+    参见sample示例
+
+# 更新日志
+
+    **【0.0.1】**
+
+    创建项目，添加了一些工具类
+
+    **【0.0.2】**
+
+    添加工具类；
+    ExpandIcon
+
+    **【0.0.3】**
+
+    添加完善工具类；
+    添加自定义控件“可翻转的View，仿支付宝-蚂蚁宝卡里流量兑换的翻转View”
+
+    **【0.0.4】**
+
+    添加BottomDialog和NumberAnimTextView
+
+    **【0.0.5】**
+
+    添加HorizontalProgressDialog；
+    添加StatusBarHelper；
+    去掉枚举并转换成Integer，避免增加app的class.dex文件的大小
+
+    **【0.0.6】**
+
+    修改ProgressDialog
+
+    **【0.0.7】**
+
+    StringUtils、TimeUtils、ViewUtils类中添加新的方法
+    添加 SwipeToLoadLayout 下拉刷新上拉加载

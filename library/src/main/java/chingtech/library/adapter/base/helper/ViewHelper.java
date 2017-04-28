@@ -267,6 +267,61 @@ public interface ViewHelper {
         VH setViewHeight(int viewId, float type, float screen);
 
         /**
+         * 设置控件的宽度
+         *
+         * @param viewId
+         *            The view id.
+         * @param type
+         * @return
+         */
+        VH setViewWidth(int viewId, float type);
+
+        /**
+         * 设置控件的宽度
+         *
+         * @param viewId
+         *            The view id.
+         * @param type
+         * @param screen
+         * @return
+         */
+        VH setViewWidth(int viewId, float type, float screen);
+
+        /**
+         * 设置控件的大小
+         *
+         * @param viewId
+         *            The view id.
+         * @param type
+         * @return
+         */
+        VH setViewSize(int viewId, float type);
+
+        /**
+         * 设置控件的大小
+         *
+         * @param viewId
+         *            The view id.
+         * @param type
+         * @param screen
+         * @return
+         */
+        VH setViewSize(int viewId, float type, float screen);
+
+        /**
+         * 设置控件的尺寸
+         *
+         * @param viewId
+         *            The view id.
+         * @param width
+         *            The view width.
+         * @param height
+         *            The view height.
+         * @return
+         */
+        VH setViewSize(int viewId, int width, int height);
+
+        /**
          * 设置监听
          *
          * @param viewId
@@ -591,5 +646,39 @@ public interface ViewHelper {
          * @return
          */
         VH setViewWidth(int viewId, float type, float screen);
+
+        /**
+         * 设置控件的大小
+         *
+         * @param viewId
+         *            The view id.
+         * @param type
+         * @return
+         */
+        VH setViewSize(int viewId, float type);
+
+        /**
+         * 设置控件的大小
+         *
+         * @param viewId
+         *            The view id.
+         * @param type
+         * @param screen
+         * @return
+         */
+        VH setViewSize(int viewId, float type, float screen);
+
+        /**
+         * 设置控件的尺寸
+         *
+         * @param viewId
+         *            The view id.
+         * @param width
+         *            The view width.
+         * @param height
+         *            The view height.
+         * @return
+         */
+        VH setViewSize(int viewId, int width, int height);
     }
 }

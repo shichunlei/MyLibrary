@@ -82,10 +82,8 @@ public class ViewUtils {
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
-        /** 控件的高强制设成屏幕宽度 */
+        /** 控件的高强制设成height */
         params.height = height;
-        /** 控件的高强制设成屏幕宽度 */
-//		params.width = width;
         /** 使设置好的布局参数应用到控件 */
         view.setLayoutParams(params);
     }
@@ -112,14 +110,12 @@ public class ViewUtils {
     public static void setViewWidth(Context context, View view, float type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
 
-        int height = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
+        int _width = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
-        /** 控件的高强制设成屏幕宽度 */
-//		params.height = height;
-        /** 控件的高强制设成屏幕宽度 */
-        params.width = height;
+        /** 控件的高强制设成_width */
+        params.width = _width;
         /** 使设置好的布局参数应用到控件 */
         view.setLayoutParams(params);
     }
@@ -133,5 +129,61 @@ public class ViewUtils {
      */
     public static void setViewWidth(Context context, View view, float type) {
         setViewWidth(context, view, type, 0f);
+    }
+
+    /**
+     * 设置View大小
+     *
+     * @param context
+     * @param view
+     * @param type
+     * @param screen
+     */
+    public static void setViewSize(Context context, View view, float type, float screen) {
+        int width = ScreenUtils.screenWidthPixel(context);
+
+        int size = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
+
+        /** 取控件View当前的布局参数 */
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        /** 控件的高强制设成 size */
+		params.height = size;
+        /** 控件的高强制设成 size */
+        params.width = size;
+        /** 使设置好的布局参数应用到控件 */
+        view.setLayoutParams(params);
+    }
+
+    /**
+     * 设置View大小
+     *
+     * @param context
+     * @param view
+     * @param type
+     */
+    public static void setViewSize(Context context, View view, float type) {
+        setViewSize(context, view, type, 0f);
+    }
+
+    /**
+     * 设置View尺寸
+     *
+     * @param context
+     * @param view
+     * @param width
+     * @param height
+     */
+    public static void setViewSize(Context context, View view, int width, int height) {
+        int _width = ScreenUtils.dip2px(context, width);
+        int _height = ScreenUtils.dip2px(context, height);
+
+        /** 取控件View当前的布局参数 */
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        /** 控件的高强制设成 height */
+        params.height = _height;
+        /** 控件的高强制设成 width */
+        params.width = _width;
+        /** 使设置好的布局参数应用到控件 */
+        view.setLayoutParams(params);
     }
 }

@@ -14,6 +14,7 @@ import static chingtech.library.utils.TimeUtils.TIME_SHAORT_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_M_FORMAT;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,6 +39,7 @@ import java.io.File;
 import chingtech.library.interfaces.OnSheetItemClickListener;
 import chingtech.library.utils.AppUitls;
 import chingtech.library.utils.FileUtils;
+import chingtech.library.utils.StringUtils;
 import chingtech.library.utils.TimeUtils;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.AlertDialog;
@@ -89,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
     @ViewInject(R.id.tv_2)
     private TextView tv2;
 
+    @ViewInject(R.id.tv_3)
+    private TextView tv3;
+
+    @ViewInject(R.id.tv_4)
+    private TextView tv4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,10 +107,18 @@ public class MainActivity extends AppCompatActivity {
         ViewUtils.setViewHeight(this, layout, 1 / 2f);
         ViewUtils.setViewWidth(this, tv1, 1 / 2f);
 
+        ViewUtils.setViewSize(this, tv3, 100, 100);
+
+        ViewUtils.setViewSize(this, tv4, 1 / 3f);
+
         progress = new ProgressDialog(this);
         progress.setTitleText("正在登录");
 
         number.startNumber();
+
+        Log.i("tag", "=---------------" + TimeUtils.intervalDays("2016-12-31 12:22:22", "2017-01-01 01:01:01"));
+
+        Log.i("tag", "=======" + StringUtils.hangeToBig(3453450.23));
 
         String appname = AppUitls.getAppName(MainActivity.this);
         Log.i("tag", "appname:" + appname);
@@ -321,7 +337,9 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onClick(int which) {
-                                Log.i("TAG", "item6");
+                                Intent intent = new Intent();
+                                intent.setClass(MainActivity.this, SampleActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .addSheetItem("item7", R.color.google_cyan, new OnSheetItemClickListener(){

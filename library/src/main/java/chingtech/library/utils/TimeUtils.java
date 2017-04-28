@@ -43,6 +43,8 @@ public class TimeUtils {
     public static final int WEEKS_EN_ABB = 3;
     public static final int WEEKS_EN_LET = 4;
 
+    public static final long ONE_DAY = 24 * 60 * 60 * 1000;
+
     public static SimpleDateFormat getFormat(String format){
         return new SimpleDateFormat(format);
     }
@@ -476,5 +478,25 @@ public class TimeUtils {
                 return true;
         } else
             return false;
+    }
+
+    /**
+     * 比较两个日期相差天数
+     *
+     * @param fDate
+     * @param oDate
+     * @return
+     */
+    public static int intervalDays(String fDate, String oDate) {
+        Date date1 = strToDate(fDate);
+        Date date2 = strToDate(oDate);
+
+        if (null == fDate || null == oDate) {
+            return -1;
+        }
+
+        long intervalMilli = Math.abs(date1.getTime() - date2.getTime());
+
+        return (int) (intervalMilli / ONE_DAY);
     }
 }
