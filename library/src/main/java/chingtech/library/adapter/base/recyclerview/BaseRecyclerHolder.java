@@ -15,8 +15,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -269,12 +267,23 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
     }
 
     /**
-     * Sets the adapter of a adapter view.
+     * Sets the adapter of a RecyclerView.
      */
     @Override
-    public BaseRecyclerHolder setAdapter(@IdRes int viewId, @NonNull Adapter adapter) {
-        AdapterView view = getView(viewId);
+    public BaseRecyclerHolder setAdapter(@IdRes int viewId, @NonNull RecyclerView.Adapter adapter) {
+        RecyclerView view = getView(viewId);
         view.setAdapter(adapter);
+        return this;
+    }
+
+    /**
+     * Sets the LayoutManager of a RecyclerView.
+     */
+    @Override
+    public BaseRecyclerHolder setLayoutManager(@IdRes int viewId,
+            @NonNull RecyclerView.LayoutManager manager) {
+        RecyclerView view = getView(viewId);
+        view.setLayoutManager(manager);
         return this;
     }
 

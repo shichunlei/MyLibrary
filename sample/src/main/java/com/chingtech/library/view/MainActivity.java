@@ -1,4 +1,4 @@
-package com.chingtech.library;
+package com.chingtech.library.view;
 
 import static chingtech.library.utils.TimeUtils.DATE_SHAORT_FORMAT;
 import static chingtech.library.utils.TimeUtils.DATE_TIME_FORMAT;
@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chingtech.library.R;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -330,7 +331,9 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onClick(int which) {
-                                Log.i("TAG", "item5");
+                                Intent intent = new Intent();
+                                intent.setClass(MainActivity.this, RecyclerViewActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .addSheetItem("item6", R.color.google_yellow, new OnSheetItemClickListener(){

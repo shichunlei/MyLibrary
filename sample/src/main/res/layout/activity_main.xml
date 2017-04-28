@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context="com.chingtech.library.MainActivity">
+    tools:context="com.chingtech.library.view.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

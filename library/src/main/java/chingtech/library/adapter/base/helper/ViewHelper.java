@@ -7,6 +7,7 @@ import android.graphics.drawable.Icon;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.view.View;
 import android.widget.Adapter;
 
@@ -551,13 +552,22 @@ public interface ViewHelper {
         VH setOnCheckedChangeListener(int viewId, SmoothCheckBox.OnCheckedChangeListener listener);
 
         /**
-         * Sets the adapter of a adapter view.
+         * Sets the adapter of a RecyclerView.
          *
          * @param viewId
          * @param adapter
          * @return
          */
-        VH setAdapter(@IdRes int viewId, @NonNull Adapter adapter);
+        VH setAdapter(@IdRes int viewId, @NonNull android.support.v7.widget.RecyclerView.Adapter adapter);
+
+        /**
+         * Sets the LayoutManager of a RecyclerView.
+         *
+         * @param viewId
+         * @param manager
+         * @return
+         */
+        VH setLayoutManager(@IdRes int viewId, @NonNull LayoutManager manager);
 
         /**
          * Sets the progress and max of a ProgressBar.
