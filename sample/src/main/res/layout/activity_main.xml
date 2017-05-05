@@ -225,14 +225,48 @@
 
         </chingtech.library.widget.FlipView>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
             android:background="@color/google_blue">
-        </LinearLayout>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:lv_text="Hot"
+                app:lv_text_size="12sp"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                app:lv_background_color="#3F9FE0"
+                app:lv_gravity="TOP_RIGHT"
+                app:lv_text="纯♀妹子"
+                app:lv_text_size="12sp"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                app:lv_background_color="#F6CE59"
+                app:lv_gravity="BOTTOM_LEFT"
+                app:lv_text="Gank.io"
+                app:lv_text_all_caps="false"
+                app:lv_text_size="12sp"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                app:lv_background_color="#EC7263"
+                app:lv_gravity="BOTTOM_RIGHT"
+                app:lv_text="new"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -258,20 +292,69 @@
                 android:text="1/7"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_3"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/google_green"
-            android:gravity="center"
-            android:text="宽高都是100"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_4"
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/google_green"
+                android:gravity="center"
+                android:text="宽高都是100"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lv_fill_triangle="true"
+                app:lv_text="新"
+                app:lv_text_size="12sp"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                app:lv_background_color="#EC7263"
+                app:lv_fill_triangle="true"
+                app:lv_gravity="BOTTOM_RIGHT"
+                app:lv_text="new"/>
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/google_red"
-            android:gravity="center"
-            android:text="宽高都是屏幕1/3"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/google_red"
+                android:gravity="center"
+                android:text="宽高都是屏幕1/3"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:lv_background_color="#3F9FE0"
+                app:lv_fill_triangle="true"
+                app:lv_gravity="TOP_RIGHT"
+                app:lv_text="妹子"
+                app:lv_text_size="12sp"/>
+
+            <chingtech.library.widget.LabelView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                app:lv_background_color="#F6CE59"
+                app:lv_fill_triangle="true"
+                app:lv_gravity="BOTTOM_LEFT"
+                app:lv_text="Gank.io"
+                app:lv_text_all_caps="false"
+                app:lv_text_size="12sp"/>
+        </FrameLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

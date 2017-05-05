@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 
 import com.chingtech.library.R;
 import com.chingtech.library.bean.Child;
@@ -90,6 +91,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         @Override
         protected void onBindData(BaseRecyclerHolder holder, Child item, int position) {
+            holder.setLabelText(R.id.labelview, "A");
+            holder.setGravity(R.id.labelview, Gravity.TOP | Gravity.LEFT);
+            holder.setLabelBgColor(R.id.labelview, R.color.google_orange);
             holder.setText(R.id.tv_name, item.getName());
             holder.setImageUrl(R.id.image, item.getUrl(), R.mipmap.ic_launcher);
         }

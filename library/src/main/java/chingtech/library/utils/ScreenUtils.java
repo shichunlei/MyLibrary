@@ -22,6 +22,10 @@ public class ScreenUtils {
 
     /**
      * dp转px
+     *
+     * @param ctx
+     * @param dpValue
+     * @return
      */
     public static int dip2px(Context ctx, float dpValue) {
         final float scale = ctx.getResources().getDisplayMetrics().density;
@@ -30,10 +34,26 @@ public class ScreenUtils {
 
     /**
      * px转dp
+     *
+     * @param ctx
+     * @param pxValue
+     * @return
      */
     public static int px2dip(Context ctx, float pxValue) {
         final float scale = ctx.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * sp转px
+     *
+     * @param ctx
+     * @param spValue
+     * @return
+     */
+    public static int sp2px(Context ctx, float spValue) {
+        final float scale = ctx.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * scale + 0.5f);
     }
 
     /**

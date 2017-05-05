@@ -15,11 +15,24 @@
         app:border_color="@color/colorPrimary"
         app:border_width="2dp"/>
 
-    <TextView
-        android:id="@+id/tv_name"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="20dp"
-        android:text="名字"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="名字"/>
+
+        <chingtech.library.widget.LabelView
+            android:id="@+id/labelview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lv_fill_triangle="true"
+            app:lv_text_all_caps="false"
+            app:lv_text_size="12sp"/>
+    </FrameLayout>
 </LinearLayout>

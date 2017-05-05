@@ -22,7 +22,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private HorizontalProgressDialog hpd;
 
     @ViewInject(R.id.layout1)
-    private LinearLayout layout;
+    private FrameLayout layout;
 
     @ViewInject(R.id.tv_1)
     private TextView tv1;

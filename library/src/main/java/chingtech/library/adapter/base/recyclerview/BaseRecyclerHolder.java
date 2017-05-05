@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 
 import chingtech.library.adapter.base.helper.ViewHelper;
 import chingtech.library.utils.ViewUtils;
+import chingtech.library.widget.LabelView;
 import chingtech.library.widget.SmoothCheckBox;
 
 public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewHelper.RecyclerView<BaseRecyclerHolder> {
@@ -436,6 +437,51 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
     public BaseRecyclerHolder setViewSize(int viewId, int width, int height) {
         View view = getView(viewId);
         ViewUtils.setViewSize(mContext, view, width, height);
+        return this;
+    }
+
+    /**
+     * Will set the text of a LabelView.
+     *
+     * @param viewId The view id.
+     * @param value  The text to put in the text view.
+     * @return The BaseAdapterHelper for chaining.
+     */
+    @Override
+    public BaseRecyclerHolder setLabelText(@IdRes int viewId, String value) {
+        LabelView view = getView(viewId);
+        view.setText(value);
+        return this;
+    }
+
+    /**
+     * Will set the gravity of a View.
+     *
+     * @param viewId  The view id.
+     * @param gravity The text gravity.
+     *
+     *                Gravity.TOP | Gravity.LEFT
+     *                Gravity.TOP | Gravity.RIGHT
+     *                Gravity.BOTTOM | Gravity.LEFT
+     */
+    @Override
+    public BaseRecyclerHolder setGravity(@IdRes int viewId, int gravity) {
+        LabelView view = getView(viewId);
+        view.setGravity(gravity);
+        return this;
+    }
+
+    /**
+     * Will set the background color of a LabelView.
+     *
+     * @param viewId  The view id.
+     * @param bgColor The text background color.
+     * @return The BaseAdapterHelper for chaining.
+     */
+    @Override
+    public BaseRecyclerHolder setLabelBgColor(@IdRes int viewId, int bgColor) {
+        LabelView view = getView(viewId);
+        view.setBgColor(ContextCompat.getColor(mContext, bgColor));
         return this;
     }
 }

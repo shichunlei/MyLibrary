@@ -428,6 +428,7 @@ public interface ViewHelper {
          *
          * @param viewId viewId
          * @param imgUrl 图片路径
+         * @param defaultDrawable 默认图片
          * @return viewHolder
          */
         VH setImageUrl(int viewId, String imgUrl, int defaultDrawable);
@@ -623,7 +624,7 @@ public interface ViewHelper {
          * @param type
          * @return
          */
-        VH setViewHeight(int viewId, float type);
+        VH setViewHeight(@IdRes int viewId, float type);
 
         /**
          * 设置控件的高度
@@ -634,7 +635,7 @@ public interface ViewHelper {
          * @param screen
          * @return
          */
-        VH setViewHeight(int viewId, float type, float screen);
+        VH setViewHeight(@IdRes int viewId, float type, float screen);
 
         /**
          * 设置控件的宽度
@@ -644,7 +645,7 @@ public interface ViewHelper {
          * @param type
          * @return
          */
-        VH setViewWidth(int viewId, float type);
+        VH setViewWidth(@IdRes int viewId, float type);
 
         /**
          * 设置控件的宽度
@@ -655,7 +656,7 @@ public interface ViewHelper {
          * @param screen
          * @return
          */
-        VH setViewWidth(int viewId, float type, float screen);
+        VH setViewWidth(@IdRes int viewId, float type, float screen);
 
         /**
          * 设置控件的大小
@@ -676,7 +677,7 @@ public interface ViewHelper {
          * @param screen
          * @return
          */
-        VH setViewSize(int viewId, float type, float screen);
+        VH setViewSize(@IdRes int viewId, float type, float screen);
 
         /**
          * 设置控件的尺寸
@@ -689,6 +690,37 @@ public interface ViewHelper {
          *            The view height.
          * @return
          */
-        VH setViewSize(int viewId, int width, int height);
+        VH setViewSize(@IdRes int viewId, int width, int height);
+
+        /**
+         * Will set the text of a LabelView.
+         *
+         * @param viewId The view id.
+         * @param value The text to put in the text view.
+         * @return The BaseAdapterHelper for chaining.
+         */
+        VH setLabelText(@IdRes int viewId, String value);
+
+        /**
+         * Will set the gravity of a View.
+         *
+         * @param viewId The view id.
+         * @param gravity The text gravity.
+         *
+         * Gravity.TOP | Gravity.LEFT
+         * Gravity.TOP | Gravity.RIGHT
+         * Gravity.BOTTOM | Gravity.LEFT
+         * Gravity.BOTTOM | Gravity.RIGHT
+         */
+        VH setGravity(@IdRes int viewId, int gravity);
+
+        /**
+         * Will set the background color of a LabelView.
+         *
+         * @param viewId The view id.
+         * @param bgColor The text background color.
+         * @return The BaseAdapterHelper for chaining.
+         */
+        VH setLabelBgColor(@IdRes int viewId, int bgColor);
     }
 }
