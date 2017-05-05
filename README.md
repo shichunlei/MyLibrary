@@ -119,9 +119,10 @@ Step 2. Add the dependency
 
 【0.0.7】
 
-    StringUtils、TimeUtils、ViewUtils类中添加新的方法
+    StringUtils、TimeUtils、ViewUtils类中添加新的方法；
     添加 SwipeToLoadLayout 下拉刷新上拉加载
 
 【0.0.8】
 
+    RecyclerView嵌套RecyclerView；
     添加 LabelView 角标
