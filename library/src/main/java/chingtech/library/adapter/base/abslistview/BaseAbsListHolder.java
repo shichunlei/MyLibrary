@@ -104,6 +104,34 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
         return this;
     }
 
+    /**
+     * 设置textView文本内容
+     *
+     * @param viewId viewId
+     * @param value  文本内容
+     * @return viewHolder
+     */
+    @Override
+    public BaseAbsListHolder setText(int viewId, CharSequence value) {
+        TextView view = getView(viewId);
+        view.setText(value);
+        return this;
+    }
+
+    @Override
+    public BaseAbsListHolder setTextDeleteLine(int viewId) {
+        TextView view = getView(viewId);
+        view.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        return this;
+    }
+
+    @Override
+    public BaseAbsListHolder setTextUnderLine(int viewId) {
+        TextView view = getView(viewId);
+        view.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        return this;
+    }
+
     @Override
     public BaseAbsListHolder setTextColor(int viewId, int color) {
         TextView view = getView(viewId);

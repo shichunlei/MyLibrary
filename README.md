@@ -56,13 +56,17 @@
 
     原始项目地址：https://github.com/Aspsine/SwipeToLoadLayout
 
+- **LoadingView**
+
+    加载动画
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper等
 
 **Version**
 
-    【0.0.8】
+    【0.0.9】
 
 # Installation
 
@@ -80,7 +84,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.0.7'
+        compile 'com.github.shichunlei:MyLibrary:0.0.9'
     }
 
 # Usage
@@ -126,3 +130,8 @@ Step 2. Add the dependency
 
     RecyclerView嵌套RecyclerView；
     添加 LabelView 角标
+
+【0.0.9】
+
+    添加 LoadingView 加载动画
+    更新Android 轻量级适配器，添加TextView一些属性

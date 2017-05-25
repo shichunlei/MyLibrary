@@ -23,9 +23,34 @@ public interface ViewHelper {
          *
          * @param viewId viewId
          * @param value  文本内容
-         * @return viewHolder viewHolder viewHolder
+         * @return viewHolder
          */
         VH setText(int viewId, String value);
+
+        /**
+         * 设置textView文本内容
+         *
+         * @param viewId viewId
+         * @param value  文本内容
+         * @return viewHolder
+         */
+        VH setText(int viewId, CharSequence value);
+
+        /**
+         * 设置文本删除线
+         *
+         * @param viewId viewId
+         * @return
+         */
+        VH setTextDeleteLine(int viewId);
+
+        /**
+         * 设置文本下划线
+         *
+         * @param viewId viewId
+         * @return
+         */
+        VH setTextUnderLine(int viewId);
 
         /**
          * 设置textView文本颜色
@@ -338,9 +363,34 @@ public interface ViewHelper {
          *
          * @param viewId viewId
          * @param value  文本内容
-         * @return viewHolder viewHolder viewHolder
+         * @return viewHolder
          */
         VH setText(int viewId, String value);
+
+        /**
+         * 设置textView文本内容
+         *
+         * @param viewId viewId
+         * @param value  文本内容
+         * @return viewHolder
+         */
+        VH setText(int viewId, CharSequence value);
+
+        /**
+         * 设置文本删除线
+         *
+         * @param viewId viewId
+         * @return viewHolder
+         */
+        VH setTextDeleteLine(int viewId);
+
+        /**
+         * 设置文本下划线
+         *
+         * @param viewId viewId
+         * @return viewHolder
+         */
+        VH setTextUnderLine(int viewId);
 
         /**
          * 设置textView文本颜色

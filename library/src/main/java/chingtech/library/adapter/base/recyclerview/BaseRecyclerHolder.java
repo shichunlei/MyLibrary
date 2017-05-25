@@ -82,6 +82,34 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
         return this;
     }
 
+    /**
+     * 设置textView文本内容
+     *
+     * @param viewId viewId
+     * @param value  文本内容
+     * @return viewHolder
+     */
+    @Override
+    public BaseRecyclerHolder setText(int viewId, CharSequence value) {
+        TextView view = getView(viewId);
+        view.setText(value);
+        return this;
+    }
+
+    @Override
+    public BaseRecyclerHolder setTextDeleteLine(int viewId) {
+        TextView view = getView(viewId);
+        view.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        return this;
+    }
+
+    @Override
+    public BaseRecyclerHolder setTextUnderLine(int viewId) {
+        TextView view = getView(viewId);
+        view.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        return this;
+    }
+
     @Override
     public BaseRecyclerHolder setTextColor(int viewId, int color) {
         TextView view = getView(viewId);
@@ -114,7 +142,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
      * 设置背景颜色
      *
      * @param viewId viewId
-     * @return viewHolder viewHolder
+     * @return viewHolder
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
