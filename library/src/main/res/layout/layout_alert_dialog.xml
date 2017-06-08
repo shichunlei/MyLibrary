@@ -7,27 +7,43 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_title"
+    <RelativeLayout
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center_vertical"
-        android:text="Title"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:background="@color/google_blue"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/image_close"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/icon_close" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txt_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
         android:gravity="center_vertical"
+        android:padding="15dp"
         android:text="Message"
         android:textColor="@android:color/black"
         android:textSize="16sp" />
@@ -38,17 +54,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical">
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
+        android:clipToPadding="false"
         android:padding="10dp"
-        app:layoutManager="LinearLayoutManager"
-        android:clipToPadding="false"/>
+        android:scrollbars="none"
+        app:layoutManager="LinearLayoutManager" />
 
     <LinearLayout
         android:id="@+id/dialog_Group"
@@ -56,74 +73,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical">
+
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edittxt_text"
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center_vertical"
-        android:hint="edittext"
-        android:padding="8dp"
-        android:inputType="text"
-        android:maxLines="1"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/edittxt_text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center_vertical"
-        android:hint="edittext2"
-        android:padding="8dp"
-        android:inputType="text"
-        android:maxLines="1"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/edittxt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:gravity="center_vertical"
-        android:hint="请输入密码"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:padding="8dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right">
-
-        <Button
-            android:id="@+id/btn_neg"
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/gray_9"
-            android:text="取消"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_pos"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="43dp"
+            android:layout_alignParentRight="true"
             android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="#037BFF"
             android:text="确定"
-            style="@style/Widget.AppCompat.Button.Borderless" />
-    </LinearLayout>
+            android:textColor="#037BFF"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_neg"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_toLeftOf="@+id/btn_pos"
+            android:layout_toStartOf="@+id/btn_pos"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/gray_9"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/gray_9"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </RelativeLayout>
 </LinearLayout>

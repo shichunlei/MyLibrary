@@ -1,110 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SmoothCheckBox">
-        <attr name="duration" format="integer"/>
-        <attr name="stroke_width" format="dimension"/>
-        <attr name="color_tick" format="color"/>
-        <attr name="color_checked" format="color"/>
-        <attr name="color_unchecked" format="color"/>
-        <attr name="color_unchecked_stroke" format="color"/>
+        <attr name="duration" format="integer" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="color_tick" format="color" />
+        <attr name="color_checked" format="color" />
+        <attr name="color_unchecked" format="color" />
+        <attr name="color_unchecked_stroke" format="color" />
     </declare-styleable>
 
     <declare-styleable name="RoundImageView">
-        <!-- 描边宽度-->
-        <attr name="border_width" format="dimension"/>
-        <!-- 描边颜色-->
-        <attr name="border_color" format="color"/>
+        <!-- 描边宽度 -->
+        <attr name="border_width" format="dimension" />
+        <!-- 描边颜色 -->
+        <attr name="border_color" format="color" />
         <!--圆角大小-->
-        <attr name="corner_radius" format="dimension"/>
+        <attr name="corner_radius" format="dimension" />
         <!--左上圆角大小-->
-        <attr name="leftTop_corner_radius" format="dimension"/>
+        <attr name="leftTop_corner_radius" format="dimension" />
         <!--右上圆角大小-->
-        <attr name="rightTop_corner_radius" format="dimension"/>
+        <attr name="rightTop_corner_radius" format="dimension" />
         <!--左下圆角大小-->
-        <attr name="leftBottom_corner_radius" format="dimension"/>
+        <attr name="leftBottom_corner_radius" format="dimension" />
         <!--右下圆角大小-->
-        <attr name="rightBottom_corner_radius" format="dimension"/>
+        <attr name="rightBottom_corner_radius" format="dimension" />
         <!--图片类型：圆角或者圆形-->
         <attr name="type" format="enum">
-            <enum name="oval" value="2"/>
-            <enum name="round" value="1"/>
-            <enum name="circle" value="0"/>
+            <enum name="oval" value="2" />
+            <enum name="round" value="1" />
+            <enum name="circle" value="0" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="ExpandIconView">
-        <attr name="eiv_roundedCorners" format="boolean"/>
-        <attr name="eiv_switchColor" format="boolean"/>
-        <attr name="eiv_color" format="color"/>
-        <attr name="eiv_colorMore" format="color"/>
-        <attr name="eiv_colorLess" format="color"/>
-        <attr name="eiv_animationDuration" format="integer"/>
-        <attr name="eiv_padding" format="dimension"/>
+        <attr name="eiv_roundedCorners" format="boolean" />
+        <attr name="eiv_switchColor" format="boolean" />
+        <attr name="eiv_color" format="color" />
+        <attr name="eiv_colorMore" format="color" />
+        <attr name="eiv_colorLess" format="color" />
+        <attr name="eiv_animationDuration" format="integer" />
+        <attr name="eiv_padding" format="dimension" />
     </declare-styleable>
 
+    <!-- 可翻转View -->
     <declare-styleable name="FlipView">
-        <attr name="flip_touch" format="boolean"/>
-        <attr name="flip_duration" format="integer"/>
-        <attr name="flip_enabled" format="boolean"/>
+        <attr name="flip_touch" format="boolean" />
+        <attr name="flip_duration" format="integer" />
+        <attr name="flip_enabled" format="boolean" />
         <attr name="flip_state" format="enum">
-            <enum name="front" value="0"/>
-            <enum name="back" value="1"/>
+            <enum name="front" value="0" />
+            <enum name="back" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="NumberAnimTextView">
-        <attr name="enable_anim" format="boolean"/>
-        <attr name="start_number" format="string"/>
-        <attr name="end_number" format="string"/>
-        <attr name="number_duration" format="integer"/>
-        <attr name="postfix" format="string"/>
-        <attr name="prefix" format="string"/>
+        <attr name="enable_anim" format="boolean" />
+        <attr name="start_number" format="string" />
+        <attr name="end_number" format="string" />
+        <attr name="number_duration" format="integer" />
+        <attr name="postfix" format="string" />
+        <attr name="prefix" format="string" />
     </declare-styleable>
 
     <declare-styleable name="GoogleCircleProgressView">
-        <attr name="gcp_inner_radius" format="dimension"/>
-        <attr name="gcp_background_color" format="color"/>
-        <attr name="gcp_progress_color" format="color"/>
-        <attr name="gcp_progress_stoke_width" format="dimension"/>
-        <attr name="gcp_show_arrow" format="boolean"/>
-        <attr name="gcp_enable_circle_background" format="boolean"/>
-        <attr name="gcp_arrow_width" format="dimension"/>
-        <attr name="gcp_arrow_height" format="dimension"/>
-        <attr name="gcp_progress" format="integer"/>
-        <attr name="gcp_max" format="integer"/>
-        <attr name="gcp_progress_text_size" format="dimension"/>
-        <attr name="gcp_progress_text_color" format="color"/>
+        <attr name="gcp_inner_radius" format="dimension" />
+        <attr name="gcp_background_color" format="color" />
+        <attr name="gcp_progress_color" format="color" />
+        <attr name="gcp_progress_stoke_width" format="dimension" />
+        <attr name="gcp_show_arrow" format="boolean" />
+        <attr name="gcp_enable_circle_background" format="boolean" />
+        <attr name="gcp_arrow_width" format="dimension" />
+        <attr name="gcp_arrow_height" format="dimension" />
+        <attr name="gcp_progress" format="integer" />
+        <attr name="gcp_max" format="integer" />
+        <attr name="gcp_progress_text_size" format="dimension" />
+        <attr name="gcp_progress_text_color" format="color" />
         <attr name="gcp_progress_text_visibility" format="enum">
-            <enum name="visible" value="0"/>
-            <enum name="invisible" value="1"/>
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
         </attr>
     </declare-styleable>
 
+    <!-- 角标 -->
     <declare-styleable name="LabelView">
         <!-- 设置文字内容 -->
-        <attr name="lv_text" format="string"/>
+        <attr name="lv_text" format="string" />
         <!-- 设置文字颜色,默认#ffffff -->
-        <attr name="lv_text_color" format="color"/>
+        <attr name="lv_text_color" format="color" />
         <!-- 设置文字大小,默认11sp -->
-        <attr name="lv_text_size" format="dimension"/>
+        <attr name="lv_text_size" format="dimension" />
         <!-- 设置文字是否支持加粗,默认true -->
-        <attr name="lv_text_bold" format="boolean"/>
+        <attr name="lv_text_bold" format="boolean" />
         <!-- 设置文字是否支持全部大写,默认true-->
-        <attr name="lv_text_all_caps" format="boolean"/>
+        <attr name="lv_text_all_caps" format="boolean" />
         <!-- 设置背景颜色,默认"#FF4081"-->
-        <attr name="lv_background_color" format="color"/>
+        <attr name="lv_background_color" format="color" />
         <!-- 设置LabelView所在矩形最小宽高,默认mFillTriangle?35dp:50dp-->
-        <attr name="lv_min_size" format="dimension"/>
+        <attr name="lv_min_size" format="dimension" />
         <!-- 设置文字上下padding,默认3.5dp,mFillTriangle为true时无效-->
-        <attr name="lv_padding" format="dimension"/>
+        <attr name="lv_padding" format="dimension" />
         <!-- 设置LabelView方向 -->
         <attr name="lv_gravity" format="enum">
-            <enum name="TOP_LEFT" value="51"/>
-            <enum name="TOP_RIGHT" value="53"/>
-            <enum name="BOTTOM_LEFT" value="83"/>
-            <enum name="BOTTOM_RIGHT" value="85"/>
+            <enum name="TOP_LEFT" value="51" />
+            <enum name="TOP_RIGHT" value="53" />
+            <enum name="BOTTOM_LEFT" value="83" />
+            <enum name="BOTTOM_RIGHT" value="85" />
         </attr>
         <!-- 设置是否填充三角区域,默认false -->
-        <attr name="lv_fill_triangle" format="boolean"/>
+        <attr name="lv_fill_triangle" format="boolean" />
+    </declare-styleable>
+
+    <!-- 可展开(Expand)的TextView -->
+    <declare-styleable name="ExpandTextView">
+        <!--设置开始折叠的行数-->
+        <attr name="maxCollapsedLines" format="integer" />
+        <!--展开/折叠动画时长-->
+        <attr name="animDuration" format="integer" />
+        <!--透明度渐变起始值-->
+        <attr name="animAlphaStart" format="float" />
+        <!--指示展开状态的图标-->
+        <attr name="expandDrawable" format="reference" />
+        <!--指示折叠状态的图标-->
+        <attr name="collapseDrawable" format="reference" />
+        <!--指示状态的图标的对齐方式,有左/上,居中,右/下可选-->
+        <attr name="arrowAlign" format="enum">
+            <enum name="bottom" value="0" />
+            <enum name="top" value="1" />
+            <enum name="center" value="2" />
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
+        </attr>
+        <!--指示状态的图标位置,两种可选,在text的右边和在text的下面-->
+        <attr name="arrowPosition" format="enum">
+            <enum name="right" value="0" />
+            <enum name="below" value="1" />
+        </attr>
+        <!--可以设置图标离文字的间距-->
+        <attr name="arrowPadding" format="dimension" />
+    </declare-styleable>
+
+    <!-- 水波 -->
+    <declare-styleable name="WaveLoadingView">
+        <!-- 描边宽度, default is 0 -->
+        <attr name="wlv_borderWidth" format="dimension" />
+        <!-- 描边颜色 -->
+        <attr name="wlv_borderColor" format="color" />
+        <!-- 进度值, default is 50 -->
+        <attr name="wlv_progressValue" format="integer" />
+        <!-- 形状, default is circle -->
+        <attr name="wlv_shapeType" format="enum">
+            <enum name="triangle" value="0" />
+            <enum name="circle" value="1" />
+            <enum name="square" value="2" />
+            <enum name="rectangle" value="3" />
+        </attr>
+        <!-- Triangle direction, default is north -->
+        <attr name="wlv_triangle_direction" format="enum">
+            <enum name="north" value="0" />
+            <enum name="south" value="1" />
+            <enum name="east" value="2" />
+            <enum name="west" value="3" />
+        </attr>
+        <!-- Is round rectangle, default is false -->
+        <attr name="wlv_round_rectangle" format="boolean" />
+        <!-- Round Rectangle corners, default is 30 -->
+        <attr name="wlv_round_rectangle_x_and_y" format="integer" />
+        <!-- Wave color -->
+        <attr name="wlv_waveColor" format="color" />
+        <!-- Wave background color -->
+        <attr name="wlv_wave_background_Color" format="color" />
+        <!-- Wave amplitude -->
+        <attr name="wlv_waveAmplitude" format="float" />
+        <!-- Top title content, default is null -->
+        <attr name="wlv_titleTop" format="string" />
+        <!-- Center title content, default is null -->
+        <attr name="wlv_titleCenter" format="string" />
+        <!-- Bottom title content, default is null -->
+        <attr name="wlv_titleBottom" format="string" />
+        <!-- Top title size, default is 18 -->
+        <attr name="wlv_titleTopSize" format="dimension" />
+        <!-- Center title size, default is 22 -->
+        <attr name="wlv_titleCenterSize" format="dimension" />
+        <!-- Bottom size, default is 18 -->
+        <attr name="wlv_titleBottomSize" format="dimension" />
+        <!-- Top title color -->
+        <attr name="wlv_titleTopColor" format="color" />
+        <!-- Center title color -->
+        <attr name="wlv_titleCenterColor" format="color" />
+        <!-- Bottom title color -->
+        <attr name="wlv_titleBottomColor" format="color" />
+        <!-- Top title stroke color -->
+        <attr name="wlv_titleTopStrokeColor" format="color" />
+        <!-- Center title stroke color -->
+        <attr name="wlv_titleTopStrokeWidth" format="dimension" />
+        <!-- Bottom title stroke color -->
+        <attr name="wlv_titleBottomStrokeColor" format="color" />
+        <!-- Top title stroke width -->
+        <attr name="wlv_titleBottomStrokeWidth" format="dimension" />
+        <!-- Center title stroke width -->
+        <attr name="wlv_titleCenterStrokeColor" format="color" />
+        <!-- Bottom title stroke width -->
+        <attr name="wlv_titleCenterStrokeWidth" format="dimension" />
+    </declare-styleable>
+
+    <!-- 轮播 -->
+    <declare-styleable name="RecyclerViewBanner">
+        <attr name="rvb_interval" format="integer" />
+        <attr name="rvb_showIndicator" format="boolean" />
+        <attr name="rvb_indicatorSelectedSrc" format="color|reference" />
+        <attr name="rvb_indicatorUnselectedSrc" format="color|reference" />
+        <attr name="rvb_indicatorSize" format="dimension|reference" />
+        <attr name="rvb_indicatorSpace" format="dimension|reference" />
+        <attr name="rvb_indicatorMargin" format="dimension|reference" />
+        <attr name="rvb_indicatorGravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="rvb_autoPlaying" format="boolean" />
     </declare-styleable>
 </resources>
