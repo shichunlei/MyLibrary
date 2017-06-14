@@ -392,22 +392,25 @@ public class AlertDialog {
         }
 
         if (showPosBtn && showNegBtn) {
+            showCancel = false;
             layoutBottom.setVisibility(View.VISIBLE);
             btn_pos.setVisibility(View.VISIBLE);
             btn_neg.setVisibility(View.VISIBLE);
         }
 
         if (showPosBtn && !showNegBtn) {
+            showCancel = false;
             layoutBottom.setVisibility(View.VISIBLE);
             btn_pos.setVisibility(View.VISIBLE);
         }
 
         if (!showPosBtn && showNegBtn) {
+            showCancel = false;
             layoutBottom.setVisibility(View.VISIBLE);
             btn_neg.setVisibility(View.VISIBLE);
         }
 
-        if (!showPosBtn && !showNegBtn && !showClose || showCancel) {
+        if (!showPosBtn && !showNegBtn && !showClose && showCancel) {
             layoutBottom.setVisibility(View.VISIBLE);
             btn_cancel.setVisibility(View.VISIBLE);
         }

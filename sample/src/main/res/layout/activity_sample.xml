@@ -4,21 +4,21 @@
     android:id="@+id/swipeToLoadLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:swipe_style="classic" >
+    app:swipe_style="classic">
 
     <include
         android:id="@id/swipe_refresh_header"
-        layout="@layout/layout_header"/>
+        layout="@layout/layout_header" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/swipe_target"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     </LinearLayout>
 
     <include
         android:id="@id/swipe_load_more_footer"
-        layout="@layout/layout_footer"/>
+        layout="@layout/layout_footer" />
 </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

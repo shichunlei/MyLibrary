@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chingtech.library.widget.ExpandTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_expand"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:textColor="@color/gray_6"
+    android:textSize="16sp"
+    app:arrowAlign="center"
+    app:arrowPosition="right"
+    app:maxCollapsedLines="3" />

@@ -14,8 +14,11 @@ import static chingtech.library.utils.TimeUtils.TIME_SHAORT_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_M_FORMAT;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -117,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
         number.startNumber();
 
-        Log.i("tag", "=---------------" + TimeUtils.intervalDays("2016-12-31 12:22:22", "2017-01-01 01:01:01"));
+        Log.i("tag", "=---------------" + TimeUtils.intervalDays("2016-12-31 12:22:22",
+                "2017-01-01 01:01:01"));
 
         Log.i("tag", "=======" + StringUtils.hangeToBig(3453450.23));
 
@@ -173,45 +177,46 @@ public class MainActivity extends AppCompatActivity {
         String s090 = TimeUtils.formatDateTime(datetime, "HH:00");
         Log.i("tag", s090);
 
-        image1 = (RoundImageView)findViewById(R.id.image1);
-        image2 = (RoundImageView)findViewById(R.id.image2);
-        image3 = (RoundImageView)findViewById(R.id.image3);
+        image1 = (RoundImageView) findViewById(R.id.image1);
+        image2 = (RoundImageView) findViewById(R.id.image2);
+        image3 = (RoundImageView) findViewById(R.id.image3);
 
-        Glide.with(this).load("http://www.5857.com/uploadfile/2015/0321/20150321103512823.jpg").centerCrop().crossFade().error(R.drawable.wall04).placeholder(R.drawable.wall04).into(image1);
-        Glide.with(this).load("http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg").centerCrop().crossFade().error(R.drawable.wall04).placeholder(R.drawable.wall04).into(image2);
-        Glide.with(this).load("http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg").centerCrop().crossFade().error(R.drawable.wall04).placeholder(R.drawable.wall04).into(image3);
+        Glide.with(this).load(
+                "http://www.5857.com/uploadfile/2015/0321/20150321103512823.jpg").centerCrop().crossFade().error(
+                R.drawable.wall04).placeholder(R.drawable.wall04).into(image1);
+        Glide.with(this).load(
+                "http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg").centerCrop().crossFade().error(
+                R.drawable.wall04).placeholder(R.drawable.wall04).into(image2);
+        Glide.with(this).load(
+                "http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg").centerCrop().crossFade().error(
+                R.drawable.wall04).placeholder(R.drawable.wall04).into(image3);
 
         findViewById(R.id.btn_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog
-                        .setTitle("这里是Title", Gravity.CENTER)
-                        .addSheetItem("item0", new OnSheetItemClickListener() {
+                dialog.setTitle("这里是Title", Gravity.CENTER).setCancel("", null).addSheetItem(
+                        "item0", new OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
                                 showToast("item0");
                             }
-                        })
-                        .addSheetItem("item1", new OnSheetItemClickListener() {
-                            @Override
-                            public void onClick(int which) {
-                                showToast("item1");
-                            }
-                        })
-                        .addSheetItem("item2", new OnSheetItemClickListener() {
-                            @Override
-                            public void onClick(int which) {
-                                showToast("item2");
-                            }
-                        })
-                        .addSheetItem("item3", new OnSheetItemClickListener() {
-                            @Override
-                            public void onClick(int which) {
-                                showToast("item3");
-                            }
-                        })
-                        .show();
+                        }).addSheetItem("item1", new OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        showToast("item1");
+                    }
+                }).addSheetItem("item2", new OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        showToast("item2");
+                    }
+                }).addSheetItem("item3", new OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        showToast("item3");
+                    }
+                }).show();
             }
         });
 
@@ -219,24 +224,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog
-                        .setTitle("Title")
-                        .setMsg("Message")
-                        .setEditText("用户名")
-                        .setPassword("密码")
-                        .setNegativeButton("", new View.OnClickListener() {
+                dialog.setTitle("Title").setMsg("Message").setNegativeButton("",
+                        new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
                             }
-                        })
-                        .setPositiveButton("", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                        }).setPositiveButton("", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                            }
-                        })
-                        .show();
+                    }
+                }).show();
             }
         });
 
@@ -244,45 +243,84 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog
-                        .setTitle("Title")
-                        .setSingleChoiceItems(items)
-                        .setNegativeButton("", null)
-                        .setPositiveButton("", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()], Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .show();
+                dialog.setTitle("Title").setSingleChoiceItems(items).setNegativeButton("",
+                        null).setPositiveButton("", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()],
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
             }
         });
 
         findViewById(R.id.btn_dialog4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View v = LayoutInflater.from(MainActivity.this).inflate(
-                        R.layout.layout, null);
+                View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
                 final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
                 final EditText phone = (EditText) v.findViewById(R.id.edittxt_phone);
                 final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog
-                        .setTitle("Title")
-                        .setView(v)
-                        .setSingleChoiceItems(items)
-                        .setNegativeButton("", null)
-                        .setPositiveButton("", new View.OnClickListener() {
+                dialog.setTitle("Title").setView(v).setSingleChoiceItems(items).setNegativeButton(
+                        "", null).setPositiveButton("", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        progress.show();
+                        Log.i("tag", username.getText().toString().trim());
+                        Log.i("tag", phone.getText().toString().trim());
+                        Log.i("tag", password.getText().toString().trim());
+                        Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()],
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+            }
+        });
+
+        findViewById(R.id.bottom_alertdialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog.setTitle("这里是Title", Gravity.CENTER, R.color.white).setBackgroundColor(
+                        R.color.google_orange).setColseImage(R.mipmap.ic_launcher).setView(
+                        v).setColse(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showToast("关闭");
+                    }
+                }).show();
+            }
+        });
+
+        findViewById(R.id.bottom_alertdialog2).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View view) {
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog.setTitle("这里是Title", Gravity.CENTER).setBackgroundDrawable(
+                        R.mipmap.ic_launcher).setMsg("234444444444444444").setPositiveButton("",
+                        new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                progress.show();
-                                Log.i("tag", username.getText().toString().trim());
-                                Log.i("tag", phone.getText().toString().trim());
-                                Log.i("tag", password.getText().toString().trim());
-                                Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()], Toast.LENGTH_SHORT).show();
+
                             }
-                        })
-                        .show();
+                        }).show();
+            }
+        });
+
+        findViewById(R.id.bottom_alertdialog3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new AlertDialog(MainActivity.this).builder();
+                dialog.setTitle("这里是Title", Gravity.CENTER).setBackgroundResource(
+                        R.mipmap.ic_launcher).setMsg("234444444444444444").setCancel("",
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                showToast("取消");
+                            }
+                        }).show();
             }
         });
 
@@ -290,93 +328,83 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mBottomDialog = new BottomDialog(MainActivity.this).builder();
-                mBottomDialog.setTitle("这里是Title", 0, R.color.black)
-                        .setCancel("取消", null)
-                        .addSheetItem("item0", R.color.google_red, new OnSheetItemClickListener(){
+                mBottomDialog.setTitle("这里是Title", 0, R.color.black).setCancel("取消",
+                        null).addSheetItem("item0", R.color.google_red,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
                                 Log.i("TAG", "item0");
                             }
-                        })
-                        .addSheetItem("item1", R.color.google_blue, new OnSheetItemClickListener(){
+                        }).addSheetItem("item1", R.color.google_blue,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
                                 Log.i("TAG", "item1");
                             }
-                        })
-                        .addSheetItem("item2", R.color.google_green, new OnSheetItemClickListener(){
+                        }).addSheetItem("item2", R.color.google_green,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
-                                Log.i("TAG", "item2");
+                                goNextClass(WaveLoadView.class);
                             }
-                        })
-                        .addSheetItem("item3", R.color.google_pink, new OnSheetItemClickListener(){
+                        }).addSheetItem("item3", R.color.google_pink,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
-                                Log.i("TAG", "item3");
+                                goNextClass(LikeBangActivity.class);
                             }
-                        })
-                        .addSheetItem("item4", R.color.google_purple, new OnSheetItemClickListener(){
+                        }).addSheetItem("item4", R.color.google_purple,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
-                                Log.i("TAG", "item4");
+                                goNextClass(ExpandTextViewActivity.class);
                             }
-                        })
-                        .addSheetItem("item5", R.color.google_orange, new OnSheetItemClickListener(){
+                        }).addSheetItem("item5", R.color.google_orange,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
-                                Intent intent = new Intent();
-                                intent.setClass(MainActivity.this, RecyclerViewActivity.class);
-                                startActivity(intent);
+                                goNextClass(RecyclerViewActivity.class);
                             }
-                        })
-                        .addSheetItem("item6", R.color.google_yellow, new OnSheetItemClickListener(){
+                        }).addSheetItem("item6", R.color.google_yellow,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
-                                Intent intent = new Intent();
-                                intent.setClass(MainActivity.this, SampleActivity.class);
-                                startActivity(intent);
+                                goNextClass(SampleActivity.class);
                             }
-                        })
-                        .addSheetItem("item7", R.color.google_cyan, new OnSheetItemClickListener(){
+                        }).addSheetItem("item7", R.color.google_cyan,
+                        new OnSheetItemClickListener() {
 
                             @Override
                             public void onClick(int which) {
                                 download();
                             }
-                        })
-                        .show();
+                        }).show();
             }
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View v = LayoutInflater.from(MainActivity.this).inflate(
-                        R.layout.layout, null);
+                View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
                 final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
                 final EditText phone = (EditText) v.findViewById(R.id.edittxt_phone);
                 final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
                 mBottomDialog = new BottomDialog(MainActivity.this).builder();
-                mBottomDialog
-                        .setView(v)
-                        .setPositiveButton("确定", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Log.i("tag", username.getText().toString().trim());
-                                Log.i("tag", phone.getText().toString().trim());
-                                Log.i("tag", password.getText().toString().trim());
-                            }
-                        })
-                        .setNegativeButton("取消", null)
-                        .show();
+                mBottomDialog.setView(v).setPositiveButton("确定", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("tag", username.getText().toString().trim());
+                        Log.i("tag", phone.getText().toString().trim());
+                        Log.i("tag", password.getText().toString().trim());
+                    }
+                }).setNegativeButton("取消", null).show();
             }
         });
 
@@ -384,10 +412,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mBottomDialog = new BottomDialog(MainActivity.this).builder();
-                mBottomDialog
-                        .setTitle("这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题", Gravity.LEFT, R.color.gray_6)
-                        .setCancel("取消", null)
-                        .show();
+                mBottomDialog.setTitle(
+                        "这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题",
+                        Gravity.LEFT, R.color.gray_6).setCancel("取消", null).show();
             }
         });
 
@@ -430,7 +457,9 @@ public class MainActivity extends AppCompatActivity {
 
         hpd = new HorizontalProgressDialog(this);
         hpd.builder();
-        RequestParams requestParams = new RequestParams("http://101.200.174.126:9898/system/app_versions/appfiles/000/000/001/original/app-release.apk?1490756569");
+        RequestParams requestParams = new RequestParams(
+                "http://101.200.174.126:9898/system/app_versions/appfiles/000/000/001/original"
+                        + "/app-release.apk?1490756569");
         requestParams.setSaveFilePath(FileUtils.getSDPath() + "/a.apk");
         x.http().get(requestParams, new Callback.ProgressCallback<File>() {
             @Override
@@ -472,7 +501,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void showToast(String string){
+    private void showToast(String string) {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+    }
+
+    private void goNextClass(Class<?> claxx) {
+        Intent intent = new Intent();
+        intent.setClass(this, claxx);
+        startActivity(intent);
     }
 }
