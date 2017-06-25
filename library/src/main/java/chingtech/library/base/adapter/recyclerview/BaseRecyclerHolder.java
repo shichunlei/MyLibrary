@@ -28,6 +28,7 @@ import chingtech.library.base.adapter.helper.ViewHelper;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.LabelView;
 import chingtech.library.widget.SmoothCheckBox;
+import com.bumptech.glide.load.Transformation;
 
 public class BaseRecyclerHolder extends RecyclerView.ViewHolder
         implements ViewHelper.RecyclerView<BaseRecyclerHolder> {
@@ -196,6 +197,21 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder
              .load(imageUrl)
              .centerCrop()
              .crossFade()
+             .error(defaultDrawable)
+             .placeholder(defaultDrawable)
+             .into(view);
+        return this;
+    }
+
+    @Override
+    public BaseRecyclerHolder setImageUrl(int viewId, String imgUrl, int defaultDrawable,
+            Transformation transformation) {
+        ImageView view = getView(viewId);
+        Glide.with(mContext)
+             .load(imgUrl)
+             .centerCrop()
+             .crossFade()
+             .bitmapTransform(transformation)
              .error(defaultDrawable)
              .placeholder(defaultDrawable)
              .into(view);

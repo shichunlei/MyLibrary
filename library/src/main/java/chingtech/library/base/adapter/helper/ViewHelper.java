@@ -15,6 +15,7 @@ import android.widget.Adapter;
 import chingtech.library.base.adapter.ablistview.BaseAbsListHolder;
 import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
 import chingtech.library.widget.SmoothCheckBox;
+import com.bumptech.glide.load.Transformation;
 
 public interface ViewHelper {
 
@@ -133,6 +134,18 @@ public interface ViewHelper {
          * @return viewHolder
          */
         VH setImageUrl(int viewId, String imgUrl, int defaultDrawable);
+
+        /**
+         * 设置img图片路径
+         *
+         * @param viewId          viewId
+         * @param imgUrl          图片路径
+         * @param defaultDrawable 默认图片
+         * @param transformation  变换形式
+         * @return viewHolder
+         */
+        VH setImageUrl(int viewId, String imgUrl, int defaultDrawable,
+                Transformation transformation);
 
         /**
          * 设置img图片Bitmap
@@ -483,6 +496,18 @@ public interface ViewHelper {
          * @return viewHolder
          */
         VH setImageUrl(int viewId, String imgUrl, int defaultDrawable);
+
+        /**
+         * 设置img图片路径
+         *
+         * @param viewId          viewId
+         * @param imgUrl          图片路径
+         * @param defaultDrawable 默认图片
+         * @param transformation  变换形式
+         * @return viewHolder
+         */
+        VH setImageUrl(int viewId, String imgUrl, int defaultDrawable,
+                Transformation transformation);
 
         /**
          * 设置img图片Bitmap
