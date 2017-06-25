@@ -98,7 +98,7 @@
 
 **Version**
 
-    【0.1.2】
+    【0.1.3】
 
 # Installation
 
@@ -116,7 +116,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.2'
+        compile 'com.github.shichunlei:MyLibrary:0.1.3'
     }
 
 # Usage
@@ -188,3 +188,7 @@ Step 2. Add the dependency
 【0.1.2】
 
     添加 Glide 下的 Transformations
+
+【0.1.3】
+
+    修改0.1.2的BUG
