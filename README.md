@@ -84,9 +84,17 @@
     
     原始项目地址：https://github.com/tangqi92/WaveLoadingView
 
+- **GifMovieView**
+
+    GIF View
+
+- **SearchView**
+
+    搜索View
+
 - **工具类**
 
-    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、AnimatorUitls、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper、RandomUtils等
+    StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、AnimatorUitls、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper、RandomUtils、ConversionUtils等
 
 **Version**
 
@@ -168,3 +176,10 @@ Step 2. Add the dependency
     添加 SmallBang
     添加 WaveLoadingView 水波效果
     添加工具类AnimatorUitls、RandomUtils，完善AppUitls
+
+【0.1.1】
+
+    添加 SearchView
+    添加 GifMovieView
+    添加 ConversionUtils
+    修改 TimeUtils

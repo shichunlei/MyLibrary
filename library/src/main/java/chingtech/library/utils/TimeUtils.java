@@ -23,6 +23,7 @@ public class TimeUtils {
     public static final String TIME_SHAORT_FORMAT = "HH:mm";
     public static final String TIME_MS_FORMAT = "mm:ss";
     public static final String Y_M_FORMAT = "yyyy-MM";
+    public static final String YY_FORMAT = "yy";
     public static final String Y_FORMAT = "yyyy";
     public static final String M_FORMAT = "MM";
     public static final String D_FORMAT = "dd";

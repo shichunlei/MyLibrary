@@ -8,30 +8,39 @@ import static chingtech.library.utils.TimeUtils.H_12_FORMAT;
 import static chingtech.library.utils.TimeUtils.H_24_FORMAT;
 import static chingtech.library.utils.TimeUtils.MIN_FORMAT;
 import static chingtech.library.utils.TimeUtils.M_FORMAT;
+import static chingtech.library.utils.TimeUtils.S_FORMAT;
 import static chingtech.library.utils.TimeUtils.TIME_FORMAT;
 import static chingtech.library.utils.TimeUtils.TIME_MS_FORMAT;
 import static chingtech.library.utils.TimeUtils.TIME_SHAORT_FORMAT;
+import static chingtech.library.utils.TimeUtils.TZ_FORMAT;
+import static chingtech.library.utils.TimeUtils.YY_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_FORMAT;
 import static chingtech.library.utils.TimeUtils.Y_M_FORMAT;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import chingtech.library.utils.ConversionUtils;
+import chingtech.library.widget.SearchView;
 import com.bumptech.glide.Glide;
 import com.chingtech.library.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
@@ -56,6 +65,11 @@ import chingtech.library.widget.RoundImageView;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
+
+    @ViewInject(R.id.main_search_view_rsv)
+    private SearchView searchView;
+    @ViewInject(R.id.main_toolbar_tb)
+    private Toolbar    toolbar;
 
     private AlertDialog dialog;
 
@@ -107,6 +121,23 @@ public class MainActivity extends AppCompatActivity {
 
         x.view().inject(this);
 
+        setSupportActionBar(toolbar);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String queryText) {
+                Toast.makeText(MainActivity.this, "你搜索了" + queryText, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        iiiiiii();
+
         ViewUtils.setViewWidth(this, tv2, 1 / 7f);
         ViewUtils.setViewHeight(this, layout, 1 / 2f);
         ViewUtils.setViewWidth(this, tv1, 1 / 2f);
@@ -120,8 +151,48 @@ public class MainActivity extends AppCompatActivity {
 
         number.startNumber();
 
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            Log.w("Tag", "=====onCreate: " + i);
+
+            int k = 0;
+
+            if (i < 3) {
+                for (int j = 0; j < 3; j++) {
+                    if (j == 2) {
+                        k = j;
+                    }
+                }
+
+                Log.w("Tag", i + "=====onCreate: " + k);
+            } else {
+                for (int j = 0; j < 3; j++) {
+                    if (j == 3) {
+                        k = j;
+                    }
+                }
+
+                Log.w("Tag", i + "-----onCreate: " + k);
+            }
+
+            list.add(k);
+        }
+
+        Log.i("Tag", "list: " + list.toString());
+
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(TZ_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(Y_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(YY_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(M_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(D_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(H_12_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(H_24_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(MIN_FORMAT));
+        Log.i("tag", "----" + TimeUtils.getNowDateTime(S_FORMAT));
+
         Log.i("tag", "=---------------" + TimeUtils.intervalDays("2016-12-31 12:22:22",
-                "2017-01-01 01:01:01"));
+                                                                 "2017-01-01 01:01:01"));
 
         Log.i("tag", "=======" + StringUtils.hangeToBig(3453450.23));
 
@@ -177,46 +248,59 @@ public class MainActivity extends AppCompatActivity {
         String s090 = TimeUtils.formatDateTime(datetime, "HH:00");
         Log.i("tag", s090);
 
-        image1 = (RoundImageView) findViewById(R.id.image1);
-        image2 = (RoundImageView) findViewById(R.id.image2);
-        image3 = (RoundImageView) findViewById(R.id.image3);
-
-        Glide.with(this).load(
-                "http://www.5857.com/uploadfile/2015/0321/20150321103512823.jpg").centerCrop().crossFade().error(
-                R.drawable.wall04).placeholder(R.drawable.wall04).into(image1);
-        Glide.with(this).load(
-                "http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg").centerCrop().crossFade().error(
-                R.drawable.wall04).placeholder(R.drawable.wall04).into(image2);
-        Glide.with(this).load(
-                "http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg").centerCrop().crossFade().error(
-                R.drawable.wall04).placeholder(R.drawable.wall04).into(image3);
+        Glide.with(this)
+             .load("http://pic.58pic.com/58pic/11/75/23/17n58PIC9um.jpg")
+             .centerCrop()
+             .crossFade()
+             .error(R.drawable.wall04)
+             .placeholder(R.drawable.wall04)
+             .into(image1);
+        Glide.with(this)
+             .load("http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg")
+             .centerCrop()
+             .crossFade()
+             .error(R.drawable.wall04)
+             .placeholder(R.drawable.wall04)
+             .into(image2);
+        Glide.with(this)
+             .load("http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg")
+             .centerCrop()
+             .crossFade()
+             .error(R.drawable.wall04)
+             .placeholder(R.drawable.wall04)
+             .into(image3);
 
         findViewById(R.id.btn_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("这里是Title", Gravity.CENTER).setCancel("", null).addSheetItem(
-                        "item0", new OnSheetItemClickListener() {
-                            @Override
-                            public void onClick(int which) {
-                                showToast("item0");
-                            }
-                        }).addSheetItem("item1", new OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        showToast("item1");
-                    }
-                }).addSheetItem("item2", new OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        showToast("item2");
-                    }
-                }).addSheetItem("item3", new OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        showToast("item3");
-                    }
-                }).show();
+                dialog.setTitle("这里是Title", Gravity.CENTER)
+                      .setCancel("", null)
+                      .addSheetItem("item0", new OnSheetItemClickListener() {
+                          @Override
+                          public void onClick(int which) {
+                              showToast("item0");
+                          }
+                      })
+                      .addSheetItem("item1", new OnSheetItemClickListener() {
+                          @Override
+                          public void onClick(int which) {
+                              showToast("item1");
+                          }
+                      })
+                      .addSheetItem("item2", new OnSheetItemClickListener() {
+                          @Override
+                          public void onClick(int which) {
+                              showToast("item2");
+                          }
+                      })
+                      .addSheetItem("item3", new OnSheetItemClickListener() {
+                          @Override
+                          public void onClick(int which) {
+                              showToast("item3");
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -224,18 +308,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("Title").setMsg("Message").setNegativeButton("",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                dialog.setTitle("Title")
+                      .setMsg("Message")
+                      .setNegativeButton("", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
 
-                            }
-                        }).setPositiveButton("", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                          }
+                      })
+                      .setPositiveButton("", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
 
-                    }
-                }).show();
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -243,14 +330,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("Title").setSingleChoiceItems(items).setNegativeButton("",
-                        null).setPositiveButton("", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()],
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
+                dialog.setTitle("Title")
+                      .setSingleChoiceItems(items)
+                      .setNegativeButton("", null)
+                      .setPositiveButton("", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              Toast.makeText(MainActivity.this,
+                                             items[dialog.getSingleChoiceItems()],
+                                             Toast.LENGTH_SHORT).show();
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -259,21 +350,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
                 final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
-                final EditText phone = (EditText) v.findViewById(R.id.edittxt_phone);
+                final EditText phone    = (EditText) v.findViewById(R.id.edittxt_phone);
                 final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("Title").setView(v).setSingleChoiceItems(items).setNegativeButton(
-                        "", null).setPositiveButton("", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        progress.show();
-                        Log.i("tag", username.getText().toString().trim());
-                        Log.i("tag", phone.getText().toString().trim());
-                        Log.i("tag", password.getText().toString().trim());
-                        Toast.makeText(MainActivity.this, items[dialog.getSingleChoiceItems()],
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
+                dialog.setTitle("Title")
+                      .setView(v)
+                      .setSingleChoiceItems(items)
+                      .setNegativeButton("", null)
+                      .setPositiveButton("", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              progress.show();
+                              Log.i("tag", username.getText().toString().trim());
+                              Log.i("tag", phone.getText().toString().trim());
+                              Log.i("tag", password.getText().toString().trim());
+                              Toast.makeText(MainActivity.this,
+                                             items[dialog.getSingleChoiceItems()],
+                                             Toast.LENGTH_SHORT).show();
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -282,14 +378,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("这里是Title", Gravity.CENTER, R.color.white).setBackgroundColor(
-                        R.color.google_orange).setColseImage(R.mipmap.ic_launcher).setView(
-                        v).setColse(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showToast("关闭");
-                    }
-                }).show();
+                dialog.setTitle("这里是Title", Gravity.CENTER, R.color.white)
+                      .setBackgroundColor(R.color.google_orange)
+                      .setColseImage(R.mipmap.ic_launcher)
+                      .setView(v)
+                      .setColse(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              showToast("关闭");
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -298,14 +397,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("这里是Title", Gravity.CENTER).setBackgroundDrawable(
-                        R.mipmap.ic_launcher).setMsg("234444444444444444").setPositiveButton("",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                dialog.setTitle("这里是Title", Gravity.CENTER)
+                      .setBackgroundDrawable(R.mipmap.ic_launcher)
+                      .setMsg("234444444444444444")
+                      .setPositiveButton("", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
 
-                            }
-                        }).show();
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -313,14 +414,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog = new AlertDialog(MainActivity.this).builder();
-                dialog.setTitle("这里是Title", Gravity.CENTER).setBackgroundResource(
-                        R.mipmap.ic_launcher).setMsg("234444444444444444").setCancel("",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                showToast("取消");
-                            }
-                        }).show();
+                dialog.setTitle("这里是Title", Gravity.CENTER)
+                      .setBackgroundResource(R.mipmap.ic_launcher)
+                      .setMsg("234444444444444444")
+                      .setCancel("", new View.OnClickListener() {
+                          @Override
+                          public void onClick(View view) {
+                              showToast("取消");
+                          }
+                      })
+                      .show();
             }
         });
 
@@ -328,64 +431,73 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mBottomDialog = new BottomDialog(MainActivity.this).builder();
-                mBottomDialog.setTitle("这里是Title", 0, R.color.black).setCancel("取消",
-                        null).addSheetItem("item0", R.color.google_red,
-                        new OnSheetItemClickListener() {
+                mBottomDialog.setTitle("这里是Title", 0, R.color.black)
+                             .setCancel("取消", null)
+                             .addSheetItem("item0", R.color.google_red,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                Log.i("TAG", "item0");
-                            }
-                        }).addSheetItem("item1", R.color.google_blue,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   Log.i("TAG", "item0");
+                                               }
+                                           })
+                             .addSheetItem("item1", R.color.google_blue,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                Log.i("TAG", "item1");
-                            }
-                        }).addSheetItem("item2", R.color.google_green,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   Log.i("TAG", "item1");
+                                               }
+                                           })
+                             .addSheetItem("item2", R.color.google_green,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                goNextClass(WaveLoadView.class);
-                            }
-                        }).addSheetItem("item3", R.color.google_pink,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   goNextClass(WaveLoadView.class);
+                                               }
+                                           })
+                             .addSheetItem("item3", R.color.google_pink,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                goNextClass(LikeBangActivity.class);
-                            }
-                        }).addSheetItem("item4", R.color.google_purple,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   goNextClass(LikeBangActivity.class);
+                                               }
+                                           })
+                             .addSheetItem("item4", R.color.google_purple,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                goNextClass(ExpandTextViewActivity.class);
-                            }
-                        }).addSheetItem("item5", R.color.google_orange,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   goNextClass(ExpandTextViewActivity.class);
+                                               }
+                                           })
+                             .addSheetItem("item5", R.color.google_orange,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                goNextClass(RecyclerViewActivity.class);
-                            }
-                        }).addSheetItem("item6", R.color.google_yellow,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   goNextClass(RecyclerViewActivity.class);
+                                               }
+                                           })
+                             .addSheetItem("item6", R.color.google_yellow,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                goNextClass(SampleActivity.class);
-                            }
-                        }).addSheetItem("item7", R.color.google_cyan,
-                        new OnSheetItemClickListener() {
+                                               @Override
+                                               public void onClick(int which) {
+                                                   goNextClass(SampleActivity.class);
+                                               }
+                                           })
+                             .addSheetItem("item7", R.color.google_cyan,
+                                           new OnSheetItemClickListener() {
 
-                            @Override
-                            public void onClick(int which) {
-                                download();
-                            }
-                        }).show();
+                                               @Override
+                                               public void onClick(int which) {
+                                                   download();
+                                               }
+                                           })
+                             .show();
             }
         });
 
@@ -394,7 +506,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
                 final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
-                final EditText phone = (EditText) v.findViewById(R.id.edittxt_phone);
+                final EditText phone    = (EditText) v.findViewById(R.id.edittxt_phone);
                 final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
                 mBottomDialog = new BottomDialog(MainActivity.this).builder();
                 mBottomDialog.setView(v).setPositiveButton("确定", new View.OnClickListener() {
@@ -453,6 +565,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void iiiiiii() {
+        System.out.println("1的十六进制结果是：" + ConversionUtils.intToHex(1));
+
+        System.out.println("125的十六进制结果是：" + ConversionUtils.intToHex(125));
+        System.out.println("125的二进制结果是：" + ConversionUtils.intToBinary(125));
+        System.out.println("125的八进制结果是：" + ConversionUtils.intToOctal(125));
+
+        System.out.println("十进制字符串125转16进制为" + ConversionUtils.intStrToHex("125"));
+        System.out.println("十进制字符串125转二进制为" + ConversionUtils.intStrToBinary("125"));
+        System.out.println("十进制字符串125转八进制为" + ConversionUtils.intStrToOctal("125"));
+
+        System.out.println("十六进制字符串01 87转为10进制后为:" + ConversionUtils.hexToIntStr("01 87"));
+
+        System.out.println("二进制字符串0111101 1111101转为10进制后为:" + ConversionUtils.binaryToIntStr(
+                "0111101 1111101"));
+
+        System.out.println("八进制字符串175 245转为10进制后为:" + ConversionUtils.octalToIntStr("175 245"));
+
+        System.out.println(
+                "字符串175的bytes数组转为16进制后为:\n" + ConversionUtils.bytesToHex("175".getBytes()));
+
+        System.out.println(
+                "字符串175的bytes数组转为2进制后为:\n" + ConversionUtils.bytesToBinary("175".getBytes()));
+
+        System.out.println(
+                "字符串31 37 35的16进制转为bytes数组后为:\n" + ConversionUtils.hexToBytes("31 37 35"));
+        System.out.println("字符串31 37 35的16进制转为2进制后为:\n" + ConversionUtils.bytesToBinary(
+                ConversionUtils.hexToBytes("31 37 35")));
+    }
+
     private void download() {
 
         hpd = new HorizontalProgressDialog(this);
@@ -509,5 +651,52 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(this, claxx);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 这里控制如果SearchView打开了，按返回键先关掉SearchView
+        if (searchView.isSearchOpen()) {
+            searchView.hideSearch();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                searchView.showSearch();
+                return false;
+            }
+        });
+
+        MenuItem item1 = menu.findItem(R.id.action_search1);
+
+        item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                showToast("=====");
+                return false;
+            }
+        });
+
+        MenuItem item2 = menu.findItem(R.id.action_search2);
+        item2.setVisible(false);
+
+        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                showToast("=====");
+                return false;
+            }
+        });
+        return true;
     }
 }

@@ -23,4 +23,6 @@
     <color name="gray_6">#666</color>
     <color name="gray_3">#333</color>
     <color name="gray_b">#bbb</color>
+
+    <color name="search_transparent_mask">#50000000</color>
 </resources>

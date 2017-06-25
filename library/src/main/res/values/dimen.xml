@@ -9,4 +9,7 @@
     <dimen name="refresh_final_offset_google">150dp</dimen>
     <dimen name="refresh_drawable_size_google">40dp</dimen>
     <dimen name="refresh_trigger_offset_google">100dp</dimen>
+
+    <dimen name="search_icon_padding">12dp</dimen>
+    <dimen name="search_view_text_padding">50dp</dimen>
 </resources>

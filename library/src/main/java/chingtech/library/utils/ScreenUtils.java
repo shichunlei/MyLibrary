@@ -56,6 +56,12 @@ public class ScreenUtils {
         return (int) (spValue * scale + 0.5f);
     }
 
+    // 将px值转换为sp值
+    public static int px2sp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
     /**
      * Gets the width of the display, in pixels.
      *
