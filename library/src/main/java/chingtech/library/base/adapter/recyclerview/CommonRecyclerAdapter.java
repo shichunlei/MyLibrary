@@ -1,4 +1,4 @@
-package chingtech.library.adapter.base.recyclerview;
+package chingtech.library.base.adapter.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import chingtech.library.adapter.base.helper.DataHelper;
+import chingtech.library.base.adapter.helper.DataHelper;
 
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRecyclerHolder> implements DataHelper<T> {
 

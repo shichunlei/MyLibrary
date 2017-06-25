@@ -1,4 +1,4 @@
-package chingtech.library.adapter.base.helper;
+package chingtech.library.base.adapter.helper;
 
 import java.util.List;
 

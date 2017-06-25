@@ -1,4 +1,4 @@
-package chingtech.library.adapter.base.abslistview;
+package chingtech.library.base.adapter.ablistview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import chingtech.library.adapter.base.helper.ViewHelper;
+import chingtech.library.base.adapter.helper.ViewHelper;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.SmoothCheckBox;
 

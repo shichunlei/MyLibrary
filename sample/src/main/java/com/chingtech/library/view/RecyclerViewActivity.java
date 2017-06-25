@@ -19,8 +19,8 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-import chingtech.library.adapter.base.recyclerview.BaseRecyclerHolder;
-import chingtech.library.adapter.base.recyclerview.CommonRecyclerAdapter;
+import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
+import chingtech.library.base.adapter.recyclerview.CommonRecyclerAdapter;
 
 /**
  * MyLibrary

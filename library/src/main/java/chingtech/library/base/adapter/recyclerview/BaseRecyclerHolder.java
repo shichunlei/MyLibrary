@@ -1,4 +1,4 @@
-package chingtech.library.adapter.base.recyclerview;
+package chingtech.library.base.adapter.recyclerview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,9 +11,11 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Checkable;
 import android.widget.ImageView;
@@ -22,17 +24,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import chingtech.library.adapter.base.helper.ViewHelper;
+import chingtech.library.base.adapter.helper.ViewHelper;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.LabelView;
 import chingtech.library.widget.SmoothCheckBox;
 
-public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewHelper.RecyclerView<BaseRecyclerHolder> {
+public class BaseRecyclerHolder extends RecyclerView.ViewHolder
+        implements ViewHelper.RecyclerView<BaseRecyclerHolder> {
 
     private SparseArray<View> mViews = new SparseArray<>();
 
-    private View mConvertView;
-    private int mLayoutId;
+    private   View    mConvertView;
+    private   int     mLayoutId;
     protected Context mContext;
 
     public BaseRecyclerHolder(Context context, int layoutId, View itemView) {
@@ -65,12 +68,12 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
         return mConvertView;
     }
 
-    public BaseRecyclerHolder setOnItemViewClickListener(View.OnClickListener listener){
+    public BaseRecyclerHolder setOnItemViewClickListener(View.OnClickListener listener) {
         mConvertView.setOnClickListener(listener);
         return this;
     }
 
-    public BaseRecyclerHolder setOnItemViewLongClickListener(View.OnLongClickListener listener){
+    public BaseRecyclerHolder setOnItemViewLongClickListener(View.OnLongClickListener listener) {
         mConvertView.setOnLongClickListener(listener);
         return this;
     }
@@ -160,6 +163,13 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
     }
 
     @Override
+    public BaseRecyclerHolder setCardBackgroundColor(int viewId, int color) {
+        CardView view = getView(viewId);
+        view.setCardBackgroundColor(ContextCompat.getColor(mContext, color));
+        return this;
+    }
+
+    @Override
     public BaseRecyclerHolder setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = getView(viewId);
         view.setImageDrawable(drawable);
@@ -182,7 +192,13 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
     @Override
     public BaseRecyclerHolder setImageUrl(int viewId, String imageUrl, int defaultDrawable) {
         ImageView view = getView(viewId);
-        Glide.with(mContext).load(imageUrl).centerCrop().crossFade().error(defaultDrawable).placeholder(defaultDrawable).into(view);
+        Glide.with(mContext)
+             .load(imageUrl)
+             .centerCrop()
+             .crossFade()
+             .error(defaultDrawable)
+             .placeholder(defaultDrawable)
+             .into(view);
         return this;
     }
 
@@ -289,7 +305,8 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
     }
 
     @Override
-    public BaseRecyclerHolder setOnCheckedChangeListener(int viewId, SmoothCheckBox.OnCheckedChangeListener listener) {
+    public BaseRecyclerHolder setOnCheckedChangeListener(int viewId,
+            SmoothCheckBox.OnCheckedChangeListener listener) {
         SmoothCheckBox view = getView(viewId);
         view.setOnCheckedChangeListener(listener);
         return this;
@@ -510,6 +527,21 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder implements ViewH
     public BaseRecyclerHolder setLabelBgColor(@IdRes int viewId, int bgColor) {
         LabelView view = getView(viewId);
         view.setBgColor(ContextCompat.getColor(mContext, bgColor));
+        return this;
+    }
+
+    @Override
+    public BaseRecyclerHolder addView(@IdRes int viewId, View subview) {
+        ViewGroup layout = getView(viewId);
+        layout.addView(subview);
+        return this;
+    }
+
+    @Override
+    public BaseRecyclerHolder addView(@IdRes int viewId, View subview,
+            ViewGroup.LayoutParams params) {
+        ViewGroup layout = getView(viewId);
+        layout.addView(subview, params);
         return this;
     }
 }

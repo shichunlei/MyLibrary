@@ -1,4 +1,4 @@
-package chingtech.library.adapter.base.abslistview;
+package chingtech.library.base.adapter.ablistview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import chingtech.library.adapter.base.helper.DataHelper;
+import chingtech.library.base.adapter.helper.DataHelper;
 
 public abstract class CommonAdapter<T> extends BaseAdapter implements DataHelper<T> {
 

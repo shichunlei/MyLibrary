@@ -1,4 +1,4 @@
-package chingtech.library.adapter.base.helper;
+package chingtech.library.base.adapter.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -9,10 +9,11 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 
-import chingtech.library.adapter.base.abslistview.BaseAbsListHolder;
-import chingtech.library.adapter.base.recyclerview.BaseRecyclerHolder;
+import chingtech.library.base.adapter.ablistview.BaseAbsListHolder;
+import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
 import chingtech.library.widget.SmoothCheckBox;
 
 public interface ViewHelper {
@@ -237,7 +238,7 @@ public interface ViewHelper {
         /**
          * Sets the progress and max of a ProgressBar.
          *
-         * @param viewId The view id.
+         * @param viewId   The view id.
          * @param drawable The drawable.
          * @return
          */
@@ -246,9 +247,9 @@ public interface ViewHelper {
         /**
          * Sets the progress and max of a ProgressBar.
          *
-         * @param viewId The view id.
+         * @param viewId   The view id.
          * @param progress The progress.
-         * @param max The max value of a ProgressBar.
+         * @param max      The max value of a ProgressBar.
          * @return
          */
         VH setProgress(@IdRes int viewId, int progress, int max);
@@ -256,7 +257,7 @@ public interface ViewHelper {
         /**
          * Sets the progress of a ProgressBar.
          *
-         * @param viewId The view id.
+         * @param viewId   The view id.
          * @param progress The progress.
          * @return
          */
@@ -265,7 +266,7 @@ public interface ViewHelper {
         /**
          * Sets the enable of a view.
          *
-         * @param viewId The view id.
+         * @param viewId  The view id.
          * @param enabled The progress.
          * @return
          */
@@ -274,8 +275,7 @@ public interface ViewHelper {
         /**
          * 设置控件的高度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @return
          */
@@ -284,8 +284,7 @@ public interface ViewHelper {
         /**
          * 设置控件的高度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @param screen
          * @return
@@ -295,8 +294,7 @@ public interface ViewHelper {
         /**
          * 设置控件的宽度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @return
          */
@@ -305,8 +303,7 @@ public interface ViewHelper {
         /**
          * 设置控件的宽度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @param screen
          * @return
@@ -316,8 +313,7 @@ public interface ViewHelper {
         /**
          * 设置控件的大小
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @return
          */
@@ -326,8 +322,7 @@ public interface ViewHelper {
         /**
          * 设置控件的大小
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @param screen
          * @return
@@ -337,12 +332,9 @@ public interface ViewHelper {
         /**
          * 设置控件的尺寸
          *
-         * @param viewId
-         *            The view id.
-         * @param width
-         *            The view width.
-         * @param height
-         *            The view height.
+         * @param viewId The view id.
+         * @param width  The view width.
+         * @param height The view height.
          * @return
          */
         VH setViewSize(int viewId, int width, int height);
@@ -431,7 +423,7 @@ public interface ViewHelper {
         /**
          * 设置背景颜色
          *
-         * @param viewId viewId
+         * @param viewId     viewId
          * @param background
          * @return viewHolder viewHolder
          */
@@ -445,6 +437,15 @@ public interface ViewHelper {
          * @return viewHolder
          */
         VH setBackgroundColorRes(int viewId, int colorRes);
+
+        /**
+         * 设置CardView背景颜色
+         *
+         * @param viewId
+         * @param colorRes
+         * @return
+         */
+        VH setCardBackgroundColor(int viewId, int colorRes);
 
         /**
          * 设置img的Drawable
@@ -476,8 +477,8 @@ public interface ViewHelper {
         /**
          * 设置img图片路径
          *
-         * @param viewId viewId
-         * @param imgUrl 图片路径
+         * @param viewId          viewId
+         * @param imgUrl          图片路径
          * @param defaultDrawable 默认图片
          * @return viewHolder
          */
@@ -495,8 +496,8 @@ public interface ViewHelper {
         /**
          * 设置img图片Bitmap
          *
-         * @param viewId    viewId
-         * @param icon icon
+         * @param viewId viewId
+         * @param icon   icon
          * @return viewHolder
          */
         VH setImageIcon(@IdRes int viewId, @NonNull Icon icon);
@@ -609,7 +610,8 @@ public interface ViewHelper {
          * @param adapter
          * @return
          */
-        VH setAdapter(@IdRes int viewId, @NonNull android.support.v7.widget.RecyclerView.Adapter adapter);
+        VH setAdapter(@IdRes int viewId,
+                @NonNull android.support.v7.widget.RecyclerView.Adapter adapter);
 
         /**
          * Sets the LayoutManager of a RecyclerView.
@@ -623,7 +625,7 @@ public interface ViewHelper {
         /**
          * Sets the progress and max of a ProgressBar.
          *
-         * @param viewId The view id.
+         * @param viewId   The view id.
          * @param drawable The drawable.
          * @return
          */
@@ -632,9 +634,9 @@ public interface ViewHelper {
         /**
          * Sets the progress and max of a ProgressBar.
          *
-         * @param viewId The view id.
+         * @param viewId   The view id.
          * @param progress The progress.
-         * @param max The max value of a ProgressBar.
+         * @param max      The max value of a ProgressBar.
          * @return
          */
         VH setProgress(@IdRes int viewId, int progress, int max);
@@ -642,7 +644,7 @@ public interface ViewHelper {
         /**
          * Sets the progress of a ProgressBar.
          *
-         * @param viewId The view id.
+         * @param viewId   The view id.
          * @param progress The progress.
          * @return
          */
@@ -651,7 +653,7 @@ public interface ViewHelper {
         /**
          * Sets the enable of a view.
          *
-         * @param viewId The view id.
+         * @param viewId  The view id.
          * @param enabled
          * @return
          */
@@ -660,7 +662,7 @@ public interface ViewHelper {
         /**
          * Sets the clickable of a view.
          *
-         * @param viewId The view id.
+         * @param viewId    The view id.
          * @param clickable
          * @return
          */
@@ -669,8 +671,7 @@ public interface ViewHelper {
         /**
          * 设置控件的高度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @return
          */
@@ -679,8 +680,7 @@ public interface ViewHelper {
         /**
          * 设置控件的高度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @param screen
          * @return
@@ -690,8 +690,7 @@ public interface ViewHelper {
         /**
          * 设置控件的宽度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @return
          */
@@ -700,8 +699,7 @@ public interface ViewHelper {
         /**
          * 设置控件的宽度
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @param screen
          * @return
@@ -711,8 +709,7 @@ public interface ViewHelper {
         /**
          * 设置控件的大小
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @return
          */
@@ -721,8 +718,7 @@ public interface ViewHelper {
         /**
          * 设置控件的大小
          *
-         * @param viewId
-         *            The view id.
+         * @param viewId The view id.
          * @param type
          * @param screen
          * @return
@@ -732,12 +728,9 @@ public interface ViewHelper {
         /**
          * 设置控件的尺寸
          *
-         * @param viewId
-         *            The view id.
-         * @param width
-         *            The view width.
-         * @param height
-         *            The view height.
+         * @param viewId The view id.
+         * @param width  The view width.
+         * @param height The view height.
          * @return
          */
         VH setViewSize(@IdRes int viewId, int width, int height);
@@ -746,7 +739,7 @@ public interface ViewHelper {
          * Will set the text of a LabelView.
          *
          * @param viewId The view id.
-         * @param value The text to put in the text view.
+         * @param value  The text to put in the text view.
          * @return The BaseAdapterHelper for chaining.
          */
         VH setLabelText(@IdRes int viewId, String value);
@@ -754,23 +747,42 @@ public interface ViewHelper {
         /**
          * Will set the gravity of a View.
          *
-         * @param viewId The view id.
+         * @param viewId  The view id.
          * @param gravity The text gravity.
          *
-         * Gravity.TOP | Gravity.LEFT
-         * Gravity.TOP | Gravity.RIGHT
-         * Gravity.BOTTOM | Gravity.LEFT
-         * Gravity.BOTTOM | Gravity.RIGHT
+         *                Gravity.TOP | Gravity.LEFT
+         *                Gravity.TOP | Gravity.RIGHT
+         *                Gravity.BOTTOM | Gravity.LEFT
+         *                Gravity.BOTTOM | Gravity.RIGHT
          */
         VH setGravity(@IdRes int viewId, int gravity);
 
         /**
          * Will set the background color of a LabelView.
          *
-         * @param viewId The view id.
+         * @param viewId  The view id.
          * @param bgColor The text background color.
          * @return The BaseAdapterHelper for chaining.
          */
         VH setLabelBgColor(@IdRes int viewId, int bgColor);
+
+        /**
+         * 动态加载布局
+         *
+         * @param viewId
+         * @param view
+         * @return
+         */
+        VH addView(@IdRes int viewId, View view);
+
+        /**
+         * 动态加载布局
+         *
+         * @param viewId
+         * @param view
+         * @param params
+         * @return
+         */
+        VH addView(@IdRes int viewId, View view, ViewGroup.LayoutParams params);
     }
 }

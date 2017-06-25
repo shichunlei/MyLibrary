@@ -98,7 +98,7 @@
 
 **Version**
 
-    【0.1.0】
+    【0.1.1】
 
 # Installation
 
@@ -116,7 +116,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.0'
+        compile 'com.github.shichunlei:MyLibrary:0.1.1'
     }
 
 # Usage
@@ -183,3 +183,4 @@ Step 2. Add the dependency
     添加 GifMovieView
     添加 ConversionUtils
     修改 TimeUtils
+    修改包结构
