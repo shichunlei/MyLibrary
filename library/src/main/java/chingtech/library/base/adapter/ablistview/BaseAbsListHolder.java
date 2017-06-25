@@ -26,18 +26,19 @@ import com.bumptech.glide.Glide;
 import chingtech.library.base.adapter.helper.ViewHelper;
 import chingtech.library.utils.ViewUtils;
 import chingtech.library.widget.SmoothCheckBox;
+import com.bumptech.glide.load.Transformation;
 
 public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHolder> {
 
     /**
      * findViewById后保存View集合
      */
-    private SparseArray<View> mViews = new SparseArray<>();
+    private SparseArray<View> mViews        = new SparseArray<>();
     private SparseArray<View> mConvertViews = new SparseArray<>();
 
-    private View mConvertView;
-    protected int mPosition;
-    protected int mLayoutId;
+    private   View    mConvertView;
+    protected int     mPosition;
+    protected int     mLayoutId;
     protected Context mContext;
 
     protected BaseAbsListHolder(Context context, int position, ViewGroup parent, int layoutId) {
@@ -55,7 +56,8 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
     protected BaseAbsListHolder() {
     }
 
-    public <BVH extends BaseAbsListHolder> BVH get(Context context, int position, View convertView, ViewGroup parent, int layoutId) {
+    public <BVH extends BaseAbsListHolder> BVH get(Context context, int position, View convertView,
+            ViewGroup parent, int layoutId) {
         if (convertView == null) {
             return (BVH) new BaseAbsListHolder(context, position, parent, layoutId);
         } else {
@@ -70,6 +72,7 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
 
     /**
      * 获取item布局
+     *
      * @return
      */
     public View getConvertView() {
@@ -192,7 +195,28 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
     @Override
     public BaseAbsListHolder setImageUrl(int viewId, String imageUrl, int defaultDrawable) {
         ImageView view = getView(viewId);
-        Glide.with(mContext).load(imageUrl).centerCrop().crossFade().error(defaultDrawable).placeholder(defaultDrawable).into(view);
+        Glide.with(mContext)
+             .load(imageUrl)
+             .centerCrop()
+             .crossFade()
+             .error(defaultDrawable)
+             .placeholder(defaultDrawable)
+             .into(view);
+        return this;
+    }
+
+    @Override
+    public BaseAbsListHolder setImageUrl(int viewId, String imgUrl, int defaultDrawable,
+            Transformation transformation) {
+        ImageView view = getView(viewId);
+        Glide.with(mContext)
+             .load(imgUrl)
+             .centerCrop()
+             .crossFade()
+             .bitmapTransform(transformation)
+             .error(defaultDrawable)
+             .placeholder(defaultDrawable)
+             .into(view);
         return this;
     }
 
