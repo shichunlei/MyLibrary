@@ -10,8 +10,6 @@
 
 - **ProgressDialog**
 
-- **HorizontalProgressDialog**
-
 - **RoundImageView**
 
     圆形图片、圆角图片、椭圆图片
@@ -84,13 +82,15 @@
     
     原始项目地址：https://github.com/tangqi92/WaveLoadingView
 
-- **GifMovieView**
-
-    GIF View
-
 - **SearchView**
 
     搜索View
+
+- **RadarView**
+
+    雷达图
+
+    参考项目地址：https://github.com/qstumn/RadarChart
 
 - **工具类**
 
@@ -98,7 +98,7 @@
 
 **Version**
 
-    【0.1.3】
+    【0.1.4】
 
 # Installation
 
@@ -192,3 +192,14 @@ Step 2. Add the dependency
 【0.1.3】
 
     修改0.1.2的BUG
+
+【0.1.4】
+
+    完善TimeUtils
+    添加AnimatorUitls方法
+    添加雷达图library
+    添加BaseApplication
+    添加NumberProgressBar
+    添加UpdateAppDialog
+    删除GifMovieView
+    删除HorizontalProgressDialog

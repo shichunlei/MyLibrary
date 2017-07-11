@@ -1,41 +1,20 @@
 package com.chingtech.library.view;
 
-import static chingtech.library.utils.TimeUtils.DATE_SHAORT_FORMAT;
-import static chingtech.library.utils.TimeUtils.DATE_TIME_FORMAT;
-import static chingtech.library.utils.TimeUtils.DATE_TIME_HOUR_MIN_FORMAT;
-import static chingtech.library.utils.TimeUtils.D_FORMAT;
-import static chingtech.library.utils.TimeUtils.H_12_FORMAT;
-import static chingtech.library.utils.TimeUtils.H_24_FORMAT;
-import static chingtech.library.utils.TimeUtils.MIN_FORMAT;
-import static chingtech.library.utils.TimeUtils.M_FORMAT;
-import static chingtech.library.utils.TimeUtils.S_FORMAT;
-import static chingtech.library.utils.TimeUtils.TIME_FORMAT;
-import static chingtech.library.utils.TimeUtils.TIME_MS_FORMAT;
-import static chingtech.library.utils.TimeUtils.TIME_SHAORT_FORMAT;
-import static chingtech.library.utils.TimeUtils.TZ_FORMAT;
-import static chingtech.library.utils.TimeUtils.YY_FORMAT;
-import static chingtech.library.utils.TimeUtils.Y_FORMAT;
-import static chingtech.library.utils.TimeUtils.Y_M_FORMAT;
+import static chingtech.library.utils.TimeUtils.*;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 
+import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.ConversionUtils;
 import chingtech.library.widget.SearchView;
+import chingtech.library.widget.UpdateAppDialog;
 import com.bumptech.glide.Glide;
 import com.chingtech.library.R;
 
@@ -50,21 +29,11 @@ import org.xutils.x;
 import java.io.File;
 
 import chingtech.library.interfaces.OnSheetItemClickListener;
-import chingtech.library.utils.AppUitls;
-import chingtech.library.utils.FileUtils;
-import chingtech.library.utils.StringUtils;
-import chingtech.library.utils.TimeUtils;
-import chingtech.library.utils.ViewUtils;
-import chingtech.library.widget.AlertDialog;
-import chingtech.library.widget.BottomDialog;
-import chingtech.library.widget.FlipView;
-import chingtech.library.widget.HorizontalProgressDialog;
-import chingtech.library.widget.NumberAnimTextView;
-import chingtech.library.widget.ProgressDialog;
-import chingtech.library.widget.RoundImageView;
+import chingtech.library.utils.*;
+import chingtech.library.widget.*;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @ViewInject(R.id.main_search_view_rsv)
     private SearchView searchView;
@@ -98,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomDialog mBottomDialog;
 
-    private HorizontalProgressDialog hpd;
+    private UpdateAppDialog hpd;
 
     @ViewInject(R.id.layout1)
     private FrameLayout layout;
@@ -116,26 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv4;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        x.view().inject(this);
-
-        setSupportActionBar(toolbar);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String queryText) {
-                Toast.makeText(MainActivity.this, "你搜索了" + queryText, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
+    protected void init() {
         iiiiiii();
 
         ViewUtils.setViewWidth(this, tv2, 1 / 7f);
@@ -222,13 +172,13 @@ public class MainActivity extends AppCompatActivity {
         Log.i("tag", s2);
 
         String s3 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
-        Log.i("tag", s3);
+        Log.i("tag----------", s3);
 
         String s4 = TimeUtils.formatDateTime(datetime, DATE_TIME_HOUR_MIN_FORMAT);
         Log.i("tag", s4);
 
         String s5 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
-        Log.i("tag", s5);
+        Log.i("tag=========", s5);
 
         String s6 = TimeUtils.formatDateTime(datetime, DATE_TIME_FORMAT);
         Log.i("tag", s6);
@@ -348,7 +298,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_dialog4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+                View           v        = LayoutInflater.from(MainActivity.this)
+                                                        .inflate(R.layout.layout, null);
                 final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
                 final EditText phone    = (EditText) v.findViewById(R.id.edittxt_phone);
                 final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
@@ -504,7 +455,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bottom_dialog2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+                View           v        = LayoutInflater.from(MainActivity.this)
+                                                        .inflate(R.layout.layout, null);
                 final EditText username = (EditText) v.findViewById(R.id.edittxt_username);
                 final EditText phone    = (EditText) v.findViewById(R.id.edittxt_phone);
                 final EditText password = (EditText) v.findViewById(R.id.edittxt_password);
@@ -565,6 +517,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void initToolBar() {
+        setSupportActionBar(toolbar);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String queryText) {
+                Toast.makeText(MainActivity.this, "你搜索了" + queryText, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
     private void iiiiiii() {
         System.out.println("1的十六进制结果是：" + ConversionUtils.intToHex(1));
 
@@ -596,51 +566,66 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void download() {
-
-        hpd = new HorizontalProgressDialog(this);
+        hpd = new UpdateAppDialog(this);
         hpd.builder();
-        RequestParams requestParams = new RequestParams(
-                "http://101.200.174.126:9898/system/app_versions/appfiles/000/000/001/original"
-                        + "/app-release.apk?1490756569");
-        requestParams.setSaveFilePath(FileUtils.getSDPath() + "/a.apk");
-        x.http().get(requestParams, new Callback.ProgressCallback<File>() {
+        hpd.setMsg("这里是更新的内容");
+        hpd.setTitle("应用更新");
+        hpd.setDownLoad(new View.OnClickListener() {
             @Override
-            public void onWaiting() {
-            }
+            public void onClick(View v) {
+                RequestParams requestParams = new RequestParams(
+                        "http://101.200.174.126:9898/system/app_versions/appfiles/000/000/001/original"
+                                + "/app-release.apk?1490756569");
+                requestParams.setSaveFilePath(FileUtils.getSDPath() + "/a.apk");
+                x.http().get(requestParams, new Callback.ProgressCallback<File>() {
+                    @Override
+                    public void onWaiting() {
+                    }
 
-            @Override
-            public void onStarted() {
-            }
+                    @Override
+                    public void onStarted() {
+                    }
 
-            @Override
-            public void onLoading(long total, long current, boolean isDownloading) {
-                hpd.setMessage("应用更新");
-                hpd.show();
-                hpd.setMax((int) total);
-                hpd.setProgress((int) current);
-            }
+                    @Override
+                    public void onLoading(long total, long current, boolean isDownloading) {
+                        hpd.show();
+                        hpd.setUnreachedBarColor(Color.YELLOW);
+                        hpd.setProgressTextColor(Color.BLUE);
+                        hpd.setReachedBarColor(Color.RED);
+                        hpd.setmMax((int) total / 1024);
+                        hpd.setmProgress((int) current / 1024);
+                    }
 
-            @Override
-            public void onSuccess(File result) {
-                showToast("下载成功");
-                hpd.dismiss();
-            }
+                    @Override
+                    public void onSuccess(File result) {
+                        showToast("下载成功");
+                        hpd.dismiss();
+                    }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                ex.printStackTrace();
-                showToast("下载失败，请检查网络和SD卡");
-                hpd.dismiss();
-            }
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        ex.printStackTrace();
+                        showToast("下载失败，请检查网络和SD卡");
+                        hpd.dismiss();
+                    }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
-            }
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+                    }
 
-            @Override
-            public void onFinished() {
+                    @Override
+                    public void onFinished() {
+                    }
+                });
             }
         });
+        hpd.setColse(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        hpd.show();
     }
 
     private void showToast(String string) {

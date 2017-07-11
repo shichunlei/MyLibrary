@@ -12,41 +12,41 @@ import chingtech.library.R;
 
 public class TimeUtils {
 
-    public static final String TZ_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-    public static final String T_HOUR_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String TZ_FORMAT                 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    public static final String T_HOUR_FORMAT             = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String DATE_TIME_FORMAT          = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_TIME_HOUR_MIN_FORMAT = "yyyy-MM-dd HH:mm";
-    public static final String DATE_TIME_MONTH_FORMAT = "MM-dd HH:mm:ss";
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
-    public static final String DATE_SHAORT_FORMAT = "MM-dd";
-    public static final String TIME_FORMAT = "HH:mm:ss";
-    public static final String TIME_SHAORT_FORMAT = "HH:mm";
-    public static final String TIME_MS_FORMAT = "mm:ss";
-    public static final String Y_M_FORMAT = "yyyy-MM";
-    public static final String YY_FORMAT = "yy";
-    public static final String Y_FORMAT = "yyyy";
-    public static final String M_FORMAT = "MM";
-    public static final String D_FORMAT = "dd";
-    public static final String H_24_FORMAT = "HH";
-    public static final String H_12_FORMAT = "hh";
-    public static final String MIN_FORMAT = "mm";
-    public static final String S_FORMAT = "ss";
-    public static final String DATE_CALENDAR = "yyyyMMdd";
-    public static final String DATE_E_FORMAT = "yyyy-MM-dd E";
-    public static final String DATE_FORMAT_CN = "yyyy年MM月dd日";
-    public static final String DATE_SHAORT_FORMAT_CN = "MM月dd日";
-    public static final String DAY_FORMAT = "MM/dd";
-    public static final String DAY_YMD_FORMAT = "yyyy/MM/dd";
+    public static final String DATE_TIME_MONTH_FORMAT    = "MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT               = "yyyy-MM-dd";
+    public static final String DATE_SHAORT_FORMAT        = "MM-dd";
+    public static final String TIME_FORMAT               = "HH:mm:ss";
+    public static final String TIME_SHAORT_FORMAT        = "HH:mm";
+    public static final String TIME_MS_FORMAT            = "mm:ss";
+    public static final String Y_M_FORMAT                = "yyyy-MM";
+    public static final String YY_FORMAT                 = "yy";
+    public static final String Y_FORMAT                  = "yyyy";
+    public static final String M_FORMAT                  = "MM";
+    public static final String D_FORMAT                  = "dd";
+    public static final String H_24_FORMAT               = "HH";
+    public static final String H_12_FORMAT               = "hh";
+    public static final String MIN_FORMAT                = "mm";
+    public static final String S_FORMAT                  = "ss";
+    public static final String DATE_CALENDAR             = "yyyyMMdd";
+    public static final String DATE_E_FORMAT             = "yyyy-MM-dd E";
+    public static final String DATE_FORMAT_CN            = "yyyy年MM月dd日";
+    public static final String DATE_SHAORT_FORMAT_CN     = "MM月dd日";
+    public static final String DAY_FORMAT                = "MM/dd";
+    public static final String DAY_YMD_FORMAT            = "yyyy/MM/dd";
 
-    public static final int WEEKS = 0;
-    public static final int WEEKS_CN = 1;
-    public static final int WEEKS_EN = 2;
+    public static final int WEEKS        = 0;
+    public static final int WEEKS_CN     = 1;
+    public static final int WEEKS_EN     = 2;
     public static final int WEEKS_EN_ABB = 3;
     public static final int WEEKS_EN_LET = 4;
 
     public static final long ONE_DAY = 24 * 60 * 60 * 1000;
 
-    public static SimpleDateFormat getFormat(String format){
+    public static SimpleDateFormat getFormat(String format) {
         return new SimpleDateFormat(format);
     }
 
@@ -148,8 +148,7 @@ public class TimeUtils {
      * @return
      * @throws ParseException
      */
-    public static Date strToDate(String strDate, String formatType)
-            throws ParseException {
+    public static Date strToDate(String strDate, String formatType) throws ParseException {
         return getFormat(formatType).parse(strDate);
     }
 
@@ -158,10 +157,20 @@ public class TimeUtils {
      *
      * @param strDateTime
      * @return
-     * @throws ParseException
      */
-    public static long strToLong(String strDateTime) throws ParseException {
+    public static long datetimeToLong(String strDateTime) {
         Date date = strToDateTime(strDateTime);
+        return date.getTime();
+    }
+
+    /**
+     * 将String类型的日期转换成long型
+     *
+     * @param strDate
+     * @return
+     */
+    public static long dateToLong(String strDate) {
+        Date date = strToDate(strDate);
         return date.getTime();
     }
 
@@ -171,7 +180,7 @@ public class TimeUtils {
      * @param formatType 格式
      * @return
      */
-    public static String getNowDateTime(String formatType){
+    public static String getNowDateTime(String formatType) {
         return dateToStr(new Date(), formatType);
     }
 
@@ -180,7 +189,7 @@ public class TimeUtils {
      *
      * @return
      */
-    public static long getNowDateTime(){
+    public static long getNowDateTime() {
         return System.currentTimeMillis();
     }
 
@@ -190,7 +199,7 @@ public class TimeUtils {
      * @param strDate
      * @return
      */
-    public static String getWeek(Context context, String strDate, int type){
+    public static String getWeek(Context context, String strDate, int type) {
         String[] weeks;
         switch (type) {
             case WEEKS:
@@ -216,7 +225,7 @@ public class TimeUtils {
         Calendar cal = Calendar.getInstance();
         cal.setTime(strToDate(strDate));
         int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if(week_index < 0){
+        if (week_index < 0) {
             week_index = 0;
         }
         return weeks[week_index];
@@ -269,21 +278,22 @@ public class TimeUtils {
         if (cal.before(birthday)) {
             throw new IllegalArgumentException("The birthDay is before Now. It's unbelievable!");
         }
-        int yearNow = cal.get(Calendar.YEAR);
-        int monthNow = cal.get(Calendar.MONTH);
+        int yearNow       = cal.get(Calendar.YEAR);
+        int monthNow      = cal.get(Calendar.MONTH);
         int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
         cal.setTime(birthday);
 
-        int yearBirth = cal.get(Calendar.YEAR);
-        int monthBirth = cal.get(Calendar.MONTH);
+        int yearBirth       = cal.get(Calendar.YEAR);
+        int monthBirth      = cal.get(Calendar.MONTH);
         int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
 
         int age = yearNow - yearBirth;
 
         if (monthNow <= monthBirth) {
             if (monthNow == monthBirth) {
-                if (dayOfMonthNow < dayOfMonthBirth)
+                if (dayOfMonthNow < dayOfMonthBirth) {
                     age--;
+                }
             } else {
                 age--;
             }
@@ -295,7 +305,6 @@ public class TimeUtils {
      * 以友好的方式显示时间
      *
      * @param sdatetime
-     *
      * @return
      */
     public static String friendlyTime(String sdatetime) {
@@ -305,7 +314,7 @@ public class TimeUtils {
             return "Unknown";
         }
 
-        String ftime;
+        String   ftime;
         Calendar cal = Calendar.getInstance();
 
         // 今天日期
@@ -319,20 +328,22 @@ public class TimeUtils {
         // 判断是否是同一天
         if (curDate.equals(paramDate)) {
             int hour = (int) (timeInterval / 3600);
-            if (hour == 0)
+            if (hour == 0) {
                 ftime = Math.max(timeInterval / 60, 1) + "分钟前";
-            else
+            } else {
                 ftime = hour + "小时前";
+            }
             return ftime;
         }
 
         int days = (int) (timeInterval / 86400);
         if (days == 0) {
             int hour = (int) (timeInterval / 3600);
-            if (hour == 0)
+            if (hour == 0) {
                 ftime = Math.max(timeInterval / 60, 1) + "分钟前";
-            else
+            } else {
                 ftime = hour + "小时前";
+            }
         } else if (days == 1) {
             ftime = "昨天";
         } else if (days == 2) {
@@ -426,7 +437,7 @@ public class TimeUtils {
      * @return
      */
     public static String afterNDay(String strDate, int days) {
-        Date date = strToDate(strDate);
+        Date     date     = strToDate(strDate);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, days);
@@ -443,7 +454,7 @@ public class TimeUtils {
      * @return
      */
     public static String afterNDay(String strDate, int days, String format) {
-        Date date = strToDate(strDate);
+        Date     date     = strToDate(strDate);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, days);
@@ -466,19 +477,21 @@ public class TimeUtils {
      * @return
      */
     public static boolean isLeapYear(String strDate) {
-        Date date = strToDate(strDate);
-        GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+        Date              date = strToDate(strDate);
+        GregorianCalendar gc   = (GregorianCalendar) Calendar.getInstance();
         gc.setTime(date);
         int year = gc.get(Calendar.YEAR);
-        if ((year % 400) == 0)
+        if ((year % 400) == 0) {
             return true;
-        else if ((year % 4) == 0) {
-            if ((year % 100) == 0)
+        } else if ((year % 4) == 0) {
+            if ((year % 100) == 0) {
                 return false;
-            else
+            } else {
                 return true;
-        } else
+            }
+        } else {
             return false;
+        }
     }
 
     /**

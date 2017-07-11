@@ -49,14 +49,23 @@
         <item name="android:windowExitAnimation">@anim/bottom_dialog_out</item>
     </style>
 
-    <!-- 横向加载对话框 -->
-    <style name="HorizontalProgressStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
-        <item name="android:maxHeight">50dp</item>
-        <item name="android:minHeight">10dp</item>
-        <item name="android:indeterminateOnly">false</item>
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
-        <item name="android:progressDrawable">@drawable/shape_progressbar</item>
+    <style name="UpdateAppNumberProgressBar_Red">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="progress_max">100</item>
+        <item name="progress_current">0</item>
+        <item name="progress_unreached_color">#CCCCCC</item>
+        <item name="progress_reached_color">@color/google_red</item>
+        <item name="progress_text_size">12sp</item>
+        <item name="progress_text_color">@color/google_red</item>
+        <item name="progress_reached_bar_height">4dp</item>
+        <item name="progress_unreached_bar_height">3dp</item>
     </style>
 
-    <style name="Widget.GifMoviewView" parent="@android:style/Widget"></style>
+    <style name="UpdateAppDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
 </resources>
