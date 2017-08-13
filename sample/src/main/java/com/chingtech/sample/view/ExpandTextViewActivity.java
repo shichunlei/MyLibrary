@@ -1,16 +1,14 @@
-package com.chingtech.library.view;
+package com.chingtech.sample.view;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.chingtech.library.R;
+import chingtech.library.base.activity.BaseActivity;
+import com.chingtech.sample.R;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,7 @@ import chingtech.library.base.adapter.recyclerview.CommonRecyclerAdapter;
  * Created at 2017/5/26 18:01
  */
 @ContentView(R.layout.activity_recycler)
-public class ExpandTextViewActivity extends AppCompatActivity {
+public class ExpandTextViewActivity extends BaseActivity {
 
     @ViewInject(R.id.recyclerview)
     private RecyclerView mRecyclerView;
@@ -34,14 +32,15 @@ public class ExpandTextViewActivity extends AppCompatActivity {
     private List<String> data = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        x.view().inject(this);
-
+    protected void init() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mRecyclerView.setAdapter(new RecyclerAdapter(this, setData(), R.layout.item_extext));
+    }
+
+    @Override
+    protected void initToolBar() {
+
     }
 
     private List<String> setData() {

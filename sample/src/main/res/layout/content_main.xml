@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:srlEnablePureScrollMode="true"
+    tools:context=".view.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/timer"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:text="倒计时"
+                android:textSize="33sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="restart"
+                    android:text="restart" />
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="oncancel"
+                    android:text="cancel" />
+            </LinearLayout>
+
+            <chingtech.library.widget.NumberAnimTextView
+                android:id="@+id/tv_number"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                app:enable_anim="true"
+                app:end_number="2103134322"
+                app:number_duration="1000"
+                app:postfix="元"
+                app:prefix="￥"
+                app:start_number="23434" />
+
+            <EditText
+                android:id="@+id/id_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入银行卡号"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/pone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入手机号码"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/idcard_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入身份证号码"
+                android:inputType="numberSigned" />
+
+            <EditText
+                android:id="@+id/money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入金额"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/tv_update_info"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                tools:text="I am a TextView" />
+
+            <Button
+                android:id="@+id/btn_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dialog 列表" />
+
+            <Button
+                android:id="@+id/btn_dialog2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dialog Editview" />
+
+            <Button
+                android:id="@+id/btn_dialog3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dialog 单选列表" />
+
+            <Button
+                android:id="@+id/btn_dialog4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dialog 单选列表 + View" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bottom_alertdialog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Close Dialog" />
+
+                <Button
+                    android:id="@+id/bottom_alertdialog2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Title Bg Dialog" />
+
+                <Button
+                    android:id="@+id/bottom_alertdialog3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Title Dialog" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bottom_dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bottom\nDialog" />
+
+                <Button
+                    android:id="@+id/bottom_dialog2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bottom\nDialog" />
+
+                <Button
+                    android:id="@+id/bottom_dialog3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bottom\nDialog" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <chingtech.library.widget.SmoothCheckBox
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:color_checked="@color/google_red" />
+
+                <chingtech.library.widget.SmoothCheckBox
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    app:color_checked="@color/google_green" />
+
+                <chingtech.library.widget.SmoothCheckBox
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    app:color_checked="@color/google_blue" />
+
+                <chingtech.library.widget.SmoothCheckBox
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    app:color_checked="@color/google_yellow" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <chingtech.library.widget.RoundImageView
+                    android:id="@+id/image1"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/wall04"
+                    app:border_color="@color/google_green"
+                    app:border_width="4dp"
+                    app:type="circle" />
+
+                <chingtech.library.widget.RoundImageView
+                    android:id="@+id/image2"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/wall04"
+                    app:type="oval" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <chingtech.library.widget.RoundImageView
+                    android:id="@+id/image3"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/wall04"
+                    app:border_color="@color/google_red"
+                    app:border_width="2dp"
+                    app:corner_radius="15dp"
+                    app:type="round" />
+
+                <chingtech.library.widget.RoundImageView
+                    android:layout_width="150dp"
+                    android:layout_height="180dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/wall04"
+                    app:border_color="@android:color/black"
+                    app:border_width="2dp"
+                    app:leftBottom_corner_radius="20dp"
+                    app:leftTop_corner_radius="0dp"
+                    app:rightBottom_corner_radius="20dp"
+                    app:rightTop_corner_radius="0dp"
+                    app:type="round" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <chingtech.library.widget.RoundImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/wall04" />
+
+                <chingtech.library.widget.RoundImageView
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/wall04"
+                    app:border_color="@android:color/holo_red_dark"
+                    app:border_width="3dp"
+                    app:leftBottom_corner_radius="0dp"
+                    app:leftTop_corner_radius="30dp"
+                    app:rightBottom_corner_radius="30dp"
+                    app:rightTop_corner_radius="0dp"
+                    app:type="round" />
+            </RelativeLayout>
+
+            <chingtech.library.widget.FlipView
+                android:id="@+id/flipView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:flip_state="front"
+                app:flip_touch="false">
+
+                <ImageView
+                    android:id="@+id/imgBackCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="center"
+                    android:src="@mipmap/card_back" />
+
+                <ImageView
+                    android:id="@+id/imgFrontCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="center"
+                    android:src="@mipmap/card_front" />
+
+            </chingtech.library.widget.FlipView>
+
+            <chingtech.library.widget.FlipView
+                android:id="@+id/flipView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:flip_duration="1500"
+                app:flip_state="back"
+                app:flip_touch="false">
+
+                <include layout="@layout/layout_back" />
+
+                <include layout="@layout/layout_front" />
+
+            </chingtech.library.widget.FlipView>
+
+            <FrameLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/google_blue">
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:lv_text="Hot"
+                    app:lv_text_size="12sp" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    app:lv_background_color="#3F9FE0"
+                    app:lv_gravity="TOP_RIGHT"
+                    app:lv_text="纯♀妹子"
+                    app:lv_text_size="12sp" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    app:lv_background_color="#F6CE59"
+                    app:lv_gravity="BOTTOM_LEFT"
+                    app:lv_text="Gank.io"
+                    app:lv_text_all_caps="false"
+                    app:lv_text_size="12sp" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    app:lv_background_color="#EC7263"
+                    app:lv_gravity="BOTTOM_RIGHT"
+                    app:lv_text="new" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/google_pink"
+                    android:gravity="center"
+                    android:text="1/2" />
+
+                <TextView
+                    android:id="@+id/tv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/google_purple"
+                    android:gravity="center"
+                    android:text="1/7" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/google_green"
+                    android:gravity="center"
+                    android:text="宽高都是100" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:lv_fill_triangle="true"
+                    app:lv_text="新"
+                    app:lv_text_size="12sp" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    app:lv_background_color="#EC7263"
+                    app:lv_fill_triangle="true"
+                    app:lv_gravity="BOTTOM_RIGHT"
+                    app:lv_text="new" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/google_red"
+                    android:gravity="center"
+                    android:text="宽高都是屏幕1/3" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:lv_background_color="#3F9FE0"
+                    app:lv_fill_triangle="true"
+                    app:lv_gravity="TOP_RIGHT"
+                    app:lv_text="妹子"
+                    app:lv_text_size="12sp" />
+
+                <chingtech.library.widget.LabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    app:lv_background_color="#F6CE59"
+                    app:lv_fill_triangle="true"
+                    app:lv_gravity="BOTTOM_LEFT"
+                    app:lv_text="Gank.io"
+                    app:lv_text_all_caps="false"
+                    app:lv_text_size="12sp" />
+            </FrameLayout>
+
+            <chingtech.library.widget.RangeSeekBar
+                android:id="@+id/seekbar1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cellMode="number"
+                app:lineColorEdge="@color/colorSeekBarDefault"
+                app:lineColorSelected="@color/colorAccent"
+                app:markTextArray="@array/markArray"
+                app:seekBarMode="single"
+                app:seekBarResId="@drawable/seekbar_thumb" />
+
+            <TextView
+                android:id="@+id/progress2_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center" />
+
+            <chingtech.library.widget.RangeSeekBar
+                android:id="@+id/seekbar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cellMode="number"
+                app:lineColorEdge="@color/colorSeekBarDefault"
+                app:lineColorSelected="@color/colorAccent"
+                app:markTextArray="@array/markArray2"
+                app:max="1"
+                app:min="-1"
+                app:seekBarHeight="4dp"
+                app:seekBarMode="range"
+                app:textPadding="17dp"
+                app:thumbPrimaryColor="@color/colorSeekBarDefault"
+                app:thumbSecondaryColor="@color/colorAccent"
+                app:thumbSize="20dp" />
+
+            <chingtech.library.widget.RangeSeekBar
+                android:id="@+id/seekbar3"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                app:cellMode="other"
+                app:hintBGHeight="50dp"
+                app:hintBGWith="60dp"
+                app:lineColorEdge="@color/colorSeekBarDefault"
+                app:lineColorSelected="@color/colorAccent"
+                app:markTextArray="@array/negativeMarkArray"
+                app:max="100"
+                app:min="-100"
+                app:reserve="60"
+                app:seekBarHeight="2dp"
+                app:seekBarMode="range"
+                app:textPadding="17dp"
+                app:textSize="16sp"
+                app:thumbSize="26dp" />
+
+            <chingtech.library.widget.RangeSeekBar
+                android:id="@+id/seekbar4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cellMode="other"
+                app:cells="4"
+                app:hideProgressHint="true"
+                app:hintBGHeight="28dp"
+                app:lineColorEdge="@color/colorSeekBarDefault"
+                app:lineColorSelected="@color/colorPrimary"
+                app:markTextArray="@array/wordsArray"
+                app:seekBarHeight="8dp"
+                app:seekBarMode="single"
+                app:textPadding="7dp"
+                app:textSize="12sp"
+                app:thumbSize="26dp" />
+
+            <chingtech.library.widget.SwitchButton
+                android:id="@+id/switch_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <chingtech.library.widget.SwitchButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:sb_checked="true" />
+
+            <chingtech.library.widget.SwitchButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:sb_checked="true"
+                app:sb_show_indicator="false" />
+
+            <chingtech.library.widget.SwitchButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:sb_checked="true"
+                app:sb_checked_color="#fdc951" />
+
+            <chingtech.library.widget.SwitchButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:sb_background="#FFF"
+                app:sb_button_color="#db99c7"
+                app:sb_checked_color="#A36F95"
+                app:sb_checkline_color="#a5dc88"
+                app:sb_shadow_color="#A36F95"
+                app:sb_uncheckcircle_color="#A36F95" />
+
+            <chingtech.library.widget.SwitchButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:sb_enable_effect="false" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

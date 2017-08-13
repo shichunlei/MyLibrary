@@ -3,4 +3,55 @@
 
     <string name="test">Java 是一种跨平台的、解释型语言，Java 源代码编译成中间”字节码”存储于 class 文件中。Java 字节码中包括了很多源代码信息，如变量名、方法名，很容易被反编译成 Java 源代码。所以需要对java代码进行混淆。混淆就是对发布出去的程序进行重新组织和处理，混淆器将代码中的所有变量、函数、类的名称变为简短的英文字母代号，反编译后将难以阅读。
     同时混淆的时候会遍历代码以发现没有被调用的代码，从而将其在打包成apk时剔除，最终一定程度上降低了apk的大小，比如编译后 jar 文件体积大约能减少25% 。</string>
+
+    <string name="description_set_default_creater">这是使用定制Header和Footer的第一种方法-全局默认\n\n
+        本方法是实际项目中最常用的方法，起特点有：\n\n
+        1.设置一次全部生效，不用多次写重复的代码\n
+        2.优先级最低，在特别页面可以轻松的覆盖替换\n\n
+        使用方法： \n
+        //设置全局的Header构建器 \n
+        SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {\n
+        public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {\n
+        return new ClassicsHeader(context);//指定为经典Header，默认是 贝塞尔雷达Header\n
+        }\n
+        });\n
+        //设置全局的Footer构建器\n
+        SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {\n
+        public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {\n
+        return new ClassicsFooter(context);//指定为经典Footer，默认是 BallPulseFooter\n
+        }\n
+        });\n\n
+        关键代码，需要在布局生成之前设置，建议代码放在 Application.onCreate 中
+    </string>
+    <string name="description_define_in_xml"><![CDATA[这是使用定制Header和Footer的第二种方法-Xml中配置\n\n
+        在需要使用特别的Header或者特别配置的页面时候可以使用本方法\n\n
+        本方法的特点：\n
+        1.可以在Androd Studio中的预览窗口预览效果\n
+        2.优先级高于 【全局默认】但是低于 【JavaCode】\n\n
+        代码示例：\n
+        <com.scwang.smartrefresh.SmartRefreshLayout\n
+            \t\tandroid:layout_width="match_parent"\n
+            \t\tandroid:layout_height="match_parent">\n
+            \t<com.scwang.smartrefresh.header.ClassicsHeader\n
+                \t\tandroid:layout_width="match_parent"\n
+                \t\tandroid:layout_height="wrap_content"/>\n
+            \t<TextView\n
+                \t\tandroid:layout_width="match_parent"\n
+                \t\tandroid:layout_height="match_parent"/>\n
+            \t<com.scwang.smartrefresh.footer.ClassicsFooter\n
+                \t\tandroid:layout_width="match_parent"\n
+                \t\tandroid:layout_height="wrap_content"/>\n
+        </com.scwang.smartrefresh.SmartRefreshLayout>\n
+    ]]></string>
+    <string name="description_define_in_code">这是使用定制Header和Footer的第三种方法-代码设置\n\n
+        本方法是实际项目中比较少用的方法，起特点有：\n\n
+        1.设置一次生效一次，需要多处设置，建议特别的页面使用\n
+        2.优先级最高，即使使用了会覆盖方法一和方法二的设置\n\n
+        使用方法： \n
+        final RefreshLayout refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);\n
+        //设置 Header 为 Material风格\n
+        refreshLayout.setRefreshHeader(new MaterialHeader(this));\n
+        //设置 Footer 为 三球动画\n
+        refreshLayout.setRefreshFooter(new BallPulseFooter(this));\n\n
+    </string>
 </resources>

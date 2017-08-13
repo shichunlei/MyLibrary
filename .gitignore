@@ -9,7 +9,4 @@
 .externalNativeBuild
 .idea/
 gradle/
-app/src/test/
-app/src/androidTest/
-library/src/androidTest/
-library/src/test/
+app/

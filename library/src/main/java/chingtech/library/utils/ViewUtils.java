@@ -1,11 +1,14 @@
 package chingtech.library.utils;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * MyLibrary
@@ -17,7 +20,7 @@ import android.widget.EditText;
 public class ViewUtils {
 
     private ViewUtils() {
-		/* cannot be instantiated */
+        /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
@@ -30,12 +33,10 @@ public class ViewUtils {
         editText.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                    int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().contains(".")) {
                     if (s.length() - 1 - s.toString().indexOf(".") > 2) {
-                        s = s.toString().subSequence(0,
-                                s.toString().indexOf(".") + 3);
+                        s = s.toString().subSequence(0, s.toString().indexOf(".") + 3);
                         editText.setText(s);
                         editText.setSelection(s.length());
                     }
@@ -45,8 +46,7 @@ public class ViewUtils {
                     editText.setText(s);
                     editText.setSelection(2);
                 }
-                if (s.toString().startsWith("0")
-                        && s.toString().trim().length() > 1) {
+                if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
                     if (!s.toString().substring(1, 2).equals(".")) {
                         editText.setText(s.subSequence(0, 1));
                         editText.setSelection(1);
@@ -56,8 +56,7 @@ public class ViewUtils {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                    int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
@@ -147,7 +146,7 @@ public class ViewUtils {
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
         /** 控件的高强制设成 size */
-		params.height = size;
+        params.height = size;
         /** 控件的高强制设成 size */
         params.width = size;
         /** 使设置好的布局参数应用到控件 */
@@ -174,7 +173,7 @@ public class ViewUtils {
      * @param height
      */
     public static void setViewSize(Context context, View view, int width, int height) {
-        int _width = ScreenUtils.dip2px(context, width);
+        int _width  = ScreenUtils.dip2px(context, width);
         int _height = ScreenUtils.dip2px(context, height);
 
         /** 取控件View当前的布局参数 */
@@ -185,5 +184,25 @@ public class ViewUtils {
         params.width = _width;
         /** 使设置好的布局参数应用到控件 */
         view.setLayoutParams(params);
+    }
+
+    /**
+     * 给TextView设置下划线
+     *
+     * @param textView
+     */
+    public static void setUnderLine(TextView textView) {
+        textView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        textView.getPaint().setAntiAlias(true);
+    }
+
+    /**
+     * 给TextView设置删除线
+     *
+     * @param textView
+     */
+    public static void setDeleteLine(TextView textView) {
+        textView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        textView.getPaint().setAntiAlias(true);
     }
 }

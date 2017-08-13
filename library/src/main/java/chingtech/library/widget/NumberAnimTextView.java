@@ -22,7 +22,7 @@ import chingtech.library.utils.StringUtils;
  * Created by 师春雷
  * Created at 2017/4/14 17:26
  */
-public class NumberAnimTextView extends TextView {
+public class NumberAnimTextView extends android.support.v7.widget.AppCompatTextView {
 
     public static final int DEFAULT_DURATION = 2000; // 动画总时间 默认 2000 毫秒
 

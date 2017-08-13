@@ -46,6 +46,14 @@ public class TimeUtils {
 
     public static final long ONE_DAY = 24 * 60 * 60 * 1000;
 
+    private static final String[] CHINESE_ZODIAC = new String[] {"猴", "鸡", "狗", "猪", "鼠", "牛", "虎",
+            "兔", "龙", "蛇", "马", "羊"};
+    private static final String[] ZODIAC         = new String[] {"水瓶座", "双鱼座", "白羊座", "金牛座", "双子座",
+            "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"};
+
+    private static final int[] ZODIAC_FLAGS = new int[] {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23,
+            22};
+
     public static SimpleDateFormat getFormat(String format) {
         return new SimpleDateFormat(format);
     }
@@ -495,6 +503,46 @@ public class TimeUtils {
     }
 
     /**
+     * 计算某月的天数
+     *
+     * @param year
+     * @param month 现实生活中的月份，不是系统存储的月份，从1到12
+     * @return
+     */
+    public int getDaysOfMonth(String year, int month) {
+        if (month < 1 || month > 12) {
+            return 0;
+        }
+        boolean isLeapYear  = isLeapYear(year);
+        int     daysOfMonth = 0;
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                daysOfMonth = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                daysOfMonth = 30;
+                break;
+            case 2:
+                if (isLeapYear) {
+                    daysOfMonth = 29;
+                } else {
+                    daysOfMonth = 28;
+                }
+
+        }
+        return daysOfMonth;
+    }
+
+    /**
      * 比较两个日期相差天数
      *
      * @param fDate
@@ -512,5 +560,52 @@ public class TimeUtils {
         long intervalMilli = Math.abs(date1.getTime() - date2.getTime());
 
         return (int) (intervalMilli / ONE_DAY);
+    }
+
+    /**
+     * 获取日期中的生肖
+     *
+     * @param year
+     * @return
+     */
+    public static String getChineseZodiac(int year) {
+        return CHINESE_ZODIAC[year % 12];
+    }
+
+    /**
+     * 获取日期中的星座
+     *
+     * @param month
+     * @param day
+     * @return
+     */
+    public static String getZodiac(int month, int day) {
+        return ZODIAC[day >= ZODIAC_FLAGS[month - 1] ? month - 1 : (month + 10) % 12];
+    }
+
+    /**
+     * 时间计数器，最多只能到99小时，如需要更大小时数需要改改方法
+     *
+     * @param time
+     * @return
+     */
+    public static String showTimeCount(long time) {
+        if (time >= 360000000) {
+            return "00:00:00";
+        }
+        String timeCount;
+        long   hourc = time / 3600000;
+        String hour  = "0" + hourc;
+        hour = hour.substring(hour.length() - 2, hour.length());
+
+        long   minuec = (time - hourc * 3600000) / (60000);
+        String minue  = "0" + minuec;
+        minue = minue.substring(minue.length() - 2, minue.length());
+
+        long   secc = (time - hourc * 3600000 - minuec * 60000) / 1000;
+        String sec  = "0" + secc;
+        sec = sec.substring(sec.length() - 2, sec.length());
+        timeCount = hour + ":" + minue + ":" + sec;
+        return timeCount;
     }
 }

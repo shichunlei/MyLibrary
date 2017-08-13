@@ -1,4 +1,4 @@
-package com.chingtech.library.view;
+package com.chingtech.sample.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.chingtech.library.R;
+import com.chingtech.sample.R;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;

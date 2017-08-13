@@ -25,58 +25,58 @@ import chingtech.library.interfaces.OnSheetItemClickListener;
 
 public class BottomDialog {
 
-    private Context context;
-    private Dialog dialog;
-    private LinearLayout layoutTitle;
-    private TextView txtTitle;
-    private TextView txt_cancel;
-    private View view_line;
-    private RelativeLayout layoutTop;
-    private Button btnOk;
-    private Button btnCancel;
-    private LinearLayout viewContent;
-    private LinearLayout layoutContent;
-    private ScrollView scrollContent;
+    private Context         context;
+    private Dialog          dialog;
+    private LinearLayout    layoutTitle;
+    private TextView        txtTitle;
+    private TextView        txt_cancel;
+    private View            view_line;
+    private RelativeLayout  layoutTop;
+    private Button          btnOk;
+    private Button          btnCancel;
+    private LinearLayout    viewContent;
+    private LinearLayout    layoutContent;
+    private ScrollView      scrollContent;
     private List<SheetItem> sheetItemList;
-    private Display display;
+    private Display         display;
     private boolean showSheet = false;
 
     public BottomDialog(Context context) {
         this.context = context;
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) context.getSystemService(
+                Context.WINDOW_SERVICE);
         display = windowManager.getDefaultDisplay();
     }
 
     @SuppressWarnings("deprecation")
     public BottomDialog builder() {
         // 获取Dialog布局
-        View view = LayoutInflater.from(context).inflate(
-                R.layout.layout_bottom_dialog, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_bottom_dialog, null);
 
         // 设置Dialog最小宽度为屏幕宽度
         view.setMinimumWidth(display.getWidth());
 
         // 获取自定义Dialog布局中的控件
-        scrollContent = (ScrollView) view.findViewById(R.id.scroll_content);
+        scrollContent = view.findViewById(R.id.scroll_content);
         scrollContent.setVisibility(View.GONE);
-        layoutContent = (LinearLayout) view.findViewById(R.id.layout_content);
-        viewContent = (LinearLayout) view.findViewById(R.id.view_content);
+        layoutContent = view.findViewById(R.id.layout_content);
+        viewContent = view.findViewById(R.id.view_content);
         viewContent.setVisibility(View.GONE);
 
-        layoutTitle = (LinearLayout) view.findViewById(R.id.layout_title);
+        layoutTitle = view.findViewById(R.id.layout_title);
         layoutTitle.setVisibility(View.GONE);
-        txtTitle = (TextView) view.findViewById(R.id.txt_title);
+        txtTitle = view.findViewById(R.id.txt_title);
 
-        txt_cancel = (TextView) view.findViewById(R.id.txt_cancel);
+        txt_cancel = view.findViewById(R.id.txt_cancel);
         txt_cancel.setVisibility(View.GONE);
         view_line = view.findViewById(R.id.view_line);
         view_line.setVisibility(View.GONE);
 
-        layoutTop = (RelativeLayout) view.findViewById(R.id.layout_top);
+        layoutTop = view.findViewById(R.id.layout_top);
         layoutTop.setVisibility(View.GONE);
-        btnOk = (Button) view.findViewById(R.id.btn_ok);
+        btnOk = view.findViewById(R.id.btn_ok);
         btnOk.setVisibility(View.INVISIBLE);
-        btnCancel = (Button) view.findViewById(R.id.btn_cancel);
+        btnCancel = view.findViewById(R.id.btn_cancel);
         btnOk.setVisibility(View.GONE);
 
         // 定义Dialog布局和参数
@@ -144,7 +144,7 @@ public class BottomDialog {
     public BottomDialog setView(View view) {
         viewContent.setVisibility(View.VISIBLE);
         viewContent.addView(view, LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
+                            LinearLayout.LayoutParams.MATCH_PARENT);
         return this;
     }
 
@@ -182,11 +182,8 @@ public class BottomDialog {
     }
 
     /**
-     *
-     * @param strItem
-     *            条目名称
-     * @param color
-     *            条目字体颜色，设置null则默认蓝色
+     * @param strItem  条目名称
+     * @param color    条目字体颜色，设置null则默认蓝色
      * @param listener
      * @return
      */
@@ -201,9 +198,7 @@ public class BottomDialog {
     }
 
     /**
-     *
-     * @param strItem
-     *            条目名称
+     * @param strItem  条目名称
      * @param listener
      * @return
      */
@@ -229,18 +224,19 @@ public class BottomDialog {
         // 高度控制，非最佳解决办法
         // 添加条目过多的时候控制高度
         if (size >= 7) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) scrollContent.getLayoutParams();
+            LinearLayout.LayoutParams params
+                    = (LinearLayout.LayoutParams) scrollContent.getLayoutParams();
             params.height = display.getHeight() / 2;
             scrollContent.setLayoutParams(params);
         }
 
         // 循环添加条目
         for (int i = 1; i <= size; i++) {
-            final int index = i;
-            SheetItem sheetItem = sheetItemList.get(i - 1);
-            String strItem = sheetItem.getName();
-            int color = sheetItem.getColor();
-            final OnSheetItemClickListener listener = sheetItem.getItemClickListener();
+            final int                      index     = i;
+            SheetItem                      sheetItem = sheetItemList.get(i - 1);
+            String                         strItem   = sheetItem.getName();
+            int                            color     = sheetItem.getColor();
+            final OnSheetItemClickListener listener  = sheetItem.getItemClickListener();
 
             TextView textView = new TextView(context);
             textView.setBackgroundResource(R.drawable.recycler_bg);
@@ -256,9 +252,10 @@ public class BottomDialog {
             }
 
             // 高度
-            float scale = context.getResources().getDisplayMetrics().density;
-            int height = (int) (45 * scale + 0.5f);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
+            float scale  = context.getResources().getDisplayMetrics().density;
+            int   height = (int) (45 * scale + 0.5f);
+            textView.setLayoutParams(
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
 
             // 点击事件
             textView.setOnClickListener(new View.OnClickListener() {
@@ -274,8 +271,9 @@ public class BottomDialog {
     }
 
     public void show() {
-        if (showSheet)
+        if (showSheet) {
             setSheetItems();
+        }
         dialog.show();
     }
 }

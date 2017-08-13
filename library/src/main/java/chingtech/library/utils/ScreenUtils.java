@@ -3,6 +3,7 @@ package chingtech.library.utils;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -16,50 +17,71 @@ import android.view.WindowManager;
 public class ScreenUtils {
 
     private ScreenUtils() {
-		/* cannot be instantiated */
+        /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+    /**
+     * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 
     /**
      * dp转px
      *
-     * @param ctx
-     * @param dpValue
+     * @param context
+     * @param dpVal
      * @return
      */
-    public static int dip2px(Context ctx, float dpValue) {
-        final float scale = ctx.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    /**
-     * px转dp
-     *
-     * @param ctx
-     * @param pxValue
-     * @return
-     */
-    public static int px2dip(Context ctx, float pxValue) {
-        final float scale = ctx.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+    public static int dp2px(Context context, float dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal,
+                                               context.getResources().getDisplayMetrics());
     }
 
     /**
      * sp转px
      *
-     * @param ctx
-     * @param spValue
+     * @param context
+     * @param spVal
      * @return
      */
-    public static int sp2px(Context ctx, float spValue) {
-        final float scale = ctx.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * scale + 0.5f);
+    public static int sp2px(Context context, float spVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal,
+                                               context.getResources().getDisplayMetrics());
     }
 
-    // 将px值转换为sp值
-    public static int px2sp(Context context, float pxValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (pxValue / fontScale + 0.5f);
+    /**
+     * px转dp
+     *
+     * @param context
+     * @param pxVal
+     * @return
+     */
+    public static float px2dp(Context context, float pxVal) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (pxVal / scale);
+    }
+
+    /**
+     * px转sp
+     *
+     * @param pxVal
+     * @param pxVal
+     * @return
+     */
+    public static float px2sp(Context context, float pxVal) {
+        return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
 
     /**
@@ -70,14 +92,14 @@ public class ScreenUtils {
      */
     public static int screenWidthPixel(Context context) {
         int sScreenWidthPixels;
-        WindowManager windowManager = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) context.getSystemService(
+                Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             Point outPoint = new Point();
             display.getRealSize(outPoint);
             sScreenWidthPixels = outPoint.x;
-        }  else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             Point outPoint = new Point();
             display.getSize(outPoint);
             sScreenWidthPixels = outPoint.x;

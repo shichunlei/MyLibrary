@@ -1,22 +1,21 @@
-package com.chingtech.library.view;
+package com.chingtech.sample.view;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.chingtech.library.R;
+import chingtech.library.base.activity.BaseActivity;
+import com.chingtech.sample.R;
 import com.larswerkman.lobsterpicker.OnColorListener;
 import com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import chingtech.library.widget.WaveLoadingView;
 
@@ -28,17 +27,14 @@ import chingtech.library.widget.WaveLoadingView;
  * Created at 2017/5/27 13:54
  */
 @ContentView(R.layout.wave_load_view)
-public class WaveLoadView extends AppCompatActivity {
+public class WaveLoadView extends BaseActivity {
 
     @ViewInject(R.id.waveLoadingView)
     private WaveLoadingView mWaveLoadingView;
     private int checkedItem = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        x.view().inject(this);
+    protected void init() {
 
         // Sets the length of the animation, default is 1000.
         mWaveLoadingView.setAnimDuration(3000);
@@ -48,39 +44,44 @@ public class WaveLoadView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new AlertDialog.Builder(WaveLoadView.this).setTitle(
-                        "Shape Type").setSingleChoiceItems(
-                        new String[]{"CIRCLE", "TRIANGLE", "SQUARE", "RECTANGLE"}, checkedItem,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                checkedItem = which;
-                                switch (which) {
-                                    case 0:
-                                        mWaveLoadingView.setShapeType(
-                                                WaveLoadingView.ShapeType.CIRCLE);
-                                        dialog.dismiss();
-                                        break;
-                                    case 1:
-                                        mWaveLoadingView.setShapeType(
-                                                WaveLoadingView.ShapeType.TRIANGLE);
-                                        dialog.dismiss();
-                                        break;
-                                    case 2:
-                                        mWaveLoadingView.setShapeType(
-                                                WaveLoadingView.ShapeType.SQUARE);
-                                        dialog.dismiss();
-                                        break;
-                                    case 3:
-                                        mWaveLoadingView.setShapeType(
-                                                WaveLoadingView.ShapeType.RECTANGLE);
-                                        dialog.dismiss();
-                                        break;
-                                    default:
-                                        dialog.dismiss();
-                                        break;
-                                }
-                            }
-                        }).show();
+                new AlertDialog.Builder(WaveLoadView.this).setTitle("Shape Type")
+                                                          .setSingleChoiceItems(
+                                                                  new String[] {"CIRCLE",
+                                                                          "TRIANGLE", "SQUARE",
+                                                                          "RECTANGLE"}, checkedItem,
+                                                                  new DialogInterface.OnClickListener() {
+                                                                      public void onClick(
+                                                                              DialogInterface dialog,
+                                                                              int which) {
+                                                                          checkedItem = which;
+                                                                          switch (which) {
+                                                                              case 0:
+                                                                                  mWaveLoadingView.setShapeType(
+                                                                                          WaveLoadingView.ShapeType.CIRCLE);
+                                                                                  dialog.dismiss();
+                                                                                  break;
+                                                                              case 1:
+                                                                                  mWaveLoadingView.setShapeType(
+                                                                                          WaveLoadingView.ShapeType.TRIANGLE);
+                                                                                  dialog.dismiss();
+                                                                                  break;
+                                                                              case 2:
+                                                                                  mWaveLoadingView.setShapeType(
+                                                                                          WaveLoadingView.ShapeType.SQUARE);
+                                                                                  dialog.dismiss();
+                                                                                  break;
+                                                                              case 3:
+                                                                                  mWaveLoadingView.setShapeType(
+                                                                                          WaveLoadingView.ShapeType.RECTANGLE);
+                                                                                  dialog.dismiss();
+                                                                                  break;
+                                                                              default:
+                                                                                  dialog.dismiss();
+                                                                                  break;
+                                                                          }
+                                                                      }
+                                                                  })
+                                                          .show();
             }
         });
 
@@ -239,5 +240,10 @@ public class WaveLoadView extends AppCompatActivity {
                     public void onColorSelected(@ColorInt int color) {
                     }
                 });
+    }
+
+    @Override
+    protected void initToolBar() {
+
     }
 }

@@ -220,6 +220,7 @@
         <attr format="boolean" name="rvb_autoPlaying" />
     </declare-styleable>
 
+    <!-- 雷达图 -->
     <declare-styleable name="RadarView">
         <attr format="integer" name="radar_layer" />
         <attr format="boolean" name="rotation_enable" />
@@ -236,6 +237,7 @@
         <attr format="dimension" name="vertex_text_offset" />
     </declare-styleable>
 
+    <!-- 数字进度条 -->
     <declare-styleable name="NumberProgressBar">
         <attr format="integer" name="progress_current" />
         <attr format="integer" name="progress_max" />
@@ -259,5 +261,100 @@
 
     <declare-styleable name="Themes">
         <attr format="reference" name="numberProgressBarStyle" />
+    </declare-styleable>
+
+    <declare-styleable name="RangeSeekBar">
+        <!--最大值-->
+        <attr format="float" name="max" />
+        <!--最小值-->
+        <attr format="float" name="min" />
+        <!--两个按钮的最小间距-->
+        <attr format="float" name="reserve" />
+        <!--cells 等于0为普通模式，大于1时切换为刻度模式-->
+        <attr format="integer" name="cells" />
+        <!--是否关闭进度提示-->
+        <attr format="boolean" name="hideProgressHint" />
+        <!--拖动后的Seekbar颜色-->
+        <attr format="color" name="lineColorSelected" />
+        <!--默认的Seekbar颜色-->
+        <attr format="color" name="lineColorEdge" />
+        <!--进度为最小值或最大值时按钮的颜色，默认此属性不调用-->
+        <attr format="color" name="thumbPrimaryColor" />
+        <!--进度不为最小值或最大值时按钮的颜色，默认此属性不调用-->
+        <attr format="color" name="thumbSecondaryColor" />
+        <!--刻度文字，不设置的时候默认隐藏-->
+        <attr format="reference" name="markTextArray" />
+        <!--按钮的背景资源，不设置的时候默认为圆形按钮-->
+        <attr format="reference" name="seekBarResId" />
+        <!--进度提示背景资源，必须使用 9 path文件-->
+        <attr format="reference" name="progressHintResId" />
+        <!--刻度文字与进度条之间的距离-->
+        <attr format="dimension" name="textPadding" />
+        <!--刻度文字和进度提示文字的大小-->
+        <attr format="dimension" name="textSize" />
+        <!--进度提示背景的高度，不设置时根据文字尺寸自适应-->
+        <attr format="dimension" name="hintBGHeight" />
+        <!--进度提示背景的宽度，不设置时根据文字尺寸自适应-->
+        <attr format="dimension" name="hintBGWith" />
+        <!--进度提示背景和进度条之间的距离-->
+        <attr format="dimension" name="hintBGPadding" />
+        <!--进度条的高度-->
+        <attr format="dimension" name="seekBarHeight" />
+        <!--按钮的尺寸-->
+        <attr format="dimension" name="thumbSize" />
+        <!--刻度模式
+            number 根据刻度的实际所占比例分配位置（markTextArray中必须都为数字）
+            other 平分当前布局（markTextArray可以是任何字符）
+        -->
+        <attr format="enum" name="cellMode">
+            <enum name="number" value="0" />
+            <enum name="other" value="1" />
+        </attr>
+        <!--单向、双向模式 single 单向模式，只有一个按钮 range 双向模式，有两个按钮 -->
+        <attr format="enum" name="seekBarMode">
+            <enum name="single" value="1" />
+            <enum name="range" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <!-- 阴影半径 -->
+        <attr format="reference|dimension" name="sb_shadow_radius" />
+        <!-- 阴影偏移 -->
+        <attr format="reference|dimension" name="sb_shadow_offset" />
+        <!-- 阴影颜色 -->
+        <attr format="reference|color" name="sb_shadow_color" />
+        <!-- 关闭颜色 -->
+        <attr format="reference|color" name="sb_uncheck_color" />
+        <!-- 开启颜色 -->
+        <attr format="reference|color" name="sb_checked_color" />
+
+        <!-- 边框宽度 -->
+        <attr format="reference|dimension" name="sb_border_width" />
+        <!-- 开启指示器颜色 -->
+        <attr format="reference|color" name="sb_checkline_color" />
+        <!-- 开启指示器线宽 -->
+        <attr format="reference|dimension" name="sb_checkline_width" />
+        <!-- 关闭指示器颜色 -->
+        <attr format="reference|color" name="sb_uncheckcircle_color" />
+        <!-- 关闭指示器线宽 -->
+        <attr format="reference|dimension" name="sb_uncheckcircle_width" />
+        <!-- 关闭指示器半径 -->
+        <attr format="reference|dimension" name="sb_uncheckcircle_radius" />
+
+        <!-- 是否选中 -->
+        <attr format="reference|boolean" name="sb_checked" />
+        <!-- 是否启用阴影 -->
+        <attr format="reference|boolean" name="sb_shadow_effect" />
+        <!-- 动画时间，默认300ms -->
+        <attr format="reference|integer" name="sb_effect_duration" />
+        <!-- 按钮颜色 -->
+        <attr format="reference|color" name="sb_button_color" />
+        <!-- 是否显示指示器，默认true：显示 -->
+        <attr format="reference|boolean" name="sb_show_indicator" />
+        <!-- 背景色，默认白色 -->
+        <attr format="reference|color" name="sb_background" />
+        <!-- 是否启用特效，默认true -->
+        <attr format="reference|boolean" name="sb_enable_effect" />
     </declare-styleable>
 </resources>

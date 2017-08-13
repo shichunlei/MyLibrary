@@ -39,76 +39,75 @@ import chingtech.library.utils.StringUtils;
  */
 public class AlertDialog {
 
-    private Context context;
-    private Dialog dialog;
-    private LinearLayout lLayout_bg;
+    private Context        context;
+    private Dialog         dialog;
+    private LinearLayout   lLayout_bg;
     /** 标头 */
-    private TextView txt_title;
+    private TextView       txt_title;
     /** 提示信息 */
-    private TextView txt_msg;
-    private LinearLayout dialog_Group;
-    private LinearLayout layoutList;
+    private TextView       txt_msg;
+    private LinearLayout   dialog_Group;
+    private LinearLayout   layoutList;
     private RelativeLayout layoutTitle;
     private RelativeLayout layoutBottom;
     /** 确定按钮 */
-    private Button btn_neg;
+    private Button         btn_neg;
     /** 取消按钮 */
-    private Button btn_pos;
+    private Button         btn_pos;
     /** 取消按钮 */
-    private Button btn_cancel;
-    private ImageView close;
-    private Display display;
-    private RecyclerView recyclerView;
+    private Button         btn_cancel;
+    private ImageView      close;
+    private Display        display;
+    private RecyclerView   recyclerView;
 
     private List<SheetItem> sheetItemList;
 
     private ItemAdapter adapter;
 
-    private boolean showTitle = false;
-    private boolean showMsg = false;
-    private boolean showLayout = false;
-    private boolean showPosBtn = false;
-    private boolean showNegBtn = false;
-    private boolean showList = false;
+    private boolean showTitle    = false;
+    private boolean showMsg      = false;
+    private boolean showLayout   = false;
+    private boolean showPosBtn   = false;
+    private boolean showNegBtn   = false;
+    private boolean showList     = false;
     private boolean showListView = false;
-    private boolean showClose = false;
-    private boolean showCancel = false;
+    private boolean showClose    = false;
+    private boolean showCancel   = false;
 
     public AlertDialog(Context context) {
         this.context = context;
-        WindowManager windowManager = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) context.getSystemService(
+                Context.WINDOW_SERVICE);
         display = windowManager.getDefaultDisplay();
     }
 
     @SuppressWarnings("deprecation")
     public AlertDialog builder() {
         // 获取Dialog布局
-        View view = LayoutInflater.from(context).inflate(
-                R.layout.layout_alert_dialog, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_alert_dialog, null);
 
         // 获取自定义Dialog布局中的控件
-        lLayout_bg = (LinearLayout) view.findViewById(R.id.lLayout_bg);
-        txt_title = (TextView) view.findViewById(R.id.txt_title);
+        lLayout_bg = view.findViewById(R.id.lLayout_bg);
+        txt_title = view.findViewById(R.id.txt_title);
         txt_title.setVisibility(View.GONE);
-        txt_msg = (TextView) view.findViewById(R.id.txt_msg);
+        txt_msg = view.findViewById(R.id.txt_msg);
         txt_msg.setVisibility(View.GONE);
-        dialog_Group = (LinearLayout) view.findViewById(R.id.dialog_Group);
+        dialog_Group = view.findViewById(R.id.dialog_Group);
         dialog_Group.setVisibility(View.GONE);
-        layoutList = (LinearLayout) view.findViewById(R.id.layout_list);
+        layoutList = view.findViewById(R.id.layout_list);
         layoutList.setVisibility(View.GONE);
-        btn_neg = (Button) view.findViewById(R.id.btn_neg);
+        btn_neg = view.findViewById(R.id.btn_neg);
         btn_neg.setVisibility(View.GONE);
-        btn_pos = (Button) view.findViewById(R.id.btn_pos);
+        btn_pos = view.findViewById(R.id.btn_pos);
         btn_pos.setVisibility(View.GONE);
-        btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
+        btn_cancel = view.findViewById(R.id.btn_cancel);
         btn_cancel.setVisibility(View.GONE);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setVisibility(View.GONE);
-        layoutTitle = (RelativeLayout) view.findViewById(R.id.layout_title);
-        close = (ImageView) view.findViewById(R.id.image_close);
+        layoutTitle = view.findViewById(R.id.layout_title);
+        close = view.findViewById(R.id.image_close);
         close.setVisibility(View.GONE);
-        layoutBottom = (RelativeLayout) view.findViewById(R.id.layout_bottom);
+        layoutBottom = view.findViewById(R.id.layout_bottom);
         layoutBottom.setVisibility(View.GONE);
 
         // 定义Dialog布局和参数
@@ -116,8 +115,8 @@ public class AlertDialog {
         dialog.setContentView(view);
 
         // 调整dialog背景大小
-        lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display
-                .getWidth() * 0.85), LayoutParams.WRAP_CONTENT));
+        lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display.getWidth() * 0.85),
+                                                                LayoutParams.WRAP_CONTENT));
 
         return this;
     }
@@ -236,8 +235,7 @@ public class AlertDialog {
         if (view == null) {
             showLayout = false;
         } else {
-            dialog_Group.addView(view, LayoutParams.MATCH_PARENT,
-                    LayoutParams.MATCH_PARENT);
+            dialog_Group.addView(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         }
         return this;
     }
@@ -296,8 +294,7 @@ public class AlertDialog {
         return this;
     }
 
-    public AlertDialog setPositiveButton(String text, int textId,
-            final OnClickListener listener) {
+    public AlertDialog setPositiveButton(String text, int textId, final OnClickListener listener) {
         showPosBtn = true;
         if (textId != 0) {
             btn_pos.setText(context.getString(textId));
@@ -328,8 +325,7 @@ public class AlertDialog {
         return this;
     }
 
-    public AlertDialog setNegativeButton(int textId, String text,
-            final OnClickListener listener) {
+    public AlertDialog setNegativeButton(int textId, String text, final OnClickListener listener) {
         showNegBtn = true;
         if (textId != 0) {
             btn_neg.setText(context.getString(textId));
@@ -440,10 +436,10 @@ public class AlertDialog {
 
         // 循环添加条目
         for (int i = 1; i <= size; i++) {
-            final int index = i;
-            SheetItem sheetItem = sheetItemList.get(i - 1);
-            String strItem = sheetItem.getName();
-            final OnSheetItemClickListener listener = sheetItem.getItemClickListener();
+            final int                      index     = i;
+            SheetItem                      sheetItem = sheetItemList.get(i - 1);
+            String                         strItem   = sheetItem.getName();
+            final OnSheetItemClickListener listener  = sheetItem.getItemClickListener();
 
             TextView textView = new TextView(context);
             textView.setText(strItem);
@@ -452,8 +448,8 @@ public class AlertDialog {
             textView.setGravity(Gravity.CENTER);
 
             // 高度
-            float scale = context.getResources().getDisplayMetrics().density;
-            int height = (int) (45 * scale + 0.5f);
+            float scale  = context.getResources().getDisplayMetrics().density;
+            int   height = (int) (45 * scale + 0.5f);
             textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, height));
 
             // 点击事件

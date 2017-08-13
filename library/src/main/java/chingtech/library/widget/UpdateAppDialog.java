@@ -54,21 +54,21 @@ public class UpdateAppDialog {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_app_update_dialog, null);
 
         // 获取自定义Dialog布局中的控件
-        layoutBg = (LinearLayout) view.findViewById(R.id.layout_bg);
+        layoutBg = view.findViewById(R.id.layout_bg);
         //提示内容
-        mContentTextView = (TextView) view.findViewById(R.id.tv_update_info);
+        mContentTextView = view.findViewById(R.id.tv_update_info);
         //标题
-        mTitleTextView = (TextView) view.findViewById(R.id.tv_title);
+        mTitleTextView = view.findViewById(R.id.tv_title);
         //更新按钮
-        mUpdateOkButton = (Button) view.findViewById(R.id.btn_ok);
+        mUpdateOkButton = view.findViewById(R.id.btn_ok);
         //进度条
-        mNumberProgressBar = (NumberProgressBar) view.findViewById(R.id.npb);
+        mNumberProgressBar = view.findViewById(R.id.npb);
         //关闭按钮
-        mIvClose = (ImageView) view.findViewById(R.id.iv_close);
+        mIvClose = view.findViewById(R.id.iv_close);
         //关闭按钮+线 的整个布局
-        mLlClose = (LinearLayout) view.findViewById(R.id.ll_close);
+        mLlClose = view.findViewById(R.id.ll_close);
         //顶部图片
-        mTopIv = (ImageView) view.findViewById(R.id.iv_top);
+        mTopIv = view.findViewById(R.id.iv_top);
 
         // 定义Dialog布局和参数
         dialog = new Dialog(context, R.style.AlertDialogStyle);
@@ -152,15 +152,15 @@ public class UpdateAppDialog {
         mNumberProgressBar.setProgress(this.mProgress);
     }
 
-    public void setReachedBarColor(int color){
+    public void setReachedBarColor(int color) {
         mNumberProgressBar.setReachedBarColor(color);
     }
 
-    public void setProgressTextColor(int color){
+    public void setProgressTextColor(int color) {
         mNumberProgressBar.setProgressTextColor(color);
     }
 
-    public void setUnreachedBarColor(int color){
+    public void setUnreachedBarColor(int color) {
         mNumberProgressBar.setUnreachedBarColor(color);
     }
 

@@ -2,14 +2,17 @@ package chingtech.library.utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import chingtech.library.bean.RadarData;
 import chingtech.library.widget.RadarView;
@@ -18,16 +21,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.view.animation.Animation.RELATIVE_TO_PARENT;
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
 /**
  * MyLibrary
  * Package chingtech.library.utils
- * Description:
+ * Description: 动画工具类
  * Created by 师春雷
  * Created at 2017/6/7 15:35
  */
 public class AnimatorUitls {
+
+    // 动画持续时间
+    public static final int ANIMATION_DURATION = 300;
 
     private AnimatorUitls() {
         /** cannot be instantiated */
@@ -39,16 +46,12 @@ public class AnimatorUitls {
      *
      * @param view View
      */
-    public static void showAlphaView(final View view) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
-        animator.setDuration(500);
-        animator.start();
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.VISIBLE);
-            }
-        });
+    public static void showAlphaView(View view) {
+        AlphaAnimation alphaAnim = new AlphaAnimation(0, 1);
+        alphaAnim.setFillAfter(true);
+        alphaAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(alphaAnim);
+        view.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -56,16 +59,12 @@ public class AnimatorUitls {
      *
      * @param view View
      */
-    public static void hidenAlphaView(final View view) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
-        animator.setDuration(500);
-        animator.start();
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.GONE);
-            }
-        });
+    public static void hidenAlphaView(View view) {
+        AlphaAnimation alphaAnim = new AlphaAnimation(1, 0);
+        alphaAnim.setFillAfter(true);
+        alphaAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(alphaAnim);
+        view.setVisibility(View.GONE);
     }
 
     /***
@@ -78,7 +77,7 @@ public class AnimatorUitls {
                                                                   RELATIVE_TO_SELF, 0.0f,
                                                                   RELATIVE_TO_SELF, 0.0f,
                                                                   RELATIVE_TO_SELF, 1.0f);
-        mHiddenAction.setDuration(500);
+        mHiddenAction.setDuration(ANIMATION_DURATION);
         view.setAnimation(mHiddenAction);
         view.setVisibility(View.GONE);
     }
@@ -93,7 +92,7 @@ public class AnimatorUitls {
                                                                 RELATIVE_TO_SELF, 0.0f,
                                                                 RELATIVE_TO_SELF, 1.0f,
                                                                 RELATIVE_TO_SELF, 0.0f);
-        mShowAction.setDuration(500);
+        mShowAction.setDuration(ANIMATION_DURATION);
         view.setAnimation(mShowAction);
         view.setVisibility(View.VISIBLE);
     }
@@ -103,12 +102,12 @@ public class AnimatorUitls {
      *
      * @param view View
      */
-    public void moveToTopHiden(View view) {
+    public static void moveToTopHiden(View view) {
         TranslateAnimation mHiddenAction = new TranslateAnimation(RELATIVE_TO_SELF, 0.0f,
                                                                   RELATIVE_TO_SELF, 0.0f,
                                                                   RELATIVE_TO_SELF, 0.0f,
                                                                   RELATIVE_TO_SELF, -1.0f);
-        mHiddenAction.setDuration(500);
+        mHiddenAction.setDuration(ANIMATION_DURATION);
         view.setAnimation(mHiddenAction);
         view.setVisibility(View.GONE);
     }
@@ -118,108 +117,372 @@ public class AnimatorUitls {
      *
      * @param view View
      */
-    public void fromTopToLocationShow(View view) {
+    public static void fromTopToLocationShow(View view) {
         TranslateAnimation mShowAction = new TranslateAnimation(RELATIVE_TO_SELF, 0.0f,
                                                                 RELATIVE_TO_SELF, 0.0f,
                                                                 RELATIVE_TO_SELF, -1.0f,
                                                                 RELATIVE_TO_SELF, 0.0f);
-        mShowAction.setDuration(500);
+        mShowAction.setDuration(ANIMATION_DURATION);
         view.setAnimation(mShowAction);
         view.setVisibility(View.VISIBLE);
     }
 
-    public void fromLeftIn(View view) {
+    /**
+     * 从左侧进入
+     *
+     * @param view
+     */
+    public static void fromLeftIn(View view) {
         TranslateAnimation mInAction = new TranslateAnimation(RELATIVE_TO_SELF, -1.0f,
                                                               RELATIVE_TO_SELF, 0.0f,
                                                               RELATIVE_TO_SELF, 0.0f,
                                                               RELATIVE_TO_SELF, 0.0f);
-        mInAction.setDuration(500);
+        mInAction.setDuration(ANIMATION_DURATION);
         view.setAnimation(mInAction);
         view.setVisibility(View.VISIBLE);
     }
 
-    public void fromRightOut(View view) {
+    /**
+     * 从左侧滑出
+     *
+     * @param view
+     */
+    public static void fromLeftOut(View view) {
         TranslateAnimation mOutAction = new TranslateAnimation(RELATIVE_TO_SELF, 0.0f,
-                                                               RELATIVE_TO_SELF, 1.0f,
+                                                               RELATIVE_TO_SELF, -1.0f,
                                                                RELATIVE_TO_SELF, 0.0f,
                                                                RELATIVE_TO_SELF, 0.0f);
-        mOutAction.setDuration(500);
+        mOutAction.setDuration(ANIMATION_DURATION);
         view.setAnimation(mOutAction);
         view.setVisibility(View.GONE);
     }
 
-    /** //////////////////////////////////////////////////////////////////////////// */
-
-    // 动画持续时间
-    public static final int ANIMATION_DURATION = 300;
-
-    public static void fadeInView(View targetView) {
-        fadeInView(targetView, ANIMATION_DURATION);
+    /**
+     * 从右侧进入
+     *
+     * @param view
+     */
+    public static void fromRightIn(View view) {
+        TranslateAnimation mInAction = new TranslateAnimation(RELATIVE_TO_SELF, 1.0f,
+                                                              RELATIVE_TO_SELF, 0.0f,
+                                                              RELATIVE_TO_SELF, 0.0f,
+                                                              RELATIVE_TO_SELF, 0.0f);
+        mInAction.setDuration(ANIMATION_DURATION);
+        view.setAnimation(mInAction);
+        view.setVisibility(View.VISIBLE);
     }
 
     /**
-     * 渐隐式显示控件
+     * 从右侧滑出
      *
-     * @param targetView 目标控件
-     * @param duration   动画持续时间
+     * @param view
      */
-    public static void fadeInView(final View targetView, int duration) {
-        ViewCompat.animate(targetView)
-                  .alpha(1f)
-                  .setDuration(duration)
-                  .setListener(new ViewPropertyAnimatorListener() {
-                      @Override
-                      public void onAnimationStart(View view) {
-                          if (targetView.getVisibility() != View.VISIBLE) {
-                              targetView.setVisibility(View.VISIBLE);
-                          }
-                          targetView.setAlpha(0f);
-                      }
-
-                      @Override
-                      public void onAnimationEnd(View view) {
-
-                      }
-
-                      @Override
-                      public void onAnimationCancel(View view) {
-
-                      }
-                  });
-    }
-
-    public static void fadeOutView(View targetView) {
-        fadeOutView(targetView, ANIMATION_DURATION);
+    public static void fromRightOut(View view) {
+        TranslateAnimation mOutAction = new TranslateAnimation(RELATIVE_TO_SELF, 0.0f,
+                                                               RELATIVE_TO_SELF, 1.0f,
+                                                               RELATIVE_TO_SELF, 0.0f,
+                                                               RELATIVE_TO_SELF, 0.0f);
+        mOutAction.setDuration(ANIMATION_DURATION);
+        view.setAnimation(mOutAction);
+        view.setVisibility(View.GONE);
     }
 
     /**
-     * 渐隐式隐藏控件
+     * 左侧中心旋转进入
      *
-     * @param targetView 目标控件
-     * @param duration   动画持续时间
+     * @param view
      */
-    public static void fadeOutView(final View targetView, int duration) {
-        ViewCompat.animate(targetView)
-                  .alpha(0f)
-                  .setDuration(duration)
-                  .setListener(new ViewPropertyAnimatorListener() {
-                      @Override
-                      public void onAnimationStart(View view) {
+    public static void RotaLeftCenterIn(View view) {
+        RotateAnimation rotateAnim = new RotateAnimation(-90, 0, RELATIVE_TO_PARENT, 0f,
+                                                         RELATIVE_TO_PARENT, 0.5f);
+        rotateAnim.setFillAfter(true);
+        rotateAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(rotateAnim);
+        view.setVisibility(View.VISIBLE);
+    }
 
-                      }
+    /**
+     * 左侧中心旋转出
+     *
+     * @param view
+     */
+    public static void RotaLeftCenterOut(View view) {
+        RotateAnimation rotateAnim = new RotateAnimation(0, 180, RELATIVE_TO_PARENT, 0f,
+                                                         RELATIVE_TO_PARENT, 0.5f);
+        rotateAnim.setFillAfter(true);
+        rotateAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(rotateAnim);
+        view.setVisibility(View.GONE);
+    }
 
-                      @Override
-                      public void onAnimationEnd(View view) {
-                          if (targetView.getVisibility() != View.GONE) {
-                              targetView.setVisibility(View.GONE);
-                          }
-                      }
+    /**
+     * 左上角旋转
+     *
+     * @param view
+     */
+    public static void RotaLeftTopIn(View view) {
+        RotateAnimation rotateAnim = new RotateAnimation(-90, 0, RELATIVE_TO_PARENT, 0f,
+                                                         RELATIVE_TO_PARENT, 0f);
+        rotateAnim.setFillAfter(true);
+        rotateAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(rotateAnim);
+        view.setVisibility(View.VISIBLE);
+    }
 
-                      @Override
-                      public void onAnimationCancel(View view) {
+    /**
+     * 左上角旋转
+     *
+     * @param view
+     */
+    public static void RotaLeftTopOut(View view) {
+        RotateAnimation rotateAnim = new RotateAnimation(0, -90, RELATIVE_TO_PARENT, 0f,
+                                                         RELATIVE_TO_PARENT, 0f);
+        rotateAnim.setFillAfter(true);
+        rotateAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(rotateAnim);
+        view.setVisibility(View.GONE);
+    }
 
-                      }
-                  });
+    /**
+     * 中心旋转
+     *
+     * @param view
+     */
+    public static void RotaCenterIn(View view) {
+        RotateAnimation rotateAnim = new RotateAnimation(0, 360, RELATIVE_TO_PARENT, 0.5f,
+                                                         RELATIVE_TO_PARENT, 0.5f);
+        rotateAnim.setFillAfter(true);
+        rotateAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(rotateAnim);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 中心旋转
+     *
+     * @param view
+     */
+    public static void RotaCenterOut(View view) {
+        RotateAnimation rotateAnim = new RotateAnimation(0, -360, RELATIVE_TO_PARENT, 0.5f,
+                                                         RELATIVE_TO_PARENT, 0.5f);
+        rotateAnim.setFillAfter(true);
+        rotateAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(rotateAnim);
+        view.setVisibility(View.GONE);
+    }
+
+    /**
+     * 中心放大
+     *
+     * @param view
+     */
+    public static void ScaleBig(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(0, 1.0f, 0, 1.0f, RELATIVE_TO_PARENT, 0.5f,
+                                                      RELATIVE_TO_PARENT, 0.5f);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 中心缩小
+     *
+     * @param view
+     */
+    public static void ScaleSmall(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(1.0f, 0, 1.0f, 0, RELATIVE_TO_PARENT, 0.5f,
+                                                      RELATIVE_TO_PARENT, 0.5f);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.GONE);
+    }
+
+    /**
+     * 左上角放大
+     *
+     * @param view
+     */
+    public static void ScaleBigLeftTop(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(0, 1.0f, 0, 1.0f, RELATIVE_TO_PARENT, 0,
+                                                      RELATIVE_TO_PARENT, 0);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 左上角缩小
+     *
+     * @param view
+     */
+    public static void ScaleSmallLeftTop(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(1.0f, 0, 1.0f, 0, RELATIVE_TO_PARENT, 0,
+                                                      RELATIVE_TO_PARENT, 0);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.GONE);
+    }
+
+    /**
+     * 横向展开
+     *
+     * @param view
+     */
+    public static void ScaleToBigHorizontalIn(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(0f, 1.0f, 1.0f, 1.0f, RELATIVE_TO_PARENT,
+                                                      0.5f, RELATIVE_TO_PARENT, 0);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 横向收缩
+     *
+     * @param view
+     */
+    public static void ScaleToBigHorizontalOut(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(1.0f, 0f, 1.0f, 1.0f, RELATIVE_TO_PARENT,
+                                                      0.5f, RELATIVE_TO_PARENT, 0);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.GONE);
+    }
+
+    /**
+     * 纵向展开
+     *
+     * @param view
+     */
+    public static void ScaleToBigVerticalIn(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(1.0f, 1.0f, 0f, 1.0f, RELATIVE_TO_PARENT, 0f,
+                                                      RELATIVE_TO_PARENT, 0.5f);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 纵向收缩
+     *
+     * @param view
+     */
+    public static void ScaleToBigVerticalOut(View view) {
+        ScaleAnimation scaleAnim = new ScaleAnimation(1.0f, 1.0f, 1.0f, 0f, RELATIVE_TO_PARENT, 0f,
+                                                      RELATIVE_TO_PARENT, 0.5f);
+        scaleAnim.setFillAfter(true);
+        scaleAnim.setDuration(ANIMATION_DURATION);
+        view.setAnimation(scaleAnim);
+        view.setVisibility(View.GONE);
+    }
+
+    /**
+     * 震动
+     *
+     * @param shakeCount
+     * @param view
+     */
+    public static void ShakeMode(Integer shakeCount, View view) {
+        TranslateAnimation transAnim = new TranslateAnimation(RELATIVE_TO_PARENT, -0.01f,
+                                                              RELATIVE_TO_PARENT, 0.01f,
+                                                              RELATIVE_TO_PARENT, 0,
+                                                              RELATIVE_TO_PARENT, 0);
+        if (shakeCount == null) {
+            transAnim.setRepeatCount(1);
+        } else {
+            transAnim.setRepeatCount(shakeCount);
+        }
+        transAnim.setDuration(100);
+        view.setAnimation(transAnim);
+    }
+
+    /**
+     * 上下翻转
+     *
+     * @param view
+     */
+    public static void FlipUpDown(final View view, final boolean isShow) {
+        ObjectAnimator objAnim = ObjectAnimator.ofFloat(view, "rotationX", 0, 360);
+        objAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+        objAnim.setDuration(ANIMATION_DURATION);
+        objAnim.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator arg0) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator arg0) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator arg0) {
+                if (isShow) {
+                    if (view.getVisibility() != View.VISIBLE) {
+                        view.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (view.getVisibility() != View.GONE) {
+                        view.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator arg0) {
+            }
+        });
+        AnimatorSet as = new AnimatorSet();
+        as.play(objAnim);
+        as.start();
+    }
+
+    /**
+     * 左右翻转
+     *
+     * @param view
+     */
+    public static void FlipLeftRight(final View view, final boolean isShow) {
+        ObjectAnimator objAnim = ObjectAnimator.ofFloat(view, "rotationY", 0, 360);
+        objAnim.setInterpolator(new AccelerateDecelerateInterpolator());
+        objAnim.setDuration(ANIMATION_DURATION);
+        objAnim.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator arg0) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator arg0) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator arg0) {
+                if (isShow) {
+                    if (view.getVisibility() != View.VISIBLE) {
+                        view.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (view.getVisibility() != View.GONE) {
+                        view.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator arg0) {
+            }
+        });
+        AnimatorSet as = new AnimatorSet();
+        as.play(objAnim);
+        as.start();
     }
 
     /**
@@ -260,12 +523,10 @@ public class AnimatorUitls {
 
             @Override
             public void onAnimationCancel(Animator animation) {
-
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-
             }
         });
         circularReveal.start();

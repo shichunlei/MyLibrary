@@ -90,12 +90,12 @@ public class SearchView extends FrameLayout {
      */
     private void initViews() {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.search_view, this, true);
-        mSearchLayout = (FrameLayout) rootView.findViewById(R.id.search_layout);
-        mSearchBarLayout = (RelativeLayout) mSearchLayout.findViewById(R.id.search_bar_layout_rl);
-        mSearchContentEditText = (EditText) mSearchLayout.findViewById(R.id.search_edit_text_et);
-        mSuggestionListView = (ListView) mSearchLayout.findViewById(R.id.search_suggestion_list_lv);
-        mBackBtn = (ImageButton) mSearchLayout.findViewById(R.id.search_home_up_icon_ib);
-        mClearBtn = (ImageButton) mSearchLayout.findViewById(R.id.search_clear_icon_ib);
+        mSearchLayout = rootView.findViewById(R.id.search_layout);
+        mSearchBarLayout = mSearchLayout.findViewById(R.id.search_bar_layout_rl);
+        mSearchContentEditText = mSearchLayout.findViewById(R.id.search_edit_text_et);
+        mSuggestionListView = mSearchLayout.findViewById(R.id.search_suggestion_list_lv);
+        mBackBtn = mSearchLayout.findViewById(R.id.search_home_up_icon_ib);
+        mClearBtn = mSearchLayout.findViewById(R.id.search_clear_icon_ib);
         mTransparentView = mSearchLayout.findViewById(R.id.search_transparent_view);
 
         mTransparentView.setOnClickListener(mOnClickListener);
@@ -289,7 +289,7 @@ public class SearchView extends FrameLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AnimatorUitls.revealViewToggle(mSearchBarLayout, true);
         } else {
-            AnimatorUitls.fadeInView(mSearchLayout);
+            AnimatorUitls.showAlphaView(mSearchLayout);
         }
     }
 
@@ -307,7 +307,7 @@ public class SearchView extends FrameLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AnimatorUitls.revealViewToggle(mSearchBarLayout, false);
         } else {
-            AnimatorUitls.fadeOutView(mSearchLayout);
+            AnimatorUitls.hidenAlphaView(mSearchLayout);
         }
 
         mIsSearchOpen = false;

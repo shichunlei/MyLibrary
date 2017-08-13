@@ -1,4 +1,4 @@
-package com.chingtech.library.view;
+package com.chingtech.sample.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 
-import com.chingtech.library.R;
-import com.chingtech.library.bean.Child;
-import com.chingtech.library.bean.Parent;
+import com.chingtech.sample.R;
+import com.chingtech.sample.bean.Child;
+import com.chingtech.sample.bean.Parent;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;

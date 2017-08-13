@@ -1,4 +1,6 @@
-package com.chingtech.library.bean;
+package com.chingtech.sample.bean;
+
+import java.util.List;
 
 /**
  * MyLibrary
@@ -7,20 +9,17 @@ package com.chingtech.library.bean;
  * Created by 师春雷
  * Created at 2017/4/28 16:52
  */
-public class Child {
+public class Parent {
 
     private int id;
 
     private String name;
 
-    private String url;
+    private List<Child> children;
 
-    public Child(){
-    }
-
-    public Child(String name, String url){
+    public Parent(String name, List<Child> children){
         this.name = name;
-        this.url = url;
+        this.children = children;
     }
 
     public int getId() {
@@ -39,20 +38,20 @@ public class Child {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public List<Child> getChildren() {
+        return children;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setChildren(List<Child> children) {
+        this.children = children;
     }
 
     @Override
     public String toString() {
-        return "Child{" +
+        return "Parent{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
+                ", children=" + children +
                 '}';
     }
 }

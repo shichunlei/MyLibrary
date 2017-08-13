@@ -28,7 +28,7 @@ import chingtech.library.utils.ScreenUtils;
  * Created by 师春雷
  * Created at 2017/5/26 17:41
  */
-public class ExpandTextView extends TextView implements View.OnClickListener {
+public class ExpandTextView extends android.support.v7.widget.AppCompatTextView implements View.OnClickListener {
 
     /** The default number of lines 默认显示行数为8行 */
     private static final int MAX_COLLAPSED_LINES = 8;

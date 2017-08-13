@@ -23,7 +23,7 @@
             android:id="@+id/search_bar_layout_rl"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@android:color/white">
+            android:background="#3F51B5">
 
             <EditText
                 android:id="@+id/search_edit_text_et"
@@ -43,18 +43,17 @@
                 android:layout_centerVertical="true"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_action_navigation_arrow_back" />
+                android:src="@drawable/ic_action_navigation_arrow_back_inverted" />
 
             <ImageButton
                 android:id="@+id/search_clear_icon_ib"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="?android:attr/selectableItemBackground"
-                android:paddingLeft="@dimen/search_icon_padding"
-                android:paddingRight="@dimen/search_icon_padding"
+                android:padding="@dimen/search_icon_padding"
                 android:src="@drawable/ic_action_navigation_close" />
         </RelativeLayout>
 

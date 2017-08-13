@@ -530,7 +530,6 @@ public class RadarView extends View {
             mRotateOrientation = dis;
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
-
     }
 
     @Override
@@ -562,5 +561,21 @@ public class RadarView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mPointCenter = new PointF(w / 2, h / 2);
+    }
+
+    public double getmRotateAngle() {
+        return mRotateAngle;
+    }
+
+    public void setmRotateAngle(double mRotateAngle) {
+        this.mRotateAngle = mRotateAngle;
+    }
+
+    public double getmAngle() {
+        return mAngle;
+    }
+
+    public void setmAngle(double mAngle) {
+        this.mAngle = mAngle;
     }
 }
