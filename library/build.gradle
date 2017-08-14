@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.shichunlei'
+group = 'com.github.shichunlei'
 
 android {
     compileSdkVersion 26
@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    repositories {
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -41,28 +44,4 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     // 刷新 https://github.com/Aspsine/SwipeToLoadLayout
     compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
-}
-
-// build a jar with source files
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    failOnError  false
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
-}
-
-// build a jar with javadoc
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
 }
