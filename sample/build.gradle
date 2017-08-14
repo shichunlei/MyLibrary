@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 26
@@ -11,10 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -26,6 +23,11 @@ android {
         schemaVersion 1 // 指定数据库schema版本号，迁移等操作会用到;
         daoPackage 'com.chingtech.greendao.gen' // dao的包名，包名默认是entity所在的包；
         targetGenDir 'src/main/java' // 生成数据库文件的目录;
+    }
+    //支持lambda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

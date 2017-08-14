@@ -108,7 +108,7 @@
 
 **Version**
 
-    【0.1.5】
+    【0.1.5.1】
 
 # Installation
 
@@ -126,7 +126,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.5'
+        compile 'com.github.shichunlei:MyLibrary:0.1.5.1'
     }
 
 # Usage
@@ -146,6 +146,10 @@ Step 2. Add the dependency
 - _等等。。。_
 
 # 更新日志
+
+【0.1.5.1】
+
+    修改0.1.5的BUG
 
 【0.1.5】
 
