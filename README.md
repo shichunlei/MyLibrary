@@ -110,7 +110,7 @@
 
 **Version**
 
-    【0.1.4】
+    【0.1.7】
 
 # Installation
 
@@ -128,7 +128,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.4'
+        compile 'com.github.shichunlei:MyLibrary:0.1.7'
     }
 
 # Usage
@@ -149,7 +149,7 @@ Step 2. Add the dependency
 
 # 更新日志
 
-【0.1.5】
+【0.1.7】
 
     添加动画工具类方法
     完善工具类方法
