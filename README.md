@@ -2,6 +2,8 @@
 
     根据自己项目用到过的一些自定义控件，也有部分是网上找的，在这里根据自己的项目需求稍作修改，会陆续添加一些好用的自定义View，再此特别感谢原作者们。
 
+[![](https://jitpack.io/v/shichunlei/MyLibrary.svg)](https://jitpack.io/#shichunlei/MyLibrary)
+
 **Include**
 
 - **AlertDialog**
@@ -108,7 +110,7 @@
 
 **Version**
 
-    【0.1.5.1】
+    【0.1.5】
 
 # Installation
 
@@ -126,7 +128,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.5.1'
+        compile 'com.github.shichunlei:MyLibrary:0.1.5'
     }
 
 # Usage
@@ -147,10 +149,6 @@ Step 2. Add the dependency
 
 # 更新日志
 
-【0.1.5.1】
-
-    修改0.1.5的BUG
-
 【0.1.5】
 
     添加动画工具类方法
@@ -159,6 +157,7 @@ Step 2. Add the dependency
     添加加密算法
     添加对lanmbda表达式的支持
     添加SwitchButton
+    配置JitPack.io
 
 【0.1.4】
 
