@@ -1,6 +1,7 @@
 package com.chingtech.sample.view;
 
 import android.util.Log;
+import android.view.View;
 import chingtech.library.base.activity.BaseActivity;
 import com.andrognito.patternlockview.PatternLockView;
 import com.andrognito.patternlockview.listener.PatternLockViewListener;
@@ -77,5 +78,10 @@ public class PatternLockActivity extends BaseActivity {
 
     @Override
     protected void initToolBar() {
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout);
     }
 }

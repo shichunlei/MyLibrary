@@ -3,6 +3,7 @@ package com.chingtech.sample.view;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.bean.RadarData;
 import chingtech.library.widget.RadarView;
@@ -55,6 +56,11 @@ public class RadarViewActivity extends BaseActivity {
     @Override
     protected void initToolBar() {
 
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.radarView);
     }
 
     @Override

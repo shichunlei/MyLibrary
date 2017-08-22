@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 import chingtech.library.widget.ProgressDialog;
+import chingtech.library.widget.StateView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected ProgressDialog progress;
 
+    private long exitTime = 0;
+
+    protected StateView mStateView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +36,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         progress = new ProgressDialog(this);
 
         x.view().inject(this);
+
+        mStateView = StateView.inject(injectTarget());
 
         init();
         initToolBar();
@@ -48,6 +56,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化ToolBar
      */
     protected abstract void initToolBar();
+
+    protected abstract View injectTarget();
 
     /**
      * 接收前一个页面传递的String值
@@ -71,17 +81,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         return receive.getIntExtra(key, 0);
     }
 
-    protected Object getSerializableExtra(String key){
+    protected Object getSerializableExtra(String key) {
         Intent receive = getIntent();
         return receive.getSerializableExtra(key);
     }
 
-    public List<Object> getSerializable(String key){
+    public List<Object> getSerializable(String key) {
         Intent receive = getIntent();
         return (ArrayList<Object>) receive.getSerializableExtra(key);
     }
 
-    protected ArrayList<Parcelable> getParcelableArrayList(String key){
+    protected ArrayList<Parcelable> getParcelableArrayList(String key) {
         Intent receive = getIntent();
         return receive.getExtras().getParcelableArrayList(key);
     }
@@ -209,5 +219,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void showToast(CharSequence text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public void doExitApp() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            showToast("再按一次退出！");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }

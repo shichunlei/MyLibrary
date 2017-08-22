@@ -10,6 +10,7 @@ import static chingtech.library.utils.TimeUtils.*;
 import android.content.*;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +27,8 @@ import com.bumptech.glide.Glide;
 import com.chingtech.sample.R;
 
 import com.chingtech.sample.service.UpdateService;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.beta.UpgradeInfo;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import org.xutils.common.Callback;
@@ -40,6 +43,8 @@ import chingtech.library.utils.*;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
+    private final static String TAG = "TAG";
+
     @ViewInject(R.id.main_search_view_rsv)
     private SearchView searchView;
     @ViewInject(R.id.toolbar)
@@ -49,7 +54,7 @@ public class MainActivity extends BaseActivity {
 
     private AlertDialog dialog;
 
-    private String[] items = {"item0", "item1", "item2", "item3"};
+    private String[] items = {"图片选择Activity", "图片选择Fragment", "item2", "item3"};
 
     @ViewInject(R.id.image1)
     private RoundImageView image1;
@@ -69,8 +74,6 @@ public class MainActivity extends BaseActivity {
 
     @ViewInject(R.id.tv_number)
     private NumberAnimTextView number;
-
-    private ProgressDialog progress;
 
     private BottomDialog mBottomDialog;
 
@@ -94,12 +97,6 @@ public class MainActivity extends BaseActivity {
     @ViewInject(R.id.tv_update_info)
     private TextView updateText;
 
-    @ViewInject(R.id.pone_number)
-    private EditText etPhone;
-    @ViewInject(R.id.id_number)
-    private EditText etIdCard;
-    @ViewInject(R.id.idcard_number)
-    private EditText etIdCardNo;
     @ViewInject(R.id.money)
     private EditText etMoney;
 
@@ -137,29 +134,36 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        mc = new MyCountDownTimer(30000, 1000);
+
+        mStateView.showRetry();
+        mStateView.setOnRetryClickListener(() -> {
+            new Handler().postDelayed(() -> {
+                mStateView.showContent();
+                mc.start();
+            }, 3000);
+        });
+
         initSeekBar();
 
         Intent intent = new Intent(this, UpdateService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
 
-        mc = new MyCountDownTimer(30000, 1000);
-        mc.start();
-
         easyFlipView.setFlipDuration(1000);
 
-        Log.i("Tag", "23132422.63232保留2位小数:" + doubleToString(23132422.63232));
-        Log.i("Tag", "23132422.23282保留3位小数:" + round(23132422.23282, 3));
-        Log.i("Tag", "23132422.93232转整数:" + round(23132422.93232, 0));
+        Log.i(TAG, "23132422.63232保留2位小数:" + doubleToString(23132422.63232));
+        Log.i(TAG, "23132422.23282保留3位小数:" + round(23132422.23282, 3));
+        Log.i(TAG, "23132422.93232转整数:" + round(23132422.93232, 0));
 
-        Log.i("Tag", "金额格式化: " + roundMoney(new BigDecimal(23132422.23832)));
-        Log.i("Tag", "金额格式化: " + roundMoney(new BigDecimal(-23132422.23832)));
+        Log.i(TAG, "金额格式化: " + roundMoney(new BigDecimal(23132422.23832)));
+        Log.i(TAG, "金额格式化: " + roundMoney(new BigDecimal(-23132422.23832)));
 
-        Log.i("Tag", "金额格式化: " + formatMoney(new BigDecimal(23132422.23832)));
+        Log.i(TAG, "金额格式化: " + formatMoney(new BigDecimal(23132422.23832)));
 
         String idcard15 = "131128900923065";
         String idcard18 = "131128199009230658";
-        Log.i("Tag", "131128199009230658身份证号码校验：" + isIdcard(idcard18));
-        Log.i("Tag", "131128900923065身份证号码校验：" + isIdcard(idcard15));
+        Log.i(TAG, "131128199009230658身份证号码校验：" + isIdcard(idcard18));
+        Log.i(TAG, "131128900923065身份证号码校验：" + isIdcard(idcard15));
 
         String str = "320125193206214815";
         try {
@@ -182,85 +186,79 @@ public class MainActivity extends BaseActivity {
 
         ViewUtils.setPricePoint(etMoney);
 
-        new AddSpaceTextWatcher(etIdCard, 23).setSpaceType(bankCardNumberType);
-        new AddSpaceTextWatcher(etPhone, 13).setSpaceType(mobilePhoneNumberType);
-        new AddSpaceTextWatcher(etIdCardNo, 21).setSpaceType(IDCardNumberType);
-
-        progress = new ProgressDialog(this);
         progress.setTitleText("正在登录");
 
         number.startNumber();
         ViewUtils.setUnderLine(number);
 
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(TZ_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(Y_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(YY_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(M_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(D_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(H_12_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(H_24_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(MIN_FORMAT));
-        Log.i("Tag", "----" + TimeUtils.getNowDateTime(S_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(TZ_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(Y_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(YY_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(M_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(D_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(H_12_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(H_24_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(MIN_FORMAT));
+        Log.i(TAG, "----" + TimeUtils.getNowDateTime(S_FORMAT));
 
-        Log.i("Tag", "=---------------" + TimeUtils.intervalDays("2016-12-31 12:22:22",
-                                                                 "2017-01-01 01:01:01"));
+        Log.i(TAG, "=-" + TimeUtils.intervalDays("2016-12-31 12:22:22", "2017-01-01 01:01:01"));
 
-        Log.i("Tag", "=======" + StringUtils.hangeToBig(3453450.23));
+        Log.i(TAG, "=======" + StringUtils.hangeToBig(3453450.23));
 
         String appname = AppUitls.getAppName(MainActivity.this);
-        Log.i("tag", "appname:" + appname);
+        Log.i(TAG, "appname:" + appname);
         String pkname = AppUitls.getPkName(MainActivity.this);
-        Log.i("tag", "pkname:" + pkname);
+        Log.i(TAG, "pkname:" + pkname);
         String versionname = AppUitls.getVersionName(MainActivity.this);
-        Log.i("tag", "versionname:" + versionname);
+        Log.i(TAG, "versionname:" + versionname);
         int versioncode = AppUitls.getVersionCode(MainActivity.this);
-        Log.i("tag", "versioncode:" + versioncode);
+        Log.i(TAG, "versioncode:" + versioncode);
 
         CharacterParser c = new CharacterParser();
-        Log.i("Tag", "我们拼音: " + c.getSelling("我们"));
+        Log.i(TAG, "我们拼音: " + c.getSelling("我们"));
 
         String s00 = TimeUtils.formatDate(date, DATE_SHAORT_FORMAT);
-        Log.i("Tag", s00);
+        Log.i(TAG, s00);
 
         String s0 = TimeUtils.formatDate(date, Y_FORMAT);
-        Log.i("Tag", s0);
+        Log.i(TAG, s0);
 
         String s01 = TimeUtils.formatDate(date, Y_M_FORMAT);
-        Log.i("Tag", s01);
+        Log.i(TAG, s01);
         String s02 = TimeUtils.formatDate(date, D_FORMAT);
-        Log.i("Tag", s02);
+        Log.i(TAG, s02);
         String s03 = TimeUtils.formatDate(date, M_FORMAT);
-        Log.i("Tag", s03);
+        Log.i(TAG, s03);
 
         String s2 = TimeUtils.formatDateTime(datetime, TIME_FORMAT);
-        Log.i("Tag", s2);
+        Log.i(TAG, s2);
 
         String s3 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
-        Log.i("Tag----------", s3);
+        Log.i(TAG, s3);
 
         String s4 = TimeUtils.formatDateTime(datetime, DATE_TIME_HOUR_MIN_FORMAT);
-        Log.i("Tag", s4);
+        Log.i(TAG, s4);
 
         String s5 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
-        Log.i("Tag=========", s5);
+        Log.i(TAG, s5);
 
         String s6 = TimeUtils.formatDateTime(datetime, DATE_TIME_FORMAT);
-        Log.i("Tag", s6);
+        Log.i(TAG, s6);
 
         String s7 = TimeUtils.formatDateTime(datetime, TIME_MS_FORMAT);
-        Log.i("Tag", s7);
+        Log.i(TAG, s7);
 
         String s8 = TimeUtils.formatDateTime(datetime, H_24_FORMAT);
-        Log.i("Tag", s8);
+        Log.i(TAG, s8);
 
         String s9 = TimeUtils.formatDateTime(datetime, H_12_FORMAT);
-        Log.i("Tag", s9);
+        Log.i(TAG, s9);
 
         String s09 = TimeUtils.formatDateTime(datetime, MIN_FORMAT);
-        Log.i("Tag", s09);
+        Log.i(TAG, s09);
 
         String s090 = TimeUtils.formatDateTime(datetime, "HH:00");
-        Log.i("Tag", s090);
+        Log.i(TAG, s090);
 
         setGlide("http://pic.58pic.com/58pic/11/75/23/17n58PIC9um.jpg", image1);
         setGlide("http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg",
@@ -290,16 +288,27 @@ public class MainActivity extends BaseActivity {
                   .setSingleChoiceItems(items)
                   .setNegativeButton("", null)
                   .setPositiveButton("", v -> {
+                      if (dialog.getSingleChoiceItems() == 0) {
+                          openActivity(PhotoActivity.class, false);
+                      } else if (dialog.getSingleChoiceItems() == 1) {
+                          openActivity(PhotoFragmentActivity.class, false);
+                      }
+
                       showToast(items[dialog.getSingleChoiceItems()]);
                   })
                   .show();
         });
 
         findViewById(R.id.btn_dialog4).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            View           v        = LayoutInflater.from(MainActivity.this)
+                                                    .inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
-            final EditText phone    = v.findViewById(R.id.edittxt_phone);
+            new AddSpaceTextWatcher(username, 21).setSpaceType(IDCardNumberType);
+            final EditText phone = v.findViewById(R.id.edittxt_phone);
+            new AddSpaceTextWatcher(phone, 13).setSpaceType(mobilePhoneNumberType);
             final EditText password = v.findViewById(R.id.edittxt_password);
+            final EditText bankNo   = v.findViewById(R.id.id_number);
+            new AddSpaceTextWatcher(bankNo, 23).setSpaceType(bankCardNumberType);
             dialog = new AlertDialog(MainActivity.this).builder();
             dialog.setTitle("Title")
                   .setView(v)
@@ -307,9 +316,10 @@ public class MainActivity extends BaseActivity {
                   .setNegativeButton("", null)
                   .setPositiveButton("", view12 -> {
                       progress.show();
-                      Log.i("tag", username.getText().toString().trim());
-                      Log.i("tag", phone.getText().toString().trim());
-                      Log.i("tag", password.getText().toString().trim());
+                      Log.i(TAG, username.getText().toString().trim().replaceAll("\\s*", ""));
+                      Log.i(TAG, bankNo.getText().toString().trim().replaceAll("\\s*", ""));
+                      Log.i(TAG, phone.getText().toString().replaceAll("\\s*", ""));
+                      Log.i(TAG, password.getText().toString().trim());
                       showToast(items[dialog.getSingleChoiceItems()]);
                   })
                   .show();
@@ -372,15 +382,16 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            View           v        = LayoutInflater.from(MainActivity.this)
+                                                    .inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
             mBottomDialog = new BottomDialog(MainActivity.this).builder();
             mBottomDialog.setView(v).setPositiveButton("确定", view1 -> {
-                Log.i("tag", username.getText().toString().trim());
-                Log.i("tag", phone.getText().toString().trim());
-                Log.i("tag", password.getText().toString().trim());
+                Log.i(TAG, username.getText().toString().trim());
+                Log.i(TAG, phone.getText().toString().trim());
+                Log.i(TAG, password.getText().toString().trim());
             }).setNegativeButton("取消", null).show();
         });
 
@@ -449,6 +460,11 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout_main);
     }
 
     private void conversion() {
@@ -549,9 +565,9 @@ public class MainActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem item = menu.findItem(R.id.action_search);
+        MenuItem item0 = menu.findItem(R.id.action_search);
 
-        item.setOnMenuItemClickListener(item12 -> {
+        item0.setOnMenuItemClickListener(item -> {
             showToast("搜索");
             searchView.showSearch();
             return false;
@@ -559,7 +575,7 @@ public class MainActivity extends BaseActivity {
 
         MenuItem item1 = menu.findItem(R.id.action_search1);
 
-        item1.setOnMenuItemClickListener(item22 -> {
+        item1.setOnMenuItemClickListener(item -> {
             showToast("=====");
             return false;
         });
@@ -567,7 +583,7 @@ public class MainActivity extends BaseActivity {
         MenuItem item2 = menu.findItem(R.id.action_search2);
         item2.setVisible(false);
 
-        item2.setOnMenuItemClickListener(item3 -> {
+        item2.setOnMenuItemClickListener(item -> {
             showToast("=====");
             return false;
         });
@@ -622,7 +638,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Event({R.id.fab, R.id.imgFrontCard, R.id.imgBackCard, R.id.cardview_front, R.id.cardview_back,
-            R.id.tv_number})
+            R.id.tv_number, R.id.btnCheckUpdate, R.id.btnLoadUpdateInfo})
     private void onEvent(View v) {
         switch (v.getId()) {
             case R.id.fab:
@@ -656,6 +672,43 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_number:
                 number.startNumber();
                 break;
+
+            case R.id.btnCheckUpdate:
+                Beta.checkUpgrade();
+                break;
+
+            case R.id.btnLoadUpdateInfo:
+                loadUpgradeInfo();
+                break;
         }
+    }
+
+    private void loadUpgradeInfo() {
+        /***** 获取升级信息 *****/
+        UpgradeInfo upgradeInfo = Beta.getUpgradeInfo();
+
+        if (upgradeInfo == null) {
+            showToast("无升级信息");
+            return;
+        }
+
+        StringBuilder info = new StringBuilder();
+        info.append("id: ").append(upgradeInfo.id).append("\n");
+        info.append("标题: ").append(upgradeInfo.title).append("\n");
+        info.append("升级说明: ").append(upgradeInfo.newFeature).append("\n");
+        info.append("versionCode: ").append(upgradeInfo.versionCode).append("\n");
+        info.append("versionName: ").append(upgradeInfo.versionName).append("\n");
+        info.append("发布时间: ").append(upgradeInfo.publishTime).append("\n");
+        info.append("安装包Md5: ").append(upgradeInfo.apkMd5).append("\n");
+        info.append("安装包下载地址: ").append(upgradeInfo.apkUrl).append("\n");
+        info.append("安装包大小: ").append(upgradeInfo.fileSize).append("\n");
+        info.append("弹窗间隔（ms）: ").append(upgradeInfo.popInterval).append("\n");
+        info.append("弹窗次数: ").append(upgradeInfo.popTimes).append("\n");
+        info.append("发布类型（0:测试 1:正式）: ").append(upgradeInfo.publishType).append("\n");
+        info.append("弹窗类型（1:建议 2:强制 3:手工）: ").append(upgradeInfo.upgradeType);
+
+        Log.i(TAG, "loadUpgradeInfo: " + info);
+
+        showToast(info);
     }
 }

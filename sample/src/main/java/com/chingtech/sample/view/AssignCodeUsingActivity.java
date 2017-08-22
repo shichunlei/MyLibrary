@@ -69,15 +69,14 @@ public class AssignCodeUsingActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assert toolbar != null;
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
         tvTitle.setText("在Java代码中指定Header和Footer");
 
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.refreshLayout);
+    }
 }

@@ -157,4 +157,9 @@ public class CompactActivity extends BaseActivity {
             datePickerTextView.setText(subtitle);
         }
     }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout);
+    }
 }

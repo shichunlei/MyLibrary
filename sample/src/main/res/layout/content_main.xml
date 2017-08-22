@@ -2,10 +2,8 @@
 <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     app:srlEnablePureScrollMode="true"
     tools:context=".view.MainActivity"
     tools:showIn="@layout/activity_main">
@@ -64,27 +62,6 @@
                 app:start_number="23434" />
 
             <EditText
-                android:id="@+id/id_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入银行卡号"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/pone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入手机号码"
-                android:inputType="phone" />
-
-            <EditText
-                android:id="@+id/idcard_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入身份证号码"
-                android:inputType="numberSigned" />
-
-            <EditText
                 android:id="@+id/money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,6 +74,18 @@
                 android:layout_height="50dp"
                 android:gravity="center"
                 tools:text="I am a TextView" />
+
+            <Button
+                android:id="@+id/btnCheckUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="手动检查更新" />
+
+            <Button
+                android:id="@+id/btnLoadUpdateInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="刷新更新信息" />
 
             <Button
                 android:id="@+id/btn_dialog"
@@ -207,14 +196,18 @@
                     app:color_checked="@color/google_yellow" />
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <chingtech.library.widget.RoundImageView
                     android:id="@+id/image1"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="150dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
                     android:src="@drawable/wall04"
                     app:border_color="@color/google_green"
                     app:border_width="4dp"
@@ -222,23 +215,26 @@
 
                 <chingtech.library.widget.RoundImageView
                     android:id="@+id/image2"
-                    android:layout_width="100dp"
-                    android:layout_height="150dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:src="@drawable/wall04"
                     app:type="oval" />
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <chingtech.library.widget.RoundImageView
                     android:id="@+id/image3"
-                    android:layout_width="150dp"
+                    android:layout_width="0dp"
                     android:layout_height="150dp"
-                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
                     android:src="@drawable/wall04"
                     app:border_color="@color/google_red"
                     app:border_width="2dp"
@@ -246,9 +242,10 @@
                     app:type="round" />
 
                 <chingtech.library.widget.RoundImageView
-                    android:layout_width="150dp"
-                    android:layout_height="180dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:src="@drawable/wall04"
                     app:border_color="@android:color/black"
                     app:border_width="2dp"
@@ -257,24 +254,27 @@
                     app:rightBottom_corner_radius="20dp"
                     app:rightTop_corner_radius="0dp"
                     app:type="round" />
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <chingtech.library.widget.RoundImageView
                     android:id="@+id/iv1"
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
                     android:src="@drawable/wall04" />
 
                 <chingtech.library.widget.RoundImageView
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
                     android:src="@drawable/wall04"
                     app:border_color="@android:color/holo_red_dark"
                     app:border_width="3dp"
@@ -283,7 +283,7 @@
                     app:rightBottom_corner_radius="30dp"
                     app:rightTop_corner_radius="0dp"
                     app:type="round" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <chingtech.library.widget.FlipView
                 android:id="@+id/flipView"

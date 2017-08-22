@@ -74,6 +74,11 @@ public class GreenDaoActivity extends BaseActivity {
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout);
+    }
+
     @Event({R.id.button, R.id.button2, R.id.button3, R.id.button4})
     private void onEvent(View view) {
         switch (view.getId()) {

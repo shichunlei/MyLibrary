@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import chingtech.library.widget.ProgressDialog;
+import chingtech.library.widget.StateView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +21,22 @@ import org.xutils.x;
 public abstract class BaseFragment extends Fragment {
 
     /** 上下文 */
-    public static Context context;
+    protected static Context context;
 
     private boolean injected = false;
 
-    public ProgressDialog progress;
+    protected ProgressDialog progress;
+
+    protected StateView mStateView;
+
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         injected = true;
-        return x.view().inject(this, inflater, container);
+        view = x.view().inject(this, inflater, container);
+        return view;
     }
 
     @Override
@@ -41,8 +47,11 @@ public abstract class BaseFragment extends Fragment {
         progress = new ProgressDialog(context);
 
         if (!injected) {
-            x.view().inject(this, this.getView());
+            view = this.getView();
+            x.view().inject(this, view);
         }
+
+        mStateView = StateView.inject(view, false);
         init();
     }
 

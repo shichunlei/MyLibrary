@@ -1,12 +1,10 @@
 package com.chingtech.sample.view;
 
-import android.content.DialogInterface;
 import android.support.annotation.ColorInt;
 import android.support.v7.app.AlertDialog;
 
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import chingtech.library.base.activity.BaseActivity;
 import com.chingtech.sample.R;
@@ -40,110 +38,92 @@ public class WaveLoadView extends BaseActivity {
         mWaveLoadingView.setAnimDuration(3000);
 
         // Shape Type
-        findViewById(R.id.tv_shape).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                new AlertDialog.Builder(WaveLoadView.this).setTitle("Shape Type")
-                                                          .setSingleChoiceItems(
-                                                                  new String[] {"CIRCLE",
-                                                                          "TRIANGLE", "SQUARE",
-                                                                          "RECTANGLE"}, checkedItem,
-                                                                  new DialogInterface.OnClickListener() {
-                                                                      public void onClick(
-                                                                              DialogInterface dialog,
-                                                                              int which) {
-                                                                          checkedItem = which;
-                                                                          switch (which) {
-                                                                              case 0:
-                                                                                  mWaveLoadingView.setShapeType(
-                                                                                          WaveLoadingView.ShapeType.CIRCLE);
-                                                                                  dialog.dismiss();
-                                                                                  break;
-                                                                              case 1:
-                                                                                  mWaveLoadingView.setShapeType(
-                                                                                          WaveLoadingView.ShapeType.TRIANGLE);
-                                                                                  dialog.dismiss();
-                                                                                  break;
-                                                                              case 2:
-                                                                                  mWaveLoadingView.setShapeType(
-                                                                                          WaveLoadingView.ShapeType.SQUARE);
-                                                                                  dialog.dismiss();
-                                                                                  break;
-                                                                              case 3:
-                                                                                  mWaveLoadingView.setShapeType(
-                                                                                          WaveLoadingView.ShapeType.RECTANGLE);
-                                                                                  dialog.dismiss();
-                                                                                  break;
-                                                                              default:
-                                                                                  dialog.dismiss();
-                                                                                  break;
-                                                                          }
-                                                                      }
-                                                                  })
-                                                          .show();
-            }
-        });
+        findViewById(R.id.tv_shape).setOnClickListener(
+                view -> new AlertDialog.Builder(WaveLoadView.this).setTitle("Shape Type")
+                                                                  .setSingleChoiceItems(
+                                                                          new String[] {"CIRCLE",
+                                                                                  "TRIANGLE",
+                                                                                  "SQUARE",
+                                                                                  "RECTANGLE"},
+                                                                          checkedItem,
+                                                                          (dialog, which) -> {
+                                                                              checkedItem = which;
+                                                                              switch (which) {
+                                                                                  case 0:
+                                                                                      mWaveLoadingView
+                                                                                              .setShapeType(
+                                                                                                      WaveLoadingView.ShapeType.CIRCLE);
+                                                                                      dialog.dismiss();
+                                                                                      break;
+                                                                                  case 1:
+                                                                                      mWaveLoadingView
+                                                                                              .setShapeType(
+                                                                                                      WaveLoadingView.ShapeType.TRIANGLE);
+                                                                                      dialog.dismiss();
+                                                                                      break;
+                                                                                  case 2:
+                                                                                      mWaveLoadingView
+                                                                                              .setShapeType(
+                                                                                                      WaveLoadingView.ShapeType.SQUARE);
+                                                                                      dialog.dismiss();
+                                                                                      break;
+                                                                                  case 3:
+                                                                                      mWaveLoadingView
+                                                                                              .setShapeType(
+                                                                                                      WaveLoadingView.ShapeType.RECTANGLE);
+                                                                                      dialog.dismiss();
+                                                                                      break;
+                                                                                  default:
+                                                                                      dialog.dismiss();
+                                                                                      break;
+                                                                              }
+                                                                          })
+                                                                  .show());
 
         // Animator
         ((CheckBox) findViewById(R.id.cb_animator_cancel_and_start)).setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b) {
-                            mWaveLoadingView.cancelAnimation();
-                        } else {
-                            mWaveLoadingView.startAnimation();
-                        }
+                (compoundButton, b) -> {
+                    if (b) {
+                        mWaveLoadingView.cancelAnimation();
+                    } else {
+                        mWaveLoadingView.startAnimation();
                     }
                 });
 
         ((CheckBox) findViewById(R.id.cb_animator_pause_and_resume)).setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b) {
-                            mWaveLoadingView.pauseAnimation();
-                        } else {
-                            mWaveLoadingView.resumeAnimation();
-                        }
+                (compoundButton, b) -> {
+                    if (b) {
+                        mWaveLoadingView.pauseAnimation();
+                    } else {
+                        mWaveLoadingView.resumeAnimation();
                     }
                 });
 
         // Top Title
         ((CheckBox) findViewById(R.id.cb_title_top)).setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b) {
-                            mWaveLoadingView.setTopTitle("Top Title");
-                        } else {
-                            mWaveLoadingView.setTopTitle("");
-                        }
+                (compoundButton, b) -> {
+                    if (b) {
+                        mWaveLoadingView.setTopTitle("Top Title");
+                    } else {
+                        mWaveLoadingView.setTopTitle("");
                     }
                 });
         // Center Title
         ((CheckBox) findViewById(R.id.cb_title_center)).setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b) {
-                            mWaveLoadingView.setCenterTitle("Center Title");
-                        } else {
-                            mWaveLoadingView.setCenterTitle("");
-                        }
+                (compoundButton, b) -> {
+                    if (b) {
+                        mWaveLoadingView.setCenterTitle("Center Title");
+                    } else {
+                        mWaveLoadingView.setCenterTitle("");
                     }
                 });
         // Bottom Title
         ((CheckBox) findViewById(R.id.cb_title_bottom)).setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if (b) {
-                            mWaveLoadingView.setBottomTitle("Bottom Title");
-                        } else {
-                            mWaveLoadingView.setBottomTitle("");
-                        }
+                (compoundButton, b) -> {
+                    if (b) {
+                        mWaveLoadingView.setBottomTitle("Bottom Title");
+                    } else {
+                        mWaveLoadingView.setBottomTitle("");
                     }
                 });
 
@@ -245,5 +225,10 @@ public class WaveLoadView extends BaseActivity {
     @Override
     protected void initToolBar() {
 
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout);
     }
 }

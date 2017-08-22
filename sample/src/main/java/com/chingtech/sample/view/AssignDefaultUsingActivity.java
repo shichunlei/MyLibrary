@@ -10,9 +10,7 @@ import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
@@ -32,9 +30,9 @@ public class AssignDefaultUsingActivity extends BaseActivity {
     private static boolean isFirstEnter = true;
 
     @ViewInject(R.id.toolbar)
-    protected Toolbar toolbar;
+    protected Toolbar  toolbar;
     @ViewInject(R.id.tv_title)
-    private TextView tvTitle;
+    private   TextView tvTitle;
 
     /*
      * 关键代码，需要在布局生成之前设置，建议代码放在 Application.onCreate 中
@@ -53,15 +51,11 @@ public class AssignDefaultUsingActivity extends BaseActivity {
             }
         });
         //设置全局的Footer构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {
-            @NonNull
-            @Override
-            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-                ClassicsFooter footer = new ClassicsFooter(context);
-                footer.setBackgroundResource(android.R.color.white);
-                footer.setSpinnerStyle(SpinnerStyle.Scale);//设置为拉伸模式
-                return footer;//指定为经典Footer，默认是 BallPulseFooter
-            }
+        SmartRefreshLayout.setDefaultRefreshFooterCreater((context1, layout) -> {
+            ClassicsFooter footer = new ClassicsFooter(context1);
+            footer.setBackgroundResource(android.R.color.white);
+            footer.setSpinnerStyle(SpinnerStyle.Scale);//设置为拉伸模式
+            return footer;//指定为经典Footer，默认是 BallPulseFooter
         });
     }
 
@@ -95,15 +89,15 @@ public class AssignDefaultUsingActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assert toolbar != null;
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
         tvTitle.setText("全局指定默认的Header和Footer");
 
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.refreshLayout);
     }
 
 }

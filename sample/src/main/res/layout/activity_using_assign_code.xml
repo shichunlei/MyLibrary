@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".view.AssignCodeUsingActivity">
 
-    <include layout="@layout/tool_bar"/>
+    <include layout="@layout/tool_bar" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
@@ -16,11 +16,12 @@
         app:srlAccentColor="@android:color/white"
         app:srlEnableFooterTranslationContent="false"
         app:srlPrimaryColor="@color/colorPrimary">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
-            android:text="@string/description_define_in_code"/>
+            android:text="@string/description_define_in_code" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

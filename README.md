@@ -1,6 +1,6 @@
 # MyLibrary
 
-    根据自己项目用到过的一些自定义控件，也有部分是网上找的，在这里根据自己的项目需求稍作修改，会陆续添加一些好用的自定义View，再此特别感谢原作者们。
+    优秀框架、自定义控件大搜集，再此特别感谢原作者们。
 
 [![](https://jitpack.io/v/shichunlei/MyLibrary.svg)](https://jitpack.io/#shichunlei/MyLibrary)
 
@@ -99,6 +99,24 @@
     SwitchButton.An beautiful+lightweight+custom-style-easy switch widget for Android,minSdkVersion >= 11 
     
     [原始项目地址](https://github.com/zcweng/SwitchButton)
+    
+- **StateView**
+
+    StateView 一个轻量级的控件, 继承自 View, 吸收了 ViewStub 的一些特性, 初始状态下是不可见的, 不占布局位置, 占用内存少。 当进行操作显示空/重试/加载视图后, 该视图才会被添加到布局中。
+    
+    [原项目地址](https://github.com/nukc/StateView)
+    
+- **StickyHeaderDecoration**
+
+    A sticky header decoration, use for recyclerview
+    
+    [原项目地址](https://github.com/qdxxxx/StickyHeaderDecoration)
+    
+- **IndexBarLayout**
+
+    Similar to the letter to the right of the phone's contacts
+    
+    [原项目地址](https://github.com/qdxxxx/IndexBarLayout)
 
 - **工具类**
 
@@ -137,7 +155,6 @@ Step 2. Add the dependency
 
 ### Sample 中使用到的第三方框架包括
 
-- _[Glide](https://github.com/bumptech/glide)_
 - _[Gson](https://github.com/google/gson)_
 - _[xUtils3](https://github.com/wyouflf/xUtils)_
 - _[GreenDao](https://github.com/greenrobot/greenDAO)_
@@ -145,9 +162,19 @@ Step 2. Add the dependency
 - _[PinLockView](https://github.com/aritraroy/PinLockView) # 数字密码锁_
 - _[PatternLockView](https://github.com/aritraroy/PatternLockView) # 九宫格密码锁_
 - _[CompactCalendarView](https://github.com/SundeepK/CompactCalendarView) # 日历_
+- _[Bugly]()_
+- _[PictureSelector](https://github.com/LuckSiege/PictureSelector) # 图片选择库_
 - _等等。。。_
 
 # 更新日志
+
+【0.2.1】
+
+    添加StateView
+    添加PictureSelector使用
+    添加Bugly更新使用
+    添加IndexBar，InadexLayout
+    添加GridDecoration，NormalDecoration
 
 【0.1.7】
 
@@ -173,7 +200,7 @@ Step 2. Add the dependency
 【0.1.3】
 
     添加 Glide 下的 Transformations
-    修改0.1.2的BUG
+    修改BUG
 
 【0.1.1】
 

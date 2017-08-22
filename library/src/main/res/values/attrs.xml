@@ -357,4 +357,9 @@
         <!-- 是否启用特效，默认true -->
         <attr format="reference|boolean" name="sb_enable_effect" />
     </declare-styleable>
+
+    <declare-styleable name="StateView">
+        <attr name="emptyResource" format="reference" />
+        <attr name="retryResource" format="reference" />
+    </declare-styleable>
 </resources>

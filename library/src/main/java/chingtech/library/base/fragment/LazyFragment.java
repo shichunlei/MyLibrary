@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import chingtech.library.widget.ProgressDialog;
+import chingtech.library.widget.StateView;
 import org.xutils.x;
 
 /**
@@ -24,6 +25,10 @@ public abstract class LazyFragment extends BaseFragment {
     protected boolean isPrepared = false;
     // 是否第一次加载
     protected boolean isFirst = true;
+
+    protected StateView mStateView;
+
+    private View view;
 
     /**
      * 实现Fragment数据的缓加载
@@ -54,7 +59,8 @@ public abstract class LazyFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         injected = true;
-        return x.view().inject(this, inflater, container);
+        view = x.view().inject(this, inflater, container);
+        return view;
     }
 
     @Override
@@ -62,13 +68,16 @@ public abstract class LazyFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         context = getActivity();
         if (!injected) {
-            x.view().inject(this, this.getView());
+            view = this.getView();
+            x.view().inject(this, view);
         }
 
         progress = new ProgressDialog(context);
 
         //初始化view的各控件
         isPrepared = true;
+
+        mStateView = StateView.inject(view, true);
         init();
 
         LazyLoad();

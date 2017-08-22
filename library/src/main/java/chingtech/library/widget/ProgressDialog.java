@@ -21,22 +21,24 @@ import chingtech.library.R;
  */
 public class ProgressDialog extends Dialog {
 
-    private View mDialogView;
+    private View         mDialogView;
     private AnimationSet mModalInAnim;
     private AnimationSet mModalOutAnim;
-    private Animation mOverlayOutAnim;
-    private TextView mTitleTextView;
-    private String mTitleText;
-    private boolean mCloseFromCancel;
-    public Context context;
+    private Animation    mOverlayOutAnim;
+    private TextView     mTitleTextView;
+    private String       mTitleText;
+    private boolean      mCloseFromCancel;
+    public  Context      context;
 
     public ProgressDialog(Context context) {
         super(context, R.style.ProgressDialogStyle);
         this.context = context;
         setCancelable(true);
         setCanceledOnTouchOutside(false);
-        mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.modal_in);
-        mModalOutAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.modal_out);
+        mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(),
+                                                                       R.anim.modal_in);
+        mModalOutAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(),
+                                                                        R.anim.modal_out);
         mModalOutAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -80,7 +82,7 @@ public class ProgressDialog extends Dialog {
         setContentView(R.layout.layout_progress_dialog);
 
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
-        mTitleTextView = (TextView) findViewById(R.id.title_text);
+        mTitleTextView = findViewById(R.id.title_text);
         setTitleText(mTitleText);
     }
 

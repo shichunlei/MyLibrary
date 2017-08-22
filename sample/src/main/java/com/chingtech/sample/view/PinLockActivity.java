@@ -1,6 +1,7 @@
 package com.chingtech.sample.view;
 
 import android.util.Log;
+import android.view.View;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.AnimatorUitls;
 import com.andrognito.pinlockview.IndicatorDots;
@@ -76,5 +77,10 @@ public class PinLockActivity extends BaseActivity {
 
     @Override
     protected void initToolBar() {
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout);
     }
 }

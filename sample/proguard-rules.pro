@@ -15,3 +15,12 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# Bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+-keep class android.support.**{*;}
+
+-dontwarn com.squareup.okhttp.**
+-dontwarn com.squareup.picasso.**
+-dontwarn com.bumptech.glide.**
