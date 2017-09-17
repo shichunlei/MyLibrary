@@ -10,6 +10,7 @@ import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
 import com.chingtech.sample.fragment.PhotoFragment;
+import com.chingtech.sample.fragment.QuestionFragment;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.PictureFileUtils;
@@ -29,11 +30,14 @@ public class PhotoFragmentActivity extends BaseActivity {
 
     private PhotoFragment fragment;
 
+//    private QuestionFragment fragment;
+
     @Override
     protected void init() {
         // 在部分低端手机，调用单独拍照时内存不足时会导致activity被回收，所以不重复创建fragment
         // 添加显示第一个fragment
         fragment = new PhotoFragment();
+//        fragment=new QuestionFragment(0);
         getSupportFragmentManager().beginTransaction()
                                    .add(R.id.tab_content, fragment, PictureConfig.FC_TAG)
                                    .show(fragment)

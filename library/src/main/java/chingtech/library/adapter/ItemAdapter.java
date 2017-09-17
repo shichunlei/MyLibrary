@@ -18,7 +18,7 @@ import chingtech.library.widget.SmoothCheckBox;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
 
     private List<ItemBean> mDatas;
-    private Context mContext;
+    private Context        mContext;
     private LayoutInflater mInflater;
 
     private int mSelectedPos = -1;
@@ -82,20 +82,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         return null != mDatas ? mDatas.size() : 0;
     }
 
-    public int getSelectedPos(){
+    public int getSelectedPos() {
         return mSelectedPos;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private SmoothCheckBox ivSelect;
-        private TextView tvCoupon;
-        private LinearLayout layout;
+        private TextView       tvCoupon;
+        private LinearLayout   layout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            ivSelect = (SmoothCheckBox) itemView.findViewById(R.id.ivSelect);
-            tvCoupon = (TextView) itemView.findViewById(R.id.tvCoupon);
-            layout = (LinearLayout) itemView.findViewById(R.id.layout_item);
+            ivSelect = itemView.findViewById(R.id.ivSelect);
+            tvCoupon = itemView.findViewById(R.id.tvCoupon);
+            layout = itemView.findViewById(R.id.layout_item);
         }
     }
 
@@ -105,7 +105,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
      * @param holder
      * @param position
      */
-    private void setListener(MyViewHolder holder, int position){
+    private void setListener(MyViewHolder holder, int position) {
         // RecyclerView 定向刷新方法：不会有白光一闪动画 也不会重复onBindVIewHolder
         MyViewHolder myHolder = (MyViewHolder) mRv.findViewHolderForLayoutPosition(mSelectedPos);
         if (myHolder != null) {//还在屏幕里
@@ -114,8 +114,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             //此时拿不到ViewHolder，但是也不会回调onBindViewHolder方法。所以add一个异常处理
             notifyItemChanged(mSelectedPos);
         }
-        if (mSelectedPos != -1)
+        if (mSelectedPos != -1) {
             mDatas.get(mSelectedPos).setSelected(false);//不管在不在屏幕里 都需要改变数据
+        }
         //设置新Item的勾选状态
         mSelectedPos = position;
         mDatas.get(mSelectedPos).setSelected(true);

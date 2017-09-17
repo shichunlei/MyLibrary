@@ -1,8 +1,6 @@
 package com.chingtech.sample.view;
 
-import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.Toolbar;
@@ -12,14 +10,12 @@ import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
 
+import com.chingtech.sample.adapter.RecyclerAdapter;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
-import chingtech.library.base.adapter.recyclerview.CommonRecyclerAdapter;
 
 /**
  * MyLibrary
@@ -75,18 +71,6 @@ public class ExpandTextViewActivity extends BaseActivity {
         data.add(test);
 
         return data;
-    }
-
-    class RecyclerAdapter extends CommonRecyclerAdapter<String> {
-
-        public RecyclerAdapter(Context context, List<String> list, int... layoutIds) {
-            super(context, list, layoutIds);
-        }
-
-        @Override
-        protected void onBindData(BaseRecyclerHolder holder, String item, int position) {
-            holder.setText(R.id.tv_expand, item);
-        }
     }
 
     @Override

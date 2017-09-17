@@ -13,7 +13,8 @@ import java.util.List;
 
 import chingtech.library.base.adapter.helper.DataHelper;
 
-public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRecyclerHolder> implements DataHelper<T> {
+public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRecyclerHolder>
+        implements DataHelper<T> {
 
     /****
      * 头部相关
@@ -22,9 +23,9 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
     private View mHeaderView, mFooterView;
     private int headerViewId = -1, footerViewId = -2;
 
-    protected Context mContext;
-    protected List<T> mList;
-    protected int[] layoutIds;
+    protected Context        mContext;
+    protected List<T>        mList;
+    protected int[]          layoutIds;
     protected LayoutInflater mLInflater;
 
     public RecyclerView parentRecycler;
@@ -40,10 +41,10 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
 
     @Override
     public BaseRecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(mHeaderView != null && viewType == TYPE_HEADER){
+        if (mHeaderView != null && viewType == TYPE_HEADER) {
             return new BaseRecyclerHolder(mContext, headerViewId, mHeaderView);
         }
-        if(mFooterView != null && viewType == TYPE_FOOTER){
+        if (mFooterView != null && viewType == TYPE_FOOTER) {
             return new BaseRecyclerHolder(mContext, footerViewId, mFooterView);
         }
         if (viewType < 0 || viewType > layoutIds.length) {
@@ -52,8 +53,8 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
         if (layoutIds.length == 0) {
             throw new IllegalArgumentException("not layoutId");
         }
-        int layoutId = layoutIds[viewType];
-        View view = mConvertViews.get(layoutId);
+        int  layoutId = layoutIds[viewType];
+        View view     = mConvertViews.get(layoutId);
         if (view == null) {
             view = mLInflater.inflate(layoutId, parent, false);
         }
@@ -67,8 +68,12 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
 
     @Override
     public void onBindViewHolder(BaseRecyclerHolder holder, int position) {
-        if(getItemViewType(position) == TYPE_HEADER) return;
-        if(getItemViewType(position) == TYPE_FOOTER) return;
+        if (getItemViewType(position) == TYPE_HEADER) {
+            return;
+        }
+        if (getItemViewType(position) == TYPE_FOOTER) {
+            return;
+        }
         position = getPosition(position);
         final T item = mList.get(position);
         onBindData(holder, item, position);
@@ -76,21 +81,21 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
 
     @Override
     public int getItemCount() {
-        if(mHeaderView == null && mFooterView == null){
+        if (mHeaderView == null && mFooterView == null) {
             return mList == null ? 0 : mList.size();
-        } else if(mHeaderView!=null && mFooterView!=null){
+        } else if (mHeaderView != null && mFooterView != null) {
             return mList == null ? 2 : mList.size() + 2;
-        }else{
-            return mList == null ? 1 : mList.size()+1;
+        } else {
+            return mList == null ? 1 : mList.size() + 1;
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0 && mHeaderView != null) {
+        if (position == 0 && mHeaderView != null) {
             return TYPE_HEADER;
         }
-        if(position == getItemCount() - 1 && mFooterView != null){
+        if (position == getItemCount() - 1 && mFooterView != null) {
             return TYPE_FOOTER;
         }
         position = getPosition(position);
@@ -106,12 +111,14 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
         super.onAttachedToRecyclerView(recyclerView);
         parentRecycler = recyclerView;
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if(manager instanceof GridLayoutManager) {
+        if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    return getItemViewType(position) == TYPE_HEADER || getItemViewType(position) == TYPE_FOOTER  ? gridManager.getSpanCount() : 1;
+                    return getItemViewType(position) == TYPE_HEADER
+                            || getItemViewType(position) == TYPE_FOOTER ?
+                            gridManager.getSpanCount() : 1;
                 }
             });
         }
@@ -125,14 +132,15 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
     public void onViewAttachedToWindow(BaseRecyclerHolder holder) {
         super.onViewAttachedToWindow(holder);
         ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-        if(lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
-            StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
+        if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+            StaggeredGridLayoutManager.LayoutParams p
+                    = (StaggeredGridLayoutManager.LayoutParams) lp;
             p.setFullSpan(holder.getLayoutPosition() == 0);
         }
     }
 
-    private int getPosition(int position){
-        if(mHeaderView != null || mFooterView != null){
+    private int getPosition(int position) {
+        if (mHeaderView != null || mFooterView != null) {
             position = position - 1;
         }
         return position;
@@ -164,8 +172,8 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
      * 设置底部
      * @param footerViewId
      */
-    public View setFooterView(int footerViewId){
-        mFooterView = mLInflater.inflate(footerViewId,null);
+    public View setFooterView(int footerViewId) {
+        mFooterView = mLInflater.inflate(footerViewId, null);
         this.footerViewId = footerViewId;
         notifyItemInserted(mList.size());
         return mFooterView;
@@ -183,11 +191,11 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Base
      * 获取底部
      * @return
      */
-    public View getFooterView(){
+    public View getFooterView() {
         return mFooterView;
     }
 
-    protected abstract void onBindData(BaseRecyclerHolder viewHolder, T item, int position);
+    protected abstract void onBindData(BaseRecyclerHolder holder, T item, int position);
 
     @Override
     public boolean addAll(List<T> list) {

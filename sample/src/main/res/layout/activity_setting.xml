@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.SettingActivity">
+
+    <include layout="@layout/tool_bar" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/recycler_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="设置九宫格密码" />
+
+            <chingtech.library.widget.SwitchButton
+                android:id="@+id/switch_pattern_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                app:sb_background="#FFF"
+                app:sb_button_color="#db99c7"
+                app:sb_checked_color="#A36F95"
+                app:sb_checkline_color="#a5dc88"
+                app:sb_shadow_color="#A36F95"
+                app:sb_uncheckcircle_color="#A36F95" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_pattern_lock"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/recycler_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="九宫格密码"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/recycler_bg"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="设置数字密码" />
+
+            <chingtech.library.widget.SwitchButton
+                android:id="@+id/switch_pin_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                app:sb_show_indicator="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_pin_lock"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/recycler_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="数字密码"
+            android:visibility="gone" />
+
+        <chingtech.library.widget.RangeSeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            app:cellMode="other"
+            app:cells="4"
+            app:hideProgressHint="true"
+            app:hintBGHeight="150dp"
+            app:lineColorEdge="@color/colorSeekBarDefault"
+            app:lineColorSelected="@color/colorAccent"
+            app:markTextArray="@array/wordsArray"
+            app:seekBarHeight="2dp"
+            app:seekBarMode="single"
+            app:textPadding="7dp"
+            app:textSize="12sp"
+            app:thumbSize="16dp" />
+    </LinearLayout>
+</LinearLayout>

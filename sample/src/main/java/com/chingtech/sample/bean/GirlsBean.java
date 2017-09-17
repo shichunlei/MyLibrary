@@ -70,4 +70,19 @@ public class GirlsBean {
         this.pictures = pictures;
     }
 
+    @Override
+    public String toString() {
+        return "GirlsBean{"
+                + "avatar='"
+                + avatar
+                + '\''
+                + ", id="
+                + id
+                + ", name='"
+                + name
+                + '\''
+                + ", pictures="
+                + pictures
+                + '}';
+    }
 }

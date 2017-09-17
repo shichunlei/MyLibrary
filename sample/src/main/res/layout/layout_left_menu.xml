@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
+
+    <include layout="@layout/drawable_header" />
+
+    <TextView
+        android:id="@+id/tv_setting"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/recycler_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="设置"
+        android:textColor="@color/google_red" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/recycler_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="信息"
+        android:textColor="@color/google_green" />
+
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/recycler_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="关于"
+        android:textColor="@color/google_blue" />
+</LinearLayout>

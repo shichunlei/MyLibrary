@@ -38,7 +38,7 @@ public class CarBean {
     private int    masterId;
     private String name;
     private int    saleStatus;
-    private Long    uv;
+    private Long   uv;
     private int    weight;
 
     public String getInitial() {

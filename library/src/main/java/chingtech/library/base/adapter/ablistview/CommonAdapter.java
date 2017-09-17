@@ -12,9 +12,9 @@ import chingtech.library.base.adapter.helper.DataHelper;
 
 public abstract class CommonAdapter<T> extends BaseAdapter implements DataHelper<T> {
 
-    protected Context mContext;
-    protected List<T> mList;
-    protected int[] layoutIds;
+    protected Context        mContext;
+    protected List<T>        mList;
+    protected int[]          layoutIds;
     protected LayoutInflater mLInflater;
 
     protected BaseAbsListHolder holder = new BaseAbsListHolder();
@@ -30,6 +30,21 @@ public abstract class CommonAdapter<T> extends BaseAdapter implements DataHelper
         this.mContext = context;
         this.mList = list;
         this.mLInflater = LayoutInflater.from(mContext);
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
     }
 
     @Override

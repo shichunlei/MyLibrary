@@ -3,6 +3,8 @@ package com.chingtech.sample.view;
 import android.util.Log;
 import android.view.View;
 import chingtech.library.base.activity.BaseActivity;
+import chingtech.library.utils.AnimatorUitls;
+import chingtech.library.utils.SPUtils;
 import com.andrognito.patternlockview.PatternLockView;
 import com.andrognito.patternlockview.listener.PatternLockViewListener;
 import com.andrognito.patternlockview.utils.PatternLockUtils;
@@ -38,6 +40,10 @@ public class PatternLockActivity extends BaseActivity {
     @ViewInject(R.id.patter_lock_view)
     private PatternLockView mPatternLockView;
 
+    private String flag;
+
+    private String password;
+
     private PatternLockViewListener mPatternLockViewListener = new PatternLockViewListener() {
         @Override
         public void onStarted() {
@@ -53,12 +59,25 @@ public class PatternLockActivity extends BaseActivity {
 
         @Override
         public void onComplete(List<PatternLockView.Dot> pattern) {
-            Log.d(getClass().getName(),
-                  "Pattern complete: " + PatternLockUtils.patternToString(mPatternLockView,
-                                                                          pattern));
 
-            mPatternLockView.clearPattern();
-            openActivity(MainActivity.class, true);
+            String pwd = PatternLockUtils.patternToString(mPatternLockView, pattern);
+
+            Log.d(getClass().getName(), "Pattern complete: " + pwd);
+
+            if (flag.equals("welcome")) {
+                password = (String) SPUtils.get(context, "pattern_lock", "", "DEMO");
+                if (pwd.equals(password)) {
+                    mPatternLockView.clearPattern();
+                    openActivity(MainActivity.class, true);
+                } else {
+                    mPatternLockView.clearPattern();
+                    showToast("密码错误");
+                }
+            } else if (flag.equals("setting")) {
+                SPUtils.put(context, "PatternLock", true, "DEMO");
+                SPUtils.put(context, "pattern_lock", pwd, "DEMO");
+                finish();
+            }
         }
 
         @Override
@@ -69,6 +88,9 @@ public class PatternLockActivity extends BaseActivity {
 
     @Override
     protected void init() {
+
+        flag = getStringExtra("flag");
+
         mPatternLockView.setViewMode(PatternLockView.PatternViewMode.CORRECT);
         mPatternLockView.setInStealthMode(false);
         mPatternLockView.setTactileFeedbackEnabled(true);

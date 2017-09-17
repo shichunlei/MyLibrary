@@ -38,6 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         x.view().inject(this);
 
         mStateView = StateView.inject(injectTarget());
+        // mStateView.setEmptyResource(R.layout.base_empty);
+        // mStateView.setRetryResource(R.layout.base_retry);
 
         init();
         initToolBar();

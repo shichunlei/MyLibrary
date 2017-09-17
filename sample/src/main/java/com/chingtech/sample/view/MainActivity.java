@@ -1,8 +1,7 @@
 package com.chingtech.sample.view;
 
 import static chingtech.library.utils.AddSpaceTextWatcher.SpaceType.*;
-import static chingtech.library.utils.DESHelper.decrypt;
-import static chingtech.library.utils.DESHelper.encrypt;
+import static chingtech.library.utils.DESHelper.*;
 import static chingtech.library.utils.IdcardUtil.*;
 import static chingtech.library.utils.StringUtils.*;
 import static chingtech.library.utils.TimeUtils.*;
@@ -13,7 +12,9 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.*;
@@ -29,8 +30,12 @@ import com.chingtech.sample.R;
 import com.chingtech.sample.service.UpdateService;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
+import com.youth.banner.*;
+import com.youth.banner.loader.ImageLoader;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.*;
@@ -45,12 +50,24 @@ public class MainActivity extends BaseActivity {
 
     private final static String TAG = "TAG";
 
+    protected ActionBarDrawerToggle mDrawerToggle;
+
+    @ViewInject(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+
     @ViewInject(R.id.main_search_view_rsv)
     private SearchView searchView;
     @ViewInject(R.id.toolbar)
     private Toolbar    toolbar;
     @ViewInject(R.id.tv_title)
     private TextView   tvTitle;
+
+    @ViewInject(R.id.banner)
+    private Banner banner;
+    private List<String> images = new ArrayList<>();
+
+    @ViewInject(R.id.img_header)
+    private RoundImageView header;
 
     private AlertDialog dialog;
 
@@ -62,10 +79,6 @@ public class MainActivity extends BaseActivity {
     private RoundImageView image2;
     @ViewInject(R.id.image3)
     private RoundImageView image3;
-
-    private String date = "2017-04-13";
-
-    private String datetime = "2017-04-13 17:32:21";
 
     @ViewInject(R.id.flipView)
     private FlipView easyFlipView;
@@ -109,9 +122,6 @@ public class MainActivity extends BaseActivity {
 
     private DecimalFormat df = new DecimalFormat("0.00");
 
-    @ViewInject(R.id.switch_button)
-    SwitchButton switchButton;
-
     @ViewInject(R.id.timer)
     private TextView timer;
 
@@ -132,8 +142,26 @@ public class MainActivity extends BaseActivity {
         }
     };
 
+    //如果你需要考虑更好的体验，可以这么操作
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //开始轮播
+        banner.startAutoPlay();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //结束轮播
+        banner.stopAutoPlay();
+    }
+
     @Override
     protected void init() {
+        //设置抽屉DrawerLayout
+        setupActionBarDrawerToogle();
+
         mc = new MyCountDownTimer(30000, 1000);
 
         mStateView.showRetry();
@@ -148,6 +176,8 @@ public class MainActivity extends BaseActivity {
 
         Intent intent = new Intent(this, UpdateService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
+
+        initBanner();
 
         easyFlipView.setFlipDuration(1000);
 
@@ -176,13 +206,7 @@ public class MainActivity extends BaseActivity {
 
         conversion();
 
-        ViewUtils.setViewWidth(this, tv2, 1 / 7f);
-        ViewUtils.setViewHeight(this, layout, 1 / 2f);
-        ViewUtils.setViewWidth(this, tv1, 1 / 2f);
-
-        ViewUtils.setViewSize(this, tv3, 100, 100);
-
-        ViewUtils.setViewSize(this, tv4, 1 / 3f);
+        setViewSize();
 
         ViewUtils.setPricePoint(etMoney);
 
@@ -190,18 +214,6 @@ public class MainActivity extends BaseActivity {
 
         number.startNumber();
         ViewUtils.setUnderLine(number);
-
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(TZ_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(Y_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(YY_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(M_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(D_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(H_12_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(H_24_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(MIN_FORMAT));
-        Log.i(TAG, "----" + TimeUtils.getNowDateTime(S_FORMAT));
-
-        Log.i(TAG, "=-" + TimeUtils.intervalDays("2016-12-31 12:22:22", "2017-01-01 01:01:01"));
 
         Log.i(TAG, "=======" + StringUtils.hangeToBig(3453450.23));
 
@@ -216,6 +228,170 @@ public class MainActivity extends BaseActivity {
 
         CharacterParser c = new CharacterParser();
         Log.i(TAG, "我们拼音: " + c.getSelling("我们"));
+
+        testTimeUtils();
+
+        setGlide("http://img5.imgtn.bdimg.com/it/u=439122560,4153639957&fm=26&gp=0.jpg", header);
+
+        setGlide("http://pic.58pic.com/58pic/11/75/23/17n58PIC9um.jpg", image1);
+        setGlide("http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg",
+                 image2);
+        setGlide("http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg", image3);
+
+        findViewById(R.id.btn_dialog).setOnClickListener(view -> {
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("这里是Title", Gravity.CENTER)
+                  .setCancel("", null)
+                  .addSheetItem("item0", which -> showToast("item0"))
+                  .addSheetItem("item1", which -> showToast("item1"))
+                  .addSheetItem("item2", which -> showToast("item2"))
+                  .addSheetItem("item3", which -> showToast("item3"))
+                  .show();
+        });
+
+        findViewById(R.id.btn_dialog2).setOnClickListener(view -> {
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("Title").setMsg("Message").setNegativeButton("", view14 -> {
+            }).setPositiveButton("", null).show();
+        });
+
+        findViewById(R.id.btn_dialog3).setOnClickListener(view -> {
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("Title")
+                  .setSingleChoiceItems(items)
+                  .setNegativeButton("", null)
+                  .setPositiveButton("", v -> {
+                      if (dialog.getSingleChoiceItems() == 0) {
+                          openActivity(PhotoActivity.class, false);
+                      } else if (dialog.getSingleChoiceItems() == 1) {
+                          openActivity(PhotoFragmentActivity.class, false);
+                      }
+
+                      showToast(items[dialog.getSingleChoiceItems()]);
+                  })
+                  .show();
+        });
+
+        findViewById(R.id.btn_dialog4).setOnClickListener(view -> {
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            final EditText username = v.findViewById(R.id.edittxt_username);
+            new AddSpaceTextWatcher(username, 21).setSpaceType(IDCardNumberType);
+            final EditText phone = v.findViewById(R.id.edittxt_phone);
+            new AddSpaceTextWatcher(phone, 13).setSpaceType(mobilePhoneNumberType);
+            final EditText password = v.findViewById(R.id.edittxt_password);
+            final EditText bankNo   = v.findViewById(R.id.id_number);
+            new AddSpaceTextWatcher(bankNo, 23).setSpaceType(bankCardNumberType);
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("Title")
+                  .setView(v)
+                  .setSingleChoiceItems(items)
+                  .setNegativeButton("", null)
+                  .setPositiveButton("", view12 -> {
+                      progress.show();
+                      Log.i(TAG, username.getText().toString().trim().replaceAll("\\s*", ""));
+                      Log.i(TAG, bankNo.getText().toString().trim().replaceAll("\\s*", ""));
+                      Log.i(TAG, phone.getText().toString().replaceAll("\\s*", ""));
+                      Log.i(TAG, password.getText().toString().trim());
+                      showToast(items[dialog.getSingleChoiceItems()]);
+                  })
+                  .show();
+        });
+
+        findViewById(R.id.bottom_alertdialog).setOnClickListener(view -> {
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("这里是Title", Gravity.CENTER, R.color.white)
+                  .setBackgroundColor(R.color.google_orange)
+                  .setCloseImage(R.drawable.icon_close)
+                  .setView(v)
+                  .setClose(view1 -> showToast("关闭"))
+                  .show();
+        });
+
+        findViewById(R.id.bottom_alertdialog2).setOnClickListener(view -> {
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("这里是Title", Gravity.CENTER)
+                  .setBackgroundDrawable(R.drawable.wall04)
+                  .setMsg("日历")
+                  .setPositiveButton("", v -> openActivity(CompactActivity.class, false))
+                  .show();
+        });
+
+        findViewById(R.id.bottom_alertdialog3).setOnClickListener(view -> {
+            dialog = new AlertDialog(MainActivity.this).builder();
+            dialog.setTitle("这里是Title", Gravity.CENTER)
+                  .setBackgroundResource(R.drawable.recycler_bg)
+                  .setMsg(R.string.test)
+                  .setCancel("", v -> showToast("取消"))
+                  .show();
+        });
+
+        findViewById(R.id.bottom_dialog).setOnClickListener(view -> {
+            mBottomDialog = new BottomDialog(MainActivity.this).builder();
+            mBottomDialog.setTitle("这里是Title", 0, R.color.black)
+                         .setCancel("取消", null)
+                         .addSheetItem("RadarView", R.color.google_red,
+                                       which -> openActivity(RadarViewActivity.class, false))
+                         .addSheetItem("开启服务", R.color.google_blue, which -> {
+                             if (binder != null) {
+                                 binder.setDate(updateText, (tv5, data) -> tv5.setText(data + ""));
+                             } else {
+                                 showToast("连接失败");
+                             }
+                         })
+                         .addSheetItem("水波纹", R.color.google_green,
+                                       which -> openActivity(WaveLoadView.class, false))
+                         .addSheetItem("LikeBang", R.color.google_pink,
+                                       which -> openActivity(LikeBangActivity.class, false))
+                         .addSheetItem("ExpandTextView", R.color.google_purple,
+                                       which -> openActivity(ExpandTextViewActivity.class, false))
+                         .addSheetItem("嵌套RecyclerView", R.color.google_orange,
+                                       which -> openActivity(RecyclerViewActivity.class, false))
+                         .addSheetItem("刷新", R.color.google_yellow,
+                                       which -> openActivity(RefreshActivity.class, false))
+                         .addSheetItem("下载", R.color.google_cyan, which -> download())
+                         .show();
+        });
+
+        findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            final EditText username = v.findViewById(R.id.edittxt_username);
+            final EditText phone    = v.findViewById(R.id.edittxt_phone);
+            final EditText password = v.findViewById(R.id.edittxt_password);
+            mBottomDialog = new BottomDialog(MainActivity.this).builder();
+            mBottomDialog.setView(v).setPositiveButton("确定", view1 -> {
+                Log.i(TAG, username.getText().toString().trim());
+                Log.i(TAG, phone.getText().toString().trim());
+                Log.i(TAG, password.getText().toString().trim());
+            }).setNegativeButton("取消", null).show();
+        });
+
+        findViewById(R.id.bottom_dialog3).setOnClickListener(view -> {
+            mBottomDialog = new BottomDialog(MainActivity.this).builder();
+            mBottomDialog.setTitle(getString(R.string.test), Gravity.LEFT, R.color.gray_6)
+                         .setCancel("取消", null)
+                         .show();
+        });
+    }
+
+    private void testTimeUtils() {
+        String today = TimeUtils.getNowDateTime(DATE_TIME_FORMAT);
+
+        Log.i(TAG, "此刻：" + TimeUtils.getNowDateTime(TZ_FORMAT));
+        Log.i(TAG, "today:" + today);
+        Log.i(TAG, "今年：" + TimeUtils.getNowDateTime(Y_FORMAT));
+        Log.i(TAG, "今年：" + TimeUtils.getNowDateTime(YY_FORMAT));
+        Log.i(TAG, "本月：" + TimeUtils.getNowDateTime(M_FORMAT));
+        Log.i(TAG, "今天日期：" + TimeUtils.getNowDateTime(D_FORMAT));
+        Log.i(TAG, "小时（12）：" + TimeUtils.getNowDateTime(H_12_FORMAT));
+        Log.i(TAG, "小时（24）:" + TimeUtils.getNowDateTime(H_24_FORMAT));
+        Log.i(TAG, "分钟:" + TimeUtils.getNowDateTime(MIN_FORMAT));
+        Log.i(TAG, "秒:" + TimeUtils.getNowDateTime(S_FORMAT));
+
+        String date     = "2017-04-13";
+        String datetime = "2017-04-13 17:32:21";
+
+        Log.i(TAG, "两天相差天数：" + TimeUtils.intervalDays(date, today));
 
         String s00 = TimeUtils.formatDate(date, DATE_SHAORT_FORMAT);
         Log.i(TAG, s00);
@@ -259,159 +435,19 @@ public class MainActivity extends BaseActivity {
 
         String s090 = TimeUtils.formatDateTime(datetime, "HH:00");
         Log.i(TAG, s090);
+    }
 
-        setGlide("http://pic.58pic.com/58pic/11/75/23/17n58PIC9um.jpg", image1);
-        setGlide("http://file.neihan8.com/mm/2016-03-08/ffbcf468338ae8e5ebe94d93ad378fa9.jpg",
-                 image2);
-        setGlide("http://image.tianjimedia.com/uploadImages/2015/199/50/52VV98K5ENH3.jpg", image3);
+    /**
+     * 动态设置控件的大小（长、宽）
+     */
+    private void setViewSize() {
+        ViewUtils.setViewWidth(this, tv2, 1 / 7f);
+        ViewUtils.setViewHeight(this, layout, 1 / 2f);
+        ViewUtils.setViewWidth(this, tv1, 1 / 2f);
 
-        findViewById(R.id.btn_dialog).setOnClickListener(view -> {
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("这里是Title", Gravity.CENTER)
-                  .setCancel("", null)
-                  .addSheetItem("item0", which -> showToast("item0"))
-                  .addSheetItem("item1", which -> showToast("item1"))
-                  .addSheetItem("item2", which -> showToast("item2"))
-                  .addSheetItem("item3", which -> showToast("item3"))
-                  .show();
-        });
+        ViewUtils.setViewSize(this, tv3, 100, 100);
 
-        findViewById(R.id.btn_dialog2).setOnClickListener(view -> {
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("Title").setMsg("Message").setNegativeButton("", view14 -> {
-            }).setPositiveButton("", null).show();
-        });
-
-        findViewById(R.id.btn_dialog3).setOnClickListener(view -> {
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("Title")
-                  .setSingleChoiceItems(items)
-                  .setNegativeButton("", null)
-                  .setPositiveButton("", v -> {
-                      if (dialog.getSingleChoiceItems() == 0) {
-                          openActivity(PhotoActivity.class, false);
-                      } else if (dialog.getSingleChoiceItems() == 1) {
-                          openActivity(PhotoFragmentActivity.class, false);
-                      }
-
-                      showToast(items[dialog.getSingleChoiceItems()]);
-                  })
-                  .show();
-        });
-
-        findViewById(R.id.btn_dialog4).setOnClickListener(view -> {
-            View           v        = LayoutInflater.from(MainActivity.this)
-                                                    .inflate(R.layout.layout, null);
-            final EditText username = v.findViewById(R.id.edittxt_username);
-            new AddSpaceTextWatcher(username, 21).setSpaceType(IDCardNumberType);
-            final EditText phone = v.findViewById(R.id.edittxt_phone);
-            new AddSpaceTextWatcher(phone, 13).setSpaceType(mobilePhoneNumberType);
-            final EditText password = v.findViewById(R.id.edittxt_password);
-            final EditText bankNo   = v.findViewById(R.id.id_number);
-            new AddSpaceTextWatcher(bankNo, 23).setSpaceType(bankCardNumberType);
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("Title")
-                  .setView(v)
-                  .setSingleChoiceItems(items)
-                  .setNegativeButton("", null)
-                  .setPositiveButton("", view12 -> {
-                      progress.show();
-                      Log.i(TAG, username.getText().toString().trim().replaceAll("\\s*", ""));
-                      Log.i(TAG, bankNo.getText().toString().trim().replaceAll("\\s*", ""));
-                      Log.i(TAG, phone.getText().toString().replaceAll("\\s*", ""));
-                      Log.i(TAG, password.getText().toString().trim());
-                      showToast(items[dialog.getSingleChoiceItems()]);
-                  })
-                  .show();
-        });
-
-        findViewById(R.id.bottom_alertdialog).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("这里是Title", Gravity.CENTER, R.color.white)
-                  .setBackgroundColor(R.color.google_orange)
-                  .setColseImage(R.mipmap.ic_launcher)
-                  .setView(v)
-                  .setColse(view1 -> showToast("关闭"))
-                  .show();
-        });
-
-        findViewById(R.id.bottom_alertdialog2).setOnClickListener(view -> {
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("这里是Title", Gravity.CENTER)
-                  .setBackgroundDrawable(R.mipmap.ic_launcher)
-                  .setMsg("234444444444444444")
-                  .setPositiveButton("", v -> openActivity(CompactActivity.class, false))
-                  .show();
-        });
-
-        findViewById(R.id.bottom_alertdialog3).setOnClickListener(view -> {
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("这里是Title", Gravity.CENTER)
-                  .setBackgroundResource(R.mipmap.ic_launcher)
-                  .setMsg("234444444444444444")
-                  .setCancel("", v -> showToast("取消"))
-                  .show();
-        });
-
-        findViewById(R.id.bottom_dialog).setOnClickListener(view -> {
-            mBottomDialog = new BottomDialog(MainActivity.this).builder();
-            mBottomDialog.setTitle("这里是Title", 0, R.color.black)
-                         .setCancel("取消", null)
-                         .addSheetItem("RadarView", R.color.google_red,
-                                       which -> openActivity(RadarViewActivity.class, false))
-                         .addSheetItem("开启服务", R.color.google_blue, which -> {
-                             if (binder != null) {
-                                 binder.setDate(updateText, (tv5, data) -> tv5.setText(data + ""));
-                             } else {
-                                 showToast("连接失败");
-                             }
-                         })
-                         .addSheetItem("水波纹", R.color.google_green,
-                                       which -> openActivity(WaveLoadView.class, false))
-                         .addSheetItem("LikeBang", R.color.google_pink,
-                                       which -> openActivity(LikeBangActivity.class, false))
-                         .addSheetItem("ExpandTextView", R.color.google_purple,
-                                       which -> openActivity(ExpandTextViewActivity.class, false))
-                         .addSheetItem("嵌套RecyclerView", R.color.google_orange,
-                                       which -> openActivity(RecyclerViewActivity.class, false))
-                         .addSheetItem("刷新", R.color.google_yellow,
-                                       which -> openActivity(RefreshActivity.class, false))
-                         .addSheetItem("下载", R.color.google_cyan, which -> download())
-                         .show();
-        });
-
-        findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View           v        = LayoutInflater.from(MainActivity.this)
-                                                    .inflate(R.layout.layout, null);
-            final EditText username = v.findViewById(R.id.edittxt_username);
-            final EditText phone    = v.findViewById(R.id.edittxt_phone);
-            final EditText password = v.findViewById(R.id.edittxt_password);
-            mBottomDialog = new BottomDialog(MainActivity.this).builder();
-            mBottomDialog.setView(v).setPositiveButton("确定", view1 -> {
-                Log.i(TAG, username.getText().toString().trim());
-                Log.i(TAG, phone.getText().toString().trim());
-                Log.i(TAG, password.getText().toString().trim());
-            }).setNegativeButton("取消", null).show();
-        });
-
-        findViewById(R.id.bottom_dialog3).setOnClickListener(view -> {
-            mBottomDialog = new BottomDialog(MainActivity.this).builder();
-            mBottomDialog.setTitle(
-                    "这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题，这里是标题",
-                    Gravity.LEFT, R.color.gray_6).setCancel("取消", null).show();
-        });
-
-        switchButton.setChecked(true);
-        switchButton.isChecked();
-        switchButton.toggle();     //switch state
-        switchButton.toggle(false);//switch without animation
-        switchButton.setShadowEffect(true);//disable shadow effect
-        switchButton.setEnabled(false);//disable button
-        switchButton.setEnableEffect(false);//disable the switch animation
-        switchButton.setOnCheckedChangeListener((view, isChecked) -> {
-            //TODO do your job
-        });
+        ViewUtils.setViewSize(this, tv4, 1 / 3f);
     }
 
     private void setGlide(String url, ImageView view) {
@@ -424,6 +460,9 @@ public class MainActivity extends BaseActivity {
              .into(view);
     }
 
+    /**
+     * 初始化seekBar
+     */
     private void initSeekBar() {
         seekbar1.setValue(10);
         seekbar2.setValue(-0.5f, 0.8f);
@@ -442,11 +481,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initToolBar() {
+        toolbar.setNavigationIcon(R.mipmap.ic_menu);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         tvTitle.setText("首页");
-        StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        assert toolbar != null;
+        toolbar.setNavigationOnClickListener(view -> mDrawerLayout.openDrawer(GravityCompat.START));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -467,6 +508,9 @@ public class MainActivity extends BaseActivity {
         return findViewById(R.id.layout_main);
     }
 
+    /**
+     * 进制转换
+     */
     private void conversion() {
         System.out.println("1的十六进制结果是：" + ConversionUtils.intToHex(1));
 
@@ -552,16 +596,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        // 这里控制如果SearchView打开了，按返回键先关掉SearchView
-        if (searchView.isSearchOpen()) {
-            searchView.hideSearch();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
@@ -596,16 +630,6 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    public void oncancel(View view) {
-        Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_LONG).show();// toast有显示时间延迟
-        mc.cancel();
-    }
-
-    public void restart(View view) {
-        Toast.makeText(MainActivity.this, "重新开始", Toast.LENGTH_LONG).show();// toast有显示时间延迟
-        mc.start();
-    }
-
     /**
      * 继承 CountDownTimer 防范
      *
@@ -638,9 +662,18 @@ public class MainActivity extends BaseActivity {
     }
 
     @Event({R.id.fab, R.id.imgFrontCard, R.id.imgBackCard, R.id.cardview_front, R.id.cardview_back,
-            R.id.tv_number, R.id.btnCheckUpdate, R.id.btnLoadUpdateInfo})
+            R.id.tv_number, R.id.btnCheckUpdate, R.id.btnLoadUpdateInfo, R.id.tv_setting,
+            R.id.tv_info, R.id.tv_about, R.id.start, R.id.cancel})
     private void onEvent(View v) {
         switch (v.getId()) {
+            case R.id.start:
+                showToast("重新开始");
+                mc.start();
+                break;
+            case R.id.cancel:
+                showToast("取消");
+                mc.cancel();
+                break;
             case R.id.fab:
                 Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", view -> {
@@ -680,6 +713,17 @@ public class MainActivity extends BaseActivity {
             case R.id.btnLoadUpdateInfo:
                 loadUpgradeInfo();
                 break;
+            case R.id.tv_setting:
+                closeNavDrawer();
+                openActivity(SettingActivity.class, false);
+                break;
+            case R.id.tv_info:
+                closeNavDrawer();
+                openActivity(QuestionActivity.class, false);
+                break;
+            case R.id.tv_about:
+                closeNavDrawer();
+                break;
         }
     }
 
@@ -710,5 +754,98 @@ public class MainActivity extends BaseActivity {
         Log.i(TAG, "loadUpgradeInfo: " + info);
 
         showToast(info);
+    }
+
+    /**
+     * 初始化banner
+     */
+    private void initBanner() {
+        images.add(
+                "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2839432607,3967940098&fm=26&gp=0.jpg");
+        images.add(
+                "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=820805568,3482726218&fm=26&gp=0.jpg");
+        images.add(
+                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1495649415,1273524504&fm=26&gp=0.jpg");
+        images.add(
+                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=321741969,1210935552&fm=26&gp=0.jpg");
+        images.add(
+                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1971779904,950854969&fm=26&gp=0.jpg");
+
+        List<String> titles = new ArrayList<>();
+        titles.add("美女1");
+        titles.add("美女2");
+        titles.add("美女3");
+        titles.add("美女4");
+        titles.add("美女5");
+
+        //设置banner样式
+        banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(images);
+        //设置banner动画效果
+        banner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+        banner.setBannerTitles(titles);
+        //设置指示器位置（当banner模式中有指示器时）
+        banner.setIndicatorGravity(BannerConfig.CENTER);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+    }
+
+    public class GlideImageLoader extends ImageLoader {
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            /**
+             注意：
+             1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
+             2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
+             传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
+             切记不要胡乱强转！
+             */
+
+            //Glide 加载图片简单用法
+            Glide.with(context).load(path).centerCrop().into(imageView);
+        }
+    }
+
+    /**
+     * In case if you require to handle drawer open and close states
+     */
+    @SuppressWarnings("deprecation")
+    private void setupActionBarDrawerToogle() {
+        mDrawerToggle = new ActionBarDrawerToggle(this,                  /* host Activity */
+                                                  mDrawerLayout,         /* DrawerLayout object */
+                                                  R.string.drawer_open,  /* "open drawer" description */
+                                                  R.string.drawer_close  /* "close drawer" description */);
+
+        mDrawerToggle.syncState();//初始化状态
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        StatusBarHelper.tintStatusBarForDrawer(this, mDrawerLayout,
+                                               getResources().getColor(R.color.colorPrimary));
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 这里控制如果SearchView打开了，按返回键先关掉SearchView
+        if (searchView.isSearchOpen()) {
+            searchView.hideSearch();
+        } else if (isNavDrawerOpen()) {
+            closeNavDrawer();
+        } else {
+            doExitApp();
+        }
+    }
+
+    protected boolean isNavDrawerOpen() {
+        return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    protected void closeNavDrawer() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 }

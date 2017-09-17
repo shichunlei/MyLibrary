@@ -18,6 +18,12 @@
 
     [原始项目地址](https://github.com/RaphetS/RoundImageView)
 
+- **RoundTextView**
+
+    自定义TextView 实现填充色、圆角、文字变色、边框、边框颜色、背景图等功能
+    
+    [原项目地址](https://github.com/jiaowenzheng/CustomTextView)
+
 - **SmoothCheckBox**
 
     [原始项目地址](https://github.com/andyxialm/SmoothCheckBox)
@@ -162,7 +168,7 @@ Step 2. Add the dependency
 - _[PinLockView](https://github.com/aritraroy/PinLockView) # 数字密码锁_
 - _[PatternLockView](https://github.com/aritraroy/PatternLockView) # 九宫格密码锁_
 - _[CompactCalendarView](https://github.com/SundeepK/CompactCalendarView) # 日历_
-- _[Bugly]()_
+- _Bugly_
 - _[PictureSelector](https://github.com/LuckSiege/PictureSelector) # 图片选择库_
 - _等等。。。_
 
@@ -174,7 +180,9 @@ Step 2. Add the dependency
     添加PictureSelector使用
     添加Bugly更新使用
     添加IndexBar，InadexLayout
-    添加GridDecoration，NormalDecoration
+    添加NormalDecoration
+    添加Banner的使用
+    添加RoundTextView
 
 【0.1.7】
 

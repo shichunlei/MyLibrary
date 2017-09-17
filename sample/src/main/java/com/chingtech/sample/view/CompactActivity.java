@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,7 +33,7 @@ import static chingtech.library.utils.TimeUtils.DATE_FORMAT;
 /**
  * MyLibrary
  * Package com.example.compactcalendarviewtoolbar
- * Description:
+ * Description: 日历使用、动画工具类使用
  * Created by 师春雷
  * Created at 17/7/8 上午10:10
  */
@@ -64,6 +67,8 @@ public class CompactActivity extends BaseActivity {
 
     List<Event> events = new ArrayList<>();
 
+    private AnimType type = AnimType.ALPHA;
+
     @Override
     protected void init() {
         arrow.setVisibility(View.VISIBLE);
@@ -90,30 +95,26 @@ public class CompactActivity extends BaseActivity {
         // Set current date to today
         setCurrentDate(new Date());
 
-        datePickerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExpanded) {
-                    ViewCompat.animate(arrow).rotation(0).start();
-                    isExpanded = false;
-                    ScaleToBigHorizontalOut(pop);
-                } else {
-                    ViewCompat.animate(arrow).rotation(180).start();
-                    isExpanded = true;
-                    ScaleToBigHorizontalIn(pop);
-                }
-            }
+        datePickerButton.setOnClickListener(v -> {
+            //            if (isExpanded) {
+            //                ViewCompat.animate(arrow).rotation(0).start();
+            //                isExpanded = false;
+            //                ScaleToBigHorizontalOut(pop);
+            //            } else {
+            //                ViewCompat.animate(arrow).rotation(180).start();
+            //                isExpanded = true;
+            //                ScaleToBigHorizontalIn(pop);
+            //            }
+
+            setAnim();
         });
 
-        txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // ShakeMode(3, txt);
+        txt.setOnClickListener(v -> {
+            // ShakeMode(3, txt);
 
-                // FlipUpDown(txt, true);
+            // FlipUpDown(txt, true);
 
-                FlipLeftRight(txt, true);
-            }
+            FlipLeftRight(txt, true);
         });
     }
 
@@ -122,12 +123,7 @@ public class CompactActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assert toolbar != null;
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
@@ -161,5 +157,146 @@ public class CompactActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.menu_anim, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.alpha:
+                type = AnimType.ALPHA;
+                break;
+            case R.id.bottom:
+                type = AnimType.BOTTOM;
+                break;
+            case R.id.top:
+                type = AnimType.TOP;
+                break;
+            case R.id.left:
+                type = AnimType.LEFT;
+                break;
+            case R.id.right:
+                type = AnimType.RIGHT;
+                break;
+            case R.id.left_center_rota:
+                type = AnimType.LEFT_CENTER_ROTA;
+                break;
+            case R.id.left_top_rota:
+                type = AnimType.LEFT_TOP_ROTA;
+                break;
+            case R.id.center_rota:
+                type = AnimType.CENTER_ROTA;
+                break;
+            case R.id.center_zoom:
+                type = AnimType.CENTER_ZOOM;
+                break;
+            case R.id.left_top_zoom:
+                type = AnimType.LEFT_TOP_ZOOM;
+                break;
+            case R.id.scale_horizontal:
+                type = AnimType.SCALE_HORIZONTAL;
+                break;
+            case R.id.scale_vertical:
+                type = AnimType.SCALE_VERTICAL;
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setAnim() {
+        if (isExpanded) {
+            ViewCompat.animate(arrow).rotation(0).start();
+            isExpanded = false;
+
+            switch (type) {
+                case ALPHA:
+                    hidenAlphaView(pop);
+                    break;
+                case TOP:
+                    moveToTopHiden(pop);
+                    break;
+                case BOTTOM:
+                    moveToBottomHiden(pop);
+                    break;
+                case LEFT:
+                    fromLeftOut(pop);
+                    break;
+                case RIGHT:
+                    fromRightOut(pop);
+                    break;
+                case LEFT_CENTER_ROTA:
+                    RotaLeftCenterOut(pop);
+                    break;
+                case LEFT_TOP_ROTA:
+                    RotaLeftTopOut(pop);
+                    break;
+                case CENTER_ROTA:
+                    RotaCenterOut(pop);
+                    break;
+                case CENTER_ZOOM:
+                    ScaleSmall(pop);
+                    break;
+                case LEFT_TOP_ZOOM:
+                    ScaleSmallLeftTop(pop);
+                    break;
+                case SCALE_HORIZONTAL:
+                    ScaleToBigHorizontalOut(pop);
+                    break;
+                case SCALE_VERTICAL:
+                    ScaleToBigVerticalOut(pop);
+                    break;
+            }
+        } else {
+            ViewCompat.animate(arrow).rotation(180).start();
+            isExpanded = true;
+            switch (type) {
+                case ALPHA:
+                    showAlphaView(pop);
+                    break;
+                case TOP:
+                    fromTopToLocationShow(pop);
+                    break;
+                case BOTTOM:
+                    fromBottomToLocationShow(pop);
+                    break;
+                case LEFT:
+                    fromLeftIn(pop);
+                    break;
+                case RIGHT:
+                    fromRightIn(pop);
+                    break;
+                case LEFT_CENTER_ROTA:
+                    RotaLeftCenterIn(pop);
+                    break;
+                case LEFT_TOP_ROTA:
+                    RotaLeftTopIn(pop);
+                    break;
+                case CENTER_ROTA:
+                    RotaCenterIn(pop);
+                    break;
+                case CENTER_ZOOM:
+                    ScaleBig(pop);
+                    break;
+                case LEFT_TOP_ZOOM:
+                    ScaleBigLeftTop(pop);
+                    break;
+                case SCALE_HORIZONTAL:
+                    ScaleToBigHorizontalIn(pop);
+                    break;
+                case SCALE_VERTICAL:
+                    ScaleToBigVerticalIn(pop);
+                    break;
+            }
+        }
+    }
+
+    private enum AnimType {
+        ALPHA, TOP, BOTTOM, LEFT, RIGHT, LEFT_CENTER_ROTA, LEFT_TOP_ROTA, CENTER_ROTA, CENTER_ZOOM, LEFT_TOP_ZOOM, SCALE_HORIZONTAL, SCALE_VERTICAL
     }
 }

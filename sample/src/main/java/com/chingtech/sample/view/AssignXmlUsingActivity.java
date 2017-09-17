@@ -1,6 +1,5 @@
 package com.chingtech.sample.view;
 
-import android.content.Context;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,14 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import chingtech.library.base.activity.BaseActivity;
-import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
-import chingtech.library.base.adapter.recyclerview.CommonRecyclerAdapter;
 import chingtech.library.decoration.NormalDecoration;
 import chingtech.library.utils.FileUtils;
 import chingtech.library.utils.JsonUtils;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.widget.IndexLayout;
 import com.chingtech.sample.R;
+import com.chingtech.sample.adapter.RecCarAdapter;
 import com.chingtech.sample.bean.BaseBean;
 import com.chingtech.sample.bean.CarBean;
 import java.util.ArrayList;
@@ -66,7 +64,7 @@ public class AssignXmlUsingActivity extends BaseActivity {
         if (bean.getStatus() == 1) {
             carList.addAll(bean.getCars());
 
-            adapter = new RecCarAdapter(this, carList, R.layout.item_rec_car);
+            adapter = new RecCarAdapter(this, carList, R.layout.item_car);
         }
 
         decoration = new NormalDecoration() {
@@ -118,18 +116,5 @@ public class AssignXmlUsingActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
-    }
-
-    class RecCarAdapter extends CommonRecyclerAdapter<CarBean> {
-
-        public RecCarAdapter(Context context, List<CarBean> list, int... layoutIds) {
-            super(context, list, layoutIds);
-        }
-
-        @Override
-        protected void onBindData(BaseRecyclerHolder holder, CarBean item, int position) {
-            holder.setText(R.id.item_tv, item.getName());
-            holder.setImageUrl(R.id.item_iv, item.getLogoUrl());
-        }
     }
 }

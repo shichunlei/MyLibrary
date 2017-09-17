@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/alpha"
+        android:title="淡入淡出" />
+    <item
+        android:id="@+id/bottom"
+        android:title="底部显示隐藏" />
+
+    <item
+        android:id="@+id/top"
+        android:title="顶部显示隐藏" />
+    <item
+        android:id="@+id/left"
+        android:title="左侧进入退出" />
+
+    <item
+        android:id="@+id/right"
+        android:title="右侧进入退出" />
+
+    <item
+        android:id="@+id/left_center_rota"
+        android:title="左侧中心旋转进入退出" />
+
+    <item
+        android:id="@+id/left_top_rota"
+        android:title="左上角旋转进入退出" />
+
+    <item
+        android:id="@+id/center_rota"
+        android:title="中心旋转进入退出" />
+
+    <item
+        android:id="@+id/center_zoom"
+        android:title="中心放大缩小" />
+
+    <item
+        android:id="@+id/left_top_zoom"
+        android:title="左上角放大缩小" />
+
+    <item
+        android:id="@+id/scale_horizontal"
+        android:title="横向展开收缩" />
+
+    <item
+        android:id="@+id/scale_vertical"
+        android:title="纵向展开收缩" />
+</menu>

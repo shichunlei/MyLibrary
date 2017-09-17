@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 
+import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.RatingBar;
 import chingtech.library.base.adapter.ablistview.BaseAbsListHolder;
 import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
 import chingtech.library.widget.SmoothCheckBox;
@@ -194,6 +197,25 @@ public interface ViewHelper {
         VH setTag(int viewId, int key, Object tag);
 
         /**
+         * Sets the rating (the number of stars filled) of a RatingBar.
+         *
+         * @param viewId The view id.
+         * @param rating The rating.
+         * @return
+         */
+        VH setRating(int viewId, float rating);
+
+        /**
+         * Sets the rating (the number of stars filled) and max of a RatingBar.
+         *
+         * @param viewId The view id.
+         * @param rating The rating.
+         * @param max    The range of the RatingBar to 0...max.
+         * @return
+         */
+        VH setRating(int viewId, float rating, int max);
+
+        /**
          * 设置Checkable控件的选择情况
          *
          * @param viewId  viewId
@@ -275,6 +297,15 @@ public interface ViewHelper {
          * @return
          */
         VH setProgress(@IdRes int viewId, int progress);
+
+        /**
+         * Sets the progress and max of a ProgressBar.
+         *
+         * @param viewId The view id.
+         * @param max    The max value of a ProgressBar.
+         * @return
+         */
+        VH setMax(@IdRes int viewId, int max);
 
         /**
          * Sets the enable of a view.
@@ -360,6 +391,70 @@ public interface ViewHelper {
          * @return
          */
         VH setOnClickListener(int viewId, View.OnClickListener listener);
+
+        /**
+         * Sets the listview or gridview's item selected click listener of the view
+         *
+         * @param viewId   The view id.
+         * @param listener The item selected click listener;
+         * @return
+         */
+        VH setOnItemSelectedClickListener(int viewId, AdapterView.OnItemSelectedListener listener);
+
+        /**
+         * 设置监听 SmoothCheckBox.OnCheckedChangeListener
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnCheckedChangeListener(int viewId, SmoothCheckBox.OnCheckedChangeListener listener);
+
+        /**
+         * 设置监听 CompoundButton.OnCheckedChangeListener
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnCheckedChangeListener(int viewId, CompoundButton.OnCheckedChangeListener listener);
+
+        /**
+         * Sets the on longClick listener of the view.
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnLongClickListener(int viewId, View.OnLongClickListener listener);
+
+        /**
+         * Sets the on touch listener of the view.
+         *
+         * @param viewId   The view id.
+         * @param listener The on touch listener;
+         * @return
+         */
+        VH setOnTouchListener(int viewId, View.OnTouchListener listener);
+
+        /**
+         * Sets item click listener of the view
+         *
+         * @param viewId   The view id.
+         * @param listener The item on click listener;
+         * @return
+         */
+        VH setOnItemClickListener(int viewId, AdapterView.OnItemClickListener listener);
+
+        /**
+         * Sets item long click listener of the view
+         *
+         * @param viewId   The view id.
+         * @param listener The item long click listener;
+         * @return
+         */
+        VH setOnItemLongClickListener(int viewId, AdapterView.OnItemLongClickListener listener);
+
     }
 
     interface RecyclerView<VH extends BaseRecyclerHolder> {
@@ -446,10 +541,10 @@ public interface ViewHelper {
          * 设置背景颜色
          *
          * @param viewId   viewId
-         * @param colorRes 颜色Id
+         * @param backgroundRes
          * @return viewHolder
          */
-        VH setBackgroundColorRes(int viewId, int colorRes);
+        VH setBackgroundRes(int viewId, int backgroundRes);
 
         /**
          * 设置CardView背景颜色
@@ -565,6 +660,25 @@ public interface ViewHelper {
         VH setTag(int viewId, int key, Object tag);
 
         /**
+         * Sets the rating (the number of stars filled) of a RatingBar.
+         *
+         * @param viewId The view id.
+         * @param rating The rating.
+         * @return
+         */
+        VH setRating(int viewId, float rating);
+
+        /**
+         * Sets the rating (the number of stars filled) and max of a RatingBar.
+         *
+         * @param viewId The view id.
+         * @param rating The rating.
+         * @param max    The range of the RatingBar to 0...max.
+         * @return
+         */
+        VH setRating(int viewId, float rating, int max);
+
+        /**
          * 设置Checkable控件的选择情况
          *
          * @param viewId  viewId
@@ -609,24 +723,6 @@ public interface ViewHelper {
          * @return viewHolder
          */
         VH setTypeface(Typeface typeface, int... viewIds);
-
-        /**
-         * 设置监听 View.OnClickListener
-         *
-         * @param viewId
-         * @param listener
-         * @return
-         */
-        VH setOnClickListener(int viewId, View.OnClickListener listener);
-
-        /**
-         * 设置监听 SmoothCheckBox.OnCheckedChangeListener
-         *
-         * @param viewId
-         * @param listener
-         * @return
-         */
-        VH setOnCheckedChangeListener(int viewId, SmoothCheckBox.OnCheckedChangeListener listener);
 
         /**
          * Sets the adapter of a RecyclerView.
@@ -674,6 +770,15 @@ public interface ViewHelper {
          * @return
          */
         VH setProgress(@IdRes int viewId, int progress);
+
+        /**
+         * Sets the progress and max of a ProgressBar.
+         *
+         * @param viewId The view id.
+         * @param max    The max value of a ProgressBar.
+         * @return
+         */
+        VH setMax(@IdRes int viewId, int max);
 
         /**
          * Sets the enable of a view.
@@ -809,5 +914,77 @@ public interface ViewHelper {
          * @return
          */
         VH addView(@IdRes int viewId, View view, ViewGroup.LayoutParams params);
+
+        /**
+         * 设置监听 View.OnClickListener
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnClickListener(int viewId, View.OnClickListener listener);
+
+        /**
+         * Sets the listview or gridview's item selected click listener of the view
+         *
+         * @param viewId   The view id.
+         * @param listener The item selected click listener;
+         * @return
+         */
+        VH setOnItemSelectedClickListener(int viewId, AdapterView.OnItemSelectedListener listener);
+
+        /**
+         * 设置监听 SmoothCheckBox.OnCheckedChangeListener
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnCheckedChangeListener(int viewId, SmoothCheckBox.OnCheckedChangeListener listener);
+
+        /**
+         * 设置监听 CompoundButton.OnCheckedChangeListener
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnCheckedChangeListener(int viewId, CompoundButton.OnCheckedChangeListener listener);
+
+        /**
+         * Sets the on longClick listener of the view.
+         *
+         * @param viewId
+         * @param listener
+         * @return
+         */
+        VH setOnLongClickListener(int viewId, View.OnLongClickListener listener);
+
+        /**
+         * Sets the on touch listener of the view.
+         *
+         * @param viewId   The view id.
+         * @param listener The on touch listener;
+         * @return
+         */
+        VH setOnTouchListener(int viewId, View.OnTouchListener listener);
+
+        /**
+         * Sets item click listener of the view
+         *
+         * @param viewId   The view id.
+         * @param listener The item on click listener;
+         * @return
+         */
+        VH setOnItemClickListener(int viewId, AdapterView.OnItemClickListener listener);
+
+        /**
+         * Sets item long click listener of the view
+         *
+         * @param viewId   The view id.
+         * @param listener The item long click listener;
+         * @return
+         */
+        VH setOnItemLongClickListener(int viewId, AdapterView.OnItemLongClickListener listener);
     }
 }

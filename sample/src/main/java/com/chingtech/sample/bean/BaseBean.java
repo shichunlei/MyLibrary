@@ -25,10 +25,11 @@ import java.util.List;
  */
 public class BaseBean {
 
-    private String                    message;
-    private int                       status;
-    private List<CarBean>             cars;
-    private List<GirlsBean> girls;
+    private String             message;
+    private int                status;
+    private List<CarBean>      cars;
+    private List<GirlsBean>    girls;
+    private List<QuestionBean> data;
 
     public String getMessage() {
         return message;
@@ -60,5 +61,13 @@ public class BaseBean {
 
     public void setGirls(List<GirlsBean> girls) {
         this.girls = girls;
+    }
+
+    public List<QuestionBean> getData() {
+        return data;
+    }
+
+    public void setData(List<QuestionBean> data) {
+        this.data = data;
     }
 }

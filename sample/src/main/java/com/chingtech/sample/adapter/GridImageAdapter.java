@@ -148,7 +148,7 @@ public class GridImageAdapter extends RecyclerView.Adapter<GridImageAdapter.View
             });
             LocalMedia media    = list.get(position);
             int        mimeType = media.getMimeType();
-            String     path     = "";
+            String     path;
             if (media.isCut() && !media.isCompressed()) {
                 // 裁剪过
                 path = media.getCutPath();

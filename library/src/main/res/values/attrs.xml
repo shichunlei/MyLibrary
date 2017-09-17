@@ -32,6 +32,43 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="RoundTextView">
+        <!-- 边框颜色 -->
+        <attr format="color" name="textStrokeColor" />
+        <!-- textView弧度 -->
+        <attr format="dimension" name="textRadius" />
+        <!-- textView左上角弧度 -->
+        <attr format="dimension" name="textLeftTopRadius" />
+        <!-- textView左下角弧度 -->
+        <attr format="dimension" name="textLeftBottomRadius" />
+        <!-- textView右上角弧度 -->
+        <attr format="dimension" name="textRightTopRadius" />
+        <!-- textView右下角弧度 -->
+        <attr format="dimension" name="textRightBottomRadius" />
+        <!-- textView边框宽度 -->
+        <attr format="dimension" name="textStrokeWidth" />
+        <!-- textView图片 -->
+        <attr format="reference" name="textDrawable" />
+        <!-- textView正常状态文字颜色 -->
+        <attr format="color" name="textNormalTextColor" />
+        <!-- textView按下状态文字颜色 -->
+        <attr format="color" name="textSelectedTextColor" />
+        <!-- textView无左描边线 -->
+        <attr format="boolean" name="textNoLeftStroke" />
+        <!-- textView无右描边线 -->
+        <attr format="boolean" name="textNoRightStroke" />
+        <!-- textView无上描边线 -->
+        <attr format="boolean" name="textNoTopStroke" />
+        <!-- textView无底描边线 -->
+        <attr format="boolean" name="textNoBottomStroke" />
+        <!-- textView按下填充色 -->
+        <attr format="color" name="textPressedSolidColor" />
+        <!-- textView正常背景填充色 -->
+        <attr format="color" name="textNormalSolidColor" />
+        <!-- 是否支持button选中状态 与setSelected()配合使用 -->
+        <attr format="boolean" name="textIsSelected" />
+    </declare-styleable>
+
     <declare-styleable name="ExpandIconView">
         <attr format="boolean" name="eiv_roundedCorners" />
         <attr format="boolean" name="eiv_switchColor" />
@@ -359,7 +396,7 @@
     </declare-styleable>
 
     <declare-styleable name="StateView">
-        <attr name="emptyResource" format="reference" />
-        <attr name="retryResource" format="reference" />
+        <attr format="reference" name="emptyResource" />
+        <attr format="reference" name="retryResource" />
     </declare-styleable>
 </resources>

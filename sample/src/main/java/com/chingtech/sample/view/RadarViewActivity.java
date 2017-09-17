@@ -1,11 +1,15 @@
 package com.chingtech.sample.view;
 
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.bean.RadarData;
+import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.widget.RadarView;
 import com.chingtech.sample.R;
 import java.util.ArrayList;
@@ -24,6 +28,12 @@ import org.xutils.view.annotation.ViewInject;
  */
 @ContentView(R.layout.activity_radarview)
 public class RadarViewActivity extends BaseActivity {
+
+    @ViewInject(R.id.toolbar)
+    protected Toolbar toolbar;
+
+    @ViewInject(R.id.tv_title)
+    protected TextView tvTitle;
 
     @ViewInject(R.id.radarView)
     private RadarView mRadarView;
@@ -55,7 +65,13 @@ public class RadarViewActivity extends BaseActivity {
 
     @Override
     protected void initToolBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        tvTitle.setText("雷达图");
+        assert toolbar != null;
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
+        StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
     @Override

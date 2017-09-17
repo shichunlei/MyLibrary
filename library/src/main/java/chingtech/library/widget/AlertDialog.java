@@ -240,12 +240,12 @@ public class AlertDialog {
         return this;
     }
 
-    public AlertDialog setColseImage(int image) {
+    public AlertDialog setCloseImage(int image) {
         close.setImageDrawable(ContextCompat.getDrawable(context, image));
         return this;
     }
 
-    public AlertDialog setColse(final OnClickListener listener) {
+    public AlertDialog setClose(final OnClickListener listener) {
         showClose = true;
 
         close.setOnClickListener(new OnClickListener() {

@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.AnimatorUitls;
+import chingtech.library.utils.SPUtils;
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
@@ -40,15 +41,26 @@ public class PinLockActivity extends BaseActivity {
     @ViewInject(R.id.indicator_dots)
     private IndicatorDots mIndicatorDots;
 
+    private String flag;
+
+    private String password;
+
     private PinLockListener mPinLockListener = new PinLockListener() {
         @Override
         public void onComplete(String pin) {
-            Log.d(getClass().getName(), "Pin complete: " + pin);
-            if (pin.equals("1234")) {
-                openActivity(MainActivity.class, true);
-            } else {
-                mPinLockView.resetPinLockView();
-                AnimatorUitls.ShakeMode(3, mIndicatorDots);
+            if (flag.equals("welcome")) {
+                password = (String) SPUtils.get(context, "pin_lock", "", "DEMO");
+                Log.d(getClass().getName(), "Pin complete: " + pin);
+                if (pin.equals(password)) {
+                    openActivity(MainActivity.class, true);
+                } else {
+                    mPinLockView.resetPinLockView();
+                    AnimatorUitls.ShakeMode(3, mIndicatorDots);
+                }
+            } else if (flag.equals("setting")) {
+                SPUtils.put(context, "PinLock", true, "DEMO");
+                SPUtils.put(context, "pin_lock", pin, "DEMO");
+                finish();
             }
         }
 
@@ -68,6 +80,8 @@ public class PinLockActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        flag = getStringExtra("flag");
+
         mPinLockView.attachIndicatorDots(mIndicatorDots);
         mPinLockView.setPinLockListener(mPinLockListener);
         // mPinLockView.setCustomKeySet(new int[] {2, 3, 1, 5, 9, 6, 7, 0, 8, 4}); // 自定义数字键盘数字顺序

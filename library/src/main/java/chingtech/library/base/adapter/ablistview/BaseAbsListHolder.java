@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,14 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.Checkable;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import chingtech.library.base.adapter.recyclerview.BaseRecyclerHolder;
 import com.bumptech.glide.Glide;
 
 import chingtech.library.base.adapter.helper.ViewHelper;
@@ -146,7 +150,7 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
     @Override
     public BaseAbsListHolder setTextColorRes(int viewId, int colorRes) {
         TextView view = getView(viewId);
-        view.setTextColor(mContext.getResources().getColor(colorRes, null));
+        view.setTextColor(ContextCompat.getColor(mContext, colorRes));
         return this;
     }
 
@@ -181,7 +185,7 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public BaseAbsListHolder setImageDrawableRes(int viewId, int drawableRes) {
-        Drawable drawable = mContext.getResources().getDrawable(drawableRes, null);
+        Drawable drawable = ContextCompat.getDrawable(mContext, drawableRes);
         return setImageDrawable(viewId, drawable);
     }
 
@@ -255,10 +259,45 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
         return this;
     }
 
+    /**
+     * Sets the rating (the number of stars filled) of a RatingBar.
+     *
+     * @param viewId The view id.
+     * @param rating The rating.
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setRating(int viewId, float rating) {
+        RatingBar view = getView(viewId);
+        view.setRating(rating);
+        return this;
+    }
+
+    /**
+     * Sets the rating (the number of stars filled) and max of a RatingBar.
+     *
+     * @param viewId The view id.
+     * @param rating The rating.
+     * @param max    The range of the RatingBar to 0...max.
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setRating(int viewId, float rating, int max) {
+        RatingBar view = getView(viewId);
+        view.setMax(max);
+        view.setRating(rating);
+        return this;
+    }
+
     @Override
     public BaseAbsListHolder setChecked(int viewId, boolean checked) {
-        Checkable view = getView(viewId);
-        view.setChecked(checked);
+        View view = getView(viewId);
+        // View unable cast to Checkable
+        if (view instanceof CompoundButton) {
+            ((CompoundButton) view).setChecked(checked);
+        } else if (view instanceof CheckedTextView) {
+            ((CheckedTextView) view).setChecked(checked);
+        }
         return this;
     }
 
@@ -356,6 +395,19 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
     public BaseAbsListHolder setProgress(@IdRes int viewId, int progress) {
         ProgressBar view = getView(viewId);
         view.setProgress(progress);
+        return this;
+    }
+
+    /**
+     * Sets the progress and max of a ProgressBar.
+     *
+     * @param viewId The view id.
+     * @param max    The max value of a ProgressBar.
+     */
+    @Override
+    public BaseAbsListHolder setMax(@IdRes int viewId, int max) {
+        ProgressBar view = getView(viewId);
+        view.setMax(max);
         return this;
     }
 
@@ -462,6 +514,103 @@ public class BaseAbsListHolder implements ViewHelper.AbsListView<BaseAbsListHold
     public BaseAbsListHolder setOnClickListener(int viewId, View.OnClickListener listener) {
         View view = getView(viewId);
         view.setOnClickListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the listview or gridview's item selected click listener of the view
+     *
+     * @param viewId   The view id.
+     * @param listener The item selected click listener;
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setOnItemSelectedClickListener(int viewId,
+            AdapterView.OnItemSelectedListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemSelectedListener(listener);
+        return this;
+    }
+
+    @Override
+    public BaseAbsListHolder setOnCheckedChangeListener(int viewId,
+            SmoothCheckBox.OnCheckedChangeListener listener) {
+        SmoothCheckBox view = getView(viewId);
+        view.setOnCheckedChangeListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the on checked change listener of the view.
+     *
+     * @param viewId   The view id.
+     * @param listener The checked change listener of compound button.
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setOnCheckedChangeListener(int viewId,
+            CompoundButton.OnCheckedChangeListener listener) {
+        CompoundButton view = getView(viewId);
+        view.setOnCheckedChangeListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the on longClick listener of the view.
+     *
+     * @param viewId
+     * @param listener
+     * @return
+     */
+    @Override
+    public BaseAbsListHolder setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
+        View view = getView(viewId);
+        view.setOnLongClickListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the on touch listener of the view.
+     *
+     * @param viewId   The view id.
+     * @param listener The on touch listener;
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setOnTouchListener(int viewId, View.OnTouchListener listener) {
+        View view = getView(viewId);
+        view.setOnTouchListener(listener);
+        return this;
+    }
+
+
+    /**
+     * Sets the listview or gridview's item click listener of the view
+     *
+     * @param viewId   The view id.
+     * @param listener The item on click listener;
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setOnItemClickListener(int viewId,
+            AdapterView.OnItemClickListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemClickListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the listview or gridview's item long click listener of the view
+     *
+     * @param viewId   The view id.
+     * @param listener The item long click listener;
+     * @return The BaseAbsListHolder for chaining.
+     */
+    @Override
+    public BaseAbsListHolder setOnItemLongClickListener(int viewId,
+            AdapterView.OnItemLongClickListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemLongClickListener(listener);
         return this;
     }
 }
