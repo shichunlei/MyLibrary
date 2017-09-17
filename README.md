@@ -134,7 +134,7 @@
 
 **Version**
 
-    【0.1.7】
+    【0.1.9】
 
 # Installation
 
@@ -152,7 +152,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.7'
+        compile 'com.github.shichunlei:MyLibrary:0.1.9'
     }
 
 # Usage
@@ -174,7 +174,7 @@ Step 2. Add the dependency
 
 # 更新日志
 
-【0.2.1】
+【0.1.9】
 
     添加StateView
     添加PictureSelector使用
