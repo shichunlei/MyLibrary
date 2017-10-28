@@ -1,46 +1,43 @@
 package com.chingtech.sample.view;
 
-import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
-import chingtech.library.decoration.NormalDecoration;
-import chingtech.library.utils.FileUtils;
-import chingtech.library.utils.JsonUtils;
+import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
-import chingtech.library.widget.IndexLayout;
+import com.chingtech.sample.JiSuHttpManager;
+import com.chingtech.greendao.gen.CarBeanDao;
+import com.chingtech.sample.App;
 import com.chingtech.sample.R;
 import com.chingtech.sample.adapter.RecCarAdapter;
-import com.chingtech.sample.bean.BaseBean;
 import com.chingtech.sample.bean.CarBean;
+import com.chingtech.sample.bean.JiSuBaseBean;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
+
+import static com.chingtech.sample.Constant.JISU_KEY;
 
 /**
  * 在XML中指定Header和Footer
  */
-@ContentView(R.layout.activity_using_assign_xml)
 public class AssignXmlUsingActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.recView)
-    private RecyclerView mRecyclerView;
-
-    //侧边导航栏
-    @ViewInject(R.id.index_layout)
-    private IndexLayout indexLayout;
-
-    private BaseBean bean = new BaseBean();
+    @BindView(R.id.recView)
+    RecyclerView mRecyclerView;
 
     private List<CarBean> carList = new ArrayList<>();
 
@@ -48,39 +45,85 @@ public class AssignXmlUsingActivity extends BaseActivity {
 
     private LinearLayoutManager manager;
 
-    private NormalDecoration decoration;
+    private CarBeanDao dao;
 
     @Override
     protected void init() {
-        mStateView.showEmpty();
-        mStateView.showLoading();
-        new Handler().postDelayed(() -> {
-            mStateView.showContent();
-        }, 3000);
-
-        String json = FileUtils.readFromAssets(this, "cars.json");
-        bean = (BaseBean) JsonUtils.fromJson(json, BaseBean.class);
-
-        if (bean.getStatus() == 1) {
-            carList.addAll(bean.getCars());
-
-            adapter = new RecCarAdapter(this, carList, R.layout.item_car);
-        }
-
-        decoration = new NormalDecoration() {
-            @Override
-            public String getHeaderName(int pos) {
-                return carList.get(pos).getInitial();
-            }
-        };
-
-        decoration.setHeaderHeight(80);
-        decoration.setOnHeaderClickListener(
-                pos -> showToast("点击到头部" + carList.get(pos).getInitial()));
-
+        dao = App.getInstances().getDaoSession().getCarBeanDao();
         manager = new LinearLayoutManager(this);
-        mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setLayoutManager(manager);
+        mStateView.setOnRetryClickListener(() -> {
+            loadData();
+        });
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_using_assign_xml;
+    }
+
+    @Override
+    protected void initToolBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        assert toolbar != null;
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        tvTitle.setText("车型大全");
+
+        StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
+    }
+
+    @Override
+    protected View injectTarget() {
+        return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+        mStateView.showLoading();
+        carList.addAll(dao.loadAll());
+        if (carList.size() > 0) {
+            setAdapter(carList);
+        } else {
+            JiSuHttpManager.getInstance()
+                           .getApiService()
+                           .getCarList(JISU_KEY)
+                           .subscribeOn(Schedulers.io())
+                           .observeOn(AndroidSchedulers.mainThread())
+                           .subscribe(new Observer<JiSuBaseBean<List<CarBean>>>() {
+                               @Override
+                               public void onSubscribe(Disposable d) {
+                               }
+
+                               @Override
+                               public void onNext(JiSuBaseBean<List<CarBean>> value) {
+                                   if (value.getStatus().equals("0")) {
+                                       carList.addAll(value.getResult());
+                                       LogUtils.i("TAG", carList.toString());
+                                       // 保存到本地数据库中
+                                       dao.insertInTx(carList);
+                                       setAdapter(carList);
+                                   } else {
+                                       mStateView.showRetry();
+                                   }
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   LogUtils.d("TAG", e.getMessage().toString());
+                                   mStateView.showRetry();
+                               }
+
+                               @Override
+                               public void onComplete() {
+                                   mStateView.showContent();
+                               }
+                           });
+        }
+    }
+
+    public void setAdapter(List<CarBean> carList) {
+        adapter = new RecCarAdapter(context, carList, R.layout.item_car);
         mRecyclerView.setAdapter(adapter);
 
         List<String> heads = new ArrayList<>();
@@ -90,31 +133,8 @@ public class AssignXmlUsingActivity extends BaseActivity {
             }
         }
 
-        indexLayout.setIndexBarHeightRatio(0.9f);
-        indexLayout.getIndexBar().setIndexsList(heads);
-        indexLayout.getIndexBar().setIndexChangeListener(indexName -> {
-            for (int i = 0; i < carList.size(); i++) {
-                if (indexName.equals(carList.get(i).getInitial())) {
-                    manager.scrollToPositionWithOffset(i, 0);
-                    return;
-                }
-            }
-        });
-    }
+        LogUtils.i("TAG", heads.toString());
 
-    @Override
-    protected void initToolBar() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        assert toolbar != null;
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        tvTitle.setText("在XML中指定Header和Footer");
-
-        StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
-    }
-
-    @Override
-    protected View injectTarget() {
-        return findViewById(R.id.layout);
+        mStateView.hidenLoading();
     }
 }

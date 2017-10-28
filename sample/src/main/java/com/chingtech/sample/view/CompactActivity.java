@@ -11,24 +11,30 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
+import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.utils.TimeUtils;
+import com.chingtech.sample.JiSuHttpManager;
 import com.chingtech.sample.R;
+import com.chingtech.sample.bean.JiSuBaseBean;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
-import java.text.SimpleDateFormat;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 import static chingtech.library.utils.AnimatorUitls.*;
 import static chingtech.library.utils.TimeUtils.DATE_FORMAT;
+import static com.chingtech.sample.Constant.JISU_KEY;
 
 /**
  * MyLibrary
@@ -37,31 +43,28 @@ import static chingtech.library.utils.TimeUtils.DATE_FORMAT;
  * Created by 师春雷
  * Created at 17/7/8 上午10:10
  */
-@ContentView(R.layout.activity_compact)
 public class CompactActivity extends BaseActivity {
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar toolbar;
+    @BindView(R.id.tv_title)
+    TextView datePickerTextView;
 
-    @ViewInject(R.id.tv_title)
-    protected TextView datePickerTextView;
+    @BindView(R.id.date_picker_arrow)
+    ImageView arrow;
 
-    @ViewInject(R.id.date_picker_arrow)
-    protected ImageView arrow;
-
-    @ViewInject(R.id.date_picker_button)
+    @BindView(R.id.date_picker_button)
     LinearLayout datePickerButton;
 
-    @ViewInject(R.id.compactcalendar_view)
-    private CompactCalendarView mCompactCalendarView;
+    @BindView(R.id.compactcalendar_view)
+    CompactCalendarView mCompactCalendarView;
 
-    @ViewInject(R.id.layout_pop)
+    @BindView(R.id.layout_pop)
     LinearLayout pop;
 
-    @ViewInject(R.id.tv_txt)
-    protected TextView txt;
+    @BindView(R.id.tv_txt)
+    TextView txt;
 
     private boolean isExpanded = false;
 
@@ -82,30 +85,17 @@ public class CompactActivity extends BaseActivity {
             @Override
             public void onDayClick(Date dateClicked) {
                 String strDate = TimeUtils.formatDateTime(dateClicked, DATE_FORMAT);
-                showToast(strDate);
                 setSubtitle(strDate);
+                loadDate(strDate);
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                setSubtitle(dateFormat.format(firstDayOfNewMonth));
+                setSubtitle(TimeUtils.formatDateTime(firstDayOfNewMonth, DATE_FORMAT));
             }
         });
 
-        // Set current date to today
-        setCurrentDate(new Date());
-
         datePickerButton.setOnClickListener(v -> {
-            //            if (isExpanded) {
-            //                ViewCompat.animate(arrow).rotation(0).start();
-            //                isExpanded = false;
-            //                ScaleToBigHorizontalOut(pop);
-            //            } else {
-            //                ViewCompat.animate(arrow).rotation(180).start();
-            //                isExpanded = true;
-            //                ScaleToBigHorizontalIn(pop);
-            //            }
-
             setAnim();
         });
 
@@ -119,6 +109,11 @@ public class CompactActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_compact;
+    }
+
+    @Override
     protected void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -128,22 +123,22 @@ public class CompactActivity extends BaseActivity {
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
-    public void setCurrentDate(Date date) {
-
-        setData();
-
-        setSubtitle(dateFormat.format(date));
-        if (mCompactCalendarView != null) {
-            mCompactCalendarView.setCurrentDate(date);
-        }
-    }
-
     private void setData() {
-        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-07-03")));
-        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-07-02")));
-        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-07-04")));
-        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-07-06")));
-        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-07-09")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-03")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-02")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-04")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-06")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-09")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-13")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-12")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-14")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-16")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-19")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-23")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-22")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-24")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-26")));
+        events.add(new Event(Color.YELLOW, TimeUtils.dateToLong("2017-09-29")));
 
         mCompactCalendarView.addEvents(events);
     }
@@ -157,6 +152,56 @@ public class CompactActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+        setData();
+        String today = TimeUtils.getNowDateTime(DATE_FORMAT);
+
+        // Set current date to today
+        setSubtitle(today);
+        if (mCompactCalendarView != null) {
+            mCompactCalendarView.setCurrentDate(new Date());
+        }
+
+        loadDate(today);
+    }
+
+    private void loadDate(String date) {
+        mStateView.showLoading();
+        JiSuHttpManager.getInstance()
+                       .getApiService()
+                       .getCalendar(JISU_KEY, date)
+                       .subscribeOn(Schedulers.io())
+                       .observeOn(AndroidSchedulers.mainThread())
+                       .subscribe(new Observer<JiSuBaseBean<com.chingtech.sample.bean.Calendar>>() {
+                           @Override
+                           public void onSubscribe(Disposable d) {
+                           }
+
+                           @Override
+                           public void onNext(
+                                   JiSuBaseBean<com.chingtech.sample.bean.Calendar> value) {
+                               if (value.getStatus().equals("0")) {
+                                   LogUtils.i("TAG", value.toString());
+                                   LogUtils.i("TAG", value.getResult().toString());
+                               } else {
+                                   mStateView.showRetry();
+                               }
+                           }
+
+                           @Override
+                           public void onError(Throwable e) {
+                               LogUtils.d("TAG", e.getMessage().toString());
+                               mStateView.showRetry();
+                           }
+
+                           @Override
+                           public void onComplete() {
+                               mStateView.showContent();
+                           }
+                       });
     }
 
     @Override

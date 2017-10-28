@@ -2,6 +2,7 @@ package com.chingtech.sample.view;
 
 import android.util.Log;
 import android.view.View;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.AnimatorUitls;
 import chingtech.library.utils.SPUtils;
@@ -9,8 +10,6 @@ import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
 import com.chingtech.sample.R;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -33,13 +32,12 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/13 上午9:45
  */
-@ContentView(R.layout.activity_pin_lock)
 public class PinLockActivity extends BaseActivity {
 
-    @ViewInject(R.id.pin_lock_view)
-    private PinLockView   mPinLockView;
-    @ViewInject(R.id.indicator_dots)
-    private IndicatorDots mIndicatorDots;
+    @BindView(R.id.pin_lock_view)
+    PinLockView   mPinLockView;
+    @BindView(R.id.indicator_dots)
+    IndicatorDots mIndicatorDots;
 
     private String flag;
 
@@ -90,11 +88,21 @@ public class PinLockActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_pin_lock;
+    }
+
+    @Override
     protected void initToolBar() {
     }
 
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

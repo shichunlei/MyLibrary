@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
@@ -16,6 +17,8 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -23,16 +26,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    greendao {
-        schemaVersion 1 // 指定数据库schema版本号，迁移等操作会用到;
-        daoPackage 'com.chingtech.greendao.gen' // dao的包名，包名默认是entity所在的包；
-        targetGenDir 'src/main/java' // 生成数据库文件的目录;
-    }
+
     //支持lambda表达式
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+greendao {
+    schemaVersion 1 // 指定数据库schema版本号，迁移等操作会用到;
+    daoPackage 'com.chingtech.greendao.gen' // dao的包名，包名默认是entity所在的包；
+    targetGenDir 'src/main/java' // 生成数据库文件的目录;
 }
 
 dependencies {
@@ -66,4 +71,8 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.9'
     // ToggleButtonGroup
     compile 'com.nex3z:toggle-button-group:1.0.2'
+
+    //注解
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

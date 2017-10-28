@@ -5,18 +5,23 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
-import chingtech.library.utils.FileUtils;
-import chingtech.library.utils.JsonUtils;
+import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
+import com.chingtech.sample.HttpManager;
 import com.chingtech.sample.R;
 import com.chingtech.sample.adapter.ViewPagerAdapter;
-import com.chingtech.sample.bean.BaseBean;
-import com.chingtech.sample.bean.QuestionBean;
+import com.chingtech.sample.bean.AFanDaBaseBean;
+import com.chingtech.sample.bean.JztkBean;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
+
+import static com.chingtech.sample.Constant.JZTK_KEY;
 
 /**
  * <p>
@@ -39,53 +44,26 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/27 下午5:02
  */
-@ContentView(R.layout.activity_question)
 public class QuestionActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.viewpager)
-    private ViewPager viewPager;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
 
-    private ViewPagerAdapter pagerAdapter;
-
-    private BaseBean bean = new BaseBean();
-
-    public static List<QuestionBean> questionsList = new ArrayList<>();
+    private List<JztkBean> jztk_list = new ArrayList<>();
 
     @Override
     protected void init() {
-        String json = FileUtils.readFromAssets(this, "data.json");
-        bean = (BaseBean) JsonUtils.fromJson(json, BaseBean.class);
 
-        questionsList.addAll(bean.getData());
-
-        pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), questionsList);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(0);
-
-        viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
     }
 
-    public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-
-        @Override
-        public void onPageSelected(int arg0) {
-            tvTitle.setText("(" + (arg0 + 1) + "/" + questionsList.size() + ")");
-        }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_question;
     }
 
     @Override
@@ -94,7 +72,7 @@ public class QuestionActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assert toolbar != null;
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        tvTitle.setText("(1/" + questionsList.size() + ")");
+        tvTitle.setText("驾考题库");
 
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
@@ -102,5 +80,49 @@ public class QuestionActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return viewPager;
+    }
+
+    @Override
+    protected void loadData() {
+        mStateView.showLoading();
+        HttpManager.getInstance()
+                   .getApiService()
+                   .getJztk(JZTK_KEY, "1", "c1", "rand")
+                   .subscribeOn(Schedulers.io())
+                   .observeOn(AndroidSchedulers.mainThread())
+                   .subscribe(new Observer<AFanDaBaseBean<List<JztkBean>>>() {
+                       @Override
+                       public void onSubscribe(Disposable d) {
+                       }
+
+                       @Override
+                       public void onNext(AFanDaBaseBean<List<JztkBean>> value) {
+                           if (value.getError_code() == 0) {
+                               if (jztk_list.size() > 0) {
+                                   jztk_list.clear();
+                               }
+                               jztk_list.addAll(value.getResult());
+                               LogUtils.i("TAG", jztk_list.toString());
+
+                               ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(
+                                       getSupportFragmentManager(), jztk_list);
+                               viewPager.setAdapter(viewPagerAdapter);
+                               viewPager.setCurrentItem(0);
+                           } else {
+                               mStateView.showRetry();
+                           }
+                       }
+
+                       @Override
+                       public void onError(Throwable e) {
+                           LogUtils.d("TAG", e.getMessage().toString());
+                           mStateView.showRetry();
+                       }
+
+                       @Override
+                       public void onComplete() {
+                           mStateView.showContent();
+                       }
+                   });
     }
 }

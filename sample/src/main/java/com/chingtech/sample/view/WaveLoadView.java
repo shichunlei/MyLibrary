@@ -6,14 +6,13 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import com.chingtech.sample.R;
 import com.larswerkman.lobsterpicker.OnColorListener;
 import com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 import chingtech.library.widget.WaveLoadingView;
 
@@ -24,11 +23,11 @@ import chingtech.library.widget.WaveLoadingView;
  * Created by 师春雷
  * Created at 2017/5/27 13:54
  */
-@ContentView(R.layout.wave_load_view)
 public class WaveLoadView extends BaseActivity {
 
-    @ViewInject(R.id.waveLoadingView)
-    private WaveLoadingView mWaveLoadingView;
+    @BindView(R.id.waveLoadingView)
+    WaveLoadingView mWaveLoadingView;
+
     private int checkedItem = 0;
 
     @Override
@@ -223,6 +222,11 @@ public class WaveLoadView extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.wave_load_view;
+    }
+
+    @Override
     protected void initToolBar() {
 
     }
@@ -230,5 +234,10 @@ public class WaveLoadView extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

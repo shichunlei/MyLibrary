@@ -1,5 +1,10 @@
 package com.chingtech.sample.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * <p>
  * *    ***********    ***********    **
@@ -21,48 +26,48 @@ package com.chingtech.sample.bean;
  * Created by 师春雷
  * Created at 17/8/20 下午1:30
  */
+@Entity
 public class CarBean {
 
     /**
-     * initial : A
-     * logoUrl : http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_9_100.png
-     * masterId : 9
+     * id : 1
      * name : 奥迪
-     * saleStatus : 1
-     * uv : 2050725
-     * weight : 90
+     * initial : A
+     * parentid : 0
+     * logo : http://api.jisuapi.com/car/static/images/logo/300/1.png
+     * depth : 1
      */
 
-    private String initial;
-    private String logoUrl;
-    private int    masterId;
+    @Id
+    @Property(nameInDb = "_id")
+    private String id;
     private String name;
-    private int    saleStatus;
-    private Long   uv;
-    private int    weight;
+    private String initial;
+    private String parentid;
+    private String logo;
+    private String depth;
 
-    public String getInitial() {
-        return initial;
-    }
-
-    public void setInitial(String initial) {
+    @Generated(hash = 2122112942)
+    public CarBean(String id, String name, String initial, String parentid,
+            String logo, String depth) {
+        this.id = id;
+        this.name = name;
         this.initial = initial;
+        this.parentid = parentid;
+        this.logo = logo;
+        this.depth = depth;
     }
 
-    public String getLogoUrl() {
-        return logoUrl;
+    @Generated(hash = 618925768)
+    public CarBean() {
     }
 
-    public void setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
+    public String getId() {
+        return id;
     }
 
-    public int getMasterId() {
-        return masterId;
-    }
-
-    public void setMasterId(int masterId) {
-        this.masterId = masterId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -73,50 +78,35 @@ public class CarBean {
         this.name = name;
     }
 
-    public int getSaleStatus() {
-        return saleStatus;
+    public String getInitial() {
+        return initial;
     }
 
-    public void setSaleStatus(int saleStatus) {
-        this.saleStatus = saleStatus;
+    public void setInitial(String initial) {
+        this.initial = initial;
     }
 
-    public Long getUv() {
-        return uv;
+    public String getParentid() {
+        return parentid;
     }
 
-    public void setUv(Long uv) {
-        this.uv = uv;
+    public void setParentid(String parentid) {
+        this.parentid = parentid;
     }
 
-    public int getWeight() {
-        return weight;
+    public String getLogo() {
+        return logo;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
-    @Override
-    public String toString() {
-        return "CarBean{"
-                + "initial='"
-                + initial
-                + '\''
-                + ", logoUrl='"
-                + logoUrl
-                + '\''
-                + ", masterId="
-                + masterId
-                + ", name='"
-                + name
-                + '\''
-                + ", saleStatus="
-                + saleStatus
-                + ", uv="
-                + uv
-                + ", weight="
-                + weight
-                + '}';
+    public String getDepth() {
+        return depth;
+    }
+
+    public void setDepth(String depth) {
+        this.depth = depth;
     }
 }

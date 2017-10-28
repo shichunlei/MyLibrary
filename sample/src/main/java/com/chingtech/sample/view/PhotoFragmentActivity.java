@@ -6,38 +6,35 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
 import com.chingtech.sample.fragment.PhotoFragment;
-import com.chingtech.sample.fragment.QuestionFragment;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.luck.picture.lib.tools.PictureFileUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
-@ContentView(R.layout.activity_photo_fragment)
 public class PhotoFragmentActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     private PhotoFragment fragment;
 
-//    private QuestionFragment fragment;
+    //    private QuestionFragment fragment;
 
     @Override
     protected void init() {
         // 在部分低端手机，调用单独拍照时内存不足时会导致activity被回收，所以不重复创建fragment
         // 添加显示第一个fragment
         fragment = new PhotoFragment();
-//        fragment=new QuestionFragment(0);
+        //        fragment=new QuestionFragment(0);
         getSupportFragmentManager().beginTransaction()
                                    .add(R.id.tab_content, fragment, PictureConfig.FC_TAG)
                                    .show(fragment)
@@ -71,6 +68,11 @@ public class PhotoFragmentActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_photo_fragment;
+    }
+
+    @Override
     protected void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,5 +86,10 @@ public class PhotoFragmentActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.tab_content);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

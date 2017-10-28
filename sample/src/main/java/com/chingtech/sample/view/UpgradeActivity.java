@@ -3,13 +3,12 @@ package com.chingtech.sample.view;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import com.chingtech.sample.R;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.download.DownloadListener;
 import com.tencent.bugly.beta.download.DownloadTask;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -32,25 +31,24 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/17 上午11:53
  */
-@ContentView(R.layout.activity_upgrade)
 public class UpgradeActivity extends BaseActivity {
 
-    @ViewInject(R.id.tv)
-    private TextView tv;
-    @ViewInject(R.id.title)
-    private TextView title;
-    @ViewInject(R.id.version)
-    private TextView version;
-    @ViewInject(R.id.size)
-    private TextView size;
-    @ViewInject(R.id.time)
-    private TextView time;
-    @ViewInject(R.id.content)
-    private TextView content;
-    @ViewInject(R.id.cancel)
-    private Button   cancel;
-    @ViewInject(R.id.start)
-    private Button   start;
+    @BindView(R.id.tv)
+    TextView tv;
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.version)
+    TextView version;
+    @BindView(R.id.size)
+    TextView size;
+    @BindView(R.id.time)
+    TextView time;
+    @BindView(R.id.content)
+    TextView content;
+    @BindView(R.id.cancel)
+    Button   cancel;
+    @BindView(R.id.start)
+    Button   start;
 
     @Override
     protected void init() {
@@ -96,6 +94,11 @@ public class UpgradeActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_upgrade;
+    }
+
+    @Override
     protected void initToolBar() {
 
     }
@@ -103,6 +106,11 @@ public class UpgradeActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 
     @Override

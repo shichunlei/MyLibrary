@@ -7,7 +7,6 @@ import static chingtech.library.utils.StringUtils.*;
 import static chingtech.library.utils.TimeUtils.*;
 
 import android.content.*;
-import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
@@ -16,10 +15,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.ConversionUtils;
 import chingtech.library.widget.*;
@@ -36,94 +36,86 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.view.annotation.*;
-import org.xutils.x;
-
-import java.io.File;
 
 import chingtech.library.utils.*;
 
-@ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
     private final static String TAG = "TAG";
 
     protected ActionBarDrawerToggle mDrawerToggle;
 
-    @ViewInject(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-    @ViewInject(R.id.main_search_view_rsv)
-    private SearchView searchView;
-    @ViewInject(R.id.toolbar)
-    private Toolbar    toolbar;
-    @ViewInject(R.id.tv_title)
-    private TextView   tvTitle;
+    @BindView(R.id.main_search_view_rsv)
+    SearchView searchView;
+    @BindView(R.id.toolbar)
+    Toolbar    toolbar;
+    @BindView(R.id.tv_title)
+    TextView   tvTitle;
 
-    @ViewInject(R.id.banner)
-    private Banner banner;
+    @BindView(R.id.banner)
+    Banner banner;
+
     private List<String> images = new ArrayList<>();
 
-    @ViewInject(R.id.img_header)
-    private RoundImageView header;
+    @BindView(R.id.img_header)
+    RoundImageView header;
 
     private AlertDialog dialog;
 
-    private String[] items = {"图片选择Activity", "图片选择Fragment", "item2", "item3"};
+    private String[] items = {"图片选择Activity", "图片选择Fragment", "SatelliteMenu", "item3"};
 
-    @ViewInject(R.id.image1)
-    private RoundImageView image1;
-    @ViewInject(R.id.image2)
-    private RoundImageView image2;
-    @ViewInject(R.id.image3)
-    private RoundImageView image3;
+    @BindView(R.id.image1)
+    RoundImageView image1;
+    @BindView(R.id.image2)
+    RoundImageView image2;
+    @BindView(R.id.image3)
+    RoundImageView image3;
 
-    @ViewInject(R.id.flipView)
-    private FlipView easyFlipView;
-    @ViewInject(R.id.flipView2)
-    private FlipView easyFlipView2;
+    @BindView(R.id.flipView)
+    FlipView easyFlipView;
+    @BindView(R.id.flipView2)
+    FlipView easyFlipView2;
 
-    @ViewInject(R.id.tv_number)
-    private NumberAnimTextView number;
+    @BindView(R.id.tv_number)
+    NumberAnimTextView number;
 
     private BottomDialog mBottomDialog;
 
-    private UpdateAppDialog hpd;
+    @BindView(R.id.layout1)
+    FrameLayout layout;
 
-    @ViewInject(R.id.layout1)
-    private FrameLayout layout;
+    @BindView(R.id.tv_1)
+    TextView tv1;
 
-    @ViewInject(R.id.tv_1)
-    private TextView tv1;
+    @BindView(R.id.tv_2)
+    TextView tv2;
 
-    @ViewInject(R.id.tv_2)
-    private TextView tv2;
+    @BindView(R.id.tv_3)
+    TextView tv3;
 
-    @ViewInject(R.id.tv_3)
-    private TextView tv3;
+    @BindView(R.id.tv_4)
+    TextView tv4;
 
-    @ViewInject(R.id.tv_4)
-    private TextView tv4;
+    @BindView(R.id.tv_update_info)
+    TextView updateText;
 
-    @ViewInject(R.id.tv_update_info)
-    private TextView updateText;
+    @BindView(R.id.money)
+    EditText etMoney;
 
-    @ViewInject(R.id.money)
-    private EditText etMoney;
-
-    @ViewInject(R.id.seekbar1)
-    private RangeSeekBar seekbar1;
-    @ViewInject(R.id.seekbar2)
-    private RangeSeekBar seekbar2;
-    @ViewInject(R.id.progress2_tv)
-    private TextView     tv;
+    @BindView(R.id.seekbar1)
+    RangeSeekBar seekbar1;
+    @BindView(R.id.seekbar2)
+    RangeSeekBar seekbar2;
+    @BindView(R.id.progress2_tv)
+    TextView     tv;
 
     private DecimalFormat df = new DecimalFormat("0.00");
 
-    @ViewInject(R.id.timer)
-    private TextView timer;
+    @BindView(R.id.timer)
+    TextView timer;
 
     private MyCountDownTimer mc;
 
@@ -181,19 +173,19 @@ public class MainActivity extends BaseActivity {
 
         easyFlipView.setFlipDuration(1000);
 
-        Log.i(TAG, "23132422.63232保留2位小数:" + doubleToString(23132422.63232));
-        Log.i(TAG, "23132422.23282保留3位小数:" + round(23132422.23282, 3));
-        Log.i(TAG, "23132422.93232转整数:" + round(23132422.93232, 0));
+        LogUtils.i(TAG, "23132422.63232保留2位小数:" + doubleToString(23132422.63232));
+        LogUtils.i(TAG, "23132422.23282保留3位小数:" + round(23132422.23282, 3));
+        LogUtils.i(TAG, "23132422.93232转整数:" + round(23132422.93232, 0));
 
-        Log.i(TAG, "金额格式化: " + roundMoney(new BigDecimal(23132422.23832)));
-        Log.i(TAG, "金额格式化: " + roundMoney(new BigDecimal(-23132422.23832)));
+        LogUtils.i(TAG, "金额格式化: " + roundMoney(new BigDecimal(23132422.23832)));
+        LogUtils.i(TAG, "金额格式化: " + roundMoney(new BigDecimal(-23132422.23832)));
 
-        Log.i(TAG, "金额格式化: " + formatMoney(new BigDecimal(23132422.23832)));
+        LogUtils.i(TAG, "金额格式化: " + formatMoney(new BigDecimal(23132422.23832)));
 
         String idcard15 = "131128900923065";
         String idcard18 = "131128199009230658";
-        Log.i(TAG, "131128199009230658身份证号码校验：" + isIdcard(idcard18));
-        Log.i(TAG, "131128900923065身份证号码校验：" + isIdcard(idcard15));
+        LogUtils.i(TAG, "131128199009230658身份证号码校验：" + isIdcard(idcard18));
+        LogUtils.i(TAG, "131128900923065身份证号码校验：" + isIdcard(idcard15));
 
         String str = "320125193206214815";
         try {
@@ -215,19 +207,19 @@ public class MainActivity extends BaseActivity {
         number.startNumber();
         ViewUtils.setUnderLine(number);
 
-        Log.i(TAG, "=======" + StringUtils.hangeToBig(3453450.23));
+        LogUtils.i(TAG, "=======" + StringUtils.hangeToBig(3453450.23));
 
         String appname = AppUitls.getAppName(MainActivity.this);
-        Log.i(TAG, "appname:" + appname);
+        LogUtils.i(TAG, "appname:" + appname);
         String pkname = AppUitls.getPkName(MainActivity.this);
-        Log.i(TAG, "pkname:" + pkname);
+        LogUtils.i(TAG, "pkname:" + pkname);
         String versionname = AppUitls.getVersionName(MainActivity.this);
-        Log.i(TAG, "versionname:" + versionname);
+        LogUtils.i(TAG, "versionname:" + versionname);
         int versioncode = AppUitls.getVersionCode(MainActivity.this);
-        Log.i(TAG, "versioncode:" + versioncode);
+        LogUtils.i(TAG, "versioncode:" + versioncode);
 
         CharacterParser c = new CharacterParser();
-        Log.i(TAG, "我们拼音: " + c.getSelling("我们"));
+        LogUtils.i(TAG, "我们拼音: " + c.getSelling("我们"));
 
         testTimeUtils();
 
@@ -265,33 +257,11 @@ public class MainActivity extends BaseActivity {
                           openActivity(PhotoActivity.class, false);
                       } else if (dialog.getSingleChoiceItems() == 1) {
                           openActivity(PhotoFragmentActivity.class, false);
+                      } else if (dialog.getSingleChoiceItems() == 2) {
+                          openActivity(SatelliteMenuActivity.class, false);
+                      } else if (dialog.getSingleChoiceItems() == 3) {
                       }
 
-                      showToast(items[dialog.getSingleChoiceItems()]);
-                  })
-                  .show();
-        });
-
-        findViewById(R.id.btn_dialog4).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
-            final EditText username = v.findViewById(R.id.edittxt_username);
-            new AddSpaceTextWatcher(username, 21).setSpaceType(IDCardNumberType);
-            final EditText phone = v.findViewById(R.id.edittxt_phone);
-            new AddSpaceTextWatcher(phone, 13).setSpaceType(mobilePhoneNumberType);
-            final EditText password = v.findViewById(R.id.edittxt_password);
-            final EditText bankNo   = v.findViewById(R.id.id_number);
-            new AddSpaceTextWatcher(bankNo, 23).setSpaceType(bankCardNumberType);
-            dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("Title")
-                  .setView(v)
-                  .setSingleChoiceItems(items)
-                  .setNegativeButton("", null)
-                  .setPositiveButton("", view12 -> {
-                      progress.show();
-                      Log.i(TAG, username.getText().toString().trim().replaceAll("\\s*", ""));
-                      Log.i(TAG, bankNo.getText().toString().trim().replaceAll("\\s*", ""));
-                      Log.i(TAG, phone.getText().toString().replaceAll("\\s*", ""));
-                      Log.i(TAG, password.getText().toString().trim());
                       showToast(items[dialog.getSingleChoiceItems()]);
                   })
                   .show();
@@ -349,20 +319,23 @@ public class MainActivity extends BaseActivity {
                                        which -> openActivity(RecyclerViewActivity.class, false))
                          .addSheetItem("刷新", R.color.google_yellow,
                                        which -> openActivity(RefreshActivity.class, false))
-                         .addSheetItem("下载", R.color.google_cyan, which -> download())
+                         .addSheetItem("刻度尺", R.color.google_cyan, which -> {
+                             openActivity(RulerActivity.class, false);
+                         })
                          .show();
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            View           v        = LayoutInflater.from(MainActivity.this)
+                                                    .inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
             mBottomDialog = new BottomDialog(MainActivity.this).builder();
             mBottomDialog.setView(v).setPositiveButton("确定", view1 -> {
-                Log.i(TAG, username.getText().toString().trim());
-                Log.i(TAG, phone.getText().toString().trim());
-                Log.i(TAG, password.getText().toString().trim());
+                LogUtils.i(TAG, username.getText().toString().trim());
+                LogUtils.i(TAG, phone.getText().toString().trim());
+                LogUtils.i(TAG, password.getText().toString().trim());
             }).setNegativeButton("取消", null).show();
         });
 
@@ -374,67 +347,72 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
     private void testTimeUtils() {
         String today = TimeUtils.getNowDateTime(DATE_TIME_FORMAT);
 
-        Log.i(TAG, "此刻：" + TimeUtils.getNowDateTime(TZ_FORMAT));
-        Log.i(TAG, "today:" + today);
-        Log.i(TAG, "今年：" + TimeUtils.getNowDateTime(Y_FORMAT));
-        Log.i(TAG, "今年：" + TimeUtils.getNowDateTime(YY_FORMAT));
-        Log.i(TAG, "本月：" + TimeUtils.getNowDateTime(M_FORMAT));
-        Log.i(TAG, "今天日期：" + TimeUtils.getNowDateTime(D_FORMAT));
-        Log.i(TAG, "小时（12）：" + TimeUtils.getNowDateTime(H_12_FORMAT));
-        Log.i(TAG, "小时（24）:" + TimeUtils.getNowDateTime(H_24_FORMAT));
-        Log.i(TAG, "分钟:" + TimeUtils.getNowDateTime(MIN_FORMAT));
-        Log.i(TAG, "秒:" + TimeUtils.getNowDateTime(S_FORMAT));
+        LogUtils.i(TAG, "此刻：" + TimeUtils.getNowDateTime(TZ_FORMAT));
+        LogUtils.i(TAG, "today:" + today);
+        LogUtils.i(TAG, "今年：" + TimeUtils.getNowDateTime(Y_FORMAT));
+        LogUtils.i(TAG, "今年：" + TimeUtils.getNowDateTime(YY_FORMAT));
+        LogUtils.i(TAG, "本月：" + TimeUtils.getNowDateTime(M_FORMAT));
+        LogUtils.i(TAG, "今天日期：" + TimeUtils.getNowDateTime(D_FORMAT));
+        LogUtils.i(TAG, "小时（12）：" + TimeUtils.getNowDateTime(H_12_FORMAT));
+        LogUtils.i(TAG, "小时（24）:" + TimeUtils.getNowDateTime(H_24_FORMAT));
+        LogUtils.i(TAG, "分钟:" + TimeUtils.getNowDateTime(MIN_FORMAT));
+        LogUtils.i(TAG, "秒:" + TimeUtils.getNowDateTime(S_FORMAT));
 
         String date     = "2017-04-13";
         String datetime = "2017-04-13 17:32:21";
 
-        Log.i(TAG, "两天相差天数：" + TimeUtils.intervalDays(date, today));
+        LogUtils.i(TAG, "两天相差天数：" + TimeUtils.intervalDays(date, today));
 
         String s00 = TimeUtils.formatDate(date, DATE_SHAORT_FORMAT);
-        Log.i(TAG, s00);
+        LogUtils.i(TAG, s00);
 
         String s0 = TimeUtils.formatDate(date, Y_FORMAT);
-        Log.i(TAG, s0);
+        LogUtils.i(TAG, s0);
 
         String s01 = TimeUtils.formatDate(date, Y_M_FORMAT);
-        Log.i(TAG, s01);
+        LogUtils.i(TAG, s01);
         String s02 = TimeUtils.formatDate(date, D_FORMAT);
-        Log.i(TAG, s02);
+        LogUtils.i(TAG, s02);
         String s03 = TimeUtils.formatDate(date, M_FORMAT);
-        Log.i(TAG, s03);
+        LogUtils.i(TAG, s03);
 
         String s2 = TimeUtils.formatDateTime(datetime, TIME_FORMAT);
-        Log.i(TAG, s2);
+        LogUtils.i(TAG, s2);
 
         String s3 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
-        Log.i(TAG, s3);
+        LogUtils.i(TAG, s3);
 
         String s4 = TimeUtils.formatDateTime(datetime, DATE_TIME_HOUR_MIN_FORMAT);
-        Log.i(TAG, s4);
+        LogUtils.i(TAG, s4);
 
         String s5 = TimeUtils.formatDateTime(datetime, TIME_SHAORT_FORMAT);
-        Log.i(TAG, s5);
+        LogUtils.i(TAG, s5);
 
         String s6 = TimeUtils.formatDateTime(datetime, DATE_TIME_FORMAT);
-        Log.i(TAG, s6);
+        LogUtils.i(TAG, s6);
 
         String s7 = TimeUtils.formatDateTime(datetime, TIME_MS_FORMAT);
-        Log.i(TAG, s7);
+        LogUtils.i(TAG, s7);
 
         String s8 = TimeUtils.formatDateTime(datetime, H_24_FORMAT);
-        Log.i(TAG, s8);
+        LogUtils.i(TAG, s8);
 
         String s9 = TimeUtils.formatDateTime(datetime, H_12_FORMAT);
-        Log.i(TAG, s9);
+        LogUtils.i(TAG, s9);
 
         String s09 = TimeUtils.formatDateTime(datetime, MIN_FORMAT);
-        Log.i(TAG, s09);
+        LogUtils.i(TAG, s09);
 
         String s090 = TimeUtils.formatDateTime(datetime, "HH:00");
-        Log.i(TAG, s090);
+        LogUtils.i(TAG, s090);
     }
 
     /**
@@ -508,6 +486,10 @@ public class MainActivity extends BaseActivity {
         return findViewById(R.id.layout_main);
     }
 
+    @Override
+    protected void loadData() {
+    }
+
     /**
      * 进制转换
      */
@@ -539,60 +521,6 @@ public class MainActivity extends BaseActivity {
                 "字符串31 37 35的16进制转为bytes数组后为:\n" + ConversionUtils.hexToBytes("31 37 35"));
         System.out.println("字符串31 37 35的16进制转为2进制后为:\n" + ConversionUtils.bytesToBinary(
                 ConversionUtils.hexToBytes("31 37 35")));
-    }
-
-    private void download() {
-        hpd = new UpdateAppDialog(this);
-        hpd.builder();
-        hpd.setMsg("这里是更新的内容");
-        hpd.setTitle("应用更新");
-        hpd.setDownLoad(v -> {
-            RequestParams requestParams = new RequestParams(
-                    "http://101.200.174.126:9898/system/app_versions/appfiles/000/000/001/original"
-                            + "/app-release.apk?1490756569");
-            requestParams.setSaveFilePath(FileUtils.getSDPath() + "/a.apk");
-            x.http().get(requestParams, new Callback.ProgressCallback<File>() {
-                @Override
-                public void onWaiting() {
-                }
-
-                @Override
-                public void onStarted() {
-                }
-
-                @Override
-                public void onLoading(long total, long current, boolean isDownloading) {
-                    hpd.setUnreachedBarColor(Color.YELLOW);
-                    hpd.setProgressTextColor(Color.BLUE);
-                    hpd.setReachedBarColor(Color.RED);
-                    hpd.setmMax((int) total / 1024);
-                    hpd.setmProgress((int) current / 1024);
-                }
-
-                @Override
-                public void onSuccess(File result) {
-                    showToast("下载成功");
-                    hpd.dismiss();
-                }
-
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-                    ex.printStackTrace();
-                    showToast("下载失败，请检查网络和SD卡");
-                    hpd.dismiss();
-                }
-
-                @Override
-                public void onCancelled(CancelledException cex) {
-                }
-
-                @Override
-                public void onFinished() {
-                }
-            });
-        });
-        hpd.setColse(null);
-        hpd.show();
     }
 
     @Override
@@ -656,15 +584,15 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            Log.i("MainActivity", showTimeCount(millisUntilFinished));
+            LogUtils.i("TAG", showTimeCount(millisUntilFinished));
             timer.setText("倒计时(" + millisUntilFinished / 1000 + ")");
         }
     }
 
-    @Event({R.id.fab, R.id.imgFrontCard, R.id.imgBackCard, R.id.cardview_front, R.id.cardview_back,
-            R.id.tv_number, R.id.btnCheckUpdate, R.id.btnLoadUpdateInfo, R.id.tv_setting,
-            R.id.tv_info, R.id.tv_about, R.id.start, R.id.cancel})
-    private void onEvent(View v) {
+    @OnClick({R.id.fab, R.id.imgFrontCard, R.id.imgBackCard, R.id.cardview_front,
+            R.id.cardview_back, R.id.tv_number, R.id.btnCheckUpdate, R.id.btnLoadUpdateInfo,
+            R.id.tv_setting, R.id.tv_info, R.id.tv_about, R.id.start, R.id.cancel})
+    public void onEvent(View v) {
         switch (v.getId()) {
             case R.id.start:
                 showToast("重新开始");
@@ -751,7 +679,7 @@ public class MainActivity extends BaseActivity {
         info.append("发布类型（0:测试 1:正式）: ").append(upgradeInfo.publishType).append("\n");
         info.append("弹窗类型（1:建议 2:强制 3:手工）: ").append(upgradeInfo.upgradeType);
 
-        Log.i(TAG, "loadUpgradeInfo: " + info);
+        LogUtils.i(TAG, "loadUpgradeInfo: " + info);
 
         showToast(info);
     }

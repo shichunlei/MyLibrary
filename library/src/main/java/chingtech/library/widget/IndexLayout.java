@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import static org.xutils.common.util.DensityUtil.dip2px;
+import static chingtech.library.utils.ScreenUtils.dip2px;
 
 /**
  * 绘制圆
@@ -33,7 +33,7 @@ public class IndexLayout extends FrameLayout {
     private boolean isShowCircle;
     private String indexName = "";
     private IndexBar indexBar;
-    private int   indexBarWidth       = dip2px(30);
+    private int   indexBarWidth       = dip2px(getContext(), 30);
     private float indexBarHeightRatio = 1;
 
     public IndexLayout(Context context) {

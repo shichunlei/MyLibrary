@@ -13,8 +13,8 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import chingtech.library.R;
 import chingtech.library.utils.ScreenUtils;
@@ -22,7 +22,7 @@ import chingtech.library.utils.ScreenUtils;
 /**
  * 圆形图片、圆角图片、椭圆图片
  */
-public class RoundImageView extends ImageView {
+public class RoundImageView extends AppCompatImageView {
 
     /**
      * 图片的类型，圆形or圆角

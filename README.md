@@ -20,9 +20,9 @@
 
 - **RoundTextView**
 
-    自定义TextView 实现填充色、圆角、文字变色、边框、边框颜色、背景图等功能
+    基于TextView 1.直接设置selector背景2.直接设置drawableLeft大小 3.圆角，圆形，背景/边框/文字根据状态变色
     
-    [原项目地址](https://github.com/jiaowenzheng/CustomTextView)
+    [原项目地址](https://github.com/RuffianZhong/RTextView)
 
 - **SmoothCheckBox**
 
@@ -50,12 +50,6 @@
 
     [原始项目地址](https://github.com/H07000223/FlycoLabelView)
 
-- **SwipeToLoadLayout**
-
-    SwipeToLoadLayout is a reusable pull-to-refresh and pull-to-load-more widget.
-
-    [原始项目地址](https://github.com/Aspsine/SwipeToLoadLayout)
-
 - **LoadingView**
 
     加载动画
@@ -65,12 +59,6 @@
     可展开、折叠的TextView
     
     [原始项目地址](https://github.com/lcodecorex/ExpandTextView)
-
-- **RecyclerViewBanner**
-
-    广告轮播
-    
-    [原始项目地址](https://github.com/loonggg/RecyclerViewBanner)
 
 - **SmallBang**
 
@@ -124,6 +112,14 @@
     
     [原项目地址](https://github.com/qdxxxx/IndexBarLayout)
 
+- **IntegerRulerView/DecimalRulerView/RulerView**
+
+    刻度尺
+    
+- **SatelliteMenu**
+
+    弧形卫星动画菜单
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、AnimatorUitls（部分参考于SwitchLayout）、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper、RandomUtils、ConversionUtils等
@@ -162,7 +158,6 @@ Step 2. Add the dependency
 ### Sample 中使用到的第三方框架包括
 
 - _[Gson](https://github.com/google/gson)_
-- _[xUtils3](https://github.com/wyouflf/xUtils)_
 - _[GreenDao](https://github.com/greenrobot/greenDAO)_
 - _[SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)  # 刷新_
 - _[PinLockView](https://github.com/aritraroy/PinLockView) # 数字密码锁_

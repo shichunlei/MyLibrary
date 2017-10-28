@@ -21,14 +21,18 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
+        CarBeanDao.createTable(db, ifNotExists);
         MemberDao.createTable(db, ifNotExists);
         UserDao.createTable(db, ifNotExists);
+        WanNianLiBeanDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
+        CarBeanDao.dropTable(db, ifExists);
         MemberDao.dropTable(db, ifExists);
         UserDao.dropTable(db, ifExists);
+        WanNianLiBeanDao.dropTable(db, ifExists);
     }
 
     /**
@@ -47,8 +51,10 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
+        registerDaoClass(CarBeanDao.class);
         registerDaoClass(MemberDao.class);
         registerDaoClass(UserDao.class);
+        registerDaoClass(WanNianLiBeanDao.class);
     }
 
     public DaoSession newSession() {

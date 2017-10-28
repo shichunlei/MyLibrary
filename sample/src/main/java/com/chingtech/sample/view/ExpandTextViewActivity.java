@@ -6,13 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
 
 import com.chingtech.sample.adapter.RecyclerAdapter;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +23,26 @@ import java.util.List;
  * Created by 师春雷
  * Created at 2017/5/26 18:01
  */
-@ContentView(R.layout.activity_recycler)
 public class ExpandTextViewActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.recyclerview)
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
 
     private List<String> data = new ArrayList<>();
 
     @Override
     protected void init() {
         mRecyclerView.setAdapter(new RecyclerAdapter(this, setData(), R.layout.item_extext));
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_recycler;
     }
 
     @Override
@@ -76,5 +79,10 @@ public class ExpandTextViewActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

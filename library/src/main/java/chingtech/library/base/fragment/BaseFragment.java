@@ -3,27 +3,30 @@ package chingtech.library.base.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import chingtech.library.widget.ProgressDialog;
 import chingtech.library.widget.StateView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.x;
 
 /**
  * Created by leo on 2016/9/9.
  */
 public abstract class BaseFragment extends Fragment {
 
+    private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
+
     /** 上下文 */
     protected static Context context;
-
-    private boolean injected = false;
 
     protected ProgressDialog progress;
 
@@ -31,29 +34,43 @@ public abstract class BaseFragment extends Fragment {
 
     private View view;
 
+    Unbinder unbinder;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //解决fragment重叠问题
+        if (savedInstanceState != null) {
+            boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            if (isSupportHidden) {
+                fragmentTransaction.hide(this);
+            } else {
+                fragmentTransaction.show(this);
+            }
+            fragmentTransaction.commit();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        injected = true;
-        view = x.view().inject(this, inflater, container);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        view = inflater.inflate(getLayoutId(), container, false);
         context = getActivity();
 
         progress = new ProgressDialog(context);
-
-        if (!injected) {
-            view = this.getView();
-            x.view().inject(this, view);
-        }
-
+        unbinder = ButterKnife.bind(this, view);
         mStateView = StateView.inject(view, false);
         init();
+        return view;
     }
+
+    /**
+     * 设置布局资源
+     *
+     * @return
+     */
+    protected abstract int getLayoutId();
 
     //声明抽象方法
     protected abstract void init();
@@ -166,5 +183,11 @@ public abstract class BaseFragment extends Fragment {
      */
     public void showToast(CharSequence text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

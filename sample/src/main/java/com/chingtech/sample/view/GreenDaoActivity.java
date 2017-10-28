@@ -4,6 +4,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.utils.TimeUtils;
@@ -15,9 +17,6 @@ import com.chingtech.sample.bean.Member;
 import com.chingtech.sample.bean.User;
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -40,16 +39,15 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/12 上午10:02
  */
-@ContentView(R.layout.activity_greendao)
 public class GreenDaoActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.textView)
-    private TextView mContext;
+    @BindView(R.id.textView)
+    TextView mContext;
 
     private User    mUser;
     private UserDao mUserDao;
@@ -61,6 +59,11 @@ public class GreenDaoActivity extends BaseActivity {
         mUserDao = App.getInstances().getDaoSession().getUserDao();
 
         mMemberDao = App.getInstances().getDaoSession().getMemberDao();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_greendao;
     }
 
     @Override
@@ -79,8 +82,13 @@ public class GreenDaoActivity extends BaseActivity {
         return findViewById(R.id.layout);
     }
 
-    @Event({R.id.button, R.id.button2, R.id.button3, R.id.button4})
-    private void onEvent(View view) {
+    @Override
+    protected void loadData() {
+
+    }
+
+    @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4})
+    public void onEvent(View view) {
         switch (view.getId()) {
             case R.id.button:
                 addMemberDate();

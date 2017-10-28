@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.ButterKnife;
 import chingtech.library.widget.ProgressDialog;
 import chingtech.library.widget.StateView;
-import org.xutils.x;
 
 /**
  * HealthPadApp-v2
@@ -17,14 +17,12 @@ import org.xutils.x;
  */
 public abstract class LazyFragment extends BaseFragment {
 
-    private boolean injected = false;
-
     // 是否可见
     protected boolean isVisible;
     // 标志位，标志Fragment已经初始化完成
     protected boolean isPrepared = false;
     // 是否第一次加载
-    protected boolean isFirst = true;
+    protected boolean isFirst    = true;
 
     protected StateView mStateView;
 
@@ -58,29 +56,17 @@ public abstract class LazyFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        injected = true;
-        view = x.view().inject(this, inflater, container);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        view = inflater.inflate(getLayoutId(), container, false);
         context = getActivity();
-        if (!injected) {
-            view = this.getView();
-            x.view().inject(this, view);
-        }
 
         progress = new ProgressDialog(context);
-
+        unbinder = ButterKnife.bind(this, view);
+        mStateView = StateView.inject(view, false);
         //初始化view的各控件
         isPrepared = true;
-
-        mStateView = StateView.inject(view, true);
         init();
-
         LazyLoad();
+        return view;
     }
 
     /**
@@ -92,4 +78,10 @@ public abstract class LazyFragment extends BaseFragment {
      * 懒加载
      */
     protected abstract void LazyLoad();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

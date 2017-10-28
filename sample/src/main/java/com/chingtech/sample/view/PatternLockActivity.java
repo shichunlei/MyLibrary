@@ -2,16 +2,14 @@ package com.chingtech.sample.view;
 
 import android.util.Log;
 import android.view.View;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
-import chingtech.library.utils.AnimatorUitls;
 import chingtech.library.utils.SPUtils;
 import com.andrognito.patternlockview.PatternLockView;
 import com.andrognito.patternlockview.listener.PatternLockViewListener;
 import com.andrognito.patternlockview.utils.PatternLockUtils;
 import com.chingtech.sample.R;
 import java.util.List;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -34,11 +32,10 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/13 上午8:42
  */
-@ContentView(R.layout.activity_pattern_lock)
 public class PatternLockActivity extends BaseActivity {
 
-    @ViewInject(R.id.patter_lock_view)
-    private PatternLockView mPatternLockView;
+    @BindView(R.id.patter_lock_view)
+    PatternLockView mPatternLockView;
 
     private String flag;
 
@@ -99,11 +96,21 @@ public class PatternLockActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_pattern_lock;
+    }
+
+    @Override
     protected void initToolBar() {
     }
 
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

@@ -41,11 +41,11 @@
                     android:padding="10dp"
                     android:text="倒计时"
                     android:textSize="33sp"
-                    app:textIsSelected="false"
-                    app:textNormalSolidColor="@color/google_cyan"
-                    app:textNormalTextColor="@color/white"
-                    app:textRadius="40dp"
-                    app:textSelectedTextColor="@color/google_red" />
+                    app:background_normal="@color/google_red"
+                    app:border_color_normal="@color/google_cyan"
+                    app:border_width_normal="2dp"
+                    app:corner_radius_all="40dp"
+                    app:text_color_normal="@color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,15 +63,14 @@
                         android:gravity="center"
                         android:text="restart"
                         android:textSize="16sp"
-                        app:textLeftBottomRadius="25dp"
-                        app:textLeftTopRadius="25dp"
-                        app:textNoRightStroke="true"
-                        app:textNormalSolidColor="@color/colorPrimary"
-                        app:textNormalTextColor="@color/white"
-                        app:textPressedSolidColor="@color/colorPrimaryDark"
-                        app:textSelectedTextColor="@color/google_red"
-                        app:textStrokeColor="@color/google_pink"
-                        app:textStrokeWidth="1dp" />
+                        app:background_normal="@color/colorPrimaryDark"
+                        app:background_pressed="@color/colorPrimary"
+                        app:border_color_normal="@color/yellow_color"
+                        app:border_width_normal="2dp"
+                        app:corner_radius_bottom_left="25dp"
+                        app:corner_radius_top_left="25dp"
+                        app:text_color_normal="@color/google_pink"
+                        app:text_color_pressed="@color/google_red" />
 
                     <chingtech.library.widget.RoundTextView
                         android:id="@+id/cancel"
@@ -83,15 +82,14 @@
                         android:gravity="center"
                         android:text="cancel"
                         android:textSize="16sp"
-                        app:textNoLeftStroke="true"
-                        app:textNormalSolidColor="@color/colorPrimary"
-                        app:textNormalTextColor="@color/white"
-                        app:textPressedSolidColor="@color/colorPrimaryDark"
-                        app:textRightBottomRadius="25dp"
-                        app:textRightTopRadius="25dp"
-                        app:textSelectedTextColor="@color/google_red"
-                        app:textStrokeColor="@color/google_pink"
-                        app:textStrokeWidth="1dp" />
+                        app:background_normal="@color/colorPrimary"
+                        app:background_pressed="@color/colorPrimaryDark"
+                        app:border_color_normal="@color/yellow_color"
+                        app:border_width_normal="2dp"
+                        app:corner_radius_bottom_right="25dp"
+                        app:corner_radius_top_right="25dp"
+                        app:text_color_normal="@color/google_pink"
+                        app:text_color_pressed="@color/google_red" />
                 </LinearLayout>
 
                 <chingtech.library.widget.NumberAnimTextView
@@ -126,35 +124,43 @@
                     android:layout_height="wrap_content"
                     android:text="手动检查更新" />
 
-                <Button
+                <chingtech.library.widget.RoundTextView
                     android:id="@+id/btnLoadUpdateInfo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="刷新更新信息" />
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="刷新更新信息"
+                    android:textColor="@color/colorPrimary"
+                    app:border_color_normal="@color/colorPrimary"
+                    app:border_color_pressed="@color/colorAccent"
+                    app:border_dash_gap="8dp"
+                    app:border_dash_width="8dp"
+                    app:border_width_normal="3dp"
+                    app:corner_radius_all="50dp"
+                    app:text_color_pressed="@color/colorAccent" />
 
-                <Button
-                    android:id="@+id/btn_dialog"
+                <chingtech.library.widget.RoundTextView
+                    android:id="@+id/bottom_alertdialog"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dialog 列表" />
-
-                <Button
-                    android:id="@+id/btn_dialog2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dialog Editview" />
-
-                <Button
-                    android:id="@+id/btn_dialog3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dialog 单选列表" />
-
-                <Button
-                    android:id="@+id/btn_dialog4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dialog 单选列表 + View" />
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:paddingRight="20dp"
+                    android:text="对话框"
+                    android:textColor="@android:color/white"
+                    app:background_normal="@color/colorPrimary"
+                    app:background_pressed="@color/google_purple"
+                    app:border_color_normal="@color/colorAccent"
+                    app:border_color_pressed="@color/google_red"
+                    app:border_width_normal="3dp"
+                    app:corner_radius_all="10dp"
+                    app:icon_direction="right"
+                    app:icon_height="20dp"
+                    app:icon_src_normal="@drawable/ic_collapse_small_holo_light"
+                    app:icon_src_pressed="@drawable/ic_expand_small_holo_light"
+                    app:icon_width="25dp"
+                    app:text_color_pressed="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,18 +168,11 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/bottom_alertdialog"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Close Dialog" />
-
-                    <Button
                         android:id="@+id/bottom_alertdialog2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Title Bg Dialog" />
+                        android:text="万年历" />
 
                     <Button
                         android:id="@+id/bottom_alertdialog3"
@@ -208,6 +207,54 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Bottom\nDialog" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <chingtech.library.widget.RoundTextView
+                        android:id="@+id/btn_dialog"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:text="列表对话框"
+                        android:textColor="@android:color/white"
+                        app:background_normal="@color/colorPrimary"
+                        app:corner_radius_all="50dp"
+                        app:text_color_normal="@color/google_pink"
+                        app:text_color_pressed="@color/google_orange" />
+
+                    <chingtech.library.widget.RoundTextView
+                        android:id="@+id/btn_dialog2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="标准对话框"
+                        app:background_normal="@color/colorPrimary"
+                        app:border_color_normal="@color/colorAccent"
+                        app:border_width_normal="5dp"
+                        app:corner_radius_all="50dp"
+                        app:text_color_normal="@color/google_pink"
+                        app:text_color_pressed="@color/google_blue" />
+
+                    <chingtech.library.widget.RoundTextView
+                        android:id="@+id/btn_dialog3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="单选对话框"
+                        android:textColor="@android:color/black"
+                        app:border_color_normal="@color/colorAccent"
+                        app:border_width_normal="5dp"
+                        app:corner_radius_all="50dp"
+                        app:text_color_normal="@color/google_pink"
+                        app:text_color_pressed="@color/google_green" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -553,6 +600,63 @@
                     app:textPadding="17dp"
                     app:textSize="16sp"
                     app:thumbSize="26dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <chingtech.library.widget.RoundTextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:text="左上圆角"
+                        android:textColor="@android:color/white"
+                        app:background_normal="#EE8262"
+                        app:corner_radius_top_left="30dp" />
+
+                    <chingtech.library.widget.RoundTextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="右上圆角"
+                        android:textColor="@android:color/white"
+                        app:background_normal="#EE7AE9"
+                        app:corner_radius_top_right="30dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <chingtech.library.widget.RoundTextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:gravity="center"
+                        android:text="左下圆角"
+                        android:textColor="@android:color/white"
+                        app:background_normal="#9F79EE"
+                        app:corner_radius_bottom_left="30dp" />
+
+                    <chingtech.library.widget.RoundTextView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="右下圆角"
+                        android:textColor="@android:color/white"
+                        app:background_normal="#FF6A6A"
+                        app:corner_radius_bottom_right="30dp" />
+                </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

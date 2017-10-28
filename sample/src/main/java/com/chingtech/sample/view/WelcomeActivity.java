@@ -5,11 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.view.View;
 import android.widget.LinearLayout;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.SPUtils;
 import com.chingtech.sample.R;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -32,10 +31,9 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/27 下午1:32
  */
-@ContentView(R.layout.activity_welcome)
 public class WelcomeActivity extends BaseActivity {
 
-    @ViewInject(R.id.layout)
+    @BindView(R.id.layout)
     LinearLayout welcome;
 
     private boolean isPatternLock;
@@ -66,11 +64,21 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_welcome;
+    }
+
+    @Override
     protected void initToolBar() {
     }
 
     @Override
     protected View injectTarget() {
         return welcome;
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

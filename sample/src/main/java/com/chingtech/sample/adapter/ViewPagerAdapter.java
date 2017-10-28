@@ -3,7 +3,7 @@ package com.chingtech.sample.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import com.chingtech.sample.bean.QuestionBean;
+import com.chingtech.sample.bean.JztkBean;
 import com.chingtech.sample.fragment.QuestionFragment;
 import java.util.List;
 
@@ -30,10 +30,10 @@ import java.util.List;
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<QuestionBean> list;
+    private List<JztkBean> list;
     private int total = 0;
 
-    public ViewPagerAdapter(FragmentManager fm, List<QuestionBean> list) {
+    public ViewPagerAdapter(FragmentManager fm, List<JztkBean> list) {
         super(fm);
         this.list = list;
         total = list.size();

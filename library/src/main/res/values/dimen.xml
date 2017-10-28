@@ -2,14 +2,6 @@
 <resources>
     <dimen name="alert_width">86dp</dimen>
 
-    <dimen name="load_more_footer_height_classic">40dp</dimen>
-    <dimen name="load_more_trigger_offset_google">50dp</dimen>
-    <dimen name="load_more_final_offset_google">80dp</dimen>
-    <dimen name="refresh_header_height_google">100dp</dimen>
-    <dimen name="refresh_final_offset_google">150dp</dimen>
-    <dimen name="refresh_drawable_size_google">40dp</dimen>
-    <dimen name="refresh_trigger_offset_google">100dp</dimen>
-
     <dimen name="search_icon_padding">12dp</dimen>
     <dimen name="search_view_text_padding">50dp</dimen>
 </resources>

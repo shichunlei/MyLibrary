@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.RulerActivity">
+
+    <include layout="@layout/tool_bar" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <chingtech.library.widget.ruler.DecimalRulerView
+                android:id="@+id/ruler_weight"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#e3f"
+                android:focusable="true" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="38dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#5f5" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#333" />
+
+        <TextView
+            android:id="@+id/tv_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <chingtech.library.widget.ruler.IntegerRulerView
+            android:id="@+id/ruler_height"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#333" />
+
+        <TextView
+            android:id="@+id/tv_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center" />
+
+        <chingtech.library.widget.ruler.RulerView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="#345"
+            app:bgColor="#fcfffc"
+            app:firstScale="0"
+            app:isBgRoundRect="true"
+            app:largeScaleColor="#50b586"
+            app:largeScaleStroke="5dp"
+            app:maxScale="10"
+            app:midScaleColor="#999999"
+            app:midScaleStroke="3dp"
+            app:minScale="0"
+            app:resultNumColor="#50b586"
+            app:resultNumTextSize="20sp"
+            app:rulerHeight="50dp"
+            app:rulerToResultgap="30dp"
+            app:scaleCount="5"
+            app:scaleGap="10dp"
+            app:scaleNumColor="#666666"
+            app:scaleNumTextSize="16sp"
+            app:showScaleResult="true"
+            app:smallScaleColor="#aaaaaa"
+            app:smallScaleStroke="2dp"
+            app:unit="kg"
+            app:unitColor="#50b586"
+            app:unitTextSize="10sp" />
+
+        <chingtech.library.widget.ruler.RulerView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            app:bgColor="#fcfffc"
+            app:firstScale="172"
+            app:isBgRoundRect="true"
+            app:largeScaleColor="@color/colorAccent"
+            app:largeScaleStroke="5dp"
+            app:maxScale="230"
+            app:midScaleColor="@color/colorPrimaryDark"
+            app:midScaleStroke="3dp"
+            app:minScale="150"
+            app:resultNumColor="#50b586"
+            app:resultNumTextSize="20sp"
+            app:rulerHeight="50dp"
+            app:rulerToResultgap="30dp"
+            app:scaleCount="10"
+            app:scaleGap="10dp"
+            app:scaleNumColor="#666666"
+            app:scaleNumTextSize="16sp"
+            app:showScaleResult="true"
+            app:smallScaleColor="@color/colorPrimary"
+            app:smallScaleStroke="2dp"
+            app:unit="cm"
+            app:unitColor="#50b586"
+            app:unitTextSize="10sp" />
+
+        <chingtech.library.widget.ruler.RulerView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            app:bgColor="#fcfffc"
+            app:firstScale="172"
+            app:isBgRoundRect="true"
+            app:largeScaleColor="#50b586"
+            app:largeScaleStroke="5dp"
+            app:maxScale="230"
+            app:midScaleColor="#999999"
+            app:midScaleStroke="3dp"
+            app:minScale="150"
+            app:resultNumColor="#50b586"
+            app:resultNumTextSize="20sp"
+            app:rulerHeight="50dp"
+            app:rulerToResultgap="30dp"
+            app:scaleCount="5"
+            app:scaleGap="10dp"
+            app:scaleNumColor="#666666"
+            app:scaleNumTextSize="16sp"
+            app:showScaleResult="false"
+            app:smallScaleColor="#aaaaaa"
+            app:smallScaleStroke="2dp"
+            app:unit="cm"
+            app:unitColor="#50b586"
+            app:unitTextSize="10sp" />
+    </LinearLayout>
+</LinearLayout>

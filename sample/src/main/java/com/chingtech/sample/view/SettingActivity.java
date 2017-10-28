@@ -4,14 +4,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.SPUtils;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.widget.SwitchButton;
 import com.chingtech.sample.R;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -34,23 +33,22 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/27 下午1:17
  */
-@ContentView(R.layout.activity_setting)
 public class SettingActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.switch_pattern_lock)
+    @BindView(R.id.switch_pattern_lock)
     SwitchButton switchPatternLock;
-    @ViewInject(R.id.tv_pattern_lock)
-    private TextView tvPatternLock;
+    @BindView(R.id.tv_pattern_lock)
+    TextView     tvPatternLock;
 
-    @ViewInject(R.id.switch_pin_lock)
+    @BindView(R.id.switch_pin_lock)
     SwitchButton switchPinLock;
-    @ViewInject(R.id.tv_pin_lock)
-    private TextView tvPinLock;
+    @BindView(R.id.tv_pin_lock)
+    TextView     tvPinLock;
 
     private boolean isPatternLock;
     private boolean isPinLock;
@@ -95,6 +93,11 @@ public class SettingActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_setting;
+    }
+
+    @Override
     protected void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,8 +113,13 @@ public class SettingActivity extends BaseActivity {
         return findViewById(R.id.layout);
     }
 
-    @Event({R.id.tv_pattern_lock, R.id.tv_pin_lock})
-    private void onEvent(View view) {
+    @Override
+    protected void loadData() {
+
+    }
+
+    @OnClick({R.id.tv_pattern_lock, R.id.tv_pin_lock})
+    public void onEvent(View view) {
         switch (view.getId()) {
             case R.id.tv_pattern_lock:
                 openActivity(PatternLockActivity.class, "flag", "setting", false);

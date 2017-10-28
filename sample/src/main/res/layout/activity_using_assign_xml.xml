@@ -40,11 +40,5 @@
                 android:layout_height="wrap_content"
                 app:srlClassicsSpinnerStyle="Translate" />
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-        <chingtech.library.widget.IndexLayout
-            android:id="@+id/index_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true" />
     </RelativeLayout>
 </LinearLayout>

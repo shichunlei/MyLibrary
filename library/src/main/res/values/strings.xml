@@ -1,19 +1,4 @@
 <resources>
-    <string name="download_progress_bar">%1$s/%2$s(M)</string>
-    <string name="left_rate_value">0%</string>
-
-    <!-- 刷新 -->
-    <string name="pull_to_refresh">下拉刷新</string>
-    <string name="release_to_refresh">释放立即刷新</string>
-    <string name="refreshing">正在刷新…</string>
-    <string name="refresh_succeed">刷新成功</string>
-    <string name="refresh_fail">刷新失败</string>
-    <string name="release_to_load_more">释放加载更多</string>
-    <string name="pullup_to_load_more">上拉加载更多</string>
-    <string name="loading">正在加载…</string>
-    <string name="load_more_succeed">加载成功</string>
-    <string name="load_more_fail">加载失败</string>
-
     <string name="search_hint">Search…</string>
 
     <string name="text_empty">还没有数据呢！</string>

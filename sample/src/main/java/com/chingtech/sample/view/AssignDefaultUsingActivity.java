@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
@@ -14,23 +15,20 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * 全局指定默认的Header和Footer
  */
-@ContentView(R.layout.activity_using_assign_default)
 public class AssignDefaultUsingActivity extends BaseActivity {
 
     private static boolean isFirstEnter = true;
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.refreshLayout)
+    @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
 
     /**
@@ -79,6 +77,11 @@ public class AssignDefaultUsingActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_using_assign_default;
+    }
+
+    @Override
     protected void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,5 +95,10 @@ public class AssignDefaultUsingActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return (View) refreshLayout;
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 }

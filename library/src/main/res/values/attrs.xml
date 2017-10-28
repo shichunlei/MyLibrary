@@ -33,40 +33,51 @@
     </declare-styleable>
 
     <declare-styleable name="RoundTextView">
-        <!-- 边框颜色 -->
-        <attr format="color" name="textStrokeColor" />
-        <!-- textView弧度 -->
-        <attr format="dimension" name="textRadius" />
-        <!-- textView左上角弧度 -->
-        <attr format="dimension" name="textLeftTopRadius" />
-        <!-- textView左下角弧度 -->
-        <attr format="dimension" name="textLeftBottomRadius" />
-        <!-- textView右上角弧度 -->
-        <attr format="dimension" name="textRightTopRadius" />
-        <!-- textView右下角弧度 -->
-        <attr format="dimension" name="textRightBottomRadius" />
-        <!-- textView边框宽度 -->
-        <attr format="dimension" name="textStrokeWidth" />
-        <!-- textView图片 -->
-        <attr format="reference" name="textDrawable" />
-        <!-- textView正常状态文字颜色 -->
-        <attr format="color" name="textNormalTextColor" />
-        <!-- textView按下状态文字颜色 -->
-        <attr format="color" name="textSelectedTextColor" />
-        <!-- textView无左描边线 -->
-        <attr format="boolean" name="textNoLeftStroke" />
-        <!-- textView无右描边线 -->
-        <attr format="boolean" name="textNoRightStroke" />
-        <!-- textView无上描边线 -->
-        <attr format="boolean" name="textNoTopStroke" />
-        <!-- textView无底描边线 -->
-        <attr format="boolean" name="textNoBottomStroke" />
-        <!-- textView按下填充色 -->
-        <attr format="color" name="textPressedSolidColor" />
-        <!-- textView正常背景填充色 -->
-        <attr format="color" name="textNormalSolidColor" />
-        <!-- 是否支持button选中状态 与setSelected()配合使用 -->
-        <attr format="boolean" name="textIsSelected" />
+        <!--四周圆角度、左上、右上、左下、右下-->
+        <attr format="dimension" name="corner_radius_all" />
+        <attr format="dimension" name="corner_radius_top_left" />
+        <attr format="dimension" name="corner_radius_top_right" />
+        <attr format="dimension" name="corner_radius_bottom_left" />
+        <attr format="dimension" name="corner_radius_bottom_right" />
+
+        <!--虚线边框宽度/间隔-->
+        <attr format="dimension" name="border_dash_width" />
+        <attr format="dimension" name="border_dash_gap" />
+
+        <!--边框宽度-->
+        <attr format="dimension" name="border_width_normal" />
+        <attr format="dimension" name="border_width_pressed" />
+        <attr format="dimension" name="border_width_unable" />
+
+        <!--边框颜色-->
+        <attr format="color" name="border_color_normal" />
+        <attr format="color" name="border_color_pressed" />
+        <attr format="color" name="border_color_unable" />
+
+        <!--背景颜色-->
+        <attr format="color" name="background_normal" />
+        <attr format="color" name="background_pressed" />
+        <attr format="color" name="background_unable" />
+
+        <!--文本颜色-->
+        <attr format="color" name="text_color_normal" />
+        <attr format="color" name="text_color_pressed" />
+        <attr format="color" name="text_color_unable" />
+
+        <!--图标资源-->
+        <attr format="reference" name="icon_src_normal" />
+        <attr format="reference" name="icon_src_pressed" />
+        <attr format="reference" name="icon_src_unable" />
+
+        <!--图标、大小、位置-->
+        <attr format="dimension" name="icon_height" />
+        <attr format="dimension" name="icon_width" />
+        <attr name="icon_direction">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="ExpandIconView">
@@ -97,25 +108,6 @@
         <attr format="integer" name="number_duration" />
         <attr format="string" name="postfix" />
         <attr format="string" name="prefix" />
-    </declare-styleable>
-
-    <declare-styleable name="GoogleCircleProgressView">
-        <attr format="dimension" name="gcp_inner_radius" />
-        <attr format="color" name="gcp_background_color" />
-        <attr format="color" name="gcp_progress_color" />
-        <attr format="dimension" name="gcp_progress_stoke_width" />
-        <attr format="boolean" name="gcp_show_arrow" />
-        <attr format="boolean" name="gcp_enable_circle_background" />
-        <attr format="dimension" name="gcp_arrow_width" />
-        <attr format="dimension" name="gcp_arrow_height" />
-        <attr format="integer" name="gcp_progress" />
-        <attr format="integer" name="gcp_max" />
-        <attr format="dimension" name="gcp_progress_text_size" />
-        <attr format="color" name="gcp_progress_text_color" />
-        <attr format="enum" name="gcp_progress_text_visibility">
-            <enum name="visible" value="0" />
-            <enum name="invisible" value="1" />
-        </attr>
     </declare-styleable>
 
     <!-- 角标 -->
@@ -238,23 +230,6 @@
         <attr format="color" name="wlv_titleCenterStrokeColor" />
         <!-- Bottom title stroke width -->
         <attr format="dimension" name="wlv_titleCenterStrokeWidth" />
-    </declare-styleable>
-
-    <!-- 轮播 -->
-    <declare-styleable name="RecyclerViewBanner">
-        <attr format="integer" name="rvb_interval" />
-        <attr format="boolean" name="rvb_showIndicator" />
-        <attr format="color|reference" name="rvb_indicatorSelectedSrc" />
-        <attr format="color|reference" name="rvb_indicatorUnselectedSrc" />
-        <attr format="dimension|reference" name="rvb_indicatorSize" />
-        <attr format="dimension|reference" name="rvb_indicatorSpace" />
-        <attr format="dimension|reference" name="rvb_indicatorMargin" />
-        <attr format="enum" name="rvb_indicatorGravity">
-            <enum name="left" value="0" />
-            <enum name="center" value="1" />
-            <enum name="right" value="2" />
-        </attr>
-        <attr format="boolean" name="rvb_autoPlaying" />
     </declare-styleable>
 
     <!-- 雷达图 -->
@@ -398,5 +373,46 @@
     <declare-styleable name="StateView">
         <attr format="reference" name="emptyResource" />
         <attr format="reference" name="retryResource" />
+    </declare-styleable>
+
+    <declare-styleable name="RulerView">
+        <attr format="dimension" name="rulerHeight" />               <!--尺子的高度-->
+        <attr format="dimension" name="rulerToResultgap" />          <!--尺子距离结果的高度-->
+        <attr format="dimension" name="scaleGap" />                  <!--刻度间距-->
+        <attr format="integer" name="scaleCount" />                  <!--刻度数-->
+        <attr format="float" name="firstScale" />                    <!--默认选中的刻度-->
+        <attr format="integer" name="maxScale" />                    <!--最大刻度-->
+        <attr format="integer" name="minScale" />                    <!--最小刻度-->
+        <attr format="color" name="bgColor" />                       <!--背景色-->
+        <attr format="color" name="smallScaleColor" />               <!--小刻度的颜色-->
+        <attr format="color" name="midScaleColor" />                 <!--中刻度的颜色-->
+        <attr format="color" name="largeScaleColor" />               <!--大刻度的颜色-->
+        <attr format="color" name="scaleNumColor" />                 <!--刻度数的颜色-->
+        <attr format="color" name="resultNumColor" />                <!--结果字体的颜色-->
+        <attr format="string" name="unit" />                         <!--单位-->
+        <attr format="color" name="unitColor" />                     <!--单位颜色-->
+        <attr format="dimension" name="smallScaleStroke" />          <!--小刻度的宽度-->
+        <attr format="dimension" name="midScaleStroke" />            <!--中刻度的宽度-->
+        <attr format="dimension" name="largeScaleStroke" />          <!--大刻度的宽度-->
+        <attr format="dimension" name="resultNumTextSize" />         <!--结果字体大小-->
+        <attr format="dimension" name="scaleNumTextSize" />          <!--刻度字体大小-->
+        <attr format="dimension" name="unitTextSize" />              <!--单位字体大小-->
+        <attr format="boolean" name="showScaleResult" />             <!--是否显示结果值-->
+        <attr format="boolean" name="isBgRoundRect" />               <!--背景是否圆角-->
+    </declare-styleable>
+
+    <declare-styleable name="SatelliteMenu">
+        <attr format="dimension" name="radius" />
+        <attr format="dimension" name="menu_image_width" />
+        <attr format="dimension" name="menu_item_image_width" />
+        <attr format="dimension" name="menu_item_text_size" />
+        <attr format="color" name="menu_item_text_color" />
+
+        <attr format="integer" name="menu_postion">
+            <enum name="left_top" value="0" />
+            <enum name="right_top" value="1" />
+            <enum name="left_bottom" value="2" />
+            <enum name="right_bottom" value="3" />
+        </attr>
     </declare-styleable>
 </resources>

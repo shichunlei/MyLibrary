@@ -1,10 +1,12 @@
 package com.chingtech.sample.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.ListView;
 import chingtech.library.base.adapter.ablistview.BaseAbsListHolder;
 import chingtech.library.base.adapter.ablistview.CommonAdapter;
 import com.chingtech.sample.R;
+import com.chingtech.sample.bean.OptionBean;
 import java.util.List;
 
 /**
@@ -28,23 +30,29 @@ import java.util.List;
  * Created by 师春雷
  * Created at 17/8/29 上午9:52
  */
-public class OptionsListAdapter extends CommonAdapter<String> {
-
-    private String[] letter = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
-            "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+public class OptionsListAdapter extends CommonAdapter<OptionBean> {
 
     private ListView listview;
 
-    public OptionsListAdapter(Context context, List<String> list, ListView listview,
+    public OptionsListAdapter(Context context, List<OptionBean> list, ListView listview,
             int... layoutIds) {
         super(context, list, layoutIds);
         this.listview = listview;
     }
 
     @Override
-    public void onUpdate(BaseAbsListHolder holder, String item, int position) {
-        holder.setText(R.id.check_question_option, letter[position]);
-        holder.setText(R.id.tv_question_option, item);
+    public void onUpdate(BaseAbsListHolder holder, OptionBean item, int position) {
+        holder.setText(R.id.check_question_option, item.getNo());
+        if (TextUtils.isEmpty(item.getOptions())) {
+            if (position == 0) {
+                holder.setText(R.id.tv_question_option, "正确");
+            }
+            if (position == 1) {
+                holder.setText(R.id.tv_question_option, "错误");
+            }
+        } else {
+            holder.setText(R.id.tv_question_option, item.getOptions());
+        }
 
         int backgroundId;
         if (listview.isItemChecked(position)) {

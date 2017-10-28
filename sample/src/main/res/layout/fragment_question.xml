@@ -4,93 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_green"
     tools:context=".view.QuestionActivity">
 
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_question_category"
+                android:id="@+id/tv_question_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.2"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/google_blue"
+                tools:text="1/22" />
+
+            <TextView
+                android:id="@+id/tv_question_name"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:gravity="center"
-                tools:text="心里方面" />
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.2"
+                android:paddingBottom="10dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                tools:text="    今年你多大年纪了？" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:minHeight="100dp"
+            android:scaleType="centerInside"
+            android:visibility="gone" />
+
+        <chingtech.library.widget.NoScrollListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            tools:listitem="@layout/item_option" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/tv_question_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:textColor="@color/google_blue"
-                    tools:text="(单选题)" />
-
-                <TextView
-                    android:id="@+id/tv_question_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:lineSpacingMultiplier="1.2"
-                    android:paddingBottom="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingTop="10dp"
-                    tools:text="    今年你多大年纪了？" />
-            </LinearLayout>
+                    android:text="解析"
+                    android:textColor="#333"
+                    android:textSize="30px" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="216dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white">
-
-                <chingtech.library.widget.NoScrollListView
-                    android:id="@+id/listview"
+                <TextView
+                    android:id="@+id/tv_answer"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:textColor="#999"
+                    android:textSize="28px"
+                    tools:text="正确答案：D" />
+
+                <TextView
+                    android:id="@+id/tv_explains"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    tools:listitem="@layout/item_option" />
-
-                <EditText
-                    android:id="@+id/et_fill_blanks"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:gravity="left|top"
-                    android:hint="请输入..."
-                    android:lineSpacingExtra="3dp"
                     android:lineSpacingMultiplier="1.2"
-                    android:maxLength="150"
-                    android:padding="20dp"
-                    android:textColor="#666"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="下一题" />
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                    android:textColor="#999"
+                    android:textSize="16sp"
+                    tools:text="左侧变窄-用以警告车辆驾驶人注意前方车行道或路面狭窄情况，遇有来车应予减速避让。设在双车道路面宽度缩减为6 m以下的路段起点前方。" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
 </FrameLayout>

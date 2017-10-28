@@ -1,7 +1,6 @@
 package chingtech.library.base.application;
 
 import android.app.Application;
-import org.xutils.x;
 
 /**
  * MyLibrary
@@ -19,7 +18,5 @@ public class BaseApplication extends Application {
         super.onCreate();
 
         instance = this;
-
-        x.Ext.init(instance);
     }
 }

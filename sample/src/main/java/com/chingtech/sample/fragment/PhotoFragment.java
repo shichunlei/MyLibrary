@@ -5,15 +5,16 @@ import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.fragment.BaseFragment;
-import chingtech.library.widget.StateView;
+import chingtech.library.utils.LogUtils;
 import com.chingtech.sample.R;
 import com.chingtech.sample.adapter.GridImageAdapter;
 import com.chingtech.sample.FullyGridLayoutManager;
@@ -25,9 +26,6 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -50,64 +48,70 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/18 上午11:39
  */
-@ContentView(R.layout.content_photo)
 public class PhotoFragment extends BaseFragment
         implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
     private List<LocalMedia> selectList = new ArrayList<>();
 
-    @ViewInject(R.id.recycler)
-    private RecyclerView     recyclerView;
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
     private GridImageAdapter adapter;
     private int maxSelectNum = 9;
-    @ViewInject(R.id.tv_select_num)
-    private TextView tv_select_num;
+    @BindView(R.id.tv_select_num)
+    TextView tv_select_num;
 
-    @ViewInject(R.id.rgb_crop)
-    private RadioGroup rgb_crop;
-    @ViewInject(R.id.rgb_style)
-    private RadioGroup rgb_style;
-    @ViewInject(R.id.rgb_photo_mode)
-    private RadioGroup rgb_photo_mode;
-    @ViewInject(R.id.rgb_compress)
-    private RadioGroup rgb_compress;
+    @BindView(R.id.rgb_crop)
+    RadioGroup rgb_crop;
+    @BindView(R.id.rgb_style)
+    RadioGroup rgb_style;
+    @BindView(R.id.rgb_photo_mode)
+    RadioGroup rgb_photo_mode;
+    @BindView(R.id.rgb_compress)
+    RadioGroup rgb_compress;
 
     private int aspect_ratio_x, aspect_ratio_y;
 
-    @ViewInject(R.id.cb_voice)
-    private CheckBox cb_voice;
-    @ViewInject(R.id.cb_choose_mode)
-    private CheckBox cb_choose_mode;
-    @ViewInject(R.id.cb_isCamera)
-    private CheckBox cb_isCamera;
-    @ViewInject(R.id.cb_isGif)
-    private CheckBox cb_isGif;
-    @ViewInject(R.id.cb_preview_img)
-    private CheckBox cb_preview_img;
-    @ViewInject(R.id.cb_preview_video)
-    private CheckBox cb_preview_video;
-    @ViewInject(R.id.cb_crop)
-    private CheckBox cb_crop;
-    @ViewInject(R.id.cb_compress)
-    private CheckBox cb_compress;
-    @ViewInject(R.id.cb_mode)
-    private CheckBox cb_mode;
-    @ViewInject(R.id.cb_hide)
-    private CheckBox cb_hide;
-    @ViewInject(R.id.cb_preview_audio)
-    private CheckBox cb_preview_audio;
-    @ViewInject(R.id.cb_crop_circular)
-    private CheckBox cb_crop_circular;
-    @ViewInject(R.id.cb_styleCrop)
-    private CheckBox cb_styleCrop;
-    @ViewInject(R.id.cb_showCropGrid)
-    private CheckBox cb_showCropGrid;
-    @ViewInject(R.id.cb_showCropFrame)
-    private CheckBox cb_showCropFrame;
+    @BindView(R.id.cb_voice)
+    CheckBox cb_voice;
+    @BindView(R.id.cb_choose_mode)
+    CheckBox cb_choose_mode;
+    @BindView(R.id.cb_isCamera)
+    CheckBox cb_isCamera;
+    @BindView(R.id.cb_isGif)
+    CheckBox cb_isGif;
+    @BindView(R.id.cb_preview_img)
+    CheckBox cb_preview_img;
+    @BindView(R.id.cb_preview_video)
+    CheckBox cb_preview_video;
+    @BindView(R.id.cb_crop)
+    CheckBox cb_crop;
+    @BindView(R.id.cb_compress)
+    CheckBox cb_compress;
+    @BindView(R.id.cb_mode)
+    CheckBox cb_mode;
+    @BindView(R.id.cb_hide)
+    CheckBox cb_hide;
+    @BindView(R.id.cb_preview_audio)
+    CheckBox cb_preview_audio;
+    @BindView(R.id.cb_crop_circular)
+    CheckBox cb_crop_circular;
+    @BindView(R.id.cb_styleCrop)
+    CheckBox cb_styleCrop;
+    @BindView(R.id.cb_showCropGrid)
+    CheckBox cb_showCropGrid;
+    @BindView(R.id.cb_showCropFrame)
+    CheckBox cb_showCropFrame;
 
     private int compressMode = PictureConfig.SYSTEM_COMPRESS_MODE;
     private int themeId;
     private int chooseMode = PictureMimeType.ofAll();
+
+    private int x = 0, y = 0;
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.content_photo;
+    }
 
     @Override
     public void init() {
@@ -238,14 +242,14 @@ public class PhotoFragment extends BaseFragment
                     selectList = PictureSelector.obtainMultipleResult(data);
                     adapter.setList(selectList);
                     adapter.notifyDataSetChanged();
-                    Log.i("TAG", "onActivityResult:" + selectList.size());
+                    LogUtils.i("TAG", "onActivityResult:" + selectList.size());
                     break;
             }
         }
     }
 
-    @Event({R.id.minus, R.id.plus})
-    private void onClick(View v) {
+    @OnClick({R.id.minus, R.id.plus})
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.minus:
                 if (maxSelectNum > 1) {
@@ -348,8 +352,6 @@ public class PhotoFragment extends BaseFragment
                 break;
         }
     }
-
-    private int x = 0, y = 0;
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

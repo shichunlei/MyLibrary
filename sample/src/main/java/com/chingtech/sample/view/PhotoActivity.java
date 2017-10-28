@@ -2,13 +2,14 @@ package com.chingtech.sample.view;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
+import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.FullyGridLayoutManager;
 import com.chingtech.sample.R;
 import com.chingtech.sample.adapter.GridImageAdapter;
-import org.xutils.view.annotation.ContentView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -34,8 +35,6 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * <p>
@@ -58,66 +57,65 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/8/18 上午11:39
  */
-@ContentView(R.layout.activity_photo)
 public class PhotoActivity extends BaseActivity
         implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    private              List<LocalMedia> selectList = new ArrayList<>();
-    @ViewInject(R.id.recycler)
-    private RecyclerView recyclerView;
+    private List<LocalMedia> selectList = new ArrayList<>();
+    @BindView(R.id.recycler)
+    RecyclerView recyclerView;
 
     private GridImageAdapter adapter;
     private int maxSelectNum = 9;
 
-    @ViewInject(R.id.tv_select_num)
-    private TextView tv_select_num;
+    @BindView(R.id.tv_select_num)
+    TextView tv_select_num;
 
-    @ViewInject(R.id.rgb_crop)
-    private RadioGroup rgb_crop;
-    @ViewInject(R.id.rgb_style)
-    private RadioGroup rgb_style;
-    @ViewInject(R.id.rgb_photo_mode)
-    private RadioGroup rgb_photo_mode;
-    @ViewInject(R.id.rgb_compress)
-    private RadioGroup rgb_compress;
+    @BindView(R.id.rgb_crop)
+    RadioGroup rgb_crop;
+    @BindView(R.id.rgb_style)
+    RadioGroup rgb_style;
+    @BindView(R.id.rgb_photo_mode)
+    RadioGroup rgb_photo_mode;
+    @BindView(R.id.rgb_compress)
+    RadioGroup rgb_compress;
 
     private int aspect_ratio_x, aspect_ratio_y;
 
-    @ViewInject(R.id.cb_voice)
-    private CheckBox cb_voice;
-    @ViewInject(R.id.cb_choose_mode)
-    private CheckBox cb_choose_mode;
-    @ViewInject(R.id.cb_isCamera)
-    private CheckBox cb_isCamera;
-    @ViewInject(R.id.cb_isGif)
-    private CheckBox cb_isGif;
-    @ViewInject(R.id.cb_preview_img)
-    private CheckBox cb_preview_img;
-    @ViewInject(R.id.cb_preview_video)
-    private CheckBox cb_preview_video;
-    @ViewInject(R.id.cb_crop)
-    private CheckBox cb_crop;
-    @ViewInject(R.id.cb_compress)
-    private CheckBox cb_compress;
-    @ViewInject(R.id.cb_mode)
-    private CheckBox cb_mode;
-    @ViewInject(R.id.cb_hide)
-    private CheckBox cb_hide;
-    @ViewInject(R.id.cb_preview_audio)
-    private CheckBox cb_preview_audio;
-    @ViewInject(R.id.cb_crop_circular)
-    private CheckBox cb_crop_circular;
-    @ViewInject(R.id.cb_styleCrop)
-    private CheckBox cb_styleCrop;
-    @ViewInject(R.id.cb_showCropGrid)
-    private CheckBox cb_showCropGrid;
-    @ViewInject(R.id.cb_showCropFrame)
-    private CheckBox cb_showCropFrame;
+    @BindView(R.id.cb_voice)
+    CheckBox cb_voice;
+    @BindView(R.id.cb_choose_mode)
+    CheckBox cb_choose_mode;
+    @BindView(R.id.cb_isCamera)
+    CheckBox cb_isCamera;
+    @BindView(R.id.cb_isGif)
+    CheckBox cb_isGif;
+    @BindView(R.id.cb_preview_img)
+    CheckBox cb_preview_img;
+    @BindView(R.id.cb_preview_video)
+    CheckBox cb_preview_video;
+    @BindView(R.id.cb_crop)
+    CheckBox cb_crop;
+    @BindView(R.id.cb_compress)
+    CheckBox cb_compress;
+    @BindView(R.id.cb_mode)
+    CheckBox cb_mode;
+    @BindView(R.id.cb_hide)
+    CheckBox cb_hide;
+    @BindView(R.id.cb_preview_audio)
+    CheckBox cb_preview_audio;
+    @BindView(R.id.cb_crop_circular)
+    CheckBox cb_crop_circular;
+    @BindView(R.id.cb_styleCrop)
+    CheckBox cb_styleCrop;
+    @BindView(R.id.cb_showCropGrid)
+    CheckBox cb_showCropGrid;
+    @BindView(R.id.cb_showCropFrame)
+    CheckBox cb_showCropFrame;
 
     private int compressMode = PictureConfig.SYSTEM_COMPRESS_MODE;
     private int themeId;
@@ -197,6 +195,11 @@ public class PhotoActivity extends BaseActivity
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_photo;
+    }
+
+    @Override
     protected void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -210,6 +213,11 @@ public class PhotoActivity extends BaseActivity
     @Override
     protected View injectTarget() {
         return findViewById(R.id.layout);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener
@@ -331,14 +339,14 @@ public class PhotoActivity extends BaseActivity
                     // 如果裁剪并压缩了，已取压缩路径为准，因为是先裁剪后压缩的
                     adapter.setList(selectList);
                     adapter.notifyDataSetChanged();
-                    Log.i("TAG", "onActivityResult:" + selectList.toString());
+                    LogUtils.i("TAG", "onActivityResult:" + selectList.toString());
                     break;
             }
         }
     }
 
-    @Event({R.id.minus, R.id.plus})
-    private void onEvent(View v) {
+    @OnClick({R.id.minus, R.id.plus})
+    public void onEvent(View v) {
         switch (v.getId()) {
             case R.id.minus:
                 if (maxSelectNum > 1) {

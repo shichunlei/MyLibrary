@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.bean.RadarData;
 import chingtech.library.utils.StatusBarHelper;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * MyLibrary
@@ -26,17 +25,15 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 17/7/29 上午8:38
  */
-@ContentView(R.layout.activity_radarview)
 public class RadarViewActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar toolbar;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
-    @ViewInject(R.id.tv_title)
-    protected TextView tvTitle;
-
-    @ViewInject(R.id.radarView)
-    private RadarView mRadarView;
+    @BindView(R.id.radarView)
+    RadarView mRadarView;
 
     @Override
     protected void init() {
@@ -64,6 +61,11 @@ public class RadarViewActivity extends BaseActivity {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_radarview;
+    }
+
+    @Override
     protected void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,6 +79,11 @@ public class RadarViewActivity extends BaseActivity {
     @Override
     protected View injectTarget() {
         return findViewById(R.id.radarView);
+    }
+
+    @Override
+    protected void loadData() {
+
     }
 
     @Override

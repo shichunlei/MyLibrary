@@ -5,22 +5,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
-import com.bumptech.glide.Glide;
 import com.chingtech.sample.R;
-
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import chingtech.library.interfaces.SmallBangListener;
-import chingtech.library.widget.RecyclerViewBanner;
 import chingtech.library.widget.SmallBang;
 
 /**
@@ -30,30 +25,18 @@ import chingtech.library.widget.SmallBang;
  * Created by 师春雷
  * Created at 2017/5/27 10:13
  */
-@ContentView(R.layout.activity_like_bang)
 public class LikeBangActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     private SmallBang mSmallBang;
-    @ViewInject(R.id.image)
-    private ImageView mImage;
-    @ViewInject(R.id.text)
-    private TextView  mText;
-
-    @ViewInject(R.id.rv_banner_1)
-    private RecyclerViewBanner recyclerViewBanner1;
-    @ViewInject(R.id.rv_banner_2)
-    private RecyclerViewBanner recyclerViewBanner2;
-    @ViewInject(R.id.rv_banner_3)
-    private RecyclerViewBanner recyclerViewBanner3;
-    @ViewInject(R.id.rv_banner_4)
-    private RecyclerViewBanner recyclerViewBanner4;
-    @ViewInject(R.id.rv_banner_5)
-    private RecyclerViewBanner recyclerViewBanner5;
+    @BindView(R.id.image)
+    ImageView mImage;
+    @BindView(R.id.text)
+    TextView  mText;
 
     private boolean like = false;
 
@@ -79,45 +62,11 @@ public class LikeBangActivity extends BaseActivity {
         } else {
             mImage.setImageResource(R.drawable.heart);
         }
+    }
 
-        recyclerViewBanner1.setRvBannerData(banners);
-        recyclerViewBanner1.setOnSwitchRvBannerListener(
-                (position, bannerView) -> Glide.with(bannerView.getContext())
-                                               .load(banners.get(position))
-                                               .placeholder(R.drawable.wall04)
-                                               .into(bannerView));
-        recyclerViewBanner1.setOnRvBannerClickListener(
-                position -> Toast.makeText(LikeBangActivity.this, "position: " + position,
-                                           Toast.LENGTH_SHORT).show());
-
-        recyclerViewBanner2.setRvBannerData(banners);
-        recyclerViewBanner2.setOnSwitchRvBannerListener(
-                (position, bannerView) -> Glide.with(bannerView.getContext())
-                                               .load(banners.get(position))
-                                               .placeholder(R.drawable.wall04)
-                                               .into(bannerView));
-
-        recyclerViewBanner3.setRvBannerData(banners);
-        recyclerViewBanner3.setOnSwitchRvBannerListener(
-                (position, bannerView) -> Glide.with(bannerView.getContext())
-                                               .load(banners.get(position))
-                                               .placeholder(R.drawable.wall04)
-                                               .into(bannerView));
-
-        recyclerViewBanner4.setIndicatorInterval(2000);
-        recyclerViewBanner4.setRvBannerData(banners);
-        recyclerViewBanner4.setOnSwitchRvBannerListener(
-                (position, bannerView) -> Glide.with(bannerView.getContext())
-                                               .load(banners.get(position))
-                                               .placeholder(R.drawable.wall04)
-                                               .into(bannerView));
-
-        recyclerViewBanner5.setRvBannerData(banners);
-        recyclerViewBanner5.setOnSwitchRvBannerListener(
-                (position, bannerView) -> Glide.with(bannerView.getContext())
-                                               .load(banners.get(position))
-                                               .placeholder(R.drawable.wall04)
-                                               .into(bannerView));
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_like_bang;
     }
 
     @Override
@@ -136,8 +85,13 @@ public class LikeBangActivity extends BaseActivity {
         return findViewById(R.id.scrollView);
     }
 
-    @Event({R.id.image, R.id.button, R.id.text})
-    private void onEvent(View view) {
+    @Override
+    protected void loadData() {
+
+    }
+
+    @OnClick({R.id.image, R.id.button, R.id.text})
+    public void onEvent(View view) {
         switch (view.getId()) {
             case R.id.image:
                 like(view);

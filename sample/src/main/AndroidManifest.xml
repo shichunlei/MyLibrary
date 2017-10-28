@@ -118,6 +118,12 @@
         <activity
             android:name=".view.QuestionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.RulerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.SatelliteMenuActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".service.UpdateService" />
     </application>

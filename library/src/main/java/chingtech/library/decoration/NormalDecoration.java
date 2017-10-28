@@ -6,13 +6,13 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import chingtech.library.utils.LogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -162,7 +162,7 @@ public abstract class NormalDecoration extends RecyclerView.ItemDecoration {
                     translateTop = viewTop - 2 * headerHeight;
                 }
                 stickyHeaderPosArray.put(pos, viewTop);//将头部信息放进array
-                Log.i(TAG, "绘制各个头部" + pos);
+                LogUtils.i(TAG, "绘制各个头部" + pos);
             }
         }
         if (firstHeaderName == null) {
@@ -193,7 +193,7 @@ public abstract class NormalDecoration extends RecyclerView.ItemDecoration {
                             mHeaderTxtPaint);
         }
         canvas.restore();
-        Log.i(TAG, "绘制悬浮头部");
+        LogUtils.i(TAG, "绘制悬浮头部");
     }
 
     private Map<Integer, View> headViewMap = new HashMap<>();
@@ -267,7 +267,7 @@ public abstract class NormalDecoration extends RecyclerView.ItemDecoration {
     public void loadImage(final String url, final int pos, ImageView imageView) {
 
         if (getImg(url) != null) {
-            Log.i("qdx", "Glide 加载完图片" + pos);
+            LogUtils.i("qdx", "Glide 加载完图片" + pos);
             imageView.setImageDrawable(getImg(url));
         } else {
             Glide.with(mRecyclerView.getContext())
@@ -276,7 +276,7 @@ public abstract class NormalDecoration extends RecyclerView.ItemDecoration {
                      @Override
                      public void onResourceReady(GlideDrawable resource,
                              GlideAnimation<? super GlideDrawable> glideAnimation) {
-                         Log.i("qdx", "Glide回调" + pos);
+                         LogUtils.i("qdx", "Glide回调" + pos);
                          headViewMap.remove(pos);//删除，重新更新
                          imgDrawableMap.put(url, resource);
                          mRecyclerView.postInvalidate();

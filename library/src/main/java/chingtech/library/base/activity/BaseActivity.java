@@ -7,12 +7,13 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import chingtech.library.widget.ProgressDialog;
 import chingtech.library.widget.StateView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.xutils.x;
 
 /**
  * Created by leo on 2016/9/23.
@@ -28,14 +29,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected StateView mStateView;
 
+    Unbinder unbinder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
         context = this;
-
+        unbinder = ButterKnife.bind(this);
         progress = new ProgressDialog(this);
-
-        x.view().inject(this);
 
         mStateView = StateView.inject(injectTarget());
         // mStateView.setEmptyResource(R.layout.base_empty);
@@ -43,6 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         init();
         initToolBar();
+        loadData();
     }
 
     /**
@@ -53,6 +56,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void init();
 
     /**
+     * 设置布局资源
+     *
+     * @return
+     */
+    protected abstract int getLayoutId();
+
+    /**
      * 声明抽象方法
      *
      * 初始化ToolBar
@@ -60,6 +70,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initToolBar();
 
     protected abstract View injectTarget();
+
+    /**
+     * 初始化数据
+     *
+     * @return
+     */
+    protected abstract void loadData();
 
     /**
      * 接收前一个页面传递的String值
@@ -230,5 +247,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }

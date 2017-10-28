@@ -1,6 +1,8 @@
 package com.chingtech.sample;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.multidex.MultiDex;
 import android.support.v4.content.ContextCompat;
 import chingtech.library.base.application.BaseApplication;
 import com.chingtech.greendao.gen.DaoMaster;
@@ -12,6 +14,8 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+
+import static com.chingtech.sample.Constant.APP_ID;
 
 /**
  * <p>
@@ -35,8 +39,6 @@ import com.tencent.bugly.beta.Beta;
  * Created at 2017/4/17 17:26
  */
 public class App extends BaseApplication {
-
-    public static final String APP_ID = "e7cf059369"; // TODO 替换成bugly上注册的appid
 
     private       DaoMaster.DevOpenHelper mHelper;
     private       SQLiteDatabase          db;
@@ -239,6 +241,12 @@ public class App extends BaseApplication {
          * 参数3：是否开启debug
          */
         Bugly.init(getApplicationContext(), APP_ID, true);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**

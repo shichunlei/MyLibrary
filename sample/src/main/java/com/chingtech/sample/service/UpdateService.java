@@ -6,7 +6,6 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -26,7 +25,6 @@ public class UpdateService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i("Tag", "onCreate: =====");
     }
 
     @Override

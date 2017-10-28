@@ -5,6 +5,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
@@ -12,9 +14,6 @@ import com.chingtech.sample.R;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 /**
  * MyLibrary
@@ -23,26 +22,29 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 师春雷
  * Created at 2017/4/28 11:43
  */
-@ContentView(R.layout.activity_refresh)
 public class RefreshActivity extends BaseActivity implements OnLoadmoreListener, OnRefreshListener {
 
-    @ViewInject(R.id.refreshLayout)
-    private RefreshLayout refreshLayout;
+    @BindView(R.id.refreshLayout)
+    RefreshLayout refreshLayout;
 
-    @ViewInject(R.id.toolbar)
-    protected Toolbar  toolbar;
-    @ViewInject(R.id.tv_title)
-    private   TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar  toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     @Override
     protected void init() {
-
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnLoadmoreListener(this);
         refreshLayout.setOnRefreshListener(this);
 
         //触发自动刷新
         refreshLayout.autoRefresh();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_refresh;
     }
 
     @Override
@@ -62,6 +64,11 @@ public class RefreshActivity extends BaseActivity implements OnLoadmoreListener,
     }
 
     @Override
+    protected void loadData() {
+
+    }
+
+    @Override
     public void onLoadmore(final RefreshLayout refreshlayout) {
         ((View) refreshlayout).postDelayed(() -> {
             refreshlayout.finishLoadmore();
@@ -75,8 +82,8 @@ public class RefreshActivity extends BaseActivity implements OnLoadmoreListener,
         ((View) refreshlayout).postDelayed(() -> refreshlayout.finishRefresh(), 2000);
     }
 
-    @Event({R.id.btn_1, R.id.btn_2, R.id.btn_3})
-    private void onEvent(View view) {
+    @OnClick({R.id.btn_1, R.id.btn_2, R.id.btn_3})
+    public void onEvent(View view) {
         switch (view.getId()) {
             case R.id.btn_1:
                 openActivity(AssignDefaultUsingActivity.class, false);

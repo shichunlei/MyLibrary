@@ -13,31 +13,33 @@
     <LinearLayout
         android:id="@+id/layout_item"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
         android:background="@drawable/recycler_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         tools:background="@color/bar_grey_90">
 
         <TextView
             android:id="@+id/check_question_option"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/checkbox_qq_style"
             android:gravity="center"
             android:textColor="@color/google_blue"
-            android:textSize="25sp"
+            android:textSize="22sp"
             tools:text="A" />
 
         <TextView
             android:id="@+id/tv_question_option"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="20dp"
-            android:textSize="20sp"
+            android:textSize="16sp"
             tools:text="67岁" />
     </LinearLayout>
 </LinearLayout>
