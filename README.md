@@ -130,7 +130,7 @@
 
 **Version**
 
-    【0.1.9】
+    【0.2.2】
 
 # Installation
 
@@ -148,7 +148,7 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.1.9'
+        compile 'com.github.shichunlei:MyLibrary:0.2.2'
     }
 
 # Usage
@@ -165,9 +165,20 @@ Step 2. Add the dependency
 - _[CompactCalendarView](https://github.com/SundeepK/CompactCalendarView) # 日历_
 - _Bugly_
 - _[PictureSelector](https://github.com/LuckSiege/PictureSelector) # 图片选择库_
+- _butterknife_
+- _okhttp+retrofit+rxjava_
 - _等等。。。_
 
 # 更新日志
+
+【0.2.2】
+
+    更改刷新为SmartRefresh
+    更改网络加载为okhttp+retrofit+rxjava
+    更改注解为butterknife
+    添加RulerView
+    添加SatelliteMenu
+    等
 
 【0.1.9】
 
