@@ -17,6 +17,7 @@ public class TimeUtils {
     public static final String DATE_TIME_FORMAT          = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_TIME_HOUR_MIN_FORMAT = "yyyy-MM-dd HH:mm";
     public static final String DATE_TIME_MONTH_FORMAT    = "MM-dd HH:mm:ss";
+    public static final String DATETIME_FORMAT           = "MM-dd HH:mm";
     public static final String DATE_FORMAT               = "yyyy-MM-dd";
     public static final String DATE_SHAORT_FORMAT        = "MM-dd";
     public static final String TIME_FORMAT               = "HH:mm:ss";
@@ -37,6 +38,7 @@ public class TimeUtils {
     public static final String DATE_SHAORT_FORMAT_CN     = "MM月dd日";
     public static final String DAY_FORMAT                = "MM/dd";
     public static final String DAY_YMD_FORMAT            = "yyyy/MM/dd";
+    public static final String E_FORMAT                  = "E";
 
     public static final int WEEKS        = 0;
     public static final int WEEKS_CN     = 1;
@@ -61,7 +63,7 @@ public class TimeUtils {
     /**
      * 格式化时间
      *
-     * @param strDateTime
+     * @param strDateTime yyyy-MM-dd HH:mm:ss
      * @param format
      * @return
      */
@@ -73,7 +75,7 @@ public class TimeUtils {
     /**
      * 格式化时间
      *
-     * @param strDateTime
+     * @param strDateTime yyyy-MM-dd HH:mm:ss
      * @param format
      * @return
      */
@@ -108,8 +110,8 @@ public class TimeUtils {
     /**
      * 将日期字符串转换为date日期
      *
-     * @param strDate
-     * @return date型 yyyy-MM-dd
+     * @param strDate yyyy-MM-dd
+     * @return date型
      */
     public static Date strToDate(String strDate) {
         Date date = null;
@@ -128,6 +130,9 @@ public class TimeUtils {
      * @return date yyyy-MM-dd HH:mm:ss
      */
     public static Date strToDateTime(String strDateTime) {
+        if (StringUtils.isEmpty(strDateTime)) {
+            return null;
+        }
         Date datetime = null;
         try {
             datetime = getFormat(DATE_TIME_FORMAT).parse(strDateTime);
@@ -145,28 +150,37 @@ public class TimeUtils {
      * @return
      */
     public static String dateToStr(Date date, String formatType) {
+        if (date == null) {
+            return "Unknown";
+        }
         return getFormat(formatType).format(date);
     }
 
     /**
      * 将String类型转化为Date类型
      *
-     * @param strDate
+     * @param strDate    YYYY-MM-dd
      * @param formatType
      * @return
      * @throws ParseException
      */
     public static Date strToDate(String strDate, String formatType) throws ParseException {
+        if (StringUtils.isEmpty(strDate)) {
+            return null;
+        }
         return getFormat(formatType).parse(strDate);
     }
 
     /**
      * 将String类型的日期 时间转换成long型
      *
-     * @param strDateTime
+     * @param strDateTime YYYY-MM-dd HH:mm:ss
      * @return
      */
     public static long datetimeToLong(String strDateTime) {
+        if (StringUtils.isEmpty(strDateTime)) {
+            return 0l;
+        }
         Date date = strToDateTime(strDateTime);
         return date.getTime();
     }
@@ -174,10 +188,13 @@ public class TimeUtils {
     /**
      * 将String类型的日期转换成long型
      *
-     * @param strDate
+     * @param strDate YYYY-MM-dd
      * @return
      */
     public static long dateToLong(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return 0l;
+        }
         Date date = strToDate(strDate);
         return date.getTime();
     }
@@ -202,12 +219,43 @@ public class TimeUtils {
     }
 
     /**
+     * 获取当前日期 YYYY-MM-dd
+     *
+     * @return
+     */
+    public static String getToday() {
+        return dateToStr(new Date(), DATE_FORMAT);
+    }
+
+    /**
+     * 获取昨天日期 YYYY-MM-DD
+     *
+     * @return
+     */
+    public static String getYesterday() {
+        return afterNDay(-1);
+    }
+
+    /**
+     * 获取明天日期 YYYY-MM-DD
+     *
+     * @return
+     */
+    public static String getTomorrow() {
+        return afterNDay(1);
+    }
+
+    /**
      * 根据日期取得星期几
      *
      * @param strDate
      * @return
      */
     public static String getWeek(Context context, String strDate, int type) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+
         String[] weeks;
         switch (type) {
             case WEEKS:
@@ -247,7 +295,11 @@ public class TimeUtils {
      * @return
      * @throws ParseException
      */
-    public static String getWeekDay(String strDate, int week) throws ParseException {
+    public static String getWeekDay(String strDate, int week) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+
         String weekday;
 
         if (week < 0 || week > 6) {
@@ -279,6 +331,10 @@ public class TimeUtils {
      * @return
      */
     public static int getAge(String birthDay) {
+        if (StringUtils.isEmpty(birthDay)) {
+            return -1;
+        }
+
         Date birthday = strToDate(birthDay);
 
         Calendar cal = Calendar.getInstance();
@@ -316,6 +372,10 @@ public class TimeUtils {
      * @return
      */
     public static String friendlyTime(String sdatetime) {
+        if (StringUtils.isEmpty(sdatetime)) {
+            return "Unknown";
+        }
+
         Date time = strToDateTime(sdatetime);
 
         if (time == null) {
@@ -361,13 +421,38 @@ public class TimeUtils {
         } else if (days >= 31 && days <= 2 * 31) {
             ftime = "一个月前";
         } else if (days > 2 * 31 && days <= 3 * 31) {
-            ftime = "2个月前";
+            ftime = "两个月前";
         } else if (days > 3 * 31 && days <= 4 * 31) {
-            ftime = "3个月前";
+            ftime = "三个月前";
         } else {
             ftime = getFormat(DATE_FORMAT_CN).format(time);
         }
         return ftime;
+    }
+
+    /**
+     * 比较两个日期相差天数
+     *
+     * @param fDate
+     * @param oDate
+     * @return
+     */
+    public static int discrepancyDays(String fDate, String oDate) {
+
+        if (StringUtils.isEmpty(oDate) || StringUtils.isEmpty(fDate)) {
+            return -1;
+        }
+
+        Date date1 = strToDate(fDate);
+        Date date2 = strToDate(oDate);
+
+        if (null == date1 || null == date2) {
+            return -1;
+        }
+
+        long intervalMilli = Math.abs(date1.getTime() - date2.getTime());
+
+        return (int) (intervalMilli / (24 * 60 * 60 * 1000));
     }
 
     /**
@@ -378,11 +463,14 @@ public class TimeUtils {
      * @return
      */
     public static boolean dateCompare(String strDate1, String strDate2) {
+        if (StringUtils.isEmpty(strDate1) || StringUtils.isEmpty(strDate2)) {
+            return false;
+        }
         Date d1 = strToDate(strDate1);
         Date d2 = strToDate(strDate2);
 
         //比较
-        if ((d1.getTime() - d2.getTime()) / 1000 >= 0) {
+        if (d1.getTime() - d2.getTime() >= 0) {
             return true;
         } else {
             return false;
@@ -397,15 +485,34 @@ public class TimeUtils {
      * @return
      */
     public static boolean dateTimeCompare(String strDateTime1, String strDateTime2) {
+        if (StringUtils.isEmpty(strDateTime1) || StringUtils.isEmpty(strDateTime2)) {
+            return false;
+        }
         Date d1 = strToDateTime(strDateTime1);
         Date d2 = strToDateTime(strDateTime2);
 
         //比较
-        if ((d1.getTime() - d2.getTime()) / 1000 >= 0) {
+        if (d1.getTime() - d2.getTime() >= 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * 根据指定时间得到前后N毫秒的时间
+     *
+     * @param strDateTime
+     * @param mSeconds
+     * @param format
+     * @return
+     */
+    public static String afterNMSecond(String strDateTime, long mSeconds, String format) {
+        if (StringUtils.isEmpty(strDateTime)) {
+            return "Unknown";
+        }
+        long l = datetimeToLong(strDateTime);
+        return formatDateTime(l + mSeconds, format);
     }
 
     /**
@@ -415,11 +522,7 @@ public class TimeUtils {
      * @return
      */
     public static String afterNDay(int days) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DATE, days);
-        Date date = calendar.getTime();
-        return getFormat(DATE_FORMAT).format(date);
+        return afterNDay("", days, "");
     }
 
     /**
@@ -430,11 +533,7 @@ public class TimeUtils {
      * @return
      */
     public static String afterNDay(int days, String format) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DATE, days);
-        Date date = calendar.getTime();
-        return getFormat(format).format(date);
+        return afterNDay("", days, format);
     }
 
     /**
@@ -445,12 +544,7 @@ public class TimeUtils {
      * @return
      */
     public static String afterNDay(String strDate, int days) {
-        Date     date     = strToDate(strDate);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, days);
-        Date afterDate = calendar.getTime();
-        return getFormat(DATE_FORMAT).format(afterDate);
+        return afterNDay(strDate, days, "");
     }
 
     /**
@@ -462,12 +556,21 @@ public class TimeUtils {
      * @return
      */
     public static String afterNDay(String strDate, int days, String format) {
-        Date     date     = strToDate(strDate);
+        Date date;
+        if (StringUtils.isEmpty(strDate)) {
+            date = new Date();
+        } else {
+            date = strToDate(strDate);
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, days);
         Date afterDate = calendar.getTime();
-        return getFormat(format).format(afterDate);
+        if (StringUtils.isEmpty(format)) {
+            return getFormat(DATE_FORMAT).format(afterDate);
+        } else {
+            return getFormat(format).format(afterDate);
+        }
     }
 
     /**
@@ -485,8 +588,13 @@ public class TimeUtils {
      * @return
      */
     public static boolean isLeapYear(String strDate) {
-        Date              date = strToDate(strDate);
-        GregorianCalendar gc   = (GregorianCalendar) Calendar.getInstance();
+        if (StringUtils.isEmpty(strDate)) {
+            return false;
+        }
+        Date date = strToDate(strDate);
+
+        GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+
         gc.setTime(date);
         int year = gc.get(Calendar.YEAR);
         if ((year % 400) == 0) {
@@ -505,15 +613,23 @@ public class TimeUtils {
     /**
      * 计算某月的天数
      *
-     * @param year
-     * @param month 现实生活中的月份，不是系统存储的月份，从1到12
+     * @param strDate
      * @return
      */
-    public int getDaysOfMonth(String year, int month) {
+    public static int getDaysOfMonth(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return -1;
+        }
+        Date date = strToDate(strDate);
+
+        GregorianCalendar gc = (GregorianCalendar) Calendar.getInstance();
+        gc.setTime(date);
+
+        int month = gc.get(Calendar.MONTH) + 1;
         if (month < 1 || month > 12) {
             return 0;
         }
-        boolean isLeapYear  = isLeapYear(year);
+        boolean isLeapYear  = isLeapYear(strDate);
         int     daysOfMonth = 0;
         switch (month) {
             case 1:
@@ -543,6 +659,85 @@ public class TimeUtils {
     }
 
     /**
+     * 计算给定日期所在月的第一天的日期
+     *
+     * @param strDate
+     * @return
+     */
+    public static String getFirstDayOfMonth(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+        Date date = strToDate(strDate);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+
+        return formatDateTime(calendar.getTime(), DATE_FORMAT);
+    }
+
+    /**
+     * 计算给定日期所在月的最后一天的日期
+     *
+     * @param strDate
+     * @return
+     */
+    public static String getLastDayOfMonth(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+        Date date = strToDate(strDate);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+        return formatDateTime(calendar.getTime(), DATE_FORMAT);
+    }
+
+    /**
+     * 获取给定日期的前一个月的月份
+     *
+     * @param strDate
+     * @return
+     */
+    public static String getBeforeMonth(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+        Date date = strToDate(strDate);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        calendar.add(calendar.MONTH, -1);
+
+        return formatDateTime(calendar.getTime(), Y_M_FORMAT);
+    }
+
+    /**
+     * 获取给定日期的后一个月的月份
+     *
+     * @param strDate
+     * @return
+     */
+    public static String getAfterMonth(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+        Date date = strToDate(strDate);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        calendar.add(calendar.MONTH, 1);
+
+        return formatDateTime(calendar.getTime(), Y_M_FORMAT);
+    }
+
+    /**
      * 比较两个日期相差天数
      *
      * @param fDate
@@ -550,6 +745,9 @@ public class TimeUtils {
      * @return
      */
     public static int intervalDays(String fDate, String oDate) {
+        if (StringUtils.isEmpty(fDate) || StringUtils.isEmpty(oDate)) {
+            return -1;
+        }
         Date date1 = strToDate(fDate);
         Date date2 = strToDate(oDate);
 
@@ -563,7 +761,7 @@ public class TimeUtils {
     }
 
     /**
-     * 获取日期中的生肖
+     * 获取某一年的生肖
      *
      * @param year
      * @return
@@ -573,13 +771,21 @@ public class TimeUtils {
     }
 
     /**
-     * 获取日期中的星座
+     * 获取某天是什么星座
      *
-     * @param month
-     * @param day
+     * @param strDate
      * @return
      */
-    public static String getZodiac(int month, int day) {
+    public static String getZodiac(String strDate) {
+        if (StringUtils.isEmpty(strDate)) {
+            return "Unknown";
+        }
+        Date     date     = strToDate(strDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int day   = calendar.get(Calendar.DATE);
+        int month = calendar.get(Calendar.MONTH);
+
         return ZODIAC[day >= ZODIAC_FLAGS[month - 1] ? month - 1 : (month + 10) % 12];
     }
 

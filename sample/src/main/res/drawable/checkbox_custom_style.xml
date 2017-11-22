@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/gray_thumb" android:state_selected="false" />
-    <item android:drawable="@drawable/red_thumb" android:state_selected="true" />
+    <item android:state_selected="false">
+        <shape android:shape="rectangle">
+
+            <size android:height="18dp" android:width="18dp" />
+            <!-- 圆角弧度 20 -->
+            <corners android:radius="20dp" />
+
+            <!-- 变化率 -->
+            <gradient android:endColor="#eeeeee" android:startColor="#eeeeee" />
+
+            <stroke android:color="#33da33" android:width="1dp" />
+
+        </shape>
+
+    </item>
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+
+            <size android:height="18dp" android:width="18dp" />
+            <!-- 圆角弧度 20 -->
+            <corners android:radius="20dp" />
+
+            <!-- 变化率 -->
+            <gradient android:endColor="#da3333" android:startColor="#daed22" />
+
+            <stroke android:color="#da3333" android:width="1dp" />
+        </shape>
+    </item>
 </selector>

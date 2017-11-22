@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/message_oval_white" android:state_selected="false" />
-    <item android:drawable="@drawable/message_oval_orange" android:state_selected="true" />
+    <item android:state_selected="false">
+        <shape android:shape="oval" android:useLevel="false">
+
+            <solid android:color="@color/transparent" />
+            <stroke android:color="@color/white" android:width="0.5dp" />
+            <size android:height="18dp" android:width="18dp" />
+        </shape>
+    </item>
+    <item android:state_selected="true">
+        <shape android:shape="oval" android:useLevel="false">
+
+            <solid android:color="@color/color_c51" />
+            <stroke android:color="@color/white" android:width="0.5dp" />
+            <size android:height="18dp" android:width="18dp" />
+        </shape>
+    </item>
 </selector>

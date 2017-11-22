@@ -401,6 +401,40 @@
         <attr format="boolean" name="isBgRoundRect" />               <!--背景是否圆角-->
     </declare-styleable>
 
+    <declare-styleable name="DecimalRulerView">
+        <attr format="float" name="rv_defaultValue" />              <!-- 默认值 -->
+        <attr format="float" name="rv_minValue" />                  <!-- 最小值 -->
+        <attr format="float" name="rv_maxValue" />                  <!-- 最大值 -->
+        <attr format="float" name="rv_spanValue" />                 <!-- 精度，最小支持0.1 -->
+        <attr format="dimension" name="rv_itemSpacing" />           <!-- 每个刻度间的宽度 -->
+        <attr format="dimension" name="rv_minLineHeight" />         <!-- 最短刻度线长度 -->
+        <attr format="dimension" name="rv_maxLineHeight" />         <!-- 最长刻度线长度 -->
+        <attr format="dimension" name="rv_middleLineHeight" />      <!-- 中间刻度线长度 -->
+        <attr format="dimension" name="rv_minLineWidth" />          <!-- 最短刻度线宽度 -->
+        <attr format="dimension" name="rv_maxLineWidth" />          <!-- 最长刻度线宽度 -->
+        <attr format="dimension" name="rv_middleLineWidth" />       <!-- 中间刻度线宽度 -->
+        <attr format="color" name="rv_scaleTextColor" />            <!-- 刻度盘文字颜色 -->
+        <attr format="color" name="rv_minLineColor" />              <!-- 最短刻度线颜色 -->
+        <attr format="color" name="rv_maxLineColor" />              <!-- 最大刻度线颜色 -->
+        <attr format="color" name="rv_middleLineColor" />           <!-- 中间刻度线颜色 -->
+        <attr format="dimension" name="rv_scaleTextSize" />         <!-- 刻度盘文字大小 -->
+        <attr format="dimension" name="rv_textMarginTop" />         <!-- 刻度盘文字距离刻度边缘距离 -->
+        <attr format="color" name="rv_indcatorColor" />             <!-- 指示器颜色 -->
+        <attr format="dimension" name="rv_indcatorWidth" />         <!-- 指示器宽度，形状为三角时不起作用 -->
+        <attr format="enum" name="rv_indcatorType">                 <!-- 指示器形状 -->
+            <enum name="line" value="1" />                          <!-- 线 -->
+            <enum name="triangle" value="2" />                      <!-- 三角 -->
+        </attr>
+        <attr format="color" name="rv_resultTextColor" />           <!-- 结果文字颜色 -->
+        <attr format="color" name="rv_unitTextColor" />             <!-- 单位文字颜色 -->
+        <attr format="dimension" name="rv_resultTextSize" />        <!-- 结果文字大小 -->
+        <attr format="dimension" name="rv_unitTextSize" />          <!-- 单位文字大小 -->
+        <attr format="string" name="rv_unit" />                     <!-- 单位 -->
+        <attr format="boolean" name="rv_showResult" />              <!-- 是否显示结果 -->
+        <attr format="boolean" name="rv_showUnit" />                <!-- 是否显示单位 -->
+        <attr format="boolean" name="rv_alphaEnable" />             <!-- 是否渐变 -->
+    </declare-styleable>
+
     <declare-styleable name="SatelliteMenu">
         <attr format="dimension" name="radius" />
         <attr format="dimension" name="menu_image_width" />
@@ -413,6 +447,25 @@
             <enum name="right_top" value="1" />
             <enum name="left_bottom" value="2" />
             <enum name="right_bottom" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MarqueeViewStyle">
+        <attr format="integer|reference" name="mvInterval" />
+        <attr format="integer|reference" name="mvAnimDuration" />
+        <attr format="dimension|reference" name="mvTextSize" />
+        <attr format="color|reference" name="mvTextColor" />
+        <attr format="boolean" name="mvSingleLine" />
+        <attr name="mvGravity">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="mvDirection">
+            <enum name="bottom_to_top" value="0" />
+            <enum name="top_to_bottom" value="1" />
+            <enum name="right_to_left" value="2" />
+            <enum name="left_to_right" value="3" />
         </attr>
     </declare-styleable>
 </resources>

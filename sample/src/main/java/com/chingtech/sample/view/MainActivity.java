@@ -1,6 +1,5 @@
 package com.chingtech.sample.view;
 
-import static chingtech.library.utils.AddSpaceTextWatcher.SpaceType.*;
 import static chingtech.library.utils.DESHelper.*;
 import static chingtech.library.utils.IdcardUtil.*;
 import static chingtech.library.utils.StringUtils.*;
@@ -65,7 +64,7 @@ public class MainActivity extends BaseActivity {
 
     private AlertDialog dialog;
 
-    private String[] items = {"图片选择Activity", "图片选择Fragment", "SatelliteMenu", "item3"};
+    private String[] items = {"图片选择Activity", "图片选择Fragment", "SatelliteMenu", "日历大全"};
 
     @BindView(R.id.image1)
     RoundImageView image1;
@@ -260,6 +259,7 @@ public class MainActivity extends BaseActivity {
                       } else if (dialog.getSingleChoiceItems() == 2) {
                           openActivity(SatelliteMenuActivity.class, false);
                       } else if (dialog.getSingleChoiceItems() == 3) {
+                          openActivity(CalendarActivity.class, false);
                       }
 
                       showToast(items[dialog.getSingleChoiceItems()]);
@@ -326,8 +326,7 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View           v        = LayoutInflater.from(MainActivity.this)
-                                                    .inflate(R.layout.layout, null);
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
@@ -538,7 +537,7 @@ public class MainActivity extends BaseActivity {
         MenuItem item1 = menu.findItem(R.id.action_search1);
 
         item1.setOnMenuItemClickListener(item -> {
-            showToast("=====");
+            openActivity(MarqueeViewActivity.class, false);
             return false;
         });
 

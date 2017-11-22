@@ -2,6 +2,7 @@ package chingtech.library.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,8 +21,8 @@ public class StringUtils {
      * @param str
      * @return
      */
-    public static boolean isNotEmpty(String str) {
-        return str != null && !"".equals(str.trim());
+    public static boolean isNotEmpty(CharSequence str) {
+        return str != null && !"".equals(str);
     }
 
     /**
@@ -30,7 +31,7 @@ public class StringUtils {
      * @param str
      * @return
      */
-    public static boolean isEmpty(String str) {
+    public static boolean isEmpty(CharSequence str) {
         if (str == null || "".equals(str) || str.length() == 0) {
             return true;
         }
@@ -43,15 +44,53 @@ public class StringUtils {
         return true;
     }
 
+    public static <T> boolean isNotEmpty(List<T> list) {
+        return !isEmpty(list);
+    }
+
+    public static <T> boolean isEmpty(List<T> list) {
+        if (list == null || list.size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
     /**
-     * 验证两个值是否相同
+     * 判断两字符串是否相等
      *
-     * @param value1
-     * @param value2
-     * @return
+     * @param a 待校验字符串a
+     * @param b 待校验字符串b
+     * @return {@code true}: 相等<br>{@code false}: 不相等
      */
-    public static boolean checkValSame(String value1, String value2) {
-        return value1.equals(value2);
+    public static boolean equals(final CharSequence a, final CharSequence b) {
+        if (a == b) {
+            return true;
+        }
+        int length;
+        if (a != null && b != null && (length = a.length()) == b.length()) {
+            if (a instanceof String && b instanceof String) {
+                return a.equals(b);
+            } else {
+                for (int i = 0; i < length; i++) {
+                    if (a.charAt(i) != b.charAt(i)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断两字符串忽略大小写是否相等
+     *
+     * @param a 待校验字符串a
+     * @param b 待校验字符串b
+     * @return {@code true}: 相等<br>{@code false}: 不相等
+     */
+    public static boolean equalsIgnoreCase(final String a, final String b) {
+        return a == null ? b == null : a.equalsIgnoreCase(b);
     }
 
     /**
@@ -370,5 +409,136 @@ public class StringUtils {
             prefix += '圆'; // 如果整数部分存在,则有圆的字样
         }
         return prefix + suffix; // 返回正确表示
+    }
+
+    /**
+     * 返回字符串长度
+     *
+     * @param s 字符串
+     * @return null返回0，其他返回自身长度
+     */
+    public static int length(final CharSequence s) {
+        return s == null ? 0 : s.length();
+    }
+
+    /**
+     * 首字母大写
+     *
+     * @param s 待转字符串
+     * @return 首字母大写字符串
+     */
+    public static String upperFirstLetter(final String s) {
+        if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) {
+            return s;
+        }
+        return String.valueOf((char) (s.charAt(0) - 32)) + s.substring(1);
+    }
+
+    /**
+     * 首字母小写
+     *
+     * @param s 待转字符串
+     * @return 首字母小写字符串
+     */
+    public static String lowerFirstLetter(final String s) {
+        if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) {
+            return s;
+        }
+        return String.valueOf((char) (s.charAt(0) + 32)) + s.substring(1);
+    }
+
+    /**
+     * 反转字符串
+     *
+     * @param s 待反转字符串
+     * @return 反转字符串
+     */
+    public static String reverse(final String s) {
+        int len = length(s);
+        if (len <= 1) {
+            return s;
+        }
+        int    mid   = len >> 1;
+        char[] chars = s.toCharArray();
+        char   c;
+        for (int i = 0; i < mid; ++i) {
+            c = chars[i];
+            chars[i] = chars[len - i - 1];
+            chars[len - i - 1] = c;
+        }
+        return new String(chars);
+    }
+
+    /**
+     * 转化为半角字符
+     *
+     * @param s 待转字符串
+     * @return 半角字符串
+     */
+    public static String toDBC(final String s) {
+        if (isEmpty(s)) {
+            return s;
+        }
+        char[] chars = s.toCharArray();
+        for (int i = 0, len = chars.length; i < len; i++) {
+            if (chars[i] == 12288) {
+                chars[i] = ' ';
+            } else if (65281 <= chars[i] && chars[i] <= 65374) {
+                chars[i] = (char) (chars[i] - 65248);
+            } else {
+                chars[i] = chars[i];
+            }
+        }
+        return new String(chars);
+    }
+
+    /**
+     * 转化为全角字符
+     *
+     * @param s 待转字符串
+     * @return 全角字符串
+     */
+    public static String toSBC(final String s) {
+        if (isEmpty(s)) {
+            return s;
+        }
+        char[] chars = s.toCharArray();
+        for (int i = 0, len = chars.length; i < len; i++) {
+            if (chars[i] == ' ') {
+                chars[i] = (char) 12288;
+            } else if (33 <= chars[i] && chars[i] <= 126) {
+                chars[i] = (char) (chars[i] + 65248);
+            } else {
+                chars[i] = chars[i];
+            }
+        }
+        return new String(chars);
+    }
+
+    // 根据Unicode编码判断中文汉字和符号
+    private static boolean isChinese(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
+            return true;
+        }
+        return false;
+    }
+
+    // 判断中文汉字和符号
+    public static boolean isChinese(String strName) {
+        char[] ch = strName.toCharArray();
+        for (int i = 0; i < ch.length; i++) {
+            char c = ch[i];
+            if (isChinese(c)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -3,13 +3,11 @@ package com.chingtech.sample.view;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
-import chingtech.library.widget.ruler.DecimalRulerView;
-import chingtech.library.widget.ruler.IntegerRulerView;
 import com.chingtech.sample.R;
 
 /**
@@ -31,50 +29,23 @@ import com.chingtech.sample.R;
  * Package com.chingtech.sample.view
  * Description:
  * Created by 师春雷
- * Created at 17/10/28 上午8:29
+ * Created at 17/11/4 上午8:53
  */
-public class RulerActivity extends BaseActivity {
+public class CalendarActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar  toolbar;
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
-    @BindView(R.id.tv_height)
-    TextView tvHeight;
-
-    @BindView(R.id.ruler_weight)
-    DecimalRulerView mWeightRulerView;
-
-    @BindView(R.id.ruler_height)
-    IntegerRulerView mHeightRulerView;
-
-    @BindView(R.id.layout)
-    LinearLayout layout;
-
-    private float mWeight = 20.0f;
-
-    private float mHeight    = 170;
-    private float mMaxHeight = 220;
-    private float mMinHeight = 100;
-
     @Override
     protected void init() {
-        mWeightRulerView.initViewParam(20, 0, 100f, 1f);
-        mWeightRulerView.setChooseValueChangeListener(value -> {
-            mWeight = value;
-        });
 
-        mHeightRulerView.initViewParam(mHeight, mMaxHeight, mMinHeight);
-        mHeightRulerView.setValueChangeListener(value -> {
-            tvHeight.setText((int) value + "cm");
-            mHeight = value;
-        });
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_ruler;
+        return R.layout.activity_calendar;
     }
 
     @Override
@@ -83,17 +54,36 @@ public class RulerActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         assert toolbar != null;
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        tvTitle.setText("刻度尺");
+        tvTitle.setText("日历大全");
 
         StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
     @Override
     protected View injectTarget() {
-        return layout;
+        return findViewById(R.id.scrollView);
     }
 
     @Override
     protected void loadData() {
     }
+
+    @OnClick({R.id.ncalendar, R.id.calendar, R.id.dingding, R.id.xiaomi})
+    public void onEvent(View view) {
+        switch (view.getId()) {
+            case R.id.ncalendar:
+                openActivity(NCalendarActivity.class, false);
+                break;
+            case R.id.calendar:
+                openActivity(CompactActivity.class, false);
+                break;
+            case R.id.dingding:
+                openActivity(DingdingActivity.class, false);
+                break;
+            case R.id.xiaomi:
+                openActivity(XiaomiActivity.class, false);
+                break;
+        }
+    }
+
 }
