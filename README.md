@@ -324,17 +324,17 @@ and override the methods you need.
         }
     });
 
-
-Here are the attributes you can specify through XML or related setters:
-* `button_icons` - Array of buttons icons.
-* `button_colors` - Array of buttons colors.
-* `icon_menu` - Menu default icon.
-* `icon_close` - Menu closed icon.
-* `icon_color` - Menu icon color.
-* `duration_ring` - Ring effect duration.
-* `duration_open` - Menu opening animation duration.
-* `duration_close` - Menu closing animation duration.
-* `distance` - Distance between center button and buttons
+| Attribute 属性          | Description 描述 | 
+|:---				     |:---| 
+|button_icons|Array of buttons icons.|
+|button_colors|Array of buttons colors.|
+|icon_menu|Menu default icon.|
+|icon_close|Menu closed icon.|
+|icon_color|Menu icon color.|
+|duration_ring|Ring effect duration.|
+|duration_open|Menu opening animation duration.|
+|duration_close|Menu closing animation duration.|
+|distance|Distance between center button and buttons|
 
 ===========================================================================================
 
@@ -433,24 +433,26 @@ Java
 
 More Style:
 
-    <attr name="sb_shadow_radius" format="reference|dimension"/>       阴影半径
-    <attr name="sb_shadow_offset" format="reference|dimension"/>       阴影偏移
-    <attr name="sb_shadow_color" format="reference|color"/>            阴影颜色
-    <attr name="sb_uncheck_color" format="reference|color"/>           关闭颜色
-    <attr name="sb_checked_color" format="reference|color"/>           开启颜色
-    <attr name="sb_border_width" format="reference|dimension"/>        边框宽度
-    <attr name="sb_checkline_color" format="reference|color"/>         开启指示器颜色
-    <attr name="sb_checkline_width" format="reference|dimension"/>     开启指示器线宽
-    <attr name="sb_uncheckcircle_color" format="reference|color"/>     关闭指示器颜色
-    <attr name="sb_uncheckcircle_width" format="reference|dimension"/> 关闭指示器线宽
-    <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>关闭指示器半径
-    <attr name="sb_checked" format="reference|boolean"/>               是否选中
-    <attr name="sb_shadow_effect" format="reference|boolean"/>         是否启用阴影
-    <attr name="sb_effect_duration" format="reference|integer"/>       动画时间，默认300ms
-    <attr name="sb_button_color" format="reference|color"/>            按钮颜色
-    <attr name="sb_show_indicator" format="reference|boolean"/>        是否显示指示器，默认true：显示
-    <attr name="sb_background" format="reference|color"/>              背景色，默认白色
-    <attr name="sb_enable_effect" format="reference|boolean"/>         是否启用特效，默认true
+|attr|format|description|
+|---|:---|:---:|
+|sb_shadow_radius|dimension|阴影半径|
+|sb_shadow_offset|dimension|阴影偏移|
+|sb_shadow_color|color|阴影颜色|
+|sb_uncheck_color|color|关闭颜色|
+|sb_checked_color|color|开启颜色|
+|sb_border_width|dimension|边框宽度|
+|sb_checkline_color|color|开启指示器颜色|
+|sb_checkline_width|dimension|开启指示器线宽|
+|sb_uncheckcircle_color|color|关闭指示器颜色|
+|sb_uncheckcircle_width|dimension|关闭指示器线宽|
+|sb_uncheckcircle_radius|dimension|关闭指示器半径|
+|sb_checked|boolean|是否选中|
+|sb_shadow_effect|boolean|是否启用阴影|
+|sb_effect_duration|integer|动画时间，默认300ms|
+|sb_button_color|color|按钮颜色|
+|sb_show_indicator|boolean|是否显示指示器，默认true：显示|
+|sb_background|color|背景色，默认白色|
+|sb_enable_effect|boolean|是否启用特效，默认true|
 
 ===========================================================================================
 
