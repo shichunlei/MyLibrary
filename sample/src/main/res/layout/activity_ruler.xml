@@ -23,9 +23,8 @@
                 android:id="@+id/ruler_weight"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:focusable="true"
                 app:rv_alphaEnable="true"
-                app:rv_indcatorColor="#4e4"
+                app:rv_indcatorColor="#414"
                 app:rv_indcatorType="triangle"
                 app:rv_indcatorWidth="5dp"
                 app:rv_itemSpacing="8dp"
@@ -45,23 +44,6 @@
                 app:rv_unit="CM"
                 app:rv_unitTextColor="#666"
                 app:rv_unitTextSize="15sp" />
-
-            <chingtech.library.widget.ruler.DecimalRulerView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:focusable="true"
-                app:rv_showResult="true" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#333" />
-
-            <chingtech.library.widget.ruler.IntegerRulerView
-                android:id="@+id/ruler_height"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp" />
 
             <View
                 android:layout_width="match_parent"

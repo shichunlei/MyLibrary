@@ -421,6 +421,7 @@
         <attr format="dimension" name="rv_textMarginTop" />         <!-- 刻度盘文字距离刻度边缘距离 -->
         <attr format="color" name="rv_indcatorColor" />             <!-- 指示器颜色 -->
         <attr format="dimension" name="rv_indcatorWidth" />         <!-- 指示器宽度，形状为三角时不起作用 -->
+        <attr format="dimension" name="rv_indcatorHeight" />        <!-- 指示器高度，形状为三角时不起作用 -->
         <attr format="enum" name="rv_indcatorType">                 <!-- 指示器形状 -->
             <enum name="line" value="1" />                          <!-- 线 -->
             <enum name="triangle" value="2" />                      <!-- 三角 -->
@@ -432,7 +433,7 @@
         <attr format="string" name="rv_unit" />                     <!-- 单位 -->
         <attr format="boolean" name="rv_showResult" />              <!-- 是否显示结果 -->
         <attr format="boolean" name="rv_showUnit" />                <!-- 是否显示单位 -->
-        <attr format="boolean" name="rv_alphaEnable" />             <!-- 是否渐变 -->
+        <attr format="boolean" name="rv_alphaEnable" />             <!-- 是否刻度渐变 -->
     </declare-styleable>
 
     <declare-styleable name="CircleMenuView">

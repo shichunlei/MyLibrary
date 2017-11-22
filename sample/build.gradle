@@ -68,10 +68,7 @@ dependencies {
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     // Banner
-    compile 'com.youth.banner:banner:1.4.9'
-    // ToggleButtonGroup
-    compile 'com.nex3z:toggle-button-group:1.0.2'
-
+    compile 'cn.bingoogolapple:bga-banner:2.1.8@aar'
     //注解
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

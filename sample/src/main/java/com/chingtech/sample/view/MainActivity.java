@@ -23,14 +23,13 @@ import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.ConversionUtils;
 import chingtech.library.widget.*;
 import chingtech.library.widget.SearchView;
+import cn.bingoogolapple.bgabanner.BGABanner;
 import com.bumptech.glide.Glide;
 import com.chingtech.sample.R;
 
 import com.chingtech.sample.service.UpdateService;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
-import com.youth.banner.*;
-import com.youth.banner.loader.ImageLoader;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -54,8 +53,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView   tvTitle;
 
-    @BindView(R.id.banner)
-    Banner banner;
+    @BindView(R.id.bgabanner)
+    BGABanner bgaBanner;
 
     private List<String> images = new ArrayList<>();
 
@@ -138,14 +137,18 @@ public class MainActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         //开始轮播
-        banner.startAutoPlay();
+        if (null != bgaBanner) {
+            bgaBanner.startAutoPlay();
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         //结束轮播
-        banner.stopAutoPlay();
+        if (null != bgaBanner) {
+            bgaBanner.stopAutoPlay();
+        }
     }
 
     @Override
@@ -706,36 +709,22 @@ public class MainActivity extends BaseActivity {
         titles.add("美女4");
         titles.add("美女5");
 
-        //设置banner样式
-        banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
-        //设置图片加载器
-        banner.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        banner.setImages(images);
-        //设置banner动画效果
-        banner.setBannerAnimation(Transformer.DepthPage);
-        //设置标题集合（当banner样式有显示title时）
-        banner.setBannerTitles(titles);
-        //设置指示器位置（当banner模式中有指示器时）
-        banner.setIndicatorGravity(BannerConfig.CENTER);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
-    }
+        bgaBanner.setAdapter((banner, itemView, model, position) -> {
+            Glide.with(MainActivity.this)
+                 .load(model)
+                 .placeholder(R.drawable.wall04)
+                 .error(R.drawable.wall04)
+                 .centerCrop()
+                 .dontAnimate()
+                 .into((ImageView) itemView);
+        });
 
-    public class GlideImageLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            /**
-             注意：
-             1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
-             2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
-             传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
-             切记不要胡乱强转！
-             */
+        bgaBanner.setData(images, titles);
 
-            //Glide 加载图片简单用法
-            Glide.with(context).load(path).centerCrop().into(imageView);
-        }
+        bgaBanner.setDelegate((banner, itemView, model, position) -> {
+            // TODO
+            showToast(titles.get(position));
+        });
     }
 
     /**

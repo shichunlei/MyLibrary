@@ -35,20 +35,26 @@ public class DecimalRulerView extends View {
     private static final float MIN_VALUE          = 0f;   // 最小值
     private static final float SPAN_VALUE         = 0.1f;
     private static final int   ITEM_MAX_HEIGHT    = 36;  //最大刻度高度
+    private static final int   ITEM_MAX_WIDTH     = 3;  //最大刻度宽度
     private static final int   ITEM_MIN_HEIGHT    = 20;  //最小刻度高度
+    private static final int   ITEM_MIN_WIDTH     = 2;  //最小刻度宽度
     private static final int   ITEM_MIDDLE_HEIGHT = 28;  //中间刻度高度
-    private static final int   INDICATOR_WIDTH    = 6;
+    private static final int   ITEM_MIDDLE_WIDTH  = 2;  //中间刻度宽度
+    private static final int   INDICATOR_WIDTH    = 3;//指示器宽度
+    private static final int   INDICATOR_HEIGHT   = 38;//指示器高度
 
     private static final int LINE     = 1;
     private static final int TRIANGLE = 2;
 
+    private static final int defaultItemSpacing = 6;
+    private static final int textMarginTop      = 8;
+    private static final int scaleTextSize      = 15;
+    private static final int unitTextSize       = 15;
+    private static final int resultTextSize     = 17;
+
     private int mIndicatorType;
 
     private int resultHeight = 0;
-
-    private int defaultItemSpacing = 6;
-    private int textMarginTop      = 8;
-    private int scaleTextSize      = 15;
 
     private float mValue;
     private float mMaxValue;
@@ -60,9 +66,9 @@ public class DecimalRulerView extends View {
     private int   mMiddleLineHeight;
     private int   mMinLineHeight;
 
-    private int mMinLineWidth    = 1;
-    private int mMaxLineWidth    = 2;
-    private int mMiddleLineWidth = 1;
+    private int mMinLineWidth;
+    private int mMaxLineWidth;
+    private int mMiddleLineWidth;
 
     private int   mTextMarginTop;
     private float mScaleTextHeight;
@@ -71,12 +77,13 @@ public class DecimalRulerView extends View {
 
     private int mIndcatorColor = 0xff50b586;
     private int mIndcatorWidth;
+    private int mIndcatorHeight;
     private int mScaleTextColor = 0X80222222;
     private int mScaleTextSize;
     private int mResultTextColor = 0xff50b586;
-    private int mResultTextSize  = 6;
-    private int mUnitTextColor   = 0Xff666666;
-    private int mUnitTextSize    = 4;
+    private int mResultTextSize;
+    private int mUnitTextColor = 0Xff666666;
+    private int    mUnitTextSize;
     private String unit;
 
     private int mMinLineColor    = 0X80222222;
@@ -93,6 +100,7 @@ public class DecimalRulerView extends View {
     private int   mMaxOffset;
     private float mOffset; // 默认尺起始点在屏幕中心, offset是指尺起始点的偏移值
     private int   mLastX, mMove;
+
     private OnChooseResulterListener mListener;
 
     public DecimalRulerView(Context context) {
@@ -142,16 +150,16 @@ public class DecimalRulerView extends View {
 
         mMinLineWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_minLineWidth,
                                                 (int) TypedValue.applyDimension(
-                                                        TypedValue.COMPLEX_UNIT_DIP, mMinLineWidth,
+                                                        TypedValue.COMPLEX_UNIT_DIP, ITEM_MIN_WIDTH,
                                                         getResources().getDisplayMetrics()));
         mMiddleLineWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_middleLineWidth,
                                                    (int) TypedValue.applyDimension(
                                                            TypedValue.COMPLEX_UNIT_DIP,
-                                                           mMiddleLineWidth,
+                                                           ITEM_MIDDLE_WIDTH,
                                                            getResources().getDisplayMetrics()));
         mMaxLineWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_maxLineWidth,
                                                 (int) TypedValue.applyDimension(
-                                                        TypedValue.COMPLEX_UNIT_DIP, mMaxLineWidth,
+                                                        TypedValue.COMPLEX_UNIT_DIP, ITEM_MAX_WIDTH,
                                                         getResources().getDisplayMetrics()));
         mMaxLineColor = a.getColor(R.styleable.DecimalRulerView_rv_maxLineColor, mMaxLineColor);
         mMiddleLineColor = a.getColor(R.styleable.DecimalRulerView_rv_middleLineColor,
@@ -163,6 +171,11 @@ public class DecimalRulerView extends View {
                                                          TypedValue.COMPLEX_UNIT_DIP,
                                                          INDICATOR_WIDTH,
                                                          getResources().getDisplayMetrics()));
+        mIndcatorHeight = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_indcatorHeight,
+                                                  (int) TypedValue.applyDimension(
+                                                          TypedValue.COMPLEX_UNIT_DIP,
+                                                          INDICATOR_HEIGHT,
+                                                          getResources().getDisplayMetrics()));
         mIndicatorType = a.getInt(R.styleable.DecimalRulerView_rv_indcatorType, LINE);
         mScaleTextColor = a.getColor(R.styleable.DecimalRulerView_rv_scaleTextColor,
                                      mScaleTextColor);
@@ -180,13 +193,12 @@ public class DecimalRulerView extends View {
         mResultTextSize = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_resultTextSize,
                                                   (int) TypedValue.applyDimension(
                                                           TypedValue.COMPLEX_UNIT_SP,
-                                                          mResultTextSize,
+                                                          resultTextSize,
                                                           getResources().getDisplayMetrics()));
         mUnitTextColor = a.getColor(R.styleable.DecimalRulerView_rv_unitTextColor, mUnitTextColor);
         mUnitTextSize = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_unitTextSize,
                                                 (int) TypedValue.applyDimension(
-                                                        TypedValue.COMPLEX_UNIT_SP,
-                                                        mUnitTextSize,
+                                                        TypedValue.COMPLEX_UNIT_SP, unitTextSize,
                                                         getResources().getDisplayMetrics()));
 
         showUnit = a.getBoolean(R.styleable.DecimalRulerView_rv_showUnit, true);
@@ -307,8 +319,8 @@ public class DecimalRulerView extends View {
         int srcPointX = mWidth / 2; // 默认表尺起始点在屏幕中心
         // 画中间的指示器
         if (mIndicatorType == LINE) {
-            canvas.drawLine(srcPointX, resultHeight, srcPointX,
-                            (mHeight - resultHeight) / 2 + resultHeight, mIndicatorPaint);
+            canvas.drawLine(srcPointX, resultHeight, srcPointX, mIndcatorHeight + resultHeight,
+                            mIndicatorPaint);
         } else if (mIndicatorType == TRIANGLE) {
             /*画一个实心三角形*/
             Path path = new Path();

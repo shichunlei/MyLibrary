@@ -489,6 +489,79 @@ Attrs 属性
 
 ===========================================================================================
 
+###### DecimalRulerView 用法
+
+Attrs 属性
+
+    <attr format="float" name="rv_defaultValue" />              <!-- 默认值 -->
+    <attr format="float" name="rv_minValue" />                  <!-- 最小值 -->
+    <attr format="float" name="rv_maxValue" />                  <!-- 最大值 -->
+    <attr format="float" name="rv_spanValue" />                 <!-- 精度，最小支持0.1 -->
+    <attr format="dimension" name="rv_itemSpacing" />           <!-- 每个刻度间的宽度 -->
+    <attr format="dimension" name="rv_minLineHeight" />         <!-- 最短刻度线长度 -->
+    <attr format="dimension" name="rv_maxLineHeight" />         <!-- 最长刻度线长度 -->
+    <attr format="dimension" name="rv_middleLineHeight" />      <!-- 中间刻度线长度 -->
+    <attr format="dimension" name="rv_minLineWidth" />          <!-- 最短刻度线宽度 -->
+    <attr format="dimension" name="rv_maxLineWidth" />          <!-- 最长刻度线宽度 -->
+    <attr format="dimension" name="rv_middleLineWidth" />       <!-- 中间刻度线宽度 -->
+    <attr format="color" name="rv_scaleTextColor" />            <!-- 刻度盘文字颜色 -->
+    <attr format="color" name="rv_minLineColor" />              <!-- 最短刻度线颜色 -->
+    <attr format="color" name="rv_maxLineColor" />              <!-- 最大刻度线颜色 -->
+    <attr format="color" name="rv_middleLineColor" />           <!-- 中间刻度线颜色 -->
+    <attr format="dimension" name="rv_scaleTextSize" />         <!-- 刻度盘文字大小 -->
+    <attr format="dimension" name="rv_textMarginTop" />         <!-- 刻度盘文字距离刻度边缘距离 -->
+    <attr format="color" name="rv_indcatorColor" />             <!-- 指示器颜色 -->
+    <attr format="dimension" name="rv_indcatorWidth" />         <!-- 指示器宽度，形状为三角时不起作用 -->
+    <attr format="dimension" name="rv_indcatorHeight" />        <!-- 指示器高度，形状为三角时不起作用 -->
+    <attr format="enum" name="rv_indcatorType">                 <!-- 指示器形状 -->
+        <enum name="line" value="1" />                          <!-- 线 -->
+        <enum name="triangle" value="2" />                      <!-- 三角 -->
+    </attr>
+    <attr format="color" name="rv_resultTextColor" />           <!-- 结果文字颜色 -->
+    <attr format="color" name="rv_unitTextColor" />             <!-- 单位文字颜色 -->
+    <attr format="dimension" name="rv_resultTextSize" />        <!-- 结果文字大小 -->
+    <attr format="dimension" name="rv_unitTextSize" />          <!-- 单位文字大小 -->
+    <attr format="string" name="rv_unit" />                     <!-- 单位 -->
+    <attr format="boolean" name="rv_showResult" />              <!-- 是否显示结果 -->
+    <attr format="boolean" name="rv_showUnit" />                <!-- 是否显示单位 -->
+    <attr format="boolean" name="rv_alphaEnable" />             <!-- 是否刻度渐变 -->
+
+XML
+
+    <chingtech.library.widget.ruler.DecimalRulerView
+        android:id="@+id/ruler_weight"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:rv_alphaEnable="true"
+        app:rv_indcatorColor="#414"
+        app:rv_indcatorType="triangle"
+        app:rv_indcatorWidth="5dp"
+        app:rv_itemSpacing="8dp"
+        app:rv_maxLineColor="#e6e"
+        app:rv_maxLineHeight="30dp"
+        app:rv_maxLineWidth="3dp"
+        app:rv_middleLineColor="#ee2"
+        app:rv_middleLineHeight="20dp"
+        app:rv_middleLineWidth="2dp"
+        app:rv_minLineColor="#e62"
+        app:rv_minLineHeight="10dp"
+        app:rv_minLineWidth="1dp"
+        app:rv_resultTextColor="#444"
+        app:rv_resultTextSize="20sp"
+        app:rv_scaleTextColor="#e42"
+        app:rv_scaleTextSize="15sp"
+        app:rv_unit="CM"
+        app:rv_unitTextColor="#666"
+        app:rv_unitTextSize="15sp" />
+
+Java
+
+    mRulerView.initViewParam(20, 0, 100f, 1f);
+    mRulerView.setChooseValueChangeListener(value -> {
+        
+    });
+
+===========================================================================================
 
 ### Sample 中使用到的第三方框架包括
 
@@ -502,6 +575,7 @@ Attrs 属性
 - _[PictureSelector](https://github.com/LuckSiege/PictureSelector) # 图片选择库_
 - _butterknife_
 - _okhttp+retrofit+rxjava_
+- _[BGABanner-Android](https://github.com/bingoogolapple/BGABanner-Android) # 引导界面滑动导航 + 大于等于1页时无限轮播 + 各种切换动画轮播效果_
 - _等等。。。_
 
 # 更新日志

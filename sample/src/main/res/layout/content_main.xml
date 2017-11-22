@@ -23,12 +23,16 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
+                <cn.bingoogolapple.bgabanner.BGABanner
+                    android:id="@+id/bgabanner"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:delay_time="1500"
-                    app:is_auto_play="true" />
+                    android:layout_height="250dp"
+                    android:scaleType="fitXY"
+                    app:banner_indicatorGravity="bottom|right"
+                    app:banner_pageChangeDuration="1500"
+                    app:banner_placeholderDrawable="@drawable/wall04"
+                    app:banner_tipTextSize="12sp"
+                    app:banner_transitionEffect="alpha" />
 
                 <chingtech.library.widget.RoundTextView
                     android:id="@+id/timer"

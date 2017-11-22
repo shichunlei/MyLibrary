@@ -9,7 +9,6 @@ import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.widget.ruler.DecimalRulerView;
-import chingtech.library.widget.ruler.IntegerRulerView;
 import com.chingtech.sample.R;
 
 /**
@@ -44,31 +43,18 @@ public class RulerActivity extends BaseActivity {
     TextView tvHeight;
 
     @BindView(R.id.ruler_weight)
-    DecimalRulerView mWeightRulerView;
-
-    @BindView(R.id.ruler_height)
-    IntegerRulerView mHeightRulerView;
+    DecimalRulerView mRulerView;
 
     @BindView(R.id.layout)
     LinearLayout layout;
 
     private float mWeight = 20.0f;
 
-    private float mHeight    = 170;
-    private float mMaxHeight = 220;
-    private float mMinHeight = 100;
-
     @Override
     protected void init() {
-        mWeightRulerView.initViewParam(20, 0, 100f, 1f);
-        mWeightRulerView.setChooseValueChangeListener(value -> {
+        mRulerView.initViewParam(20, 0, 100f, 1f);
+        mRulerView.setChooseValueChangeListener(value -> {
             mWeight = value;
-        });
-
-        mHeightRulerView.initViewParam(mHeight, mMaxHeight, mMinHeight);
-        mHeightRulerView.setValueChangeListener(value -> {
-            tvHeight.setText((int) value + "cm");
-            mHeight = value;
         });
     }
 
