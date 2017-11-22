@@ -129,6 +129,12 @@
 
     [原项目地址](https://github.com/sfsheng0322/MarqueeView)
 
+- **AnimNumberTextView**
+
+    滚动显示TextView的数字,支持自定义每个字符速度。
+    
+    [原项目地址](https://github.com/AndroidMsky/RandomTextView)
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、AnimatorUitls（部分参考于SwitchLayout）、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper、RandomUtils、ConversionUtils等
@@ -329,6 +335,59 @@ Here are the attributes you can specify through XML or related setters:
 * `duration_open` - Menu opening animation duration.
 * `duration_close` - Menu closing animation duration.
 * `distance` - Distance between center button and buttons
+
+===========================================================================================
+
+##### AnimNumberTextView 用法
+
+<img src="/screenshot/3032383935.gif">
+
+xml中定义：
+
+    <chingtech.library.widget.AnimNumberTextView
+        android:id="@+id/rtv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:padding="0px"
+        android:text="123456"
+        android:textSize="28sp" />
+
+所有位数相同速度滚动：
+
+    mNumberTextView.setText("876543");
+    mNumberTextView.setPianyilian(AnimNumberTextView.ALL);
+    mNumberTextView.start();
+
+从左到右侧由快到慢滚动：
+
+    mNumberTextView.setText("12313288");
+    mNumberTextView.setPianyilian(AnimNumberTextView.FIRSTF_FIRST);
+    mNumberTextView.start();
+
+从左到右侧由慢到快滚动：
+
+    mNumberTextView.setText("9078111123");
+    mNumberTextView.setPianyilian(AnimNumberTextView.FIRSTF_LAST);
+    mNumberTextView.start();
+
+自定义每位数字的速度滚动（每帧滚动的像素）：
+
+    mNumberTextView.setText("909878");
+    pianyiliang[0] = 7;
+    pianyiliang[1] = 6;
+    pianyiliang[2] = 12;
+    pianyiliang[3] = 8;
+    pianyiliang[4] = 18;
+    pianyiliang[5] = 10;
+    mNumberTextView.setPianyilian(pianyiliang);
+    mNumberTextView.start();
+
+自定义滚动行数（默认10行）：
+
+    mNumberTextView.setMaxLine(20);
 
 ===========================================================================================
 

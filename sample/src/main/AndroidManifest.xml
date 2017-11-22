@@ -139,6 +139,9 @@
         <activity
             android:name=".view.MarqueeViewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AnimNumberTextViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".service.UpdateService" />
     </application>
