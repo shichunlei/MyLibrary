@@ -435,19 +435,25 @@
         <attr format="boolean" name="rv_alphaEnable" />             <!-- 是否渐变 -->
     </declare-styleable>
 
-    <declare-styleable name="SatelliteMenu">
-        <attr format="dimension" name="radius" />
-        <attr format="dimension" name="menu_image_width" />
-        <attr format="dimension" name="menu_item_image_width" />
-        <attr format="dimension" name="menu_item_text_size" />
-        <attr format="color" name="menu_item_text_color" />
-
-        <attr format="integer" name="menu_postion">
-            <enum name="left_top" value="0" />
-            <enum name="right_top" value="1" />
-            <enum name="left_bottom" value="2" />
-            <enum name="right_bottom" value="3" />
-        </attr>
+    <declare-styleable name="CircleMenuView">
+        <!-- Array of buttons icons. -->
+        <attr name="button_icons" format="reference"/>
+        <!-- Array of buttons colors. -->
+        <attr name="button_colors" format="reference"/>
+        <!-- Menu default icon. -->
+        <attr name="icon_menu" format="reference"/>
+        <!-- Menu closed icon. -->
+        <attr name="icon_close" format="reference"/>
+        <!-- Menu icon color. -->
+        <attr name="icon_color" format="color"/>
+        <!-- Ring effect duration. -->
+        <attr name="duration_ring" format="integer"/>
+        <!-- Menu opening animation duration. -->
+        <attr name="duration_open" format="integer"/>
+        <!-- Menu closing animation duration. -->
+        <attr name="duration_close" format="integer"/>
+        <!-- Distance between center button and buttons. -->
+        <attr name="distance" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="MarqueeViewStyle">

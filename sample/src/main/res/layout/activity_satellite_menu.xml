@@ -9,51 +9,18 @@
 
     <include layout="@layout/tool_bar" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <!--左上-->
-        <chingtech.library.widget.SatelliteMenu
-            android:id="@+id/mSatelliteMenuLeftTop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:menu_image_width="45dp"
-            app:menu_item_image_width="50dp"
-            app:menu_item_text_color="@color/colorPrimary"
-            app:menu_item_text_size="4sp"
-            app:menu_postion="left_top"
-            app:radius="150dp" />
-
-        <!--右上-->
-        <chingtech.library.widget.SatelliteMenu
-            android:id="@+id/mSatelliteMenuRightTop"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:menu_image_width="45dp"
-            app:menu_item_image_width="35dp"
-            app:menu_postion="right_top"
-            app:radius="130dp" />
-
-        <!--左下-->
-        <chingtech.library.widget.SatelliteMenu
-            android:id="@+id/mSatelliteMenuLeftBottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:menu_image_width="35dp"
-            app:menu_item_image_width="30dp"
-            app:menu_postion="left_bottom"
-            app:radius="150dp" />
-
-        <!--右下-->
-        <chingtech.library.widget.SatelliteMenu
-            android:id="@+id/mSatelliteMenuRightBottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:menu_image_width="30dp"
-            app:menu_item_image_width="25dp"
-            app:menu_postion="right_bottom"
-            app:radius="150dp" />
-    </RelativeLayout>
+        <chingtech.library.widget.circlemenu.CircleMenuView
+            android:id="@+id/circle_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:button_colors="@array/colors"
+            app:button_icons="@array/icons" />
+    </LinearLayout>
 </LinearLayout>

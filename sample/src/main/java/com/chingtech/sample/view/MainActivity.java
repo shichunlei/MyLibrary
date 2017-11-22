@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity {
 
     private AlertDialog dialog;
 
-    private String[] items = {"图片选择Activity", "图片选择Fragment", "SatelliteMenu", "日历大全"};
+    private String[] items = {"图片选择Activity", "图片选择Fragment", "圆形菜单", "日历大全"};
 
     @BindView(R.id.image1)
     RoundImageView image1;
