@@ -235,13 +235,10 @@ public class MainActivity extends BaseActivity {
                   .setCancel("", null)
                   .addSheetItem("滚动显示TextView的数字",
                                 which -> openActivity(AnimNumberTextViewActivity.class, false))
-                  .addSheetItem("item1", which -> showToast("item1")).addSheetItem("item2",
-                                                                                   which -> showToast(
-                                                                                           "item2"))
-                                                                     .addSheetItem("item3",
-                                                                                   which -> showToast(
-                                                                                           "item3"))
-                                                                     .show();
+                  .addSheetItem("Ring", which -> openActivity(RingActivity.class, false))
+                  .addSheetItem("DashBoard", which -> openActivity(DashBoardActivity.class, false))
+                  .addSheetItem("item3", which -> showToast("item3"))
+                  .show();
         });
 
         findViewById(R.id.btn_dialog2).setOnClickListener(view -> {
@@ -330,8 +327,7 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View           v        = LayoutInflater.from(MainActivity.this)
-                                                    .inflate(R.layout.layout, null);
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);

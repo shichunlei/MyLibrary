@@ -3,29 +3,4 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorPrimaryText">#212121</color>
-
-    <color name="colorSeekBarDefault">#c3c3c3</color>
-    <color name="mine_shaft">#303030</color>
-
-    <color name="bar_grey">#393a3e</color>
-    <color name="color_f6">#f6f6f6</color>
-    <color name="color_fa">#fafafa</color>
-    <color name="divider">#B6B6B6</color>
-    <color name="color_c51">#f94c51</color>
-    <color name="color_green">#43c117</color>
-
-    <color name="white">#FFFFFF</color>  <!-- 白色 -->
-    <color name="yellow">#FFFF00</color> <!-- 黄色 -->
-    <color name="gold">#FFD700</color>   <!-- 金色 -->
-    <color name="orange">#FFA500</color> <!-- 橙色 -->
-    <color name="red">#ff5555</color>    <!-- 红色 -->
-    <color name="gray">#808080</color>   <!-- 灰色 -->
-    <color name="green">#008000</color>  <!-- 绿色 -->
-    <color name="blue">#455ede</color>   <!-- 蓝色 -->
-    <color name="black">#000000</color>  <!-- 黑色 -->
-
-    <color name="transparent">#00000000</color>
-    <color name="half_transparent">#4f000000</color>
-    <color name="half_transparent_white">#80ffffff</color>
 </resources>

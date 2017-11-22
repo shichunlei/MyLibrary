@@ -1,5 +1,6 @@
 package com.chingtech.sample.view;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
+import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.widget.AnimNumberTextView;
 import com.chingtech.sample.R;
 
@@ -65,7 +67,13 @@ public class AnimNumberTextViewActivity extends BaseActivity {
 
     @Override
     protected void initToolBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        assert toolbar != null;
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        tvTitle.setText("跳动的数字");
 
+        StatusBarHelper.tintStatusBar(this, ContextCompat.getColor(context, R.color.colorPrimary));
     }
 
     @Override

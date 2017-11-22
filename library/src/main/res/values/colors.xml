@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
     <color name="window_background">#FFF5F5F5</color>
-
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="transparent">#00000000</color>
+    <color name="colorPrimaryText">#212121</color>
 
     <color name="google_blue">#037BFF</color>
     <color name="google_red">#FD4A2E</color>
@@ -30,4 +30,49 @@
     <color name="colorDirtyWithe">#f6f9f6</color>
     <color name="colorForgiven">#4bbb74</color>
     <color name="colorLightBlack">#2B2E2B</color>
+
+    <color name="cal_sign_color">#ee5b4f</color>
+    <color name="cal_buckle_color">#d4d4d4</color>
+    <color name="cal_safe_color">#b7d961</color>
+    <color name="cal_buckle_text_color">#949494</color>
+    <color name="drak_calendar_text_color">#222222</color>
+    <color name="base_black_title_color">#222222</color>
+
+    <color name="arc1">#099bfb</color>
+    <color name="arc2">#37d547</color>
+    <color name="arc3">#f86669</color>
+    <color name="arc_text">#999999</color>
+    <color name="arc_line">#cfcfcf</color>
+    <color name="selectColor">#f96767</color>
+    <color name="arc_bg">#f0f0f0</color>
+    <color name="arc_inteval">#E8e8e8</color>
+    <color name="arc_temp">#333333</color>
+
+    <color name="arc21">#fc843b</color>
+    <color name="arc22">#37d547</color>
+    <color name="arc23">#079df9</color>
+
+    <color name="colorSeekBarDefault">#c3c3c3</color>
+    <color name="mine_shaft">#303030</color>
+
+    <color name="bar_grey">#393a3e</color>
+    <color name="color_f6">#f6f6f6</color>
+    <color name="color_fa">#fafafa</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="color_c51">#f94c51</color>
+    <color name="color_green">#43c117</color>
+
+    <color name="white">#FFFFFF</color>  <!-- 白色 -->
+    <color name="yellow">#FFFF00</color> <!-- 黄色 -->
+    <color name="gold">#FFD700</color>   <!-- 金色 -->
+    <color name="orange">#FFA500</color> <!-- 橙色 -->
+    <color name="red">#ff5555</color>    <!-- 红色 -->
+    <color name="gray">#808080</color>   <!-- 灰色 -->
+    <color name="green">#008000</color>  <!-- 绿色 -->
+    <color name="blue">#455ede</color>   <!-- 蓝色 -->
+    <color name="black">#000000</color>  <!-- 黑色 -->
+
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#4f000000</color>
+    <color name="half_transparent_white">#80ffffff</color>
 </resources>

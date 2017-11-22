@@ -90,7 +90,7 @@
     
 - **SwitchButton**
 
-    SwitchButton.An beautiful+lightweight+custom-style-easy switch widget for Android,minSdkVersion >= 11 
+    SwitchButton.An beautiful+lightweight+custom-style-easy switch widget for Android
     
     [原始项目地址](https://github.com/zcweng/SwitchButton)
     
@@ -388,6 +388,102 @@ xml中定义：
 自定义滚动行数（默认10行）：
 
     mNumberTextView.setMaxLine(20);
+
+===========================================================================================
+
+##### Switch 用法
+
+<img src="/screenshot/switch.gif">
+
+<img src="/screenshot/device-capture.png">
+
+XML
+
+    <chingtech.library.widget.SwitchButton
+        android:id="@+id/switch_pattern_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        app:sb_background="#FFF"
+        app:sb_button_color="#db99c7"
+        app:sb_checked_color="#A36F95"
+        app:sb_checkline_color="#a5dc88"
+        app:sb_shadow_color="#A36F95"
+        app:sb_uncheckcircle_color="#A36F95" />
+
+Java
+
+    SwitchButton switchButton = (com.suke.widget.SwitchButton)
+    findViewById(R.id.switch_button);
+
+    switchButton.setChecked(true);
+    switchButton.isChecked();
+    switchButton.toggle();     //switch state
+    switchButton.toggle(false);//switch without animation
+    switchButton.setShadowEffect(true);//disable shadow effect
+    switchButton.setEnabled(false);//disable button
+    switchButton.setEnableEffect(false);//disable the switch animation
+    switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+            //TODO do your job
+        }
+    });
+
+More Style:
+
+    <attr name="sb_shadow_radius" format="reference|dimension"/>       阴影半径
+    <attr name="sb_shadow_offset" format="reference|dimension"/>       阴影偏移
+    <attr name="sb_shadow_color" format="reference|color"/>            阴影颜色
+    <attr name="sb_uncheck_color" format="reference|color"/>           关闭颜色
+    <attr name="sb_checked_color" format="reference|color"/>           开启颜色
+    <attr name="sb_border_width" format="reference|dimension"/>        边框宽度
+    <attr name="sb_checkline_color" format="reference|color"/>         开启指示器颜色
+    <attr name="sb_checkline_width" format="reference|dimension"/>     开启指示器线宽
+    <attr name="sb_uncheckcircle_color" format="reference|color"/>     关闭指示器颜色
+    <attr name="sb_uncheckcircle_width" format="reference|dimension"/> 关闭指示器线宽
+    <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>关闭指示器半径
+    <attr name="sb_checked" format="reference|boolean"/>               是否选中
+    <attr name="sb_shadow_effect" format="reference|boolean"/>         是否启用阴影
+    <attr name="sb_effect_duration" format="reference|integer"/>       动画时间，默认300ms
+    <attr name="sb_button_color" format="reference|color"/>            按钮颜色
+    <attr name="sb_show_indicator" format="reference|boolean"/>        是否显示指示器，默认true：显示
+    <attr name="sb_background" format="reference|color"/>              背景色，默认白色
+    <attr name="sb_enable_effect" format="reference|boolean"/>         是否启用特效，默认true
+
+===========================================================================================
+
+##### SmoothCheckBox 用法
+
+<img src="/screenshot/smoothcb.gif">
+
+Attrs 属性
+
+|attr|format|description|
+|---|:---|:---:|
+|duration|integer|动画持续时间|
+|stroke_width|dimension|未选中时边框宽度|
+|color_tick|color|对勾颜色|
+|color_checked|color|选中时填充颜色|
+|color_unchecked|color|未选中时填充颜色|
+|color_unchecked_stroke|color|未选中时边框颜色|
+
+    setChecked(boolean checked);                   // 默认不带动画，若需要动画 调用重载方法
+    setChecked(boolean checked, boolean animate);  // 参数: animate 是否显示动画
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample);
+
+        final SmoothCheckBox scb = (SmoothCheckBox) findViewById(R.id.scb);
+        scb.setOnCheckedChangeListener(new SmoothCheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SmoothCheckBox checkBox, boolean isChecked) {
+                Log.d("SmoothCheckBox", String.valueOf(isChecked));
+            }
+        });
+    }
 
 ===========================================================================================
 

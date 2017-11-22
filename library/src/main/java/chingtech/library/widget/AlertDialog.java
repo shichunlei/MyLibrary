@@ -280,6 +280,7 @@ public class AlertDialog {
     }
 
     public AlertDialog setCancelable(boolean cancel) {
+        // 调用这个方法时，按对话框以外的地方不起作用。按返回键也不起作用
         dialog.setCancelable(cancel);
         return this;
     }
@@ -421,8 +422,6 @@ public class AlertDialog {
         setLayout();
         // 调用这个方法时，按对话框以外的地方不起作用。按返回键还起作用
         dialog.setCanceledOnTouchOutside(false);
-        // 调用这个方法时，按对话框以外的地方不起作用。按返回键也不起作用
-        // dialog.setCancelable(false);
         dialog.show();
         return null;
     }
