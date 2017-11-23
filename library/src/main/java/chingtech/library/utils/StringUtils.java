@@ -107,15 +107,55 @@ public class StringUtils {
      * 遍历数组
      *
      * @param array
+     * @param delimiter
      * @param <T>
      * @return
      */
     public static <T> String traverseArray(T[] array, String delimiter) {
-        if (!isEmpty(array)) {
+        if (isNotEmpty(array)) {
             int           len     = array.length;
             StringBuilder builder = new StringBuilder(len);
             int           i       = 0;
             for (T t : array) {
+                if (t == null) {
+                    continue;
+                }
+                builder.append(t.toString());
+                i++;
+                if (i < len) {
+                    builder.append(delimiter);
+                }
+            }
+            return builder.toString();
+        }
+        return null;
+    }
+
+    /**
+     * 遍历List
+     *
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> String traverseList(List<T> list) {
+        return traverseList(list, DELIMITER);
+    }
+
+    /**
+     * 遍历List
+     *
+     * @param list
+     * @param delimiter
+     * @param <T>
+     * @return
+     */
+    public static <T> String traverseList(List<T> list, String delimiter) {
+        if (isNotEmpty(list)) {
+            int           len     = list.size();
+            StringBuilder builder = new StringBuilder(len);
+            int           i       = 0;
+            for (T t : list) {
                 if (t == null) {
                     continue;
                 }

@@ -15,6 +15,7 @@ import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
+import chingtech.library.utils.StringUtils;
 import chingtech.library.utils.TimeUtils;
 import com.chingtech.sample.http.JiSuHttpManager;
 import com.chingtech.sample.R;
@@ -294,24 +295,9 @@ public class CompactActivity extends BaseActivity {
         List<String> yi    = value.getHuangli().getYi();
         List<String> ji    = value.getHuangli().getJi();
 
-        StringBuilder sbSuici = new StringBuilder();
-        for (int i = 0; i < suici.size(); i++) {
-            sbSuici.append(suici.get(i));
-        }
-
-        StringBuilder sbJi = new StringBuilder();
-        for (int i = 0; i < ji.size(); i++) {
-            sbJi.append(ji.get(i));
-        }
-
-        StringBuilder sbYi = new StringBuilder();
-        for (int i = 0; i < yi.size(); i++) {
-            sbYi.append(yi.get(i));
-        }
-
-        tvJi.setText(sbJi.toString());
-        tvYi.setText(sbYi.toString());
-        tvSuici.setText(sbSuici.toString());
+        tvJi.setText(StringUtils.traverseList(ji, " "));
+        tvYi.setText(StringUtils.traverseList(yi, " "));
+        tvSuici.setText(StringUtils.traverseList(suici, " "));
     }
 
     @Override
