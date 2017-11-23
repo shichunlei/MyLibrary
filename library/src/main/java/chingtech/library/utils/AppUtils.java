@@ -16,9 +16,9 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
 
-public class AppUitls {
+public class AppUtils {
 
-    private AppUitls() {
+    private AppUtils() {
         /** cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }

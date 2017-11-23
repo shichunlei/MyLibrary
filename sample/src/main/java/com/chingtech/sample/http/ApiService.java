@@ -1,4 +1,4 @@
-package com.chingtech.sample;
+package com.chingtech.sample.http;
 
 import com.chingtech.sample.bean.AFanDaBaseBean;
 import com.chingtech.sample.bean.Calendar;
@@ -44,10 +44,21 @@ public interface ApiService {
      * @param testType 测试类型，rand：随机测试（随机100个题目），order：顺序测试（所选科目全部题目）
      * @return
      */
-    @GET(Constant.JZTK)
+    @GET(ApiUtils.JZTK)
     Observable<AFanDaBaseBean<List<JztkBean>>> getJztk(@Query("key") String key,
             @Query("subject") String subject, @Query("model") String model,
             @Query("testType") String testType);
+
+    /**
+     * 3天天气预报
+     *
+     * @param key      用户认证key
+     * @param location 所查询的地区，可通过该地区名称、ID、IP和经纬度进行查询经纬度格式：纬度,经度（英文,分隔，十进制格式，北纬东经为正，南纬西经为负
+     * @return
+     */
+    @GET(ApiUtils.HF_FORECAST)
+    Observable<JiSuBaseBean> getForecast(@Query("key") String key,
+            @Query("location") String location);
 
     /**
      * 车型大全
@@ -55,7 +66,7 @@ public interface ApiService {
      * @param appkey
      * @return
      */
-    @GET(Constant.CAR)
+    @GET(ApiUtils.CAR)
     Observable<JiSuBaseBean<List<CarBean>>> getCarList(@Query("appkey") String appkey);
 
     /**
@@ -65,7 +76,7 @@ public interface ApiService {
      * @param date   YYYY-MM-DD
      * @return
      */
-    @GET(Constant.CALENDAR)
+    @GET(ApiUtils.CALENDAR)
     Observable<JiSuBaseBean<Calendar>> getCalendar(@Query("appkey") String appkey,
             @Query("date") String date);
 
@@ -76,7 +87,7 @@ public interface ApiService {
      * @param year   YYYY
      * @return
      */
-    @GET(Constant.JIEQI_LIST)
+    @GET(ApiUtils.JIEQI_LIST)
     Observable<JiSuBaseBean<JieQiListBean>> getJieQiList(@Query("appkey") String appkey,
             @Query("year") String year);
 
@@ -88,7 +99,7 @@ public interface ApiService {
      * @param jieqiid
      * @return
      */
-    @GET(Constant.JIEQI_INFO)
+    @GET(ApiUtils.JIEQI_INFO)
     Observable<JiSuBaseBean<JieQiBean>> getJieQiInfo(@Query("appkey") String appkey,
             @Query("year") String year, @Query("jieqiid") String jieqiid);
 }

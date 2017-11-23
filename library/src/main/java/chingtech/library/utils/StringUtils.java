@@ -3,6 +3,7 @@ package chingtech.library.utils;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +23,7 @@ public class StringUtils {
      * @return
      */
     public static boolean isNotEmpty(CharSequence str) {
-        return str != null && !"".equals(str);
+        return !isEmpty(str);
     }
 
     /**
@@ -44,15 +45,89 @@ public class StringUtils {
         return true;
     }
 
+    /**
+     * Judge whether a list is null.
+     *
+     * @param list
+     * @param <T>
+     * @return
+     */
     public static <T> boolean isNotEmpty(List<T> list) {
         return !isEmpty(list);
     }
 
+    /**
+     * Judge whether a list is not null.
+     *
+     * @param list
+     * @param <T>
+     * @return
+     */
     public static <T> boolean isEmpty(List<T> list) {
         if (list == null || list.size() == 0) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Judge whether a array is null.
+     *
+     * @param array
+     * @return
+     */
+    public static <T> boolean isEmpty(T[] array) {
+        return (array == null || array.length == 0);
+    }
+
+    /**
+     * Judge whether a array is not null.
+     *
+     * @param array
+     * @return
+     */
+    public static <T> boolean isNotEmpty(T[] array) {
+        return !isEmpty(array);
+    }
+
+    private static final String DELIMITER = ",";
+
+    /**
+     * 遍历数组
+     *
+     * @param array
+     * @param <T>
+     * @return
+     */
+    public static <T> String traverseArray(T[] array) {
+        return traverseArray(array, DELIMITER);
+    }
+
+    /**
+     * 遍历数组
+     *
+     * @param array
+     * @param <T>
+     * @return
+     */
+    public static <T> String traverseArray(T[] array, String delimiter) {
+        if (!isEmpty(array)) {
+            int           len     = array.length;
+            StringBuilder builder = new StringBuilder(len);
+            int           i       = 0;
+            for (T t : array) {
+                if (t == null) {
+                    continue;
+                }
+                builder.append(t.toString());
+                i++;
+                if (i < len) {
+                    builder.append(delimiter);
+                }
+            }
+            return builder.toString();
+        }
+        return null;
     }
 
     /**
@@ -347,6 +422,21 @@ public class StringUtils {
     }
 
     /**
+     * Judge whether a string is number.
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric(String str) {
+        for (int i = str.length(); --i >= 0; ) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 人民币转成大写
      *
      * @param value
@@ -540,5 +630,25 @@ public class StringUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * Converts this string to lower case, using the rules of {@code locale}.
+     *
+     * @param s
+     * @return
+     */
+    public static String toLowerCase(String s) {
+        return s.toLowerCase(Locale.getDefault());
+    }
+
+    /**
+     * Converts this this string to upper case, using the rules of {@code locale}.
+     *
+     * @param s
+     * @return
+     */
+    public static String toUpperCase(String s) {
+        return s.toUpperCase(Locale.getDefault());
     }
 }

@@ -8,9 +8,11 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
+import chingtech.library.utils.AnimatorUtils;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.widget.MarqueeView;
 import com.chingtech.sample.R;
@@ -56,6 +58,9 @@ public class MarqueeViewActivity extends BaseActivity {
     @BindView(R.id.marqueeView4)
     MarqueeView marqueeView4;
 
+    @BindView(R.id.image)
+    ImageView image;
+
     @Override
     protected void init() {
         List<CharSequence> list = new ArrayList<>();
@@ -84,6 +89,10 @@ public class MarqueeViewActivity extends BaseActivity {
         marqueeView3.startWithText(getString(R.string.marquee_texts));
 
         marqueeView4.startWithText(getString(R.string.marquee_texts));
+
+        AnimatorUtils.alpha(image, 0, 1, 1000);
+
+        AnimatorUtils.breath(image);
     }
 
     @Override

@@ -1,11 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.chingtech.sample"
         minSdkVersion 16
@@ -46,7 +45,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile project(':library')
+    implementation project(':library')
     // 数字密码锁
     compile 'com.andrognito.pinlockview:pinlockview:2.1.0'
     // 九宫格密码锁
@@ -70,8 +69,8 @@ dependencies {
     // Banner
     compile 'cn.bingoogolapple:bga-banner:2.1.8@aar'
     //注解
-    compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // 一款仿miui，仿小米，日历，周日历，月日历，月视图、周视图滑动切换，农历,Andriod Calendar , MIUI Calendar,小米日历
     compile 'com.necer.ncalendar:ncalendar:2.4.4'

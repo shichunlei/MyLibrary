@@ -122,7 +122,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder
     @Override
     public BaseRecyclerHolder setTextColor(int viewId, int color) {
         TextView view = getView(viewId);
-        view.setTextColor(color);
+        view.setTextColor(ContextCompat.getColor(mContext, color));
         return this;
     }
 
@@ -143,7 +143,7 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder
     @Override
     public BaseRecyclerHolder setBackgroundColor(int viewId, int color) {
         View view = getView(viewId);
-        view.setBackgroundColor(color);
+        view.setBackgroundColor(ContextCompat.getColor(mContext, color));
         return this;
     }
 

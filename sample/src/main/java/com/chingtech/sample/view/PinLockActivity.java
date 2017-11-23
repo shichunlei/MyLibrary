@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.View;
 import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
-import chingtech.library.utils.AnimatorUitls;
+import chingtech.library.utils.AnimatorUtils;
 import chingtech.library.utils.SPUtils;
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
@@ -53,7 +53,7 @@ public class PinLockActivity extends BaseActivity {
                     openActivity(MainActivity.class, true);
                 } else {
                     mPinLockView.resetPinLockView();
-                    AnimatorUitls.ShakeMode(3, mIndicatorDots);
+                    AnimatorUtils.ShakeMode(3, mIndicatorDots);
                 }
             } else if (flag.equals("setting")) {
                 SPUtils.put(context, "PinLock", true, "DEMO");

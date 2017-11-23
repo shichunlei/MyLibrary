@@ -22,7 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import chingtech.library.R;
-import chingtech.library.utils.AnimatorUitls;
+import chingtech.library.utils.AnimatorUtils;
 
 /**
  * 揭露式搜索框
@@ -34,8 +34,6 @@ public class SearchView extends FrameLayout {
     private Context mContext;
 
     private boolean mIsSearchOpen;// 搜索框是否开启的标识
-    // 动画持续时间
-    private int duration = AnimatorUitls.ANIMATION_DURATION;
     // 是否清除了焦点的标志
     private boolean mClearingFocus;
 
@@ -59,15 +57,10 @@ public class SearchView extends FrameLayout {
     // 上次搜索的关键字
     private CharSequence mLastQueryText;
 
-
     private OnQueryTextListener mOnQueryTextListener;
 
     public void setOnQueryTextListener(OnQueryTextListener onQueryTextListener) {
         mOnQueryTextListener = onQueryTextListener;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public SearchView(@NonNull Context context) {
@@ -287,9 +280,9 @@ public class SearchView extends FrameLayout {
      */
     private void showWithAnimation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AnimatorUitls.revealViewToggle(mSearchBarLayout, true);
+            AnimatorUtils.revealViewToggle(mSearchBarLayout, true);
         } else {
-            AnimatorUitls.showAlphaView(mSearchLayout);
+            AnimatorUtils.showAlphaView(mSearchLayout);
         }
     }
 
@@ -305,9 +298,9 @@ public class SearchView extends FrameLayout {
         clearFocus();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AnimatorUitls.revealViewToggle(mSearchBarLayout, false);
+            AnimatorUtils.revealViewToggle(mSearchBarLayout, false);
         } else {
-            AnimatorUitls.hidenAlphaView(mSearchLayout);
+            AnimatorUtils.hidenAlphaView(mSearchLayout);
         }
 
         mIsSearchOpen = false;

@@ -148,6 +148,9 @@
         <activity
             android:name=".view.DashBoardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.JieQiInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".service.UpdateService" />
     </application>

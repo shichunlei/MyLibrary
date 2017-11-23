@@ -36,7 +36,6 @@ public class RecCarAdapter extends CommonRecyclerAdapter<CarBean> {
 
     @Override
     protected void onBindData(BaseRecyclerHolder holder, CarBean item, int position) {
-        holder.setText(R.id.item_tv, item.getName());
-        holder.setImageUrl(R.id.item_iv, item.getLogo());
+        holder.setText(R.id.item_tv, item.getName()).setImageUrl(R.id.item_iv, item.getLogo());
     }
 }

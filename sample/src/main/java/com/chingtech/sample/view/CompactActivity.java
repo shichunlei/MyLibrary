@@ -16,7 +16,7 @@ import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
 import chingtech.library.utils.TimeUtils;
-import com.chingtech.sample.JiSuHttpManager;
+import com.chingtech.sample.http.JiSuHttpManager;
 import com.chingtech.sample.R;
 import com.chingtech.sample.bean.JiSuBaseBean;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -32,9 +32,33 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import static chingtech.library.utils.AnimatorUitls.*;
+import static chingtech.library.utils.AnimatorUtils.FlipLeftRight;
+import static chingtech.library.utils.AnimatorUtils.RotaCenterIn;
+import static chingtech.library.utils.AnimatorUtils.RotaCenterOut;
+import static chingtech.library.utils.AnimatorUtils.RotaLeftCenterIn;
+import static chingtech.library.utils.AnimatorUtils.RotaLeftCenterOut;
+import static chingtech.library.utils.AnimatorUtils.RotaLeftTopIn;
+import static chingtech.library.utils.AnimatorUtils.RotaLeftTopOut;
+import static chingtech.library.utils.AnimatorUtils.ScaleBig;
+import static chingtech.library.utils.AnimatorUtils.ScaleBigLeftTop;
+import static chingtech.library.utils.AnimatorUtils.ScaleSmall;
+import static chingtech.library.utils.AnimatorUtils.ScaleSmallLeftTop;
+import static chingtech.library.utils.AnimatorUtils.ScaleToBigHorizontalIn;
+import static chingtech.library.utils.AnimatorUtils.ScaleToBigHorizontalOut;
+import static chingtech.library.utils.AnimatorUtils.ScaleToBigVerticalIn;
+import static chingtech.library.utils.AnimatorUtils.ScaleToBigVerticalOut;
+import static chingtech.library.utils.AnimatorUtils.fromBottomToLocationShow;
+import static chingtech.library.utils.AnimatorUtils.fromLeftIn;
+import static chingtech.library.utils.AnimatorUtils.fromLeftOut;
+import static chingtech.library.utils.AnimatorUtils.fromRightIn;
+import static chingtech.library.utils.AnimatorUtils.fromRightOut;
+import static chingtech.library.utils.AnimatorUtils.fromTopToLocationShow;
+import static chingtech.library.utils.AnimatorUtils.hidenAlphaView;
+import static chingtech.library.utils.AnimatorUtils.moveToBottomHiden;
+import static chingtech.library.utils.AnimatorUtils.moveToTopHiden;
+import static chingtech.library.utils.AnimatorUtils.showAlphaView;
 import static chingtech.library.utils.TimeUtils.DATE_FORMAT;
-import static com.chingtech.sample.Constant.JISU_KEY;
+import static com.chingtech.sample.http.ApiUtils.JISU_KEY;
 
 /**
  * MyLibrary
@@ -66,6 +90,41 @@ public class CompactActivity extends BaseActivity {
     @BindView(R.id.tv_txt)
     TextView txt;
 
+    @BindView(R.id.tv_yangli)
+    TextView tvYangli;
+    @BindView(R.id.tv_nongli)
+    TextView tvNongli;
+    @BindView(R.id.tv_huangli)
+    TextView tvHuangli;
+    @BindView(R.id.tv_yi)
+    TextView tvYi;
+    @BindView(R.id.tv_ji)
+    TextView tvJi;
+    @BindView(R.id.tv_caishen)
+    TextView tvCaishen;
+    @BindView(R.id.tv_xishen)
+    TextView tvXishen;
+    @BindView(R.id.tv_fushen)
+    TextView tvFushen;
+    @BindView(R.id.tv_xiongshen)
+    TextView tvXiongshen;
+    @BindView(R.id.tv_jiri)
+    TextView tvJiri;
+    @BindView(R.id.tv_zhiri)
+    TextView tvZhiri;
+    @BindView(R.id.tv_jishenyiqu)
+    TextView tvJishenyiqu;
+    @BindView(R.id.tv_wuxing)
+    TextView tvWuxing;
+    @BindView(R.id.tv_sha)
+    TextView tvSha;
+    @BindView(R.id.tv_chong)
+    TextView tvChong;
+    @BindView(R.id.tv_suici)
+    TextView tvSuici;
+    @BindView(R.id.tv_taishen)
+    TextView tvTaishen;
+
     private boolean isExpanded = false;
 
     List<Event> events = new ArrayList<>();
@@ -87,6 +146,8 @@ public class CompactActivity extends BaseActivity {
                 String strDate = TimeUtils.formatDateTime(dateClicked, DATE_FORMAT);
                 setSubtitle(strDate);
                 loadDate(strDate);
+
+                setAnim();
             }
 
             @Override
@@ -184,8 +245,9 @@ public class CompactActivity extends BaseActivity {
                            public void onNext(
                                    JiSuBaseBean<com.chingtech.sample.bean.Calendar> value) {
                                if (value.getStatus().equals("0")) {
-                                   LogUtils.i("TAG", value.toString());
                                    LogUtils.i("TAG", value.getResult().toString());
+
+                                   setWannianliData(value.getResult());
                                } else {
                                    mStateView.showRetry();
                                }
@@ -202,6 +264,54 @@ public class CompactActivity extends BaseActivity {
                                mStateView.showContent();
                            }
                        });
+    }
+
+    private void setWannianliData(com.chingtech.sample.bean.Calendar value) {
+        tvYangli.setText(value.getYear() + "-" + value.getMonth() + "-" + value.getDay());
+        tvNongli.setText(value.getHuangli().getNongli());
+        tvHuangli.setText(value.getGanzhi()
+                                  + "["
+                                  + value.getShengxiao()
+                                  + "]年 周"
+                                  + value.getWeek()
+                                  + " "
+                                  + value.getStar());
+
+        tvCaishen.setText(value.getHuangli().getCaishen());
+        tvFushen.setText(value.getHuangli().getFushen());
+        tvXishen.setText(value.getHuangli().getXishen());
+
+        tvXiongshen.setText(value.getHuangli().getXiongshen());
+        tvSha.setText(value.getHuangli().getSha());
+        tvChong.setText(value.getHuangli().getChong());
+        tvJiri.setText(value.getHuangli().getJiri());
+        tvZhiri.setText(value.getHuangli().getZhiri());
+        tvWuxing.setText(value.getHuangli().getWuxing());
+        tvJishenyiqu.setText(value.getHuangli().getJishenyiqu());
+        tvTaishen.setText(value.getHuangli().getTaishen());
+
+        List<String> suici = value.getHuangli().getSuici();
+        List<String> yi    = value.getHuangli().getYi();
+        List<String> ji    = value.getHuangli().getJi();
+
+        StringBuilder sbSuici = new StringBuilder();
+        for (int i = 0; i < suici.size(); i++) {
+            sbSuici.append(suici.get(i));
+        }
+
+        StringBuilder sbJi = new StringBuilder();
+        for (int i = 0; i < ji.size(); i++) {
+            sbJi.append(ji.get(i));
+        }
+
+        StringBuilder sbYi = new StringBuilder();
+        for (int i = 0; i < yi.size(); i++) {
+            sbYi.append(yi.get(i));
+        }
+
+        tvJi.setText(sbJi.toString());
+        tvYi.setText(sbYi.toString());
+        tvSuici.setText(sbSuici.toString());
     }
 
     @Override

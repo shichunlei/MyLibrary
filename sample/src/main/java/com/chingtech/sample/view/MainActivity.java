@@ -7,7 +7,6 @@ import static chingtech.library.utils.TimeUtils.*;
 
 import android.content.*;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -157,14 +156,7 @@ public class MainActivity extends BaseActivity {
         setupActionBarDrawerToogle();
 
         mc = new MyCountDownTimer(30000, 1000);
-
-        mStateView.showRetry();
-        mStateView.setOnRetryClickListener(() -> {
-            new Handler().postDelayed(() -> {
-                mStateView.showContent();
-                mc.start();
-            }, 3000);
-        });
+        mc.start();
 
         initSeekBar();
 
@@ -211,13 +203,13 @@ public class MainActivity extends BaseActivity {
 
         LogUtils.i(TAG, "=======" + StringUtils.hangeToBig(3453450.23));
 
-        String appname = AppUitls.getAppName(MainActivity.this);
+        String appname = AppUtils.getAppName(MainActivity.this);
         LogUtils.i(TAG, "appname:" + appname);
-        String pkname = AppUitls.getPkName(MainActivity.this);
+        String pkname = AppUtils.getPkName(MainActivity.this);
         LogUtils.i(TAG, "pkname:" + pkname);
-        String versionname = AppUitls.getVersionName(MainActivity.this);
+        String versionname = AppUtils.getVersionName(MainActivity.this);
         LogUtils.i(TAG, "versionname:" + versionname);
-        int versioncode = AppUitls.getVersionCode(MainActivity.this);
+        int versioncode = AppUtils.getVersionCode(MainActivity.this);
         LogUtils.i(TAG, "versioncode:" + versioncode);
 
         CharacterParser c = new CharacterParser();
@@ -240,7 +232,7 @@ public class MainActivity extends BaseActivity {
                                 which -> openActivity(AnimNumberTextViewActivity.class, false))
                   .addSheetItem("Ring", which -> openActivity(RingActivity.class, false))
                   .addSheetItem("DashBoard", which -> openActivity(DashBoardActivity.class, false))
-                  .addSheetItem("item3", which -> showToast("item3"))
+                  .addSheetItem("跑马灯", which -> openActivity(MarqueeViewActivity.class, false))
                   .show();
         });
 
@@ -330,7 +322,8 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            View           v        = LayoutInflater.from(MainActivity.this)
+                                                    .inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
@@ -541,7 +534,7 @@ public class MainActivity extends BaseActivity {
         MenuItem item1 = menu.findItem(R.id.action_search1);
 
         item1.setOnMenuItemClickListener(item -> {
-            openActivity(MarqueeViewActivity.class, false);
+
             return false;
         });
 

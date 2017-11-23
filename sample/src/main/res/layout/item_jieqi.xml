@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp"
-    tools:context=".view.AssignCodeUsingActivity"
-    tools:showIn="@layout/activity_using_assign_code">
+    android:background="?attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/tv_name"
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textColor="#444"
-        android:textSize="20sp"
-        tools:text="立春" />
+        android:layout_centerInParent="true"
+        android:background="#00000000"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="3dp"
-        android:textColor="#666"
-        tools:text="2016-09-09" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#eee"
+            android:textSize="18sp"
+            tools:text="立春" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="3dp"
+            android:textColor="#ddd"
+            tools:text="2016-09-09" />
+    </LinearLayout>
+</RelativeLayout>

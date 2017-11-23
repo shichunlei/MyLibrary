@@ -10,7 +10,7 @@ import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
-import com.chingtech.sample.JiSuHttpManager;
+import com.chingtech.sample.http.JiSuHttpManager;
 import com.chingtech.greendao.gen.CarBeanDao;
 import com.chingtech.sample.App;
 import com.chingtech.sample.R;
@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.chingtech.sample.Constant.JISU_KEY;
+import static com.chingtech.sample.http.ApiUtils.JISU_KEY;
 
 /**
  * 在XML中指定Header和Footer
@@ -43,15 +43,12 @@ public class AssignXmlUsingActivity extends BaseActivity {
 
     private RecCarAdapter adapter;
 
-    private LinearLayoutManager manager;
-
     private CarBeanDao dao;
 
     @Override
     protected void init() {
         dao = App.getInstances().getDaoSession().getCarBeanDao();
-        manager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mStateView.setOnRetryClickListener(() -> {
             loadData();
         });
@@ -84,6 +81,7 @@ public class AssignXmlUsingActivity extends BaseActivity {
         carList.addAll(dao.loadAll());
         if (carList.size() > 0) {
             setAdapter(carList);
+            mStateView.hidenLoading();
         } else {
             JiSuHttpManager.getInstance()
                            .getApiService()
@@ -98,6 +96,7 @@ public class AssignXmlUsingActivity extends BaseActivity {
                                @Override
                                public void onNext(JiSuBaseBean<List<CarBean>> value) {
                                    if (value.getStatus().equals("0")) {
+                                       mStateView.showContent();
                                        carList.addAll(value.getResult());
                                        LogUtils.i("TAG", carList.toString());
                                        // 保存到本地数据库中
@@ -116,7 +115,6 @@ public class AssignXmlUsingActivity extends BaseActivity {
 
                                @Override
                                public void onComplete() {
-                                   mStateView.showContent();
                                }
                            });
         }
@@ -134,7 +132,5 @@ public class AssignXmlUsingActivity extends BaseActivity {
         }
 
         LogUtils.i("TAG", heads.toString());
-
-        mStateView.hidenLoading();
     }
 }

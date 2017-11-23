@@ -1,6 +1,7 @@
 package com.chingtech.sample.view;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
@@ -10,6 +11,7 @@ import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.FileUtils;
 import chingtech.library.utils.JsonUtils;
+import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;
 import com.chingtech.sample.adapter.HeaderAdapter;
@@ -43,7 +45,10 @@ public class RecyclerViewActivity extends BaseActivity {
     @Override
     protected void init() {
         String json = FileUtils.readFromAssets(this, "girls.json");
+        LogUtils.i("TAG", "init: " + json);
         girlsList = (List<GirlsBean>) JsonUtils.fromJson(json, GirlsBean.class);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new HeaderAdapter(this, girlsList, R.layout.item_girl_header);
         mRecyclerView.setAdapter(adapter);

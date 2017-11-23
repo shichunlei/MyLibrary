@@ -16,7 +16,7 @@ import android.widget.Scroller;
 
 import chingtech.library.R;
 import chingtech.library.bean.RadarData;
-import chingtech.library.utils.AnimatorUitls;
+import chingtech.library.utils.AnimatorUtils;
 import chingtech.library.utils.RotateUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +69,7 @@ public class RadarView extends View {
     private String mEmptyHint = "no data";
     private String mMaxLengthVertexText;
 
-    private AnimatorUitls mAnimeUtil;
+    private AnimatorUtils mAnimeUtil;
 
     public RadarView(Context context) {
         this(context, null);
@@ -106,7 +106,7 @@ public class RadarView extends View {
 
     private void init() {
         mRadarPath = new Path();
-        mAnimeUtil = new AnimatorUitls(this);
+        mAnimeUtil = new AnimatorUtils(this);
         mScroller = new Scroller(context);
         mDetector = new GestureDetector(context, new GestureListener());
         mDetector.setIsLongpressEnabled(false);
@@ -258,7 +258,7 @@ public class RadarView extends View {
 
     public void animeValue(int duration, RadarData data) {
         if (!mAnimeUtil.isPlaying(data)) {
-            mAnimeUtil.animeValue(AnimatorUitls.AnimeType.ZOOM, duration, data);
+            mAnimeUtil.animeValue(AnimatorUtils.AnimeType.ZOOM, duration, data);
         }
     }
 

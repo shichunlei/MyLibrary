@@ -1,6 +1,7 @@
 package com.chingtech.sample.view;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ public class ExpandTextViewActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new RecyclerAdapter(this, setData(), R.layout.item_extext));
     }
 

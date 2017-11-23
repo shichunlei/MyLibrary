@@ -1,4 +1,4 @@
-package com.chingtech.sample;
+package com.chingtech.sample.http;
 
 import chingtech.library.utils.LogUtils;
 import java.util.concurrent.TimeUnit;
@@ -8,49 +8,28 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.chingtech.sample.Constant.JISU_API_URL;
+import static com.chingtech.sample.http.ApiUtils.BASE_URL;
 
-/**
- * <p>
- * *    ***********    ***********    **
- * *    ***********    ***********    **
- * *    **             **             **
- * *    **             **             **
- * *    **             **             **
- * *    ***********    **             **
- * *    ***********    **             **
- * *             **    **             **
- * *             **    **             **
- * *             **    **             **
- * *    ***********    ***********    ***********
- * *    ***********    ***********    ***********
- * </p>
- * MyLibrary
- * Package com.chingtech.sample.view
- * Description:
- * Created by 师春雷
- * Created at 17/9/17 下午5:20
- */
-public class JiSuHttpManager {
+public class AvatarHttpManager {
 
-    private static JiSuHttpManager mHttpClient;
+    private static AvatarHttpManager mHttpClient;
 
     private final OkHttpClient.Builder mBuilder;
     private final Retrofit             mRetrofit;
     private final ApiService           mApiService;
 
-    public static JiSuHttpManager getInstance() {
+    public static AvatarHttpManager getInstance() {
         if (mHttpClient == null) {
-            synchronized (JiSuHttpManager.class) {
+            synchronized (AvatarHttpManager.class) {
                 if (mHttpClient == null) {
-                    mHttpClient = new JiSuHttpManager();
+                    mHttpClient = new AvatarHttpManager();
                 }
             }
         }
         return mHttpClient;
     }
 
-    public JiSuHttpManager() {
+    public AvatarHttpManager() {
         mBuilder = new OkHttpClient.Builder()
                 // 超时设置
                 .connectTimeout(20, TimeUnit.SECONDS)
@@ -60,7 +39,7 @@ public class JiSuHttpManager {
         // 添加各种插入器
         addInterceptor(mBuilder);
 
-        mRetrofit = new Retrofit.Builder().baseUrl(JISU_API_URL)
+        mRetrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                                           .addConverterFactory(GsonConverterFactory.create())
                                           .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                                           .client(mBuilder.build())

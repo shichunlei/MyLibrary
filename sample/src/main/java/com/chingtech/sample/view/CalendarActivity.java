@@ -85,5 +85,4 @@ public class CalendarActivity extends BaseActivity {
                 break;
         }
     }
-
 }

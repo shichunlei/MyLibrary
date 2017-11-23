@@ -10,140 +10,149 @@
 
     <include layout="@layout/tool_bar" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/layout"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartrefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00000000">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:textColor="@color/white"
-                    android:textSize="40sp"
-                    tools:text="寒露" />
-
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tv_name"
-                    android:layout_alignTop="@+id/tv_name"
-                    android:layout_marginTop="50dp"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    tools:text="02月03日 12:22" />
-
-                <ImageView
-                    android:id="@+id/img"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="45dp"
-                    android:src="@mipmap/ic_launcher" />
-            </RelativeLayout>
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/jieqi_item_bg"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="简介" />
-
-                <View
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#999" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineSpacingMultiplier="1.2"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="立春，农历二十四节气中的第一个节气。立春是从天文上来划分的，即太阳到达黄经315°时。
+                    android:background="#00000000">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="40sp"
+                        tools:text="寒露" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_name"
+                        android:layout_alignTop="@+id/tv_name"
+                        android:layout_marginTop="50dp"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        tools:text="02月03日 12:22" />
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="45dp"
+                        android:src="@mipmap/ic_launcher" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/jieqi_item_bg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="简介"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#999" />
+
+                    <TextView
+                        android:id="@+id/tv_jianjie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
+                        android:padding="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="立春，农历二十四节气中的第一个节气。立春是从天文上来划分的，即太阳到达黄经315°时。
 立春是中国民间重要的传统节日之一。“立”是“开始”的意思，自秦代以来，中国就一直以立春作为孟春时节的开始。所谓“一年之计在于春”，春是温暖，鸟语花香；春是生长，耕耘播种。" />
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/jieqi_item_bg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="起源" />
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#999" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineSpacingMultiplier="1.2"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="立春不仅是农历二十四节气中的第一个节气，立春是从天文上来划分的，而在自然界、在人们的心目中，春意味着风和日暖，鸟语花香;春也意味着万物生长，农家播种。古籍《群芳谱》对立春解释为：“立，始建也。春气始而建立也。”立春期间，气温、日照、降雨，开始趋于上升、增多。但这一切对全国大多数地方来说仅仅是春天的前奏。" />
-            </LinearLayout>
+                    android:layout_margin="10dp"
+                    android:background="@drawable/jieqi_item_bg"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/jieqi_item_bg"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="起源"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="习俗" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#999" />
 
-                <View
+                    <TextView
+                        android:id="@+id/tv_qiyuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
+                        android:padding="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="立春不仅是农历二十四节气中的第一个节气，立春是从天文上来划分的，而在自然界、在人们的心目中，春意味着风和日暖，鸟语花香;春也意味着万物生长，农家播种。古籍《群芳谱》对立春解释为：“立，始建也。春气始而建立也。”立春期间，气温、日照、降雨，开始趋于上升、增多。但这一切对全国大多数地方来说仅仅是春天的前奏。" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#999" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineSpacingMultiplier="1.2"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="1春牛：民间艺人制作许多小泥牛，称为“春牛”。送往各家，谓之“送春”。
+                    android:layout_margin="10dp"
+                    android:background="@drawable/jieqi_item_bg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="习俗"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#999" />
+
+                    <TextView
+                        android:id="@+id/tv_xisu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
+                        android:padding="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="1春牛：民间艺人制作许多小泥牛，称为“春牛”。送往各家，谓之“送春”。
 2春牛图：也有的地方是在墙上贴一幅画有春牛的黄纸。黄色代表土地，春牛代表农事，俗称“春牛图”。
 3春娃：乡宁等地习惯用绢制作小娃娃，名为“春娃”，佩戴在孩童身上。
 互相赠贺礼拜贺，称为拜春
@@ -152,37 +161,39 @@
 五搭燕子窝：给花树戴燕子胜帛条
 六种迎春花：
 七春胜贴门窗：妇女剪春燕花鸟簪（或有专门买的春燕簪花鸟簪）用红纸剪鸡贴屋门" />
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/jieqi_item_bg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="养生" />
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#999" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineSpacingMultiplier="1.2"
-                    android:padding="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="保护阳气、戒暴怒，情怀忧郁" />
+                    android:layout_margin="10dp"
+                    android:background="@drawable/jieqi_item_bg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="养生"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#999" />
+
+                    <TextView
+                        android:id="@+id/tv_yangsheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.2"
+                        android:padding="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="保护阳气、戒暴怒，情怀忧郁" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

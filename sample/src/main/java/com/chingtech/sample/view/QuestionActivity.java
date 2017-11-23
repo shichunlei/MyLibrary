@@ -9,7 +9,7 @@ import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
-import com.chingtech.sample.HttpManager;
+import com.chingtech.sample.http.AvatarHttpManager;
 import com.chingtech.sample.R;
 import com.chingtech.sample.adapter.ViewPagerAdapter;
 import com.chingtech.sample.bean.AFanDaBaseBean;
@@ -21,7 +21,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.chingtech.sample.Constant.JZTK_KEY;
+import static com.chingtech.sample.http.ApiUtils.JZTK_KEY;
 
 /**
  * <p>
@@ -85,12 +85,12 @@ public class QuestionActivity extends BaseActivity {
     @Override
     protected void loadData() {
         mStateView.showLoading();
-        HttpManager.getInstance()
-                   .getApiService()
-                   .getJztk(JZTK_KEY, "1", "c1", "rand")
-                   .subscribeOn(Schedulers.io())
-                   .observeOn(AndroidSchedulers.mainThread())
-                   .subscribe(new Observer<AFanDaBaseBean<List<JztkBean>>>() {
+        AvatarHttpManager.getInstance()
+                         .getApiService()
+                         .getJztk(JZTK_KEY, "1", "c1", "rand")
+                         .subscribeOn(Schedulers.io())
+                         .observeOn(AndroidSchedulers.mainThread())
+                         .subscribe(new Observer<AFanDaBaseBean<List<JztkBean>>>() {
                        @Override
                        public void onSubscribe(Disposable d) {
                        }
