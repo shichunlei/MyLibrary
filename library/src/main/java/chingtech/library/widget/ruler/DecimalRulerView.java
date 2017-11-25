@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,6 +16,9 @@ import android.widget.Scroller;
 import chingtech.library.R;
 import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StringUtils;
+
+import static chingtech.library.utils.ScreenUtils.dp2px;
+import static chingtech.library.utils.ScreenUtils.sp2px;
 
 public class DecimalRulerView extends View {
 
@@ -129,77 +131,44 @@ public class DecimalRulerView extends View {
         mPerSpanValue = precision * 10;
 
         mItemSpacing = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_itemSpacing,
-                                               (int) TypedValue.applyDimension(
-                                                       TypedValue.COMPLEX_UNIT_DIP,
-                                                       defaultItemSpacing,
-                                                       getResources().getDisplayMetrics()));
+                                               (int) dp2px(defaultItemSpacing));
         mMaxLineHeight = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_maxLineHeight,
-                                                 (int) TypedValue.applyDimension(
-                                                         TypedValue.COMPLEX_UNIT_DIP,
-                                                         ITEM_MAX_HEIGHT,
-                                                         getResources().getDisplayMetrics()));
+                                                 (int) dp2px(ITEM_MAX_HEIGHT));
         mMinLineHeight = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_minLineHeight,
-                                                 (int) TypedValue.applyDimension(
-                                                         TypedValue.COMPLEX_UNIT_DIP,
-                                                         ITEM_MIN_HEIGHT,
-                                                         getResources().getDisplayMetrics()));
+                                                 (int) dp2px(ITEM_MIN_HEIGHT));
         mMiddleLineHeight = a.getDimensionPixelSize(
-                R.styleable.DecimalRulerView_rv_middleLineHeight,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ITEM_MIDDLE_HEIGHT,
-                                                getResources().getDisplayMetrics()));
+                R.styleable.DecimalRulerView_rv_middleLineHeight, (int) dp2px(ITEM_MIDDLE_HEIGHT));
 
         mMinLineWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_minLineWidth,
-                                                (int) TypedValue.applyDimension(
-                                                        TypedValue.COMPLEX_UNIT_DIP, ITEM_MIN_WIDTH,
-                                                        getResources().getDisplayMetrics()));
+                                                (int) dp2px(ITEM_MIN_WIDTH));
         mMiddleLineWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_middleLineWidth,
-                                                   (int) TypedValue.applyDimension(
-                                                           TypedValue.COMPLEX_UNIT_DIP,
-                                                           ITEM_MIDDLE_WIDTH,
-                                                           getResources().getDisplayMetrics()));
+                                                   (int) dp2px(ITEM_MIDDLE_WIDTH));
         mMaxLineWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_maxLineWidth,
-                                                (int) TypedValue.applyDimension(
-                                                        TypedValue.COMPLEX_UNIT_DIP, ITEM_MAX_WIDTH,
-                                                        getResources().getDisplayMetrics()));
+                                                (int) dp2px(ITEM_MAX_WIDTH));
         mMaxLineColor = a.getColor(R.styleable.DecimalRulerView_rv_maxLineColor, mMaxLineColor);
         mMiddleLineColor = a.getColor(R.styleable.DecimalRulerView_rv_middleLineColor,
                                       mMiddleLineColor);
         mMinLineColor = a.getColor(R.styleable.DecimalRulerView_rv_minLineColor, mMinLineColor);
         mIndcatorColor = a.getColor(R.styleable.DecimalRulerView_rv_indcatorColor, mIndcatorColor);
         mIndcatorWidth = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_indcatorWidth,
-                                                 (int) TypedValue.applyDimension(
-                                                         TypedValue.COMPLEX_UNIT_DIP,
-                                                         INDICATOR_WIDTH,
-                                                         getResources().getDisplayMetrics()));
+                                                 (int) dp2px(INDICATOR_WIDTH));
         mIndcatorHeight = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_indcatorHeight,
-                                                  (int) TypedValue.applyDimension(
-                                                          TypedValue.COMPLEX_UNIT_DIP,
-                                                          INDICATOR_HEIGHT,
-                                                          getResources().getDisplayMetrics()));
+                                                  (int) dp2px(INDICATOR_HEIGHT));
         mIndicatorType = a.getInt(R.styleable.DecimalRulerView_rv_indcatorType, LINE);
         mScaleTextColor = a.getColor(R.styleable.DecimalRulerView_rv_scaleTextColor,
                                      mScaleTextColor);
         mScaleTextSize = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_scaleTextSize,
-                                                 (int) TypedValue.applyDimension(
-                                                         TypedValue.COMPLEX_UNIT_SP, scaleTextSize,
-                                                         getResources().getDisplayMetrics()));
+                                                 (int) sp2px(scaleTextSize));
         mTextMarginTop = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_textMarginTop,
-                                                 (int) TypedValue.applyDimension(
-                                                         TypedValue.COMPLEX_UNIT_DIP, textMarginTop,
-                                                         getResources().getDisplayMetrics()));
+                                                 (int) dp2px(textMarginTop));
 
         mResultTextColor = a.getColor(R.styleable.DecimalRulerView_rv_resultTextColor,
                                       mResultTextColor);
         mResultTextSize = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_resultTextSize,
-                                                  (int) TypedValue.applyDimension(
-                                                          TypedValue.COMPLEX_UNIT_SP,
-                                                          resultTextSize,
-                                                          getResources().getDisplayMetrics()));
+                                                  (int) sp2px(resultTextSize));
         mUnitTextColor = a.getColor(R.styleable.DecimalRulerView_rv_unitTextColor, mUnitTextColor);
         mUnitTextSize = a.getDimensionPixelSize(R.styleable.DecimalRulerView_rv_unitTextSize,
-                                                (int) TypedValue.applyDimension(
-                                                        TypedValue.COMPLEX_UNIT_SP, unitTextSize,
-                                                        getResources().getDisplayMetrics()));
+                                                (int) sp2px(unitTextSize));
 
         showUnit = a.getBoolean(R.styleable.DecimalRulerView_rv_showUnit, true);
         unit = a.getString(R.styleable.DecimalRulerView_rv_unit);

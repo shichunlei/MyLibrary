@@ -370,6 +370,17 @@
         <attr format="reference|boolean" name="sb_enable_effect" />
     </declare-styleable>
 
+    <declare-styleable name="ThreeStateSwitch">
+        <attr format="color" name="background_selected_color" />
+        <attr format="color" name="background_normal_color" />
+        <attr format="color" name="text_normal_color" />
+        <attr format="color" name="text_selected_color" />
+        <attr format="string" name="text_left" />
+        <attr format="string" name="text_right" />
+        <attr format="dimension" name="text_normal_size" />
+        <attr format="dimension" name="text_selected_size" />
+    </declare-styleable>
+
     <declare-styleable name="StateView">
         <attr format="reference" name="emptyResource" />
         <attr format="reference" name="retryResource" />

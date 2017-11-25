@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static chingtech.library.utils.ScreenUtils.dip2px;
+import static chingtech.library.utils.ScreenUtils.dp2px;
 
 public class RadarView extends View {
 
@@ -94,12 +94,11 @@ public class RadarView extends View {
         mMaxValue = typedArray.getFloat(R.styleable.RadarView_max_value, 0);
         mRadarLineColor = typedArray.getColor(R.styleable.RadarView_radar_line_color, 0xFF9E9E9E);
         mRadarLineEnable = typedArray.getBoolean(R.styleable.RadarView_radar_line_enable, true);
-        mRadarLineWidth = typedArray.getDimension(R.styleable.RadarView_radar_line_width,
-                                                  dip2px(context, 1));
+        mRadarLineWidth = typedArray.getDimension(R.styleable.RadarView_radar_line_width, dp2px(1));
         mVertexTextColor = typedArray.getColor(R.styleable.RadarView_vertex_text_color,
                                                mRadarLineColor);
         mVertexTextSize = typedArray.getDimension(R.styleable.RadarView_vertex_text_size,
-                                                  dip2px(context, 12));
+                                                  dp2px(12));
         mVertexTextOffset = typedArray.getDimension(R.styleable.RadarView_vertex_text_offset, 0);
         typedArray.recycle();
     }
@@ -321,7 +320,7 @@ public class RadarView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         if (mRadarData.size() == 0) {
-            mValueTextPaint.setTextSize(dip2px(context, 16));
+            mValueTextPaint.setTextSize(dp2px(16));
             float hintWidth = mValueTextPaint.measureText(mEmptyHint);
             canvas.drawText(mEmptyHint, mPointCenter.x - hintWidth / 2, mPointCenter.y,
                             mValueTextPaint);
@@ -339,7 +338,7 @@ public class RadarView extends View {
         mRadarLinePaint.setStyle(Paint.Style.STROKE);
         mVertexTextPaint.setColor(mVertexTextColor);
         mVertexTextPaint.setTextSize(mVertexTextSize);
-        mValuePaint.setStrokeWidth(dip2px(context, 1));
+        mValuePaint.setStrokeWidth(dp2px(1));
         mLayerPaint.setStyle(Paint.Style.FILL);
     }
 
@@ -427,7 +426,7 @@ public class RadarView extends View {
         for (int i = 0; i < mRadarData.size(); i++) {
             RadarData radarData = mRadarData.get(i);
             mValuePaint.setColor(radarData.getColor());
-            mValueTextPaint.setTextSize(dip2px(context, radarData.getValueTextSize()));
+            mValueTextPaint.setTextSize(dp2px(radarData.getValueTextSize()));
             mValueTextPaint.setColor(radarData.getVauleTextColor());
             List<Float> values = radarData.getValue();
             mRadarPath.reset();
@@ -477,8 +476,8 @@ public class RadarView extends View {
                 float             textHeight  = fontMetrics.descent - fontMetrics.ascent;
                 mVertexTextOffset = (int) Math.sqrt(
                         Math.pow(maxTextWidth, 2) + Math.pow(textHeight, 2)) / 2;
-                if (mVertexTextOffset < dip2px(context, 15)) {
-                    mVertexTextOffset = dip2px(context, 15);
+                if (mVertexTextOffset < dp2px(15)) {
+                    mVertexTextOffset = dp2px(15);
                 }
             }
             mRadius = Math.min(mPointCenter.x, mPointCenter.y) - (maxTextWidth + mVertexTextOffset);

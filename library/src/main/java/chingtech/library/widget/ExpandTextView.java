@@ -28,18 +28,19 @@ import chingtech.library.utils.ScreenUtils;
  * Created by 师春雷
  * Created at 2017/5/26 17:41
  */
-public class ExpandTextView extends android.support.v7.widget.AppCompatTextView implements View.OnClickListener {
+public class ExpandTextView extends android.support.v7.widget.AppCompatTextView
+        implements View.OnClickListener {
 
     /** The default number of lines 默认显示行数为8行 */
-    private static final int MAX_COLLAPSED_LINES = 8;
+    private static final int   MAX_COLLAPSED_LINES      = 8;
     /** The default animation duration 默认动画时长为300ms */
-    private static final int DEFAULT_ANIM_DURATION = 300;
+    private static final int   DEFAULT_ANIM_DURATION    = 300;
     /** The default alpha value when the animation starts */
     private static final float DEFAULT_ANIM_ALPHA_START = 0.7f;
     /** 最大显示行数 */
-    private int mMaxCollapsedLines = 8;
-    private int mAnimationDuration;
-    private float mAnimAlphaStart;
+    private              int   mMaxCollapsedLines       = 8;
+    private int      mAnimationDuration;
+    private float    mAnimAlphaStart;
     /** 展开前显示图片 */
     private Drawable mExpandDrawable;
     /** 展开后图片 */
@@ -48,8 +49,8 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
     private int mCollapsedHeight;
     private int mTextHeightWithMaxLines;
     /** Show short version as default.表示现在所处的折叠状态 */
-    private boolean mCollapsed = true;
-    private boolean mAnimating = false;
+    private boolean mCollapsed   = true;
+    private boolean mAnimating   = false;
     /** 标示是否需要折叠已显示末尾的图标 */
     private boolean needCollapse = true;
 
@@ -59,16 +60,16 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
      * 表示箭头对齐方式,靠左/上,右/下,还是居中
      */
     private static final int ALIGN_RIGHT_BOTTOM = 0;
-    private static final int ALIGN_LEFT_TOP = 1;
-    private static final int ALIGN_CENTER = 2;
-    private int arrowAlign = ALIGN_RIGHT_BOTTOM;
+    private static final int ALIGN_LEFT_TOP     = 1;
+    private static final int ALIGN_CENTER       = 2;
+    private              int arrowAlign         = ALIGN_RIGHT_BOTTOM;
 
     /**
      * 表示箭头显示位置,在文字右边还是在文字下边
      */
     private static final int POSITION_RIGHT = 0;
     private static final int POSITION_BELOW = 1;
-    private int arrowPosition = POSITION_RIGHT;
+    private              int arrowPosition  = POSITION_RIGHT;
 
     /**
      * 箭头图标和文字的距离
@@ -91,21 +92,21 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
         super(context, attrs, defStyleAttr);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandTextView,
-                defStyleAttr, 0);
+                                                               defStyleAttr, 0);
         mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandTextView_maxCollapsedLines,
-                MAX_COLLAPSED_LINES);
+                                               MAX_COLLAPSED_LINES);
         mAnimationDuration = typedArray.getInt(R.styleable.ExpandTextView_animDuration,
-                DEFAULT_ANIM_DURATION);
+                                               DEFAULT_ANIM_DURATION);
         mAnimAlphaStart = typedArray.getFloat(R.styleable.ExpandTextView_animAlphaStart,
-                DEFAULT_ANIM_ALPHA_START);
+                                              DEFAULT_ANIM_ALPHA_START);
         mExpandDrawable = typedArray.getDrawable(R.styleable.ExpandTextView_expandDrawable);
         mCollapseDrawable = typedArray.getDrawable(R.styleable.ExpandTextView_collapseDrawable);
         arrowAlign = typedArray.getInteger(R.styleable.ExpandTextView_arrowAlign,
-                ALIGN_RIGHT_BOTTOM);
+                                           ALIGN_RIGHT_BOTTOM);
         arrowPosition = typedArray.getInteger(R.styleable.ExpandTextView_arrowPosition,
-                POSITION_RIGHT);
+                                              POSITION_RIGHT);
         arrowDrawablePadding = (int) typedArray.getDimension(
-                R.styleable.ExpandTextView_arrowPadding, ScreenUtils.dip2px(context, 2f));
+                R.styleable.ExpandTextView_arrowPadding, ScreenUtils.dp2px(2f));
 
         typedArray.recycle();
 
@@ -150,12 +151,12 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
         if (!isDrawablePaddingResolved) {
             if (arrowPosition == POSITION_RIGHT) {
                 setPadding(getPaddingLeft(), getPaddingTop(),
-                        getPaddingRight() + mDrawableSize + arrowDrawablePadding,
-                        getPaddingBottom());
+                           getPaddingRight() + mDrawableSize + arrowDrawablePadding,
+                           getPaddingBottom());
             } else {
-                setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(),
-                        getPaddingBottom() + mExpandDrawable.getIntrinsicHeight()
-                                + arrowDrawablePadding);
+                setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom()
+                        + mExpandDrawable.getIntrinsicHeight()
+                        + arrowDrawablePadding);
             }
             isDrawablePaddingResolved = true;
         }
@@ -184,7 +185,8 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
                         break;
                     case ALIGN_RIGHT_BOTTOM:
                     default:
-                        top = getHeight() - getTotalPaddingBottom()
+                        top = getHeight()
+                                - getTotalPaddingBottom()
                                 - mExpandDrawable.getIntrinsicHeight();
                         break;
                 }
@@ -199,7 +201,8 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
                         break;
                     case ALIGN_RIGHT_BOTTOM:
                     default:
-                        left = getWidth() - getTotalPaddingRight()
+                        left = getWidth()
+                                - getTotalPaddingRight()
                                 - mExpandDrawable.getIntrinsicWidth();
                         break;
                 }
@@ -208,11 +211,11 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
 
             if (mCollapsed) {
                 mExpandDrawable.setBounds(0, 0, mExpandDrawable.getIntrinsicWidth(),
-                        mExpandDrawable.getIntrinsicHeight());
+                                          mExpandDrawable.getIntrinsicHeight());
                 mExpandDrawable.draw(canvas);
             } else {
                 mCollapseDrawable.setBounds(0, 0, mCollapseDrawable.getIntrinsicWidth(),
-                        mCollapseDrawable.getIntrinsicHeight());
+                                            mCollapseDrawable.getIntrinsicHeight());
                 mCollapseDrawable.draw(canvas);
             }
         }
@@ -232,18 +235,19 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
         mCollapsed = !mCollapsed;
 
         Bitmap collapseBM = Bitmap.createBitmap(mCollapseDrawable.getIntrinsicWidth(),
-                mCollapseDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                                                mCollapseDrawable.getIntrinsicHeight(),
+                                                Bitmap.Config.ARGB_8888);
         Canvas cv2 = new Canvas(collapseBM);
         mCollapseDrawable.setBounds(0, 0, mCollapseDrawable.getIntrinsicWidth(),
-                mCollapseDrawable.getIntrinsicHeight());
+                                    mCollapseDrawable.getIntrinsicHeight());
         mCollapseDrawable.draw(cv2);
 
-        ImageSpan isExpand = new ImageSpan(mExpandDrawable);
+        ImageSpan isExpand   = new ImageSpan(mExpandDrawable);
         ImageSpan isCollapse = new ImageSpan(getContext(), collapseBM);
 
         SpannableString spannableString = new SpannableString("icon");
         spannableString.setSpan(mCollapsed ? isExpand : isCollapse, 0, 4,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         // mark that the animation is in progress
         mAnimating = true;
@@ -289,8 +293,8 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
 
     private class ExpandCollapseAnimation extends Animation {
         private final View mTargetView;
-        private final int mStartHeight;
-        private final int mEndHeight;
+        private final int  mStartHeight;
+        private final int  mEndHeight;
 
         public ExpandCollapseAnimation(View view, int startHeight, int endHeight) {
             mTargetView = view;
@@ -301,13 +305,13 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
 
         @Override
         protected void applyTransformation(float interpolatedTime, Transformation t) {
-            final int newHeight =
-                    (int) ((mEndHeight - mStartHeight) * interpolatedTime + mStartHeight);
+            final int newHeight = (int) ((mEndHeight - mStartHeight) * interpolatedTime
+                    + mStartHeight);
             mTargetView.getLayoutParams().height = newHeight;
             setMaxHeight(newHeight);
             if (Float.compare(mAnimAlphaStart, 1.0f) != 0) {
                 applyAlphaAnimation(ExpandTextView.this,
-                        mAnimAlphaStart + interpolatedTime * (1.0f - mAnimAlphaStart));
+                                    mAnimAlphaStart + interpolatedTime * (1.0f - mAnimAlphaStart));
             }
         }
 
@@ -354,7 +358,7 @@ public class ExpandTextView extends android.support.v7.widget.AppCompatTextView 
 
     private int getRealTextViewHeight(TextView textView) {
         int textHeight = textView.getLayout().getLineTop(textView.getLineCount());
-        int padding = textView.getCompoundPaddingTop() + textView.getCompoundPaddingBottom();
+        int padding    = textView.getCompoundPaddingTop() + textView.getCompoundPaddingBottom();
         return textHeight + padding;
     }
 

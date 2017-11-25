@@ -3,7 +3,6 @@ package chingtech.library.utils;
 import android.content.Context;
 import android.graphics.Paint;
 import android.text.Editable;
-import android.text.Selection;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +76,7 @@ public class ViewUtils {
     public static void setViewHeight(Context context, View view, float type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
 
-        int height = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
+        int height = (int) ((width * 1.0f - ScreenUtils.dp2px(screen)) * type);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
@@ -109,7 +108,7 @@ public class ViewUtils {
     public static void setViewWidth(Context context, View view, float type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
 
-        int _width = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
+        int _width = (int) ((width * 1.0f - ScreenUtils.dp2px(screen)) * type);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
@@ -141,7 +140,7 @@ public class ViewUtils {
     public static void setViewSize(Context context, View view, float type, float screen) {
         int width = ScreenUtils.screenWidthPixel(context);
 
-        int size = (int) ((width * 1.0f - ScreenUtils.dip2px(context, screen)) * type);
+        int size = (int) ((width * 1.0f - ScreenUtils.dp2px(screen)) * type);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();
@@ -167,14 +166,13 @@ public class ViewUtils {
     /**
      * 设置View尺寸
      *
-     * @param context
      * @param view
      * @param width
      * @param height
      */
-    public static void setViewSize(Context context, View view, int width, int height) {
-        int _width  = ScreenUtils.dip2px(context, width);
-        int _height = ScreenUtils.dip2px(context, height);
+    public static void setViewSize(View view, int width, int height) {
+        int _width  = (int) ScreenUtils.dp2px(width);
+        int _height = (int) ScreenUtils.dp2px(height);
 
         /** 取控件View当前的布局参数 */
         ViewGroup.LayoutParams params = view.getLayoutParams();

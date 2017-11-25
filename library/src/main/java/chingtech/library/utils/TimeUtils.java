@@ -10,6 +10,8 @@ import java.util.GregorianCalendar;
 
 import chingtech.library.R;
 
+import static chingtech.library.utils.StringUtils.getDisPlayNumber;
+
 public class TimeUtils {
 
     public static final String TZ_FORMAT                 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
@@ -813,5 +815,49 @@ public class TimeUtils {
         sec = sec.substring(sec.length() - 2, sec.length());
         timeCount = hour + ":" + minue + ":" + sec;
         return timeCount;
+    }
+
+    /**
+     * 将时间毫秒数格式化为 HH:mm:ss格式
+     *
+     * @param seconds
+     * @return
+     */
+    public static String formatTimeLength(long seconds) {
+        seconds = seconds / 1000;
+        String formatLength;
+        if (seconds == 0) {
+            formatLength = "00:00";
+        } else if (seconds < 60) {//小于1分钟
+            formatLength = "00:" + getDisPlayNumber((int) seconds);
+        } else if (seconds < 60 * 60) {//小于1小时
+            long sec = seconds % 60;
+            long min = seconds / 60;
+            formatLength = getDisPlayNumber((int) min) + ":" + getDisPlayNumber((int) sec);
+        } else {
+            long hour = seconds / 3600;
+            long min  = seconds % 3600 / 60;
+            long sec  = seconds % 3600 % 60;
+            formatLength = getDisPlayNumber((int) hour)
+                    + ":"
+                    + getDisPlayNumber((int) min)
+                    + ":"
+                    + getDisPlayNumber((int) sec);
+        }
+        return formatLength;
+    }
+
+    /**
+     * 分钟数转小时：分钟
+     *
+     * @param mins
+     * @return
+     */
+    public static String formatTime(int mins) {
+
+        int hour = mins / 60;
+        int min  = mins % 60;
+
+        return hour + "小时" + min + "分钟";
     }
 }

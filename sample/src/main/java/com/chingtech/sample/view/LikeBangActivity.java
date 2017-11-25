@@ -9,7 +9,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
+import chingtech.library.utils.FontHelper;
 import chingtech.library.utils.StatusBarHelper;
+import chingtech.library.widget.ThreeStateSwitch;
 import com.chingtech.sample.R;
 
 import java.util.ArrayList;
@@ -38,6 +40,11 @@ public class LikeBangActivity extends BaseActivity {
     @BindView(R.id.text)
     TextView  mText;
 
+    @BindView(R.id.threeState)
+    ThreeStateSwitch threeState;
+    @BindView(R.id.threeState1)
+    ThreeStateSwitch threeState1;
+
     private boolean like = false;
 
     private List<String> banners = new ArrayList<>();
@@ -62,6 +69,18 @@ public class LikeBangActivity extends BaseActivity {
         } else {
             mImage.setImageResource(R.drawable.heart);
         }
+
+        mText.setTypeface(FontHelper.get(this, "vazir.ttf"));
+
+        threeState.setNormalTextTypeface(FontHelper.get(this, "vazir.ttf"));
+        threeState.setSelectedTextTypeface(FontHelper.get(this, "vazir_b.ttf"));
+
+        threeState1.setNormalTextTypeface(FontHelper.get(this, "vazir.ttf"));
+        threeState1.setSelectedTextTypeface(FontHelper.get(this, "vazir_b.ttf"));
+
+        threeState1.setOnChangeListener(currentState -> {
+            showToast("状态：" + currentState);
+        });
     }
 
     @Override

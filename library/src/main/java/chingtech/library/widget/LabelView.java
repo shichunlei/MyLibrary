@@ -1,6 +1,6 @@
 package chingtech.library.widget;
 
-import static chingtech.library.utils.ScreenUtils.dip2px;
+import static chingtech.library.utils.ScreenUtils.dp2px;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,21 +22,21 @@ public class LabelView extends View {
 
     private Context context;
 
-    private String mTextContent;
-    private int mTextColor;
-    private float mTextSize;
+    private String  mTextContent;
+    private int     mTextColor;
+    private float   mTextSize;
     private boolean mTextBold;
     private boolean mFillTriangle;
     private boolean mTextAllCaps;
-    private int mBackgroundColor;
-    private float mMinSize;
-    private float mPadding;
-    private int mGravity;
+    private int     mBackgroundColor;
+    private float   mMinSize;
+    private float   mPadding;
+    private int     mGravity;
     private static final int DEFAULT_DEGREES = 45;
 
-    private Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint mTextPaint       = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Paint mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Path mPath = new Path();
+    private Path  mPath            = new Path();
 
     public LabelView(Context context) {
         this(context, null);
@@ -55,13 +55,14 @@ public class LabelView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LabelView);
         mTextContent = ta.getString(R.styleable.LabelView_lv_text);
         mTextColor = ta.getColor(R.styleable.LabelView_lv_text_color, Color.parseColor("#ffffff"));
-        mTextSize = ta.getDimension(R.styleable.LabelView_lv_text_size, ScreenUtils.sp2px(context, 11));
+        mTextSize = ta.getDimension(R.styleable.LabelView_lv_text_size, ScreenUtils.sp2px(11));
         mTextBold = ta.getBoolean(R.styleable.LabelView_lv_text_bold, true);
         mTextAllCaps = ta.getBoolean(R.styleable.LabelView_lv_text_all_caps, true);
         mFillTriangle = ta.getBoolean(R.styleable.LabelView_lv_fill_triangle, false);
-        mBackgroundColor = ta.getColor(R.styleable.LabelView_lv_background_color, Color.parseColor("#FF4081"));
+        mBackgroundColor = ta.getColor(R.styleable.LabelView_lv_background_color,
+                                       Color.parseColor("#FF4081"));
         mMinSize = ta.getDimension(R.styleable.LabelView_lv_min_size, mFillTriangle ? 35 : 50);
-        mPadding = ta.getDimension(R.styleable.LabelView_lv_padding, dip2px(context, 3.5f));
+        mPadding = ta.getDimension(R.styleable.LabelView_lv_padding, dp2px(3.5f));
         mGravity = ta.getInt(R.styleable.LabelView_lv_gravity, Gravity.TOP | Gravity.LEFT);
         ta.recycle();
     }
@@ -77,7 +78,7 @@ public class LabelView extends View {
     }
 
     public void setTextSize(float textSize) {
-        mTextSize = ScreenUtils.sp2px(context, textSize);
+        mTextSize = ScreenUtils.sp2px(textSize);
         invalidate();
     }
 
@@ -102,12 +103,12 @@ public class LabelView extends View {
     }
 
     public void setMinSize(float minSize) {
-        mMinSize = dip2px(context, minSize);
+        mMinSize = dp2px(minSize);
         invalidate();
     }
 
     public void setPadding(float padding) {
-        mPadding = dip2px(context, padding);
+        mPadding = dp2px(padding);
         invalidate();
     }
 
@@ -258,20 +259,23 @@ public class LabelView extends View {
     private void drawText(int size, float degrees, Canvas canvas, float textHeight, boolean isTop) {
         canvas.save();
         canvas.rotate(degrees, size / 2f, size / 2f);
-        float delta = isTop ? -(textHeight + mPadding * 2) / 2 : (textHeight + mPadding * 2) / 2;
+        float delta     = isTop ? -(textHeight + mPadding * 2) / 2 :
+                (textHeight + mPadding * 2) / 2;
         float textBaseY = size / 2 - (mTextPaint.descent() + mTextPaint.ascent()) / 2 + delta;
         canvas.drawText(mTextAllCaps ? mTextContent.toUpperCase() : mTextContent,
-                getPaddingLeft() + (size - getPaddingLeft() - getPaddingRight()) / 2, textBaseY, mTextPaint);
+                        getPaddingLeft() + (size - getPaddingLeft() - getPaddingRight()) / 2,
+                        textBaseY, mTextPaint);
         canvas.restore();
     }
 
     private void drawTextWhenFill(int size, float degrees, Canvas canvas, boolean isTop) {
         canvas.save();
         canvas.rotate(degrees, size / 2f, size / 2f);
-        float delta = isTop ? -size / 4 : size / 4;
+        float delta     = isTop ? -size / 4 : size / 4;
         float textBaseY = size / 2 - (mTextPaint.descent() + mTextPaint.ascent()) / 2 + delta;
         canvas.drawText(mTextAllCaps ? mTextContent.toUpperCase() : mTextContent,
-                getPaddingLeft() + (size - getPaddingLeft() - getPaddingRight()) / 2, textBaseY, mTextPaint);
+                        getPaddingLeft() + (size - getPaddingLeft() - getPaddingRight()) / 2,
+                        textBaseY, mTextPaint);
         canvas.restore();
     }
 

@@ -11,7 +11,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -21,6 +20,9 @@ import chingtech.library.R;
 import chingtech.library.utils.StringUtils;
 import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
+
+import static chingtech.library.utils.ScreenUtils.dp2px;
+import static chingtech.library.utils.ScreenUtils.sp2px;
 
 /**
  * MyLibrary
@@ -185,22 +187,14 @@ public class RulerView extends View {
                                                            defStyleAttr, 0);
 
         rulerHeight = a.getDimensionPixelSize(R.styleable.RulerView_rulerHeight,
-                                              (int) TypedValue.applyDimension(
-                                                      TypedValue.COMPLEX_UNIT_DIP, rulerHeight,
-                                                      getResources().getDisplayMetrics()));
+                                              (int) dp2px(rulerHeight));
 
         rulerToResultgap = a.getDimensionPixelSize(R.styleable.RulerView_rulerToResultgap,
-                                                   (int) TypedValue.applyDimension(
-                                                           TypedValue.COMPLEX_UNIT_DIP,
-                                                           rulerToResultgap,
-                                                           getResources().getDisplayMetrics()));
+                                                   (int) dp2px(rulerToResultgap));
 
         scaleCount = a.getInt(R.styleable.RulerView_scaleCount, scaleCount);
 
-        scaleGap = a.getDimensionPixelSize(R.styleable.RulerView_scaleGap,
-                                           (int) TypedValue.applyDimension(
-                                                   TypedValue.COMPLEX_UNIT_DIP, scaleGap,
-                                                   getResources().getDisplayMetrics()));
+        scaleGap = a.getDimensionPixelSize(R.styleable.RulerView_scaleGap, (int) dp2px(scaleGap));
 
         minScale = a.getInt(R.styleable.RulerView_minScale, minScale);
 
@@ -229,38 +223,20 @@ public class RulerView extends View {
         }
 
         smallScaleStroke = a.getDimensionPixelSize(R.styleable.RulerView_smallScaleStroke,
-                                                   (int) TypedValue.applyDimension(
-                                                           TypedValue.COMPLEX_UNIT_DIP,
-                                                           smallScaleStroke,
-                                                           getResources().getDisplayMetrics()));
+                                                   (int) dp2px(smallScaleStroke));
 
         midScaleStroke = a.getDimensionPixelSize(R.styleable.RulerView_midScaleStroke,
-                                                 (int) TypedValue.applyDimension(
-                                                         TypedValue.COMPLEX_UNIT_DIP,
-                                                         midScaleStroke,
-                                                         getResources().getDisplayMetrics()));
+                                                 (int) dp2px(midScaleStroke));
         largeScaleStroke = a.getDimensionPixelSize(R.styleable.RulerView_largeScaleStroke,
-                                                   (int) TypedValue.applyDimension(
-                                                           TypedValue.COMPLEX_UNIT_DIP,
-                                                           largeScaleStroke,
-                                                           getResources().getDisplayMetrics()));
+                                                   (int) dp2px(largeScaleStroke));
         resultNumTextSize = a.getDimensionPixelSize(R.styleable.RulerView_resultNumTextSize,
-                                                    (int) TypedValue.applyDimension(
-                                                            TypedValue.COMPLEX_UNIT_SP,
-                                                            resultNumTextSize,
-                                                            getResources().getDisplayMetrics()));
+                                                    (int) sp2px(resultNumTextSize));
 
         scaleNumTextSize = a.getDimensionPixelSize(R.styleable.RulerView_scaleNumTextSize,
-                                                   (int) TypedValue.applyDimension(
-                                                           TypedValue.COMPLEX_UNIT_SP,
-                                                           scaleNumTextSize,
-                                                           getResources().getDisplayMetrics()));
+                                                   (int) sp2px(scaleNumTextSize));
 
         unitTextSize = a.getDimensionPixelSize(R.styleable.RulerView_unitTextSize,
-                                               (int) TypedValue.applyDimension(
-                                                       TypedValue.COMPLEX_UNIT_SP, unitTextSize,
-                                                       getResources().getDisplayMetrics()));
-
+                                               (int) sp2px(unitTextSize));
 
         showScaleResult = a.getBoolean(R.styleable.RulerView_showScaleResult, showScaleResult);
         isBgRoundRect = a.getBoolean(R.styleable.RulerView_isBgRoundRect, isBgRoundRect);

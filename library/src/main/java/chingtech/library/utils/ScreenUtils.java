@@ -1,6 +1,7 @@
 package chingtech.library.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.TypedValue;
@@ -22,66 +23,47 @@ public class ScreenUtils {
     }
 
     /**
-     * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
+     * dp转为px
+     *
+     * @param dpVal
+     * @return
      */
-    public static int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
+    public static float dp2px(float dpVal) {
+        Resources r = Resources.getSystem();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, r.getDisplayMetrics());
+    }
+
+    /**
+     * sp转为px
+     *
+     * @param spVal
+     * @return
+     */
+    public static float sp2px(float spVal) {
+        Resources r = Resources.getSystem();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, r.getDisplayMetrics());
     }
 
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
-     */
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
-
-    /**
-     * dp转px
      *
-     * @param context
-     * @param dpVal
-     * @return
+     * @param pxValue
      */
-    public static int dp2px(Context context, float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal,
-                                               context.getResources().getDisplayMetrics());
-    }
-
-    /**
-     * sp转px
-     *
-     * @param context
-     * @param spVal
-     * @return
-     */
-    public static int sp2px(Context context, float spVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal,
-                                               context.getResources().getDisplayMetrics());
-    }
-
-    /**
-     * px转dp
-     *
-     * @param context
-     * @param pxVal
-     * @return
-     */
-    public static float px2dp(Context context, float pxVal) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (pxVal / scale);
+    public static float px2dp(float pxValue) {
+        Resources   r     = Resources.getSystem();
+        final float scale = r.getDisplayMetrics().density;
+        return (pxValue / scale + 0.5f);
     }
 
     /**
      * px转sp
      *
      * @param pxVal
-     * @param pxVal
      * @return
      */
-    public static float px2sp(Context context, float pxVal) {
-        return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
+    public static float px2sp(float pxVal) {
+        Resources r = Resources.getSystem();
+        return pxVal / r.getDisplayMetrics().scaledDensity + 0.5f;
     }
 
     /**

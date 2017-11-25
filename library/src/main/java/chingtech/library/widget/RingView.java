@@ -87,7 +87,6 @@ public class RingView extends View {
         a.recycle();
     }
 
-
     protected void initView() {
 
 
@@ -178,19 +177,18 @@ public class RingView extends View {
             oval2 = new RectF(oval.left - circleBorder, oval.top - circleBorder,
                               oval.right + circleBorder, oval.bottom + circleBorder);
             centerRadius = maxRadius - margin;
-            float          innerRadius = (centerRadius - circleBorder / 2) / ((float) (centerRadius
+            float innerRadius = (centerRadius - circleBorder / 2) / ((float) (centerRadius
                     + circleBorder));
-            float          outRadius   = (centerRadius + circleBorder / 2) / ((float) (centerRadius
+            float outRadius = (centerRadius + circleBorder / 2) / ((float) (centerRadius
                     + circleBorder));
-            RadialGradient gradient    = new RadialGradient(px, py, centerRadius + circleBorder,
-                                                            new int[] {0x00ffffff, 0xffd4d4d4,
-                                                                    0xffd4d4d4, 0x00ffffff},
-                                                            new float[] {innerRadius
-                                                                    - (1 - outRadius) / 3,
-                                                                    innerRadius, outRadius,
-                                                                    outRadius
-                                                                            + (1 - outRadius) / 3},
-                                                            Shader.TileMode.CLAMP);
+            RadialGradient gradient = new RadialGradient(px, py, centerRadius + circleBorder,
+                                                         new int[] {0x00ffffff, 0xffd4d4d4,
+                                                                 0xffd4d4d4, 0x00ffffff},
+                                                         new float[] {
+                                                                 innerRadius - (1 - outRadius) / 3,
+                                                                 innerRadius, outRadius,
+                                                                 outRadius + (1 - outRadius) / 3},
+                                                         Shader.TileMode.CLAMP);
             mShadowPaint.setShader(gradient);
         }
 
@@ -240,7 +238,6 @@ public class RingView extends View {
     public void initDash(String[] intervalStrs, int[] colors) {
         this.TextStrArray = intervalStrs;
         this.colorRes = colors;
-
     }
 
 
@@ -284,7 +281,6 @@ public class RingView extends View {
             }
         });
         valueAnimator.start();
-
     }
 
 
@@ -302,8 +298,6 @@ public class RingView extends View {
             }
             invalidate();
         }
-
-
     }
 
     public void setTotalSection(int totalSection) {

@@ -33,24 +33,26 @@ import chingtech.library.interfaces.SmallBangListener;
  */
 public class SmallBang extends View {
 
-    private int[] colors =
-            {0xFFDF4288, 0xFFCD8BF8, 0XFF2B9DF2, 0XFFA4EEB4, 0XFFE097CA, 0XFFCAACC6, 0XFFC5A5FC,
-                    0XFFF5BC16, 0XFFF2DFC8, 0XFFE1BE8E, 0XFFC8C79D};
+    private int[]     colors  = {0xFFDF4288, 0xFFCD8BF8, 0XFF2B9DF2, 0XFFA4EEB4, 0XFFE097CA,
+            0XFFCAACC6, 0XFFC5A5FC, 0XFFF5BC16, 0XFFF2DFC8, 0XFFE1BE8E, 0XFFC8C79D};
     private List<Dot> dotList = new ArrayList<>();
-    private long ANIMATE_DURATION = 1000;
-    private float MAX_RADIUS = 150;
+
+    private long  ANIMATE_DURATION  = 1000;
+    private float MAX_RADIUS        = 150;
     private float MAX_CIRCLE_RADIUS = 100;
     private float progress;
     private Paint circlePaint;
-    private float RING_WIDTH = 10;
-    private float P1 = 0.15f;
-    private float P2 = 0.28f;
-    private float P3 = 0.30f;
-    private int DOT_NUMBER = 16;
-    private float DOT_BIG_RADIUS = 8;
+    private float RING_WIDTH       = 10;
+    private float P1               = 0.15f;
+    private float P2               = 0.28f;
+    private float P3               = 0.30f;
+    private int   DOT_NUMBER       = 16;
+    private float DOT_BIG_RADIUS   = 8;
     private float DOT_SMALL_RADIUS = 5;
-    private int[] mExpandInset = new int[2];
+    private int[] mExpandInset     = new int[2];
+
     private SmallBangListener mListener;
+
     private int centerY;
     private int centerX;
 
@@ -81,10 +83,10 @@ public class SmallBang extends View {
     }
 
     public static SmallBang attach2Window(Activity activity) {
-        ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+        ViewGroup rootView  = activity.findViewById(Window.ID_ANDROID_CONTENT);
         SmallBang smallBang = new SmallBang(activity);
-        rootView.addView(smallBang, new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        rootView.addView(smallBang, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                                               ViewGroup.LayoutParams.MATCH_PARENT));
         return smallBang;
     }
 
@@ -145,8 +147,8 @@ public class SmallBang extends View {
 
         view.setScaleX(0.1f);
         view.setScaleY(0.1f);
-        ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f).setDuration(
-                (long) (ANIMATE_DURATION * 0.5f));
+        ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f)
+                                              .setDuration((long) (ANIMATE_DURATION * 0.5f));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -174,8 +176,8 @@ public class SmallBang extends View {
     }
 
     private void bang() {
-        ValueAnimator valueAnimator = new ValueAnimator().ofFloat(0, 1).setDuration(
-                ANIMATE_DURATION);
+        ValueAnimator valueAnimator = new ValueAnimator().ofFloat(0, 1)
+                                                         .setDuration(ANIMATE_DURATION);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -210,9 +212,11 @@ public class SmallBang extends View {
     protected void onDraw(Canvas canvas) {
         if (progress >= 0 && progress <= P1) {
             float progress1 = 1f / P1 * progress;
-            if (progress1 > 1) progress1 = 1;
+            if (progress1 > 1) {
+                progress1 = 1;
+            }
             int startColor = colors[0];
-            int endColor = colors[1];
+            int endColor   = colors[1];
             circlePaint.setStyle(Paint.Style.FILL);
             circlePaint.setColor(evaluateColor(startColor, endColor, progress1));
             canvas.drawCircle(centerX, centerY, MAX_CIRCLE_RADIUS * progress1, circlePaint);
@@ -220,20 +224,24 @@ public class SmallBang extends View {
 
             if (progress > P1 && progress <= P3) {
                 float progress2 = (progress - P1) / (P3 - P1);
-                if (progress2 < 0) progress2 = 0;
-                if (progress2 > 1) progress2 = 1;
+                if (progress2 < 0) {
+                    progress2 = 0;
+                }
+                if (progress2 > 1) {
+                    progress2 = 1;
+                }
 
                 circlePaint.setStyle(Paint.Style.STROKE);
                 float strokeWidth = (MAX_CIRCLE_RADIUS) * (1 - progress2);
                 circlePaint.setStrokeWidth(strokeWidth);
 
                 canvas.drawCircle(centerX, centerY,
-                        (MAX_CIRCLE_RADIUS) * progress2 + strokeWidth / 2, circlePaint);
+                                  (MAX_CIRCLE_RADIUS) * progress2 + strokeWidth / 2, circlePaint);
             }
             if (progress >= P2) {
                 circlePaint.setStyle(Paint.Style.FILL);
                 float progress3 = (progress - P2) / (1 - P2);
-                float r = MAX_CIRCLE_RADIUS + progress3 * (MAX_RADIUS - MAX_CIRCLE_RADIUS);
+                float r         = MAX_CIRCLE_RADIUS + progress3 * (MAX_RADIUS - MAX_CIRCLE_RADIUS);
 
                 for (int i = 0; i < dotList.size(); i += 2) {
                     Dot dot = dotList.get(i);
@@ -263,21 +271,22 @@ public class SmallBang extends View {
             return endValue;
         }
         int startInt = startValue;
-        int startA = (startInt >> 24) & 0xff;
-        int startR = (startInt >> 16) & 0xff;
-        int startG = (startInt >> 8) & 0xff;
-        int startB = startInt & 0xff;
+        int startA   = (startInt >> 24) & 0xff;
+        int startR   = (startInt >> 16) & 0xff;
+        int startG   = (startInt >> 8) & 0xff;
+        int startB   = startInt & 0xff;
 
         int endInt = endValue;
-        int endA = (endInt >> 24) & 0xff;
-        int endR = (endInt >> 16) & 0xff;
-        int endG = (endInt >> 8) & 0xff;
-        int endB = endInt & 0xff;
+        int endA   = (endInt >> 24) & 0xff;
+        int endR   = (endInt >> 16) & 0xff;
+        int endG   = (endInt >> 8) & 0xff;
+        int endB   = endInt & 0xff;
 
-        return ((startA + (int) (fraction * (endA - startA))) << 24) | (
-                (startR + (int) (fraction * (endR - startR))) << 16) | (
-                (startG + (int) (fraction * (endG - startG))) << 8) | ((startB + (int) (fraction * (
-                endB - startB))));
+        return ((startA + (int) (fraction * (endA - startA))) << 24)
+                | ((startR + (int) (fraction
+                * (endR - startR))) << 16)
+                | ((startG + (int) (fraction * (endG - startG))) << 8)
+                | ((startB + (int) (fraction * (endB - startB))));
     }
 
     class Dot {

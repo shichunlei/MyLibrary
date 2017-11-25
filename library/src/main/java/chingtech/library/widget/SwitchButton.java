@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,11 +11,12 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Checkable;
 import chingtech.library.R;
+
+import static chingtech.library.utils.ScreenUtils.dp2px;
 
 
 /**
@@ -42,8 +42,8 @@ import chingtech.library.R;
  */
 public class SwitchButton extends View implements Checkable {
 
-    private static final int DEFAULT_WIDTH  = dp2pxInt(58);
-    private static final int DEFAULT_HEIGHT = dp2pxInt(36);
+    private static final int DEFAULT_WIDTH  = (int) dp2px(58);
+    private static final int DEFAULT_HEIGHT = (int) dp2px(36);
 
     /**
      * 动画状态：
@@ -104,7 +104,7 @@ public class SwitchButton extends View implements Checkable {
 
         uncheckCircleWidth = optPixelSize(typedArray,
                                           R.styleable.SwitchButton_sb_uncheckcircle_width,
-                                          dp2pxInt(1.5f));//dp2pxInt(1.5f);
+                                          (int) dp2px(1.5f));//dp2pxInt(1.5f);
 
         uncheckCircleOffsetX = dp2px(10);
 
@@ -116,10 +116,10 @@ public class SwitchButton extends View implements Checkable {
         checkedLineOffsetY = dp2px(4);
 
         shadowRadius = optPixelSize(typedArray, R.styleable.SwitchButton_sb_shadow_radius,
-                                    dp2pxInt(2.5f));//dp2pxInt(2.5f);
+                                    (int) dp2px(2.5f));//dp2pxInt(2.5f);
 
         shadowOffset = optPixelSize(typedArray, R.styleable.SwitchButton_sb_shadow_offset,
-                                    dp2pxInt(1.5f));//dp2pxInt(1.5f);
+                                    (int) dp2px(1.5f));//dp2pxInt(1.5f);
 
         shadowColor = optColor(typedArray, R.styleable.SwitchButton_sb_shadow_color,
                                0X33000000);//0X33000000;
@@ -131,13 +131,13 @@ public class SwitchButton extends View implements Checkable {
                                 0Xff51d367);//0Xff51d367;
 
         borderWidth = optPixelSize(typedArray, R.styleable.SwitchButton_sb_border_width,
-                                   dp2pxInt(1));//dp2pxInt(1);
+                                   (int) dp2px(1));//dp2pxInt(1);
 
         checkLineColor = optColor(typedArray, R.styleable.SwitchButton_sb_checkline_color,
                                   Color.WHITE);//Color.WHITE;
 
         checkLineWidth = optPixelSize(typedArray, R.styleable.SwitchButton_sb_checkline_width,
-                                      dp2pxInt(1f));//dp2pxInt(1.0f);
+                                      (int) dp2px(1f));//dp2pxInt(1.0f);
 
         checkLineLength = dp2px(6);
 
@@ -160,7 +160,6 @@ public class SwitchButton extends View implements Checkable {
             typedArray.recycle();
         }
 
-
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         buttonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         buttonPaint.setColor(buttonColor);
@@ -168,7 +167,6 @@ public class SwitchButton extends View implements Checkable {
         if (shadowEffect) {
             buttonPaint.setShadowLayer(shadowRadius, 0, shadowOffset, shadowColor);
         }
-
 
         viewState = new ViewState();
         beforeState = new ViewState();
@@ -727,16 +725,6 @@ public class SwitchButton extends View implements Checkable {
 
     public interface OnCheckedChangeListener {
         void onCheckedChanged(SwitchButton view, boolean isChecked);
-    }
-
-    /*******************************************************/
-    private static float dp2px(float dp) {
-        Resources r = Resources.getSystem();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
-    }
-
-    private static int dp2pxInt(float dp) {
-        return (int) dp2px(dp);
     }
 
     private static int optInt(TypedArray typedArray, int index, int def) {

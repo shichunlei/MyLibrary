@@ -44,27 +44,27 @@ import java.util.List;
  */
 public class MarqueeView extends ViewFlipper {
 
-    private int interval = 3000;
+    private int     interval           = 3000;
     private boolean hasSetAnimDuration = false;
-    private int animDuration = 1000;
-    private int textSize = 14;
-    private int textColor = 0xffffffff;
-    private boolean singleLine = false;
+    private int     animDuration       = 1000;
+    private int     textSize           = 14;
+    private int     textColor          = 0xffffffff;
+    private boolean singleLine         = false;
 
-    private int gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
-    private static final int GRAVITY_LEFT = 0;
+    private              int gravity        = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+    private static final int GRAVITY_LEFT   = 0;
     private static final int GRAVITY_CENTER = 1;
-    private static final int GRAVITY_RIGHT = 2;
+    private static final int GRAVITY_RIGHT  = 2;
 
-    private boolean hasSetDirection = false;
-    private int direction = DIRECTION_BOTTOM_TO_TOP;
-    private static final int DIRECTION_BOTTOM_TO_TOP = 0;
-    private static final int DIRECTION_TOP_TO_BOTTOM = 1;
-    private static final int DIRECTION_RIGHT_TO_LEFT = 2;
-    private static final int DIRECTION_LEFT_TO_RIGHT = 3;
+    private              boolean hasSetDirection         = false;
+    private              int     direction               = DIRECTION_BOTTOM_TO_TOP;
+    private static final int     DIRECTION_BOTTOM_TO_TOP = 0;
+    private static final int     DIRECTION_TOP_TO_BOTTOM = 1;
+    private static final int     DIRECTION_RIGHT_TO_LEFT = 2;
+    private static final int     DIRECTION_LEFT_TO_RIGHT = 3;
 
     @AnimRes
-    private int inAnimResId = R.anim.anim_bottom_in;
+    private int inAnimResId  = R.anim.anim_bottom_in;
     @AnimRes
     private int outAnimResId = R.anim.anim_top_out;
 
@@ -78,15 +78,18 @@ public class MarqueeView extends ViewFlipper {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MarqueeViewStyle, defStyleAttr, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MarqueeViewStyle,
+                                                               defStyleAttr, 0);
 
         interval = typedArray.getInteger(R.styleable.MarqueeViewStyle_mvInterval, interval);
         hasSetAnimDuration = typedArray.hasValue(R.styleable.MarqueeViewStyle_mvAnimDuration);
-        animDuration = typedArray.getInteger(R.styleable.MarqueeViewStyle_mvAnimDuration, animDuration);
+        animDuration = typedArray.getInteger(R.styleable.MarqueeViewStyle_mvAnimDuration,
+                                             animDuration);
         singleLine = typedArray.getBoolean(R.styleable.MarqueeViewStyle_mvSingleLine, false);
         if (typedArray.hasValue(R.styleable.MarqueeViewStyle_mvTextSize)) {
-            textSize = (int) typedArray.getDimension(R.styleable.MarqueeViewStyle_mvTextSize, textSize);
-            textSize = (int) ScreenUtils.px2sp(context, textSize);
+            textSize = (int) typedArray.getDimension(R.styleable.MarqueeViewStyle_mvTextSize,
+                                                     textSize);
+            textSize = (int) ScreenUtils.px2sp(textSize);
         }
         textColor = typedArray.getColor(R.styleable.MarqueeViewStyle_mvTextColor, textColor);
 
@@ -150,19 +153,23 @@ public class MarqueeView extends ViewFlipper {
      * @param outAnimResID 离开动画的resID
      */
     @SuppressWarnings("deprecation")
-    public void startWithText(final String notice, final @AnimRes int inAnimResId, final @AnimRes int outAnimResID) {
-        if (TextUtils.isEmpty(notice)) return;
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
-                startWithFixedWidth(notice, inAnimResId, outAnimResID);
-            }
-        });
+    public void startWithText(final String notice, final @AnimRes int inAnimResId,
+            final @AnimRes int outAnimResID) {
+        if (TextUtils.isEmpty(notice)) {
+            return;
+        }
+        getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        } else {
+                            getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
+                        startWithFixedWidth(notice, inAnimResId, outAnimResID);
+                    }
+                });
     }
 
     /**
@@ -170,14 +177,15 @@ public class MarqueeView extends ViewFlipper {
      *
      * @param notice 字符串
      */
-    private void startWithFixedWidth(String notice, @AnimRes int inAnimResId, @AnimRes int outAnimResID) {
+    private void startWithFixedWidth(String notice, @AnimRes int inAnimResId,
+            @AnimRes int outAnimResID) {
         int noticeLength = notice.length();
-        int width = ScreenUtils.px2dip(getContext(), getWidth());
+        int width        = (int) ScreenUtils.px2dp(getWidth());
         if (width == 0) {
             throw new RuntimeException("Please set the width of MarqueeView !");
         }
-        int limit = width / textSize;
-        List list = new ArrayList();
+        int  limit = width / textSize;
+        List list  = new ArrayList();
 
         if (noticeLength <= limit) {
             list.add(notice);
@@ -185,12 +193,14 @@ public class MarqueeView extends ViewFlipper {
             int size = noticeLength / limit + (noticeLength % limit != 0 ? 1 : 0);
             for (int i = 0; i < size; i++) {
                 int startIndex = i * limit;
-                int endIndex = ((i + 1) * limit >= noticeLength ? noticeLength : (i + 1) * limit);
+                int endIndex   = ((i + 1) * limit >= noticeLength ? noticeLength : (i + 1) * limit);
                 list.add(notice.substring(startIndex, endIndex));
             }
         }
 
-        if (notices == null) notices = new ArrayList<>();
+        if (notices == null) {
+            notices = new ArrayList<>();
+        }
         notices.clear();
         notices.addAll(list);
         start(inAnimResId, outAnimResID);
@@ -212,8 +222,11 @@ public class MarqueeView extends ViewFlipper {
      * @param inAnimResId  进入动画的resID
      * @param outAnimResID 离开动画的resID
      */
-    public void startWithList(List<? extends CharSequence> notices, @AnimRes int inAnimResId, @AnimRes int outAnimResID) {
-        if (StringUtils.isEmpty(notices)) return;
+    public void startWithList(List<? extends CharSequence> notices, @AnimRes int inAnimResId,
+            @AnimRes int outAnimResID) {
+        if (StringUtils.isEmpty(notices)) {
+            return;
+        }
         setNotices(notices);
         start(inAnimResId, outAnimResID);
     }
@@ -306,11 +319,15 @@ public class MarqueeView extends ViewFlipper {
      */
     private void setInAndOutAnimation(@AnimRes int inAnimResId, @AnimRes int outAnimResID) {
         Animation inAnim = AnimationUtils.loadAnimation(getContext(), inAnimResId);
-        if (hasSetAnimDuration) inAnim.setDuration(animDuration);
+        if (hasSetAnimDuration) {
+            inAnim.setDuration(animDuration);
+        }
         setInAnimation(inAnim);
 
         Animation outAnim = AnimationUtils.loadAnimation(getContext(), outAnimResID);
-        if (hasSetAnimDuration) outAnim.setDuration(animDuration);
+        if (hasSetAnimDuration) {
+            outAnim.setDuration(animDuration);
+        }
         setOutAnimation(outAnim);
     }
 }

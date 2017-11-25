@@ -50,77 +50,71 @@ public class WaveLoadingView extends View {
      * |                        |  |
      * +------------------------+__|_______
      */
-    private static final float DEFAULT_AMPLITUDE_RATIO = 0.1f;
-    private static final float DEFAULT_AMPLITUDE_VALUE = 50.0f;
-    private static final float DEFAULT_WATER_LEVEL_RATIO = 0.5f;
-    private static final float DEFAULT_WAVE_LENGTH_RATIO = 1.0f;
-    private static final float DEFAULT_WAVE_SHIFT_RATIO = 0.0f;
-    private static final int DEFAULT_WAVE_PROGRESS_VALUE = 50;
-    private static final int DEFAULT_WAVE_COLOR = Color.parseColor("#212121");
-    private static final int DEFAULT_WAVE_BACKGROUND_COLOR = Color.TRANSPARENT;
-    private static final int DEFAULT_TITLE_COLOR = Color.parseColor("#212121");
-    private static final int DEFAULT_STROKE_COLOR = Color.TRANSPARENT;
-    private static final float DEFAULT_BORDER_WIDTH = 0;
-    private static final float DEFAULT_TITLE_STROKE_WIDTH = 0;
+    private static final float DEFAULT_AMPLITUDE_RATIO         = 0.1f;
+    private static final float DEFAULT_AMPLITUDE_VALUE         = 50.0f;
+    private static final float DEFAULT_WATER_LEVEL_RATIO       = 0.5f;
+    private static final float DEFAULT_WAVE_LENGTH_RATIO       = 1.0f;
+    private static final float DEFAULT_WAVE_SHIFT_RATIO        = 0.0f;
+    private static final int   DEFAULT_WAVE_PROGRESS_VALUE     = 50;
+    private static final int   DEFAULT_WAVE_COLOR              = Color.parseColor("#212121");
+    private static final int   DEFAULT_WAVE_BACKGROUND_COLOR   = Color.TRANSPARENT;
+    private static final int   DEFAULT_TITLE_COLOR             = Color.parseColor("#212121");
+    private static final int   DEFAULT_STROKE_COLOR            = Color.TRANSPARENT;
+    private static final float DEFAULT_BORDER_WIDTH            = 0;
+    private static final float DEFAULT_TITLE_STROKE_WIDTH      = 0;
     // This is incorrect/not recommended by Joshua Bloch in his book Effective Java (2nd ed).
-    private static final int DEFAULT_WAVE_SHAPE = ShapeType.CIRCLE.ordinal();
-    private static final int DEFAULT_TRIANGLE_DIRECTION = TriangleDirection.NORTH.ordinal();
-    private static final int DEFAULT_ROUND_RECTANGLE_X_AND_Y = 30;
-    private static final float DEFAULT_TITLE_TOP_SIZE = 18.0f;
-    private static final float DEFAULT_TITLE_CENTER_SIZE = 22.0f;
-    private static final float DEFAULT_TITLE_BOTTOM_SIZE = 18.0f;
+    private static final int   DEFAULT_WAVE_SHAPE              = ShapeType.CIRCLE.ordinal();
+    private static final int   DEFAULT_TRIANGLE_DIRECTION      = TriangleDirection.NORTH.ordinal();
+    private static final int   DEFAULT_ROUND_RECTANGLE_X_AND_Y = 30;
+    private static final float DEFAULT_TITLE_TOP_SIZE          = 18.0f;
+    private static final float DEFAULT_TITLE_CENTER_SIZE       = 22.0f;
+    private static final float DEFAULT_TITLE_BOTTOM_SIZE       = 18.0f;
 
     public enum ShapeType {
-        TRIANGLE,
-        CIRCLE,
-        SQUARE,
-        RECTANGLE
+        TRIANGLE, CIRCLE, SQUARE, RECTANGLE
     }
 
     public enum TriangleDirection {
-        NORTH,
-        SOUTH,
-        EAST,
-        WEST
+        NORTH, SOUTH, EAST, WEST
     }
 
     // Dynamic Properties.
-    private int mCanvasSize;
-    private int mCanvasHeight;
-    private int mCanvasWidth;
+    private int   mCanvasSize;
+    private int   mCanvasHeight;
+    private int   mCanvasWidth;
     private float mAmplitudeRatio;
-    private int mWaveBgColor;
-    private int mWaveColor;
-    private int mShapeType;
-    private int mTriangleDirection;
-    private int mRoundRectangleXY;
+    private int   mWaveBgColor;
+    private int   mWaveColor;
+    private int   mShapeType;
+    private int   mTriangleDirection;
+    private int   mRoundRectangleXY;
 
     // Properties.
     private String mTopTitle;
     private String mCenterTitle;
     private String mBottomTitle;
-    private float mDefaultWaterLevel;
+    private float  mDefaultWaterLevel;
     private float mWaterLevelRatio = 1f;
-    private float mWaveShiftRatio = DEFAULT_WAVE_SHIFT_RATIO;
-    private int mProgressValue = DEFAULT_WAVE_PROGRESS_VALUE;
+    private float mWaveShiftRatio  = DEFAULT_WAVE_SHIFT_RATIO;
+    private int   mProgressValue   = DEFAULT_WAVE_PROGRESS_VALUE;
     private boolean mIsRoundRectangle;
 
     // Object used to draw.
     // Shader containing repeated waves.
     private BitmapShader mWaveShader;
-    private Bitmap bitmapBuffer;
+    private Bitmap       bitmapBuffer;
     // Shader matrix.
-    private Matrix mShaderMatrix;
+    private Matrix       mShaderMatrix;
     // Paint to draw wave.
-    private Paint mWavePaint;
+    private Paint        mWavePaint;
     //Paint to draw waveBackground.
-    private Paint mWaveBgPaint;
+    private Paint        mWaveBgPaint;
     // Paint to draw border.
-    private Paint mBorderPaint;
+    private Paint        mBorderPaint;
     // Point to draw title.
-    private Paint mTopTitlePaint;
-    private Paint mBottomTitlePaint;
-    private Paint mCenterTitlePaint;
+    private Paint        mTopTitlePaint;
+    private Paint        mBottomTitlePaint;
+    private Paint        mCenterTitlePaint;
 
     private Paint mTopTitleStrokePaint;
     private Paint mBottomTitleStrokePaint;
@@ -128,7 +122,7 @@ public class WaveLoadingView extends View {
 
     // Animation.
     private ObjectAnimator waveShiftAnim;
-    private AnimatorSet mAnimatorSet;
+    private AnimatorSet    mAnimatorSet;
 
     private Context context;
 
@@ -161,34 +155,34 @@ public class WaveLoadingView extends View {
 
         // Load the styled attributes and set their properties
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.WaveLoadingView,
-                defStyleAttr, 0);
+                                                               defStyleAttr, 0);
 
         // Init ShapeType
         mShapeType = attributes.getInteger(R.styleable.WaveLoadingView_wlv_shapeType,
-                DEFAULT_WAVE_SHAPE);
+                                           DEFAULT_WAVE_SHAPE);
 
         // Init Wave
         mWaveColor = attributes.getColor(R.styleable.WaveLoadingView_wlv_waveColor,
-                DEFAULT_WAVE_COLOR);
+                                         DEFAULT_WAVE_COLOR);
         mWaveBgColor = attributes.getColor(R.styleable.WaveLoadingView_wlv_wave_background_Color,
-                DEFAULT_WAVE_BACKGROUND_COLOR);
+                                           DEFAULT_WAVE_BACKGROUND_COLOR);
 
         mWaveBgPaint.setColor(mWaveBgColor);
 
         // Init AmplitudeRatio
         float amplitudeRatioAttr = attributes.getFloat(
                 R.styleable.WaveLoadingView_wlv_waveAmplitude, DEFAULT_AMPLITUDE_VALUE) / 1000;
-        mAmplitudeRatio = (amplitudeRatioAttr > DEFAULT_AMPLITUDE_RATIO) ? DEFAULT_AMPLITUDE_RATIO
-                : amplitudeRatioAttr;
+        mAmplitudeRatio = (amplitudeRatioAttr > DEFAULT_AMPLITUDE_RATIO) ? DEFAULT_AMPLITUDE_RATIO :
+                amplitudeRatioAttr;
 
         // Init Progress
         mProgressValue = attributes.getInteger(R.styleable.WaveLoadingView_wlv_progressValue,
-                DEFAULT_WAVE_PROGRESS_VALUE);
+                                               DEFAULT_WAVE_PROGRESS_VALUE);
         setProgressValue(mProgressValue);
 
         // Init RoundRectangle
         mIsRoundRectangle = attributes.getBoolean(R.styleable.WaveLoadingView_wlv_round_rectangle,
-                false);
+                                                  false);
         mRoundRectangleXY = attributes.getInteger(
                 R.styleable.WaveLoadingView_wlv_round_rectangle_x_and_y,
                 DEFAULT_ROUND_RECTANGLE_X_AND_Y);
@@ -203,27 +197,27 @@ public class WaveLoadingView extends View {
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_borderWidth,
-                        ScreenUtils.dip2px(context, DEFAULT_BORDER_WIDTH)));
+                                        ScreenUtils.dp2px(DEFAULT_BORDER_WIDTH)));
         mBorderPaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_borderColor,
-                DEFAULT_WAVE_COLOR));
+                                                  DEFAULT_WAVE_COLOR));
 
         // Init Top Title
         mTopTitlePaint = new Paint();
         mTopTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleTopColor,
-                DEFAULT_TITLE_COLOR));
+                                                    DEFAULT_TITLE_COLOR));
         mTopTitlePaint.setStyle(Paint.Style.FILL);
         mTopTitlePaint.setAntiAlias(true);
         mTopTitlePaint.setTextSize(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopSize,
-                        ScreenUtils.sp2px(context, DEFAULT_TITLE_TOP_SIZE)));
+                                        ScreenUtils.sp2px(DEFAULT_TITLE_TOP_SIZE)));
 
         mTopTitleStrokePaint = new Paint();
         mTopTitleStrokePaint.setColor(
                 attributes.getColor(R.styleable.WaveLoadingView_wlv_titleTopStrokeColor,
-                        DEFAULT_STROKE_COLOR));
+                                    DEFAULT_STROKE_COLOR));
         mTopTitleStrokePaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopStrokeWidth,
-                        ScreenUtils.dip2px(context, DEFAULT_TITLE_STROKE_WIDTH)));
+                                        ScreenUtils.dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
         mTopTitleStrokePaint.setStyle(Paint.Style.STROKE);
         mTopTitleStrokePaint.setAntiAlias(true);
         mTopTitleStrokePaint.setTextSize(mTopTitlePaint.getTextSize());
@@ -234,20 +228,20 @@ public class WaveLoadingView extends View {
         mCenterTitlePaint = new Paint();
         mCenterTitlePaint.setColor(
                 attributes.getColor(R.styleable.WaveLoadingView_wlv_titleCenterColor,
-                        DEFAULT_TITLE_COLOR));
+                                    DEFAULT_TITLE_COLOR));
         mCenterTitlePaint.setStyle(Paint.Style.FILL);
         mCenterTitlePaint.setAntiAlias(true);
         mCenterTitlePaint.setTextSize(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterSize,
-                        ScreenUtils.sp2px(context, DEFAULT_TITLE_CENTER_SIZE)));
+                                        ScreenUtils.sp2px(DEFAULT_TITLE_CENTER_SIZE)));
 
         mCenterTitleStrokePaint = new Paint();
         mCenterTitleStrokePaint.setColor(
                 attributes.getColor(R.styleable.WaveLoadingView_wlv_titleCenterStrokeColor,
-                        DEFAULT_STROKE_COLOR));
+                                    DEFAULT_STROKE_COLOR));
         mCenterTitleStrokePaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterStrokeWidth,
-                        ScreenUtils.dip2px(context, DEFAULT_TITLE_STROKE_WIDTH)));
+                                        ScreenUtils.dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
         mCenterTitleStrokePaint.setStyle(Paint.Style.STROKE);
         mCenterTitleStrokePaint.setAntiAlias(true);
         mCenterTitleStrokePaint.setTextSize(mCenterTitlePaint.getTextSize());
@@ -258,20 +252,20 @@ public class WaveLoadingView extends View {
         mBottomTitlePaint = new Paint();
         mBottomTitlePaint.setColor(
                 attributes.getColor(R.styleable.WaveLoadingView_wlv_titleBottomColor,
-                        DEFAULT_TITLE_COLOR));
+                                    DEFAULT_TITLE_COLOR));
         mBottomTitlePaint.setStyle(Paint.Style.FILL);
         mBottomTitlePaint.setAntiAlias(true);
         mBottomTitlePaint.setTextSize(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomSize,
-                        ScreenUtils.sp2px(context, DEFAULT_TITLE_BOTTOM_SIZE)));
+                                        ScreenUtils.sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
 
         mBottomTitleStrokePaint = new Paint();
         mBottomTitleStrokePaint.setColor(
                 attributes.getColor(R.styleable.WaveLoadingView_wlv_titleBottomStrokeColor,
-                        DEFAULT_STROKE_COLOR));
+                                    DEFAULT_STROKE_COLOR));
         mBottomTitleStrokePaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomStrokeWidth,
-                        ScreenUtils.dip2px(context, DEFAULT_TITLE_STROKE_WIDTH)));
+                                        ScreenUtils.dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
         mBottomTitleStrokePaint.setStyle(Paint.Style.STROKE);
         mBottomTitleStrokePaint.setAntiAlias(true);
         mBottomTitleStrokePaint.setTextSize(mBottomTitlePaint.getTextSize());
@@ -298,12 +292,13 @@ public class WaveLoadingView extends View {
             // Sacle shader according to waveLengthRatio and amplitudeRatio.
             // This decides the size(waveLengthRatio for width, amplitudeRatio for height) of waves.
             mShaderMatrix.setScale(1, mAmplitudeRatio / DEFAULT_AMPLITUDE_RATIO, 0,
-                    mDefaultWaterLevel);
+                                   mDefaultWaterLevel);
             // Translate shader according to waveShiftRatio and waterLevelRatio.
             // This decides the start position(waveShiftRatio for x, waterLevelRatio for y) of
             // waves.
             mShaderMatrix.postTranslate(mWaveShiftRatio * getWidth(),
-                    (DEFAULT_WATER_LEVEL_RATIO - mWaterLevelRatio) * getHeight());
+                                        (DEFAULT_WATER_LEVEL_RATIO - mWaterLevelRatio)
+                                                * getHeight());
 
             // Assign matrix to invalidate the shader.
             mWaveShader.setLocalMatrix(mShaderMatrix);
@@ -318,7 +313,7 @@ public class WaveLoadingView extends View {
                     // Currently does not support the border settings
                     Point start = new Point(0, getHeight());
                     Path triangle = getEquilateralTriangle(start, getWidth(), getHeight(),
-                            mTriangleDirection);
+                                                           mTriangleDirection);
                     canvas.drawPath(triangle, mWaveBgPaint);
                     canvas.drawPath(triangle, mWavePaint);
                     break;
@@ -326,7 +321,7 @@ public class WaveLoadingView extends View {
                 case 1:
                     if (borderWidth > 0) {
                         canvas.drawCircle(getWidth() / 2f, getHeight() / 2f,
-                                (getWidth() - borderWidth) / 2f - 1f, mBorderPaint);
+                                          (getWidth() - borderWidth) / 2f - 1f, mBorderPaint);
                     }
 
                     float radius = getWidth() / 2f - borderWidth;
@@ -337,50 +332,47 @@ public class WaveLoadingView extends View {
                 // Draw square
                 case 2:
                     if (borderWidth > 0) {
-                        canvas.drawRect(
-                                borderWidth / 2f,
-                                borderWidth / 2f,
-                                getWidth() - borderWidth / 2f - 0.5f,
-                                getHeight() - borderWidth / 2f - 0.5f,
-                                mBorderPaint);
+                        canvas.drawRect(borderWidth / 2f, borderWidth / 2f,
+                                        getWidth() - borderWidth / 2f - 0.5f,
+                                        getHeight() - borderWidth / 2f - 0.5f, mBorderPaint);
                     }
 
                     canvas.drawRect(borderWidth, borderWidth, getWidth() - borderWidth,
-                            getHeight() - borderWidth, mWaveBgPaint);
+                                    getHeight() - borderWidth, mWaveBgPaint);
                     canvas.drawRect(borderWidth, borderWidth, getWidth() - borderWidth,
-                            getHeight() - borderWidth, mWavePaint);
+                                    getHeight() - borderWidth, mWavePaint);
                     break;
                 // Draw rectangle
                 case 3:
                     if (mIsRoundRectangle) {
                         if (borderWidth > 0) {
                             RectF rect = new RectF(borderWidth / 2f, borderWidth / 2f,
-                                    getWidth() - borderWidth / 2f - 0.5f,
-                                    getHeight() - borderWidth / 2f - 0.5f);
+                                                   getWidth() - borderWidth / 2f - 0.5f,
+                                                   getHeight() - borderWidth / 2f - 0.5f);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,
-                                    mWaveBgPaint);
+                                                 mWaveBgPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,
-                                    mWavePaint);
+                                                 mWavePaint);
                         } else {
                             RectF rect = new RectF(0, 0, getWidth(), getHeight());
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,
-                                    mWaveBgPaint);
+                                                 mWaveBgPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,
-                                    mWavePaint);
+                                                 mWavePaint);
                         }
                     } else {
                         if (borderWidth > 0) {
                             canvas.drawRect(borderWidth / 2f, borderWidth / 2f,
-                                    getWidth() - borderWidth / 2f - 0.5f,
-                                    getHeight() - borderWidth / 2f - 0.5f, mWaveBgPaint);
+                                            getWidth() - borderWidth / 2f - 0.5f,
+                                            getHeight() - borderWidth / 2f - 0.5f, mWaveBgPaint);
                             canvas.drawRect(borderWidth / 2f, borderWidth / 2f,
-                                    getWidth() - borderWidth / 2f - 0.5f,
-                                    getHeight() - borderWidth / 2f - 0.5f, mWavePaint);
+                                            getWidth() - borderWidth / 2f - 0.5f,
+                                            getHeight() - borderWidth / 2f - 0.5f, mWavePaint);
                         } else {
                             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(),
-                                    mWaveBgPaint);
+                                            mWaveBgPaint);
                             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(),
-                                    mWavePaint);
+                                            mWavePaint);
                         }
                     }
                     break;
@@ -392,37 +384,36 @@ public class WaveLoadingView extends View {
             if (StringUtils.isNotEmpty(mTopTitle)) {
                 float top = mTopTitlePaint.measureText(mTopTitle);
                 // Draw the stroke of top text
-                canvas.drawText(mTopTitle, (getWidth() - top) / 2,
-                        getHeight() * 2 / 10.0f, mTopTitleStrokePaint);
+                canvas.drawText(mTopTitle, (getWidth() - top) / 2, getHeight() * 2 / 10.0f,
+                                mTopTitleStrokePaint);
                 // Draw the top text
-                canvas.drawText(mTopTitle, (getWidth() - top) / 2,
-                        getHeight() * 2 / 10.0f, mTopTitlePaint);
+                canvas.drawText(mTopTitle, (getWidth() - top) / 2, getHeight() * 2 / 10.0f,
+                                mTopTitlePaint);
             }
 
             if (StringUtils.isNotEmpty(mCenterTitle)) {
                 float middle = mCenterTitlePaint.measureText(mCenterTitle);
                 // Draw the stroke of centered text
-                canvas.drawText(mCenterTitle, (getWidth() - middle) / 2,
-                        getHeight() / 2 - ((mCenterTitleStrokePaint.descent()
+                canvas.drawText(mCenterTitle, (getWidth() - middle) / 2, getHeight() / 2 - ((
+                        mCenterTitleStrokePaint.descent()
                                 + mCenterTitleStrokePaint.ascent()) / 2), mCenterTitleStrokePaint);
                 // Draw the centered text
-                canvas.drawText(mCenterTitle, (getWidth() - middle) / 2,
-                        getHeight() / 2 - (
-                                (mCenterTitlePaint.descent() + mCenterTitlePaint.ascent()) / 2),
-                        mCenterTitlePaint);
+                canvas.drawText(mCenterTitle, (getWidth() - middle) / 2, getHeight() / 2 - ((
+                        mCenterTitlePaint.descent()
+                                + mCenterTitlePaint.ascent()) / 2), mCenterTitlePaint);
             }
 
             if (StringUtils.isNotEmpty(mBottomTitle)) {
                 float bottom = mBottomTitlePaint.measureText(mBottomTitle);
                 // Draw the stroke of bottom text
                 canvas.drawText(mBottomTitle, (getWidth() - bottom) / 2,
-                        getHeight() * 8 / 10.0f - ((mBottomTitleStrokePaint.descent()
-                                + mBottomTitleStrokePaint.ascent()) / 2), mBottomTitleStrokePaint);
+                                getHeight() * 8 / 10.0f - ((mBottomTitleStrokePaint.descent()
+                                        + mBottomTitleStrokePaint.ascent()) / 2),
+                                mBottomTitleStrokePaint);
                 // Draw the bottom text
                 canvas.drawText(mBottomTitle, (getWidth() - bottom) / 2,
-                        getHeight() * 8 / 10.0f - (
-                                (mBottomTitlePaint.descent() + mBottomTitlePaint.ascent()) / 2),
-                        mBottomTitlePaint);
+                                getHeight() * 8 / 10.0f - ((mBottomTitlePaint.descent()
+                                        + mBottomTitlePaint.ascent()) / 2), mBottomTitlePaint);
             }
         } else {
             mWavePaint.setShader(null);
@@ -453,11 +444,11 @@ public class WaveLoadingView extends View {
             if (bitmapBuffer != null) {
                 bitmapBuffer.recycle();
             }
-            int width = getMeasuredWidth();
+            int width  = getMeasuredWidth();
             int height = getMeasuredHeight();
             if (width > 0 && height > 0) {
                 double defaultAngularFrequency = 2.0f * Math.PI / DEFAULT_WAVE_LENGTH_RATIO / width;
-                float defaultAmplitude = height * DEFAULT_AMPLITUDE_RATIO;
+                float  defaultAmplitude        = height * DEFAULT_AMPLITUDE_RATIO;
                 mDefaultWaterLevel = height * DEFAULT_WATER_LEVEL_RATIO;
                 float defaultWaveLength = width;
 
@@ -477,8 +468,8 @@ public class WaveLoadingView extends View {
 
                 wavePaint.setColor(adjustAlpha(mWaveColor, 0.3f));
                 for (int beginX = 0; beginX < endX; beginX++) {
-                    double wx = beginX * defaultAngularFrequency;
-                    float beginY = (float) (mDefaultWaterLevel + defaultAmplitude * Math.sin(wx));
+                    double wx     = beginX * defaultAngularFrequency;
+                    float  beginY = (float) (mDefaultWaterLevel + defaultAmplitude * Math.sin(wx));
                     canvas.drawLine(beginX, beginY, beginX, endY, wavePaint);
                     waveY[beginX] = beginY;
                 }
@@ -487,25 +478,25 @@ public class WaveLoadingView extends View {
                 final int wave2Shift = (int) (defaultWaveLength / 4);
                 for (int beginX = 0; beginX < endX; beginX++) {
                     canvas.drawLine(beginX, waveY[(beginX + wave2Shift) % endX], beginX, endY,
-                            wavePaint);
+                                    wavePaint);
                 }
 
                 // Use the bitamp to create the shader.
                 mWaveShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT,
-                        Shader.TileMode.CLAMP);
+                                               Shader.TileMode.CLAMP);
                 this.mWavePaint.setShader(mWaveShader);
             }
         }
     }
 
     private boolean haveBoundsChanged() {
-        return getMeasuredWidth() != bitmapBuffer.getWidth() ||
-                getMeasuredHeight() != bitmapBuffer.getHeight();
+        return getMeasuredWidth() != bitmapBuffer.getWidth()
+                || getMeasuredHeight() != bitmapBuffer.getHeight();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = measureWidth(widthMeasureSpec);
+        int width  = measureWidth(widthMeasureSpec);
         int height = measureHeight(heightMeasureSpec);
         // If shapType is rectangle
         if (getShapeType() == 3) {
@@ -568,7 +559,7 @@ public class WaveLoadingView extends View {
     public void setWaveColor(int color) {
         mWaveColor = color;
         // Need to recreate shader when color changed ?
-//        mWaveShader = null;
+        //        mWaveShader = null;
         updateWaveShader();
         invalidate();
     }
@@ -630,7 +621,8 @@ public class WaveLoadingView extends View {
     public void setProgressValue(int progress) {
         mProgressValue = progress;
         ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(this, "waterLevelRatio",
-                mWaterLevelRatio, ((float) mProgressValue / 100));
+                                                               mWaterLevelRatio,
+                                                               ((float) mProgressValue / 100));
         waterLevelAnim.setDuration(1000);
         waterLevelAnim.setInterpolator(new DecelerateInterpolator());
         AnimatorSet animatorSetProgress = new AnimatorSet();
@@ -718,7 +710,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setTopTitleSize(float topTitleSize) {
-        mTopTitlePaint.setTextSize(ScreenUtils.sp2px(context, topTitleSize));
+        mTopTitlePaint.setTextSize(ScreenUtils.sp2px(topTitleSize));
     }
 
     public float getsetTopTitleSize() {
@@ -726,7 +718,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setCenterTitleSize(float centerTitleSize) {
-        mCenterTitlePaint.setTextSize(ScreenUtils.sp2px(context, centerTitleSize));
+        mCenterTitlePaint.setTextSize(ScreenUtils.sp2px(centerTitleSize));
     }
 
     public float getCenterTitleSize() {
@@ -734,7 +726,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setBottomTitleSize(float bottomTitleSize) {
-        mBottomTitlePaint.setTextSize(ScreenUtils.sp2px(context, bottomTitleSize));
+        mBottomTitlePaint.setTextSize(ScreenUtils.sp2px(bottomTitleSize));
     }
 
     public float getBottomTitleSize() {
@@ -742,7 +734,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setTopTitleStrokeWidth(float topTitleStrokeWidth) {
-        mTopTitleStrokePaint.setStrokeWidth(ScreenUtils.dip2px(context, topTitleStrokeWidth));
+        mTopTitleStrokePaint.setStrokeWidth(ScreenUtils.dp2px(topTitleStrokeWidth));
     }
 
     public void setTopTitleStrokeColor(int topTitleStrokeColor) {
@@ -750,7 +742,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setBottomTitleStrokeWidth(float bottomTitleStrokeWidth) {
-        mBottomTitleStrokePaint.setStrokeWidth(ScreenUtils.dip2px(context, bottomTitleStrokeWidth));
+        mBottomTitleStrokePaint.setStrokeWidth(ScreenUtils.dp2px(bottomTitleStrokeWidth));
     }
 
     public void setBottomTitleStrokeColor(int bottomTitleStrokeColor) {
@@ -758,7 +750,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setCenterTitleStrokeWidth(float centerTitleStrokeWidth) {
-        mCenterTitleStrokePaint.setStrokeWidth(ScreenUtils.dip2px(context, centerTitleStrokeWidth));
+        mCenterTitleStrokePaint.setStrokeWidth(ScreenUtils.dp2px(centerTitleStrokeWidth));
     }
 
     public void setCenterTitleStrokeColor(int centerTitleStrokeColor) {
@@ -844,9 +836,9 @@ public class WaveLoadingView extends View {
      */
     private int adjustAlpha(int color, float factor) {
         int alpha = Math.round(Color.alpha(color) * factor);
-        int red = Color.red(color);
+        int red   = Color.red(color);
         int green = Color.green(color);
-        int blue = Color.blue(color);
+        int blue  = Color.blue(color);
         return Color.argb(alpha, red, green, blue);
     }
 

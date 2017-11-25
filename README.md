@@ -135,6 +135,13 @@
     
     [原项目地址](https://github.com/AndroidMsky/RandomTextView)
 
+- **ThreeStateSwitch**
+
+    A simple three-state switch view for Android.
+    
+    [原项目地址](https://github.com/abbas-oveissi/ThreeStateSwitch)
+
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、AnimatorUitls（部分参考于SwitchLayout）、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper、RandomUtils、ConversionUtils等
@@ -453,6 +460,60 @@ More Style:
 |sb_show_indicator|boolean|是否显示指示器，默认true：显示|
 |sb_background|color|背景色，默认白色|
 |sb_enable_effect|boolean|是否启用特效，默认true|
+
+===========================================================================================
+
+##### ThreeStateSwitch 用法
+
+<img src="/screenshot/switch_three.gif">
+
+Add the ThreeStateSwitch in your layout file and customize it the way you like it.
+
+    <chingtech.library.widget.ThreeStateSwitch
+        android:id="@+id/threeState"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:background_selected_color="#5bb434"
+        app:background_normal_color="#bfbfbf"
+        app:text_left="左"
+        app:text_right="右"
+        app:text_selected_color="#5bb434"
+        app:text_normal_color="#646464"
+        app:text_normal_size="16sp"
+        app:text_selected_size="20sp"/>
+
+You can set a listener for state changes
+
+    threeState.setOnChangeListener(new ThreeStateSwitch.OnStateChangeListener() {
+        @Override
+        public void OnStateChangeListener(int currentState) {
+            //current state=  -1  0  1
+            Toast.makeText(MainActivity.this, String.valueOf(currentState), Toast.LENGTH_SHORT).show();
+        }
+    });
+
+You can set typeface for texts.
+
+    threeState.setNormalTextTypeface( );
+    threeState.setSelectedTextTypeface( );
+
+Get the current state. 
+
+    //state=  -1  0  1
+    threeState.getState();
+
+##### 属性
+
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+|background_selected_color|Color|#5bb434|选中时的背景色|
+|background_normal_color|Color|#bfbfbf|未选中时的背景色|
+|text_normal_color|Color|#646464|未选中的字的颜色|
+|text_selected_color|Color|#5bb434|选中的字的颜色|
+|text_left|String||左侧文字|
+|text_right|String||右侧文字|
+|text_normal_size|Dp or Sp|16sp|未选中的字的大小|
+|text_selected_size|Dp or Sp|16sp|选中的字的大小|
 
 ===========================================================================================
 

@@ -2,14 +2,13 @@ package chingtech.library.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtils {
-
-    private static final String UNKNOWN_SIZE = "00:00";
 
     private StringUtils() {
         /* cannot be instantiated */
@@ -168,6 +167,26 @@ public class StringUtils {
             return builder.toString();
         }
         return null;
+    }
+
+    /**
+     * 数组转换为List列表
+     *
+     * @param array
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> arrayToList(T[] array) {
+        if (isEmpty(array)) {
+            return null;
+        }
+
+        List<T> list = new ArrayList<>();
+        for (int i = 0; i < array.length; i++) {
+            list.add(array[i]);
+        }
+
+        return list;
     }
 
     /**
@@ -392,49 +411,6 @@ public class StringUtils {
             retVal = "-" + retVal;
         }
         return retVal;
-    }
-
-    /**
-     * 将时间秒数格式化为 HH:mm:ss格式
-     *
-     * @param seconds
-     * @return
-     */
-    public static String formatTimeLength(int seconds) {
-
-        String formatLength;
-        if (seconds == 0) {
-            formatLength = UNKNOWN_SIZE;
-        } else if (seconds < 60) {//小于1分钟
-            formatLength = "00:" + (seconds < 10 ? "0" + seconds : seconds);
-        } else if (seconds < 60 * 60) {//小于1小时
-            long sec = seconds % 60;
-            long min = seconds / 60;
-            formatLength = (min < 10 ? "0" + min : String.valueOf(min)) + ":" + (sec < 10 ?
-                    "0" + sec : String.valueOf(sec));
-        } else {
-            long hour = seconds / 3600;
-            long min  = seconds % 3600 / 60;
-            long sec  = seconds % 3600 % 60;
-            formatLength = (hour < 10 ? "0" + hour : String.valueOf(hour)) + ":" + (min < 10 ?
-                    "0" + min : String.valueOf(min)) + ":" + (sec < 10 ? "0" + sec :
-                    String.valueOf(sec));
-        }
-        return formatLength;
-    }
-
-    /**
-     * 分钟数转小时：分钟
-     *
-     * @param mins
-     * @return
-     */
-    public static String formatTime(int mins) {
-
-        int hour = mins / 60;
-        int min  = mins % 60;
-
-        return hour + "小时" + min + "分钟";
     }
 
     /**
@@ -690,5 +666,44 @@ public class StringUtils {
      */
     public static String toUpperCase(String s) {
         return s.toUpperCase(Locale.getDefault());
+    }
+
+    /**
+     * 手机号码，中间4位星号替换
+     *
+     * @param phone 手机号
+     * @return 星号替换的手机号
+     */
+    public static String phoneNoHide(String phone) {
+        // 括号表示组，被替换的部分$n表示第n组的内容
+        // 正则表达式中，替换字符串，括号的意思是分组，在replace()方法中，
+        // 参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串。
+        // "(\d{3})\d{4}(\d{4})", "$1****$2"的这个意思就是用括号，
+        // 分为(前3个数字)中间4个数字(最后4个数字)替换为(第一组数值，保持不变$1)(中间为*)(第二组数值，保持不变$2)
+        return phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+    }
+
+    /**
+     * 银行卡号，保留最后4位，其他星号替换
+     *
+     * @param cardId 卡号
+     * @return 星号替换的银行卡号
+     */
+    public static String cardIdHide(String cardId) {
+        return cardId.replaceAll("\\d{15}(\\d{3})", "**** **** **** **** $1");
+    }
+
+    /**
+     * 身份证号，中间10位星号替换
+     *
+     * @param id 身份证号
+     * @return 星号替换的身份证号
+     */
+    public static String idHide(String id) {
+        return id.replaceAll("(\\d{4})\\d{10}(\\d{4})", "$1** **** ****$2");
+    }
+
+    public static String getDisPlayNumber(int num) {
+        return num < 10 ? "0" + num : "" + num;
     }
 }

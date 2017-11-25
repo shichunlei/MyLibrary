@@ -173,10 +173,10 @@ public class NumberProgressBar extends View {
     public NumberProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        default_reached_bar_height = dip2px(context, 1.5f);
-        default_unreached_bar_height = dip2px(context, 1.0f);
-        default_text_size = sp2px(context, 10);
-        default_progress_text_offset = dip2px(context, 3.0f);
+        default_reached_bar_height = dp2px(1.5f);
+        default_unreached_bar_height = dp2px(1.0f);
+        default_text_size = sp2px(10);
+        default_progress_text_offset = dp2px(3.0f);
 
         //load styled attributes.
         final TypedArray attributes = context.getTheme()

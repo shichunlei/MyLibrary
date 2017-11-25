@@ -6,7 +6,6 @@ import static chingtech.library.utils.StringUtils.*;
 import static chingtech.library.utils.TimeUtils.*;
 
 import android.content.*;
-import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -155,7 +154,7 @@ public class MainActivity extends BaseActivity {
         //设置抽屉DrawerLayout
         setupActionBarDrawerToogle();
 
-        mc = new MyCountDownTimer(30000, 1000);
+        mc = new MyCountDownTimer(30000, 1000, timer, "done");
         mc.start();
 
         initSeekBar();
@@ -322,8 +321,7 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View           v        = LayoutInflater.from(MainActivity.this)
-                                                    .inflate(R.layout.layout, null);
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
@@ -552,37 +550,6 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         unbindService(conn);
         super.onDestroy();
-    }
-
-    /**
-     * 继承 CountDownTimer 防范
-     *
-     * 重写 父类的方法 onTick() 、 onFinish()
-     */
-    class MyCountDownTimer extends CountDownTimer {
-        /**
-         * @param millisInFuture    表示以毫秒为单位 倒计时的总数
-         *
-         *                          例如 millisInFuture=1000 表示1秒
-         * @param countDownInterval 表示 间隔 多少微秒 调用一次 onTick 方法
-         *
-         *                          例如: countDownInterval =1000 ; 表示每1000毫秒调用一次onTick()
-         */
-        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onFinish() {
-            timer.setText("done");
-            openActivity(GreenDaoActivity.class, false);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            LogUtils.i("TAG", showTimeCount(millisUntilFinished));
-            timer.setText("倒计时(" + millisUntilFinished / 1000 + ")");
-        }
     }
 
     @OnClick({R.id.fab, R.id.imgFrontCard, R.id.imgBackCard, R.id.cardview_front,
