@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.FontHelper;
 import chingtech.library.utils.StatusBarHelper;
+import chingtech.library.widget.DescProgressView;
 import chingtech.library.widget.ThreeStateSwitch;
 import com.chingtech.sample.R;
 
@@ -45,9 +46,15 @@ public class LikeBangActivity extends BaseActivity {
     @BindView(R.id.threeState1)
     ThreeStateSwitch threeState1;
 
+    @BindView(R.id.dpv_test)
+    DescProgressView descProgressView;
+
     private boolean like = false;
 
     private List<String> banners = new ArrayList<>();
+
+    private List<String> descs;
+    private int tempI = 2;
 
     @Override
     protected void init() {
@@ -70,8 +77,9 @@ public class LikeBangActivity extends BaseActivity {
             mImage.setImageResource(R.drawable.heart);
         }
 
-        mText.setTypeface(FontHelper.get(this, "vazir.ttf"));
+        mText.setTypeface(FontHelper.get(this, "vazir_b.ttf"));
 
+        ///////////////////////////////////////////
         threeState.setNormalTextTypeface(FontHelper.get(this, "vazir.ttf"));
         threeState.setSelectedTextTypeface(FontHelper.get(this, "vazir_b.ttf"));
 
@@ -81,6 +89,15 @@ public class LikeBangActivity extends BaseActivity {
         threeState1.setOnChangeListener(currentState -> {
             showToast("状态：" + currentState);
         });
+
+        //////////////////////////////////////////
+        descs = new ArrayList<>();
+        descs.add("提交");
+        descs.add("上传凭证");
+        descs.add("审核凭证");
+        descs.add("支付赔款");
+        descs.add("审核");
+        descProgressView.setProgressDescs(descs, tempI);
     }
 
     @Override
@@ -132,7 +149,12 @@ public class LikeBangActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd() {
-                showToast("button +1");
+                if (tempI == descs.size()) {
+                    tempI = 1;
+                }
+
+                descProgressView.setProgressDescs(descs, ++tempI);
+                showToast("button" + tempI);
             }
         });
     }
@@ -167,7 +189,7 @@ public class LikeBangActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd() {
-                showToast("heart+1");
+
             }
         });
     }

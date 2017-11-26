@@ -141,6 +141,12 @@
     
     [原项目地址](https://github.com/abbas-oveissi/ThreeStateSwitch)
 
+- **DescProgressView**
+
+    带进度带描述的view
+
+    [原项目地址](https://github.com/GuoFeilong/DescPbView)
+
 
 - **工具类**
 
@@ -179,7 +185,7 @@ Step 2. Add the dependency
 
 ===========================================================================================
 
-#### MarqueeView 用法
+### MarqueeView 用法
 
 <img src="/screenshot/MarqueeView.gif" style="width: 30%;">
 
@@ -257,7 +263,7 @@ Step 2. Add the dependency
 
 ===========================================================================================
 
-#### CircleMenu 用法
+### CircleMenu 用法
 
 <img src="/screenshot/preview.gif" style="width: 30%;">
 
@@ -345,7 +351,7 @@ and override the methods you need.
 
 ===========================================================================================
 
-#### AnimNumberTextView 用法
+### AnimNumberTextView 用法
 
 <img src="/screenshot/3032383935.gif">
 
@@ -398,7 +404,7 @@ xml中定义：
 
 ===========================================================================================
 
-#### Switch 用法
+### Switch 用法
 
 <img src="/screenshot/switch.gif">
 
@@ -463,7 +469,7 @@ More Style:
 
 ===========================================================================================
 
-#### ThreeStateSwitch 用法
+### ThreeStateSwitch 用法
 
 <img src="/screenshot/switch_three.gif">
 
@@ -517,7 +523,7 @@ Get the current state.
 
 ===========================================================================================
 
-#### SmoothCheckBox 用法
+### SmoothCheckBox 用法
 
 <img src="/screenshot/smoothcb.gif">
 
@@ -550,7 +556,7 @@ Attrs 属性
 
 ===========================================================================================
 
-#### DecimalRulerView 用法
+### DecimalRulerView 用法
 
 Attrs 属性
 
@@ -621,6 +627,42 @@ Java
     mRulerView.setChooseValueChangeListener(value -> {
         
     });
+
+===========================================================================================
+
+### DescProgressView 用法
+
+<img src="/screenshot/progress_view.png">
+
+XML
+
+    <chingtech.library.widget.DescProgressView
+        android:id="@+id/dpv_test"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/white" />
+
+Java
+
+    private List<String> descs= new ArrayList<>();
+    DescProgressView descProgressView = findViewById(R.id.dpv_test);
+    descs.add("提交");
+    descs.add("上传凭证");
+    descs.add("审核凭证");
+    descs.add("支付赔款");
+    descs.add("审核");
+    descProgressView.setProgressDescs(descs, 2);
+
+属性
+
+|attr|format|description|
+|---|:---|:---:|
+|dpv_text_normal_color|color| 未选中字体颜色 |
+|dpv_text_seleced_color|color| 选中字体颜色 |
+|dpv_text_size|dimension| 字体大小 |
+|dev_progress_bg_color|color| 选中背景颜色 |
+|dev_progress_small_circle_color|color| 未选中圆点颜色 |
+|dev_progress_big_circle_color|color| 选中圆点颜色 |
 
 ===========================================================================================
 

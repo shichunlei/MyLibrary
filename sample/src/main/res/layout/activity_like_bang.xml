@@ -37,7 +37,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="50dp"
-                    android:text="h"
+                    android:text="+"
                     android:textSize="12sp" />
 
                 <TextView
@@ -91,8 +91,13 @@
                     android:layout_margin="30dp"
                     app:background_normal_color="#3b6bfc"
                     app:background_selected_color="#ff3f3f" />
-
             </LinearLayout>
+
+            <chingtech.library.widget.DescProgressView
+                android:id="@+id/dpv_test"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/white" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
