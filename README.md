@@ -179,7 +179,7 @@ Step 2. Add the dependency
 
 ===========================================================================================
 
-##### MarqueeView 用法
+#### MarqueeView 用法
 
 <img src="/screenshot/MarqueeView.gif" style="width: 30%;">
 
@@ -257,7 +257,7 @@ Step 2. Add the dependency
 
 ===========================================================================================
 
-##### CircleMenu 用法
+#### CircleMenu 用法
 
 <img src="/screenshot/preview.gif" style="width: 30%;">
 
@@ -345,7 +345,7 @@ and override the methods you need.
 
 ===========================================================================================
 
-##### AnimNumberTextView 用法
+#### AnimNumberTextView 用法
 
 <img src="/screenshot/3032383935.gif">
 
@@ -398,7 +398,7 @@ xml中定义：
 
 ===========================================================================================
 
-##### Switch 用法
+#### Switch 用法
 
 <img src="/screenshot/switch.gif">
 
@@ -463,7 +463,7 @@ More Style:
 
 ===========================================================================================
 
-##### ThreeStateSwitch 用法
+#### ThreeStateSwitch 用法
 
 <img src="/screenshot/switch_three.gif">
 
@@ -517,7 +517,7 @@ Get the current state.
 
 ===========================================================================================
 
-##### SmoothCheckBox 用法
+#### SmoothCheckBox 用法
 
 <img src="/screenshot/smoothcb.gif">
 
@@ -550,7 +550,7 @@ Attrs 属性
 
 ===========================================================================================
 
-###### DecimalRulerView 用法
+#### DecimalRulerView 用法
 
 Attrs 属性
 
