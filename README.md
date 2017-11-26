@@ -147,6 +147,11 @@
 
     [原项目地址](https://github.com/GuoFeilong/DescPbView)
 
+- **WavyLineView**
+
+    波浪线
+
+    [原项目地址](https://github.com/andyxialm/WavyLineView)
 
 - **工具类**
 
@@ -663,6 +668,37 @@ Java
 |dev_progress_bg_color|color| 选中背景颜色 |
 |dev_progress_small_circle_color|color| 未选中圆点颜色 |
 |dev_progress_big_circle_color|color| 选中圆点颜色 |
+
+===========================================================================================
+
+### WavyLineView 用法
+
+<img src="/screenshot/wavyline.gif">
+
+XML
+
+    <chingtech.library.widget.WavyLineView
+        android:id="@+id/wavyLineView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+        
+Java
+
+    final WavyLineView wavyLineView = (WavyLineView) findViewById(R.id.wavyLineView);
+    float initPeriod = (float) (2 * Math.PI / 180);
+    wavyLineView.setPeriod(initPeriod);
+    wavyLineView.setAmplitude(25);
+    wavyLineView.setColor(getResources().getColor(R.color.colorAccent));
+    wavyLineView.setStrokeWidth(dp2px(this, 2));
+
+属性
+
+|attr|format|description|
+|---|:---|:---:|
+|period|float||
+|strokeColor|color|线的颜色|
+|amplitude|dimension|振幅|
+|strokeWidth|dimension|线的宽度|
 
 ===========================================================================================
 

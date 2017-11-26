@@ -48,6 +48,76 @@
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="Code" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <chingtech.library.widget.WavyLineView
+                        android:id="@+id/wavyLineView"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="20dp"
+                        app:strokeColor="@color/arc2" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_period"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="period" />
+
+                        <SeekBar
+                            android:id="@+id/sb_period"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_amplitude"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="amplitude" />
+
+                        <SeekBar
+                            android:id="@+id/sb_amplitude"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="stroke width" />
+
+                        <SeekBar
+                            android:id="@+id/sb_width"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

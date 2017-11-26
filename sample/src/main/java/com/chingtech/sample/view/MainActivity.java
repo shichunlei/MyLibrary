@@ -321,7 +321,8 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            View           v        = LayoutInflater.from(MainActivity.this)
+                                                    .inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
@@ -417,7 +418,7 @@ public class MainActivity extends BaseActivity {
         ViewUtils.setViewHeight(this, layout, 1 / 2f);
         ViewUtils.setViewWidth(this, tv1, 1 / 2f);
 
-        ViewUtils.setViewSize(this, tv3, 100, 100);
+        ViewUtils.setViewSize(tv3, 100, 100);
 
         ViewUtils.setViewSize(this, tv4, 1 / 3f);
     }

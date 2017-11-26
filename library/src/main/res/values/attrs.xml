@@ -508,11 +508,19 @@
     </declare-styleable>
 
     <declare-styleable name="DescProgressView">
-        <attr name="dpv_text_normal_color" format="color" />
-        <attr name="dpv_text_seleced_color" format="color" />
-        <attr name="dpv_text_size" format="dimension" />
-        <attr name="dev_progress_bg_color" format="color" />
-        <attr name="dev_progress_small_circle_color" format="color" />
-        <attr name="dev_progress_big_circle_color" format="color" />
+        <attr format="color" name="dpv_text_normal_color" />
+        <attr format="color" name="dpv_text_seleced_color" />
+        <attr format="dimension" name="dpv_text_size" />
+        <attr format="color" name="dev_progress_bg_color" />
+        <attr format="color" name="dev_progress_small_circle_color" />
+        <attr format="color" name="dev_progress_big_circle_color" />
+    </declare-styleable>
+
+    <!-- 波浪线 -->
+    <declare-styleable name="WavyLineView">
+        <attr format="float" name="period" />
+        <attr format="color" name="strokeColor" />
+        <attr format="dimension" name="amplitude" />
+        <attr format="dimension" name="strokeWidth" />
     </declare-styleable>
 </resources>

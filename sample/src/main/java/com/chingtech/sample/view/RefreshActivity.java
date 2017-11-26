@@ -3,12 +3,14 @@ package com.chingtech.sample.view;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.OnClick;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
+import chingtech.library.widget.WavyLineView;
 import com.chingtech.sample.R;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -32,6 +34,15 @@ public class RefreshActivity extends BaseActivity implements OnLoadmoreListener,
     @BindView(R.id.tv_title)
     TextView tvTitle;
 
+    @BindView(R.id.wavyLineView)
+    WavyLineView wavyLineView;
+    @BindView(R.id.sb_amplitude)
+    SeekBar      amplitudeSb;
+    @BindView(R.id.sb_period)
+    SeekBar      periodSb;
+    @BindView(R.id.sb_width)
+    SeekBar      widthSb;
+
     @Override
     protected void init() {
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
@@ -40,6 +51,71 @@ public class RefreshActivity extends BaseActivity implements OnLoadmoreListener,
 
         //触发自动刷新
         refreshLayout.autoRefresh();
+
+        float initPeriod      = (float) (2 * Math.PI / 180);
+        int   initAmplitude   = 25;
+        int   initStrokeWidth = 2;
+        wavyLineView.setPeriod(initPeriod);
+        wavyLineView.setAmplitude(initAmplitude);
+        wavyLineView.setColor(getResources().getColor(R.color.colorAccent));
+        wavyLineView.setStrokeWidth(initStrokeWidth);
+
+        amplitudeSb.setMax(100);
+        amplitudeSb.setProgress(initAmplitude);
+        amplitudeSb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                wavyLineView.setAmplitude(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        periodSb.setMax(720);
+        periodSb.setProgress((int) (2 * Math.PI / initPeriod));
+        periodSb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                wavyLineView.setPeriod((float) (2 * Math.PI / progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        widthSb.setMax(15);
+        widthSb.setProgress(initStrokeWidth);
+        widthSb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                wavyLineView.setStrokeWidth(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
