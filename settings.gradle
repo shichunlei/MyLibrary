@@ -1,1 +1,1 @@
-include ':sample', ':library'
+include ':sample', ':library', 'ocr_ui'

@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in D:\AS\sdk/tools/proguard/proguard-android.txt
+# in /Users/baidu/IDE/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -15,12 +15,4 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
-
-# 百度文字识别
--keep class com.baidu.ocr.sdk.**{*;}
 -dontwarn com.baidu.ocr.**
-
-# 百度语音合成
--keep class com.baidu.tts.**{*;}
--keep class com.baidu.speechsynthesizer.**{*;}

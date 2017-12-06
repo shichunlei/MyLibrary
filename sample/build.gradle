@@ -31,6 +31,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []  //这一行加不加都可以
+            jniLibs.srcDirs = ['libs']//这个必须加，因为我们把.so文件放在了libs文件夹中
+        }
+    }
 }
 
 greendao {
@@ -46,6 +53,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     implementation project(':library')
+    implementation project(':ocr_ui')
     // 数字密码锁
     compile 'com.andrognito.pinlockview:pinlockview:2.1.0'
     // 九宫格密码锁
@@ -60,7 +68,8 @@ dependencies {
     compile 'org.adw.library:discrete-seekbar:1.0.0'
     // 刷新
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-2'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3-alpha-2' //没有使用特殊Header，可以不加这行
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3-alpha-2'
+    //没有使用特殊Header，可以不加这行
     // 日历
     compile 'com.github.sundeepk:compact-calendar-view:2.0.3-beta'
     // Bugly
@@ -71,9 +80,10 @@ dependencies {
     //注解
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
     // 一款仿miui，仿小米，日历，周日历，月日历，月视图、周视图滑动切换，农历,Andriod Calendar , MIUI Calendar,小米日历
     compile 'com.necer.ncalendar:ncalendar:2.4.4'
     // 高仿钉钉和小米的自定义日历控件（支持阴历和阳历，左右无限翻页viewpager）
     compile 'com.github.codbking:CalendarExaple:v1.0.0'
+    implementation files('libs/ocr-sdk-1.4.0.jar')
+    implementation files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
 }
