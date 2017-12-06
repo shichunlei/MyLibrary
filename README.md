@@ -153,6 +153,18 @@
 
     [原项目地址](https://github.com/andyxialm/WavyLineView)
 
+- **CouponView**
+
+    半圆锯齿背景虚线边框组合实现简单优惠券效果，可实现一些简单组合
+    
+    [原项目地址](https://github.com/dongjunkun/CouponView)
+
+- **RippleView**
+
+    简单的涟漪效果
+    
+    [原项目地址](https://github.com/LiqiNew/RippleDemo)
+
 - **工具类**
 
     StringUtils、TimeUtils、SPUtils、JsonUtils、ViewUtils、ScreenUtils、AnimatorUitls（部分参考于SwitchLayout）、HttpUtils、FileUtils、AppUitls、IdcardUtil、StatusBarHelper、RandomUtils、ConversionUtils等
@@ -699,6 +711,84 @@ Java
 |strokeColor|color|线的颜色|
 |amplitude|dimension|振幅|
 |strokeWidth|dimension|线的宽度|
+
+===========================================================================================
+
+### CouponView 用法
+
+<img src="/screenshot/couponView.png">
+
+自定义属性说明
+
+| 自定义属性 |格式|说明|
+| :---:|:---:|:---: |
+|cv_dash_line_color|color|虚线的颜色|
+|cv_dash_line_gap|dimension|虚线的间隔|
+|cv_dash_line_height|dimension|虚线的高度|
+|cv_dash_line_length|dimension|虚线的长度|
+|cv_semicircle_color|color|半圆的颜色，一般需要和背景色一致|
+|cv_semicircle_gap|dimension|半圆之前的间隔|
+|cv_semicircle_radius|dimension|半圆的半径|
+|cv_is_semicircle_top|boolean|是否绘制顶部半圆锯齿|
+|cv_is_semicircle_bottom|boolean|是否绘制底部半圆锯齿|
+|cv_is_semicircle_left|boolean|是否绘制左侧半圆锯齿|
+|cv_is_semicircle_right|boolean|是否绘制右侧半圆锯齿|
+|cv_is_dash_line_top|boolean|是否绘制顶部虚线|
+|cv_is_dash_line_bottom|boolean|是否绘制底部虚线|
+|cv_is_dash_line_left|boolean|是否绘制左侧虚线|
+|cv_is_dash_line_right|boolean|是否绘制右侧虚线|
+|cv_dash_line_margin_top|dimension|顶部虚线距离View顶部的距离|
+|cv_dash_line_margin_bottom|dimension|底部虚线距离View底部的距离|
+|cv_dash_line_margin_left|dimension|左侧虚线距离View左侧的距离|
+|cv_dash_line_margin_right|dimension|右侧虚线距离View右侧的距离|
+
+
+添加到你的xml
+
+    <chingtech.library.widget.CouponView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/couponView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:cv_dash_line_color="@android:color/white"
+        app:cv_dash_line_gap="5dp"
+        app:cv_dash_line_height="0.8dp"
+        app:cv_dash_line_length="10dp"
+        app:cv_dash_line_margin_bottom="5dp"
+        app:cv_dash_line_margin_left="5dp"
+        app:cv_dash_line_margin_right="5dp"
+        app:cv_dash_line_margin_top="8dp"
+        app:cv_is_dash_line_bottom="true"
+        app:cv_is_dash_line_left="true"
+        app:cv_is_dash_line_right="true"
+        app:cv_is_dash_line_top="false"
+        app:cv_is_semicircle_bottom="false"
+        app:cv_is_semicircle_left="false"
+        app:cv_is_semicircle_right="false"
+        app:cv_is_semicircle_top="true"
+        app:cv_semicircle_color="@android:color/white"
+        app:cv_semicircle_gap="4dp"
+        app:cv_semicircle_radius="4dp">
+    </chingtech.library.widget.CouponView>
+
+===========================================================================================
+
+### RippleView 用法
+
+<img src="/screenshot/RippleView.gif">
+
+自定义属性
+
+| 自定义属性 |格式|说明|
+| :---:|:---:|:---: |
+|image|reference|图片|
+|sqNot|boolean|false是深浅计算，true是浅深计算|
+|starWhat|boolean|是否执行效果|
+|roundRimColor|color|圆边颜色设置|
+|roundRimSize|integer|圆边大小设置|
 
 ===========================================================================================
 

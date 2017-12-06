@@ -473,13 +473,13 @@
         <attr format="integer|reference" name="mvAnimDuration" />
         <attr format="dimension|reference" name="mvTextSize" />
         <attr format="color|reference" name="mvTextColor" />
-        <attr format="boolean" name="mvSingleLine" />
-        <attr name="mvGravity">
+        <attr format="boolean|reference" name="mvSingleLine" />
+        <attr format="enum|reference" name="mvGravity">
             <enum name="left" value="0" />
             <enum name="center" value="1" />
             <enum name="right" value="2" />
         </attr>
-        <attr name="mvDirection">
+        <attr format="enum|reference" name="mvDirection">
             <enum name="bottom_to_top" value="0" />
             <enum name="top_to_bottom" value="1" />
             <enum name="right_to_left" value="2" />
@@ -518,9 +518,44 @@
 
     <!-- 波浪线 -->
     <declare-styleable name="WavyLineView">
-        <attr format="float" name="period" />
-        <attr format="color" name="strokeColor" />
-        <attr format="dimension" name="amplitude" />
-        <attr format="dimension" name="strokeWidth" />
+        <attr format="float|reference" name="period" />
+        <attr format="color|reference" name="strokeColor" />
+        <attr format="dimension|reference" name="amplitude" />
+        <attr format="dimension|reference" name="strokeWidth" />
+    </declare-styleable>
+
+    <declare-styleable name="Ripple">
+        <!--图片-->
+        <attr format="reference" name="image" />
+        <!--false是深浅计算，true是浅深计算-->
+        <attr format="boolean|reference" name="sqNot" />
+        <!--是否执行效果-->
+        <attr format="boolean|reference" name="starWhat" />
+        <!--圆边颜色设置-->
+        <attr format="color|reference" name="roundRimColor" />
+        <!--圆边大小设置-->
+        <attr format="integer|reference" name="roundRimSize" />
+    </declare-styleable>
+
+    <declare-styleable name="CouponView">
+        <attr format="dimension|reference" name="cv_semicircle_gap" />
+        <attr format="dimension|reference" name="cv_semicircle_radius" />
+        <attr format="color|reference" name="cv_semicircle_color" />
+        <attr format="dimension|reference" name="cv_dash_line_length" />
+        <attr format="dimension|reference" name="cv_dash_line_gap" />
+        <attr format="dimension|reference" name="cv_dash_line_height" />
+        <attr format="color|reference" name="cv_dash_line_color" />
+        <attr format="boolean|reference" name="cv_is_semicircle_top" />
+        <attr format="boolean|reference" name="cv_is_semicircle_bottom" />
+        <attr format="boolean|reference" name="cv_is_semicircle_left" />
+        <attr format="boolean|reference" name="cv_is_semicircle_right" />
+        <attr format="boolean|reference" name="cv_is_dash_line_top" />
+        <attr format="boolean|reference" name="cv_is_dash_line_bottom" />
+        <attr format="boolean|reference" name="cv_is_dash_line_left" />
+        <attr format="boolean|reference" name="cv_is_dash_line_right" />
+        <attr format="dimension|reference" name="cv_dash_line_margin_top" />
+        <attr format="dimension|reference" name="cv_dash_line_margin_bottom" />
+        <attr format="dimension|reference" name="cv_dash_line_margin_left" />
+        <attr format="dimension|reference" name="cv_dash_line_margin_right" />
     </declare-styleable>
 </resources>

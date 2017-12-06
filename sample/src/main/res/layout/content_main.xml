@@ -166,10 +166,32 @@
                     app:icon_width="25dp"
                     app:text_color_pressed="@color/colorPrimary" />
 
-                <LinearLayout
+                <chingtech.library.widget.CouponView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="10dp"
+                    android:background="@color/colorAccent"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    app:cv_dash_line_color="@android:color/white"
+                    app:cv_dash_line_gap="5dp"
+                    app:cv_dash_line_height="0.8dp"
+                    app:cv_dash_line_length="10dp"
+                    app:cv_dash_line_margin_bottom="5dp"
+                    app:cv_dash_line_margin_left="5dp"
+                    app:cv_dash_line_margin_right="5dp"
+                    app:cv_dash_line_margin_top="8dp"
+                    app:cv_is_dash_line_bottom="true"
+                    app:cv_is_dash_line_left="true"
+                    app:cv_is_dash_line_right="true"
+                    app:cv_is_dash_line_top="false"
+                    app:cv_is_semicircle_bottom="true"
+                    app:cv_is_semicircle_left="true"
+                    app:cv_is_semicircle_right="true"
+                    app:cv_is_semicircle_top="true"
+                    app:cv_semicircle_color="@android:color/white"
+                    app:cv_semicircle_gap="4dp"
+                    app:cv_semicircle_radius="4dp">
 
                     <Button
                         android:id="@+id/bottom_alertdialog2"
@@ -184,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Title Dialog" />
-                </LinearLayout>
+                </chingtech.library.widget.CouponView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
