@@ -7,6 +7,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.StatusBarHelper;
+import chingtech.library.widget.SwitchIconView;
 import com.chingtech.sample.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,6 +32,20 @@ public class AssignDefaultUsingActivity extends BaseActivity {
     @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
 
+    @BindView(R.id.switchIconView1)
+    SwitchIconView switchIcon1;
+    @BindView(R.id.switchIconView2)
+    SwitchIconView switchIcon2;
+    @BindView(R.id.switchIconView3)
+    SwitchIconView switchIcon3;
+
+    @BindView(R.id.button1)
+    View button1;
+    @BindView(R.id.button2)
+    View button2;
+    @BindView(R.id.button3)
+    View button3;
+
     /**
      * 关键代码，需要在布局生成之前设置，建议代码放在 Application.onCreate 中
      */
@@ -38,7 +53,7 @@ public class AssignDefaultUsingActivity extends BaseActivity {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreater((context, layout) -> {
             ClassicsHeader header = new ClassicsHeader(context).setSpinnerStyle(
-                    SpinnerStyle.FixedBehind);
+                    SpinnerStyle.Scale);
             header.setPrimaryColors(ContextCompat.getColor(context, R.color.colorPrimary),
                                     ContextCompat.getColor(context, android.R.color.white));
             return header;//指定为经典Header，默认是 贝塞尔雷达Header
@@ -99,6 +114,8 @@ public class AssignDefaultUsingActivity extends BaseActivity {
 
     @Override
     protected void loadData() {
-
+        button1.setOnClickListener(v -> switchIcon1.switchState());
+        button2.setOnClickListener(v -> switchIcon2.switchState());
+        button3.setOnClickListener(v -> switchIcon3.switchState());
     }
 }

@@ -488,32 +488,32 @@
     </declare-styleable>
 
     <declare-styleable name="RingView">
-        <attr format="integer" name="totalSection" />
-        <attr format="dimension" name="arcBorder" />
-        <attr format="dimension" name="arcTextSize" />
-        <attr format="color" name="arcSelectTextColor" />
-        <attr format="color" name="arcTextColor" />
-        <attr format="color" name="arc_bg_color" />
-        <attr format="color" name="arc_select_color" />
+        <attr format="integer|reference" name="totalSection" />
+        <attr format="dimension|reference" name="arcBorder" />
+        <attr format="dimension|reference" name="arcTextSize" />
+        <attr format="color|reference" name="arcSelectTextColor" />
+        <attr format="color|reference" name="arcTextColor" />
+        <attr format="color|reference" name="arc_bg_color" />
+        <attr format="color|reference" name="arc_select_color" />
     </declare-styleable>
 
     <declare-styleable name="DashboardView">
-        <attr format="integer" name="totalAngle" />
-        <attr format="dimension" name="centerCircleRadius" />
-        <attr format="dimension" name="arcBorderDimen" />
-        <attr format="dimension" name="numberTextSize" />
-        <attr format="dimension" name="graduatedTextSize" />
-        <attr format="dimension" name="angleTextSize" />
-        <attr format="float" name="pointLinePercent" />
+        <attr format="integer|reference" name="totalAngle" />
+        <attr format="dimension|reference" name="centerCircleRadius" />
+        <attr format="dimension|reference" name="arcBorderDimen" />
+        <attr format="dimension|reference" name="numberTextSize" />
+        <attr format="dimension|reference" name="graduatedTextSize" />
+        <attr format="dimension|reference" name="angleTextSize" />
+        <attr format="float|reference" name="pointLinePercent" />
     </declare-styleable>
 
     <declare-styleable name="DescProgressView">
-        <attr format="color" name="dpv_text_normal_color" />
-        <attr format="color" name="dpv_text_seleced_color" />
-        <attr format="dimension" name="dpv_text_size" />
-        <attr format="color" name="dev_progress_bg_color" />
-        <attr format="color" name="dev_progress_small_circle_color" />
-        <attr format="color" name="dev_progress_big_circle_color" />
+        <attr format="color|reference" name="dpv_text_normal_color" />
+        <attr format="color|reference" name="dpv_text_seleced_color" />
+        <attr format="dimension|reference" name="dpv_text_size" />
+        <attr format="color|reference" name="dev_progress_bg_color" />
+        <attr format="color|reference" name="dev_progress_small_circle_color" />
+        <attr format="color|reference" name="dev_progress_big_circle_color" />
     </declare-styleable>
 
     <!-- 波浪线 -->
@@ -557,5 +557,14 @@
         <attr format="dimension|reference" name="cv_dash_line_margin_bottom" />
         <attr format="dimension|reference" name="cv_dash_line_margin_left" />
         <attr format="dimension|reference" name="cv_dash_line_margin_right" />
+    </declare-styleable>
+
+    <declare-styleable name="SwitchIconView">
+        <attr format="color|reference" name="siv_tint_color" />
+        <attr format="integer|reference" name="siv_animation_duration" />
+        <attr format="float|reference" name="siv_disabled_alpha" />
+        <attr format="color|reference" name="siv_disabled_color" />
+        <attr format="boolean|reference" name="siv_enabled" />
+        <attr format="boolean|reference" name="siv_no_dash" />
     </declare-styleable>
 </resources>

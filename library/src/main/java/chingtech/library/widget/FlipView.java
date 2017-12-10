@@ -19,12 +19,18 @@ public class FlipView extends FrameLayout {
 
     public static final int DEFAULT_FLIP_DURATION = 500;
 
+    private int animLeftFlipOutId = R.animator.left_flip_out;
+    private int animLeftFlipInId  = R.animator.left_flip_in;
+
+    private int animRightFlipOutId = R.animator.right_flip_out;
+    private int animRightFlipInId  = R.animator.right_flip_in;
+
     /** 面朝上状态 */
     private int mFlipState;
     /** 正面 */
     private static final int FRONT_SIDE = 0;
     /** 背面 */
-    private static final int BACK_SIDE = 1;
+    private static final int BACK_SIDE  = 1;
 
     private AnimatorSet mSetRightOut;
     private AnimatorSet mSetLeftIn;
@@ -36,12 +42,12 @@ public class FlipView extends FrameLayout {
     private View mCardBackLayout;
 
     private boolean flipOnTouch;
-    private int flipDuration;
+    private int     flipDuration;
     private boolean flipEnabled;
 
     private Context context;
-    private float x1;
-    private float y1;
+    private float   x1;
+    private float   y1;
 
     public FlipView(Context context) {
         super(context);
@@ -59,10 +65,12 @@ public class FlipView extends FrameLayout {
         // Check for the attributes
         if (attrs != null) {
             // Attribute initialization
-            TypedArray attrArray = context.obtainStyledAttributes(attrs, R.styleable.FlipView, 0, 0);
+            TypedArray attrArray = context.obtainStyledAttributes(attrs, R.styleable.FlipView, 0,
+                                                                  0);
             try {
                 flipOnTouch = attrArray.getBoolean(R.styleable.FlipView_flip_touch, true);
-                flipDuration = attrArray.getInt(R.styleable.FlipView_flip_duration, DEFAULT_FLIP_DURATION);
+                flipDuration = attrArray.getInt(R.styleable.FlipView_flip_duration,
+                                                DEFAULT_FLIP_DURATION);
                 flipEnabled = attrArray.getBoolean(R.styleable.FlipView_flip_enabled, true);
                 mFlipState = attrArray.getInt(R.styleable.FlipView_flip_state, FRONT_SIDE);
             } finally {
@@ -72,7 +80,7 @@ public class FlipView extends FrameLayout {
     }
 
     @Override
-    protected void onFinishInflate () {
+    protected void onFinishInflate() {
         super.onFinishInflate();
 
         if (getChildCount() > 2) {
@@ -111,10 +119,8 @@ public class FlipView extends FrameLayout {
      * 正面转向背面
      */
     private void loadAnimationsFrontToBack() {
-        mSetRightOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,
-                R.animator.right_flip_out);
-        mSetLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,
-                R.animator.left_flip_in);
+        mSetRightOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, animRightFlipOutId);
+        mSetLeftIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, animRightFlipInId);
 
         mSetRightOut.addListener(new Animator.AnimatorListener() {
             @Override
@@ -150,10 +156,8 @@ public class FlipView extends FrameLayout {
      * 背面转向正面
      */
     private void loadAnimationsBackToFront() {
-        mSetLeftOut = (AnimatorSet) AnimatorInflater.loadAnimator(context,
-                R.animator.left_flip_out);
-        mSetRightIn = (AnimatorSet) AnimatorInflater.loadAnimator(context,
-                R.animator.right_flip_in);
+        mSetLeftOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, animLeftFlipOutId);
+        mSetRightIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, animLeftFlipInId);
 
         mSetLeftOut.addListener(new Animator.AnimatorListener() {
             @Override
@@ -186,8 +190,8 @@ public class FlipView extends FrameLayout {
     }
 
     private void changeCameraDistance() {
-        int distance = 8000;
-        float scale = getResources().getDisplayMetrics().density * distance;
+        int   distance = 8000;
+        float scale    = getResources().getDisplayMetrics().density * distance;
         mCardFrontLayout.setCameraDistance(scale);
         mCardBackLayout.setCameraDistance(scale);
     }
@@ -197,13 +201,16 @@ public class FlipView extends FrameLayout {
      */
     public void flipTheView() {
 
-        if (!flipEnabled)
+        if (!flipEnabled) {
             return;
+        }
 
-        if (mSetRightOut.isRunning() || mSetLeftIn.isRunning())
+        if (mSetRightOut.isRunning() || mSetLeftIn.isRunning()) {
             return;
-        if (mSetLeftOut.isRunning() || mSetRightIn.isRunning())
+        }
+        if (mSetLeftOut.isRunning() || mSetRightIn.isRunning()) {
             return;
+        }
 
         mCardBackLayout.setVisibility(VISIBLE);
         mCardFrontLayout.setVisibility(VISIBLE);
@@ -238,10 +245,11 @@ public class FlipView extends FrameLayout {
                 case MotionEvent.ACTION_UP:
                     float x2 = event.getX();
                     float y2 = event.getY();
-                    float dx = x2 -x1;
-                    float dy = y2 -y1;
+                    float dx = x2 - x1;
+                    float dy = y2 - y1;
                     float MAX_CLICK_DISTANCE = 0.5f;
-                    if ((dx>= 0 && dx<MAX_CLICK_DISTANCE)&&(dy>= 0&& dy<MAX_CLICK_DISTANCE)) {
+                    if ((dx >= 0 && dx < MAX_CLICK_DISTANCE) && (dy >= 0
+                            && dy < MAX_CLICK_DISTANCE)) {
                         flipTheView();
                     }
                     return true;
@@ -254,6 +262,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Whether view is set to flip on touch or not.
+     *
      * @return true or false
      */
     public boolean isFlipOnTouch() {
@@ -262,6 +271,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Set whether view should be flipped on touch or not!
+     *
      * @param flipOnTouch value (true or false)
      */
     public void setFlipOnTouch(boolean flipOnTouch) {
@@ -270,6 +280,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Returns duration of flip in milliseconds!
+     *
      * @return duration in milliseconds
      */
     public int getFlipDuration() {
@@ -278,6 +289,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Sets the flip duration (in milliseconds)
+     *
      * @param flipDuration duration in milliseconds
      */
     public void setFlipDuration(int flipDuration) {
@@ -298,6 +310,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Returns whether flip is enabled or not!
+     *
      * @return true or false
      */
     public boolean isFlipEnabled() {
@@ -306,6 +319,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Enable / Disable flip view.
+     *
      * @param flipEnabled true or false
      */
     public void setFlipEnabled(boolean flipEnabled) {
@@ -314,6 +328,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Returns which flip state is currently on of the flip view.
+     *
      * @return current state of flip view
      */
     public int getFlipState() {
@@ -331,6 +346,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Returns true if the front side of flip view is visible.
+     *
      * @return true if the front side of flip view is visible.
      */
     public boolean isFrontSide() {
@@ -339,6 +355,7 @@ public class FlipView extends FrameLayout {
 
     /**
      * Returns true if the back side of flip view is visible.
+     *
      * @return true if the back side of flip view is visible.
      */
     public boolean isBackSide() {

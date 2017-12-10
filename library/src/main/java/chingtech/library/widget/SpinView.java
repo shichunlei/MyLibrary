@@ -15,7 +15,7 @@ import chingtech.library.interfaces.Indeterminate;
  * Created by 师春雷
  * Created at 2017/4/18 13:55
  */
-public class SpinView extends ImageView implements Indeterminate {
+public class SpinView extends android.support.v7.widget.AppCompatImageView implements Indeterminate {
 
     private float mRotateDegrees;
     private int mFrameTime;
