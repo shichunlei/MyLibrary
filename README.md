@@ -46,7 +46,7 @@
 
 - **LabelView**
 
-    角标
+    角标,一个简单的Android标签控件.
 
     [原始项目地址](https://github.com/H07000223/FlycoLabelView)
 
@@ -181,7 +181,7 @@
 
 **Version**
 
-    【0.2.2】
+    【0.3.0】
 
 # Installation
 
@@ -199,8 +199,27 @@ Step 1. Add the JitPack repository to your build file
 Step 2. Add the dependency
 
     dependencies {
-        compile 'com.github.shichunlei:MyLibrary:0.2.2'
+        compile 'com.github.shichunlei:MyLibrary:0.3.0'
     }
+
+或者
+
+Step 1. Add the JitPack repository to your build file
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+Step 2. Add the dependency
+
+    <dependency>
+	    <groupId>com.github.shichunlei</groupId>
+	    <artifactId>MyLibrary</artifactId>
+	    <version>0.3.0</version>
+	</dependency>
 
 # Usage
 
@@ -848,6 +867,27 @@ Java
 
 ===========================================================================================
 
+### LabelView 用法
+
+<img src="/screenshot/preview.png">
+
+自定义属性
+
+|name|format|description|
+|:---:|:---:|:---:|
+| lv_text | string | 设置文字内容 
+| lv_text_color | color | 设置文字颜色,默认#ffffff
+| lv_text_size | dimension | 设置文字大小,默认11sp
+| lv_text_bold | boolean | 设置文字是否支持加粗,默认true
+| lv_text_all_caps | boolean | 设置文字是否支持全部大写,默认true
+| lv_background_color | color | 设置背景颜色,默认"#FF4081"
+| lv_min_size | dimension | 设置LabelView所在矩形最小宽高,默认mFillTriangle?35dp:50dp
+| lv_padding | dimension | 设置文字上下padding,默认3.5dp,mFillTriangle为true时无效
+| lv_gravity | enum | 设置LabelView方向,支持左上或右上或左下或右下,默认左上
+| lv_fill_triangle | boolean | 设置是否填充三角区域,默认false
+
+===========================================================================================
+
 ### Sample 中使用到的第三方框架包括
 
 - _[Gson](https://github.com/google/gson)_
@@ -864,6 +904,18 @@ Java
 - _等等。。。_
 
 # 更新日志
+
+【0.3.0】
+
+    add MarqueeView
+    add CircleMenu
+    add AnimNumberTextView
+    add ThreeStateSwitch
+    add SwitchIconView
+    add DescProgressView
+    add WavyLineView
+    add CouponView
+    add RippleView
 
 【0.2.2】
 
