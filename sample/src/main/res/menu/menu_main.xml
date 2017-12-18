@@ -22,14 +22,21 @@
         android:id="@+id/action_search1"
         android:icon="@drawable/ic_action_navigation_close_inverted"
         android:orderInCategory="100"
-        android:title="@string/app_name"
+        android:title="文字识别"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_search2"
         android:icon="@drawable/ic_action_navigation_close_inverted"
         android:orderInCategory="100"
-        android:title="hello"
+        android:title="点赞动画"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_item"
+        android:icon="@drawable/ic_action_navigation_close_inverted"
+        android:orderInCategory="100"
+        android:title="动画"
         app:showAsAction="never" />
 
     <!--

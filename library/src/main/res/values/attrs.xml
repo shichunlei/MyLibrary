@@ -567,4 +567,11 @@
         <attr format="boolean|reference" name="siv_enabled" />
         <attr format="boolean|reference" name="siv_no_dash" />
     </declare-styleable>
+
+    <declare-styleable name="PeriscopeLayout">
+        <attr format="integer|reference" name="pl_enter_duration" />
+        <attr format="integer|reference" name="pl_duration" />
+        <attr format="float|reference" name="pl_scale" />
+        <attr format="boolean|reference" name="pl_same_size" />
+    </declare-styleable>
 </resources>

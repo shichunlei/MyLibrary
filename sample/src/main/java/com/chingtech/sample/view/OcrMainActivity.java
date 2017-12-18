@@ -24,7 +24,6 @@ import com.baidu.ocr.sdk.model.AccessToken;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.chingtech.sample.R;
 import com.chingtech.sample.service.RecognizeService;
-import java.io.File;
 
 import static com.chingtech.sample.FileUtil.getSaveFile;
 

@@ -70,6 +70,9 @@
             android:name=".view.PatternLockActivity"
             android:theme="@style/FullScreenTheme" />
         <activity
+            android:name=".view.LoginActivity"
+            android:theme="@style/FullScreenTheme" />
+        <activity
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -158,6 +161,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.JieQiInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.SubmitCreditCardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AnimtionSampleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".service.UpdateService" />

@@ -602,9 +602,6 @@ public class AnimatorUtils {
 
     /** //////////////////////////////////////////////////////////////////////////// */
 
-    public static final float ALPHA_MIN = 0.0f;
-    public static final float ALPHA_MAX = 1.0f;
-
     /**
      * alpha
      *

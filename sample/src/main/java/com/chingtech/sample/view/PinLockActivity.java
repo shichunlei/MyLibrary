@@ -50,7 +50,7 @@ public class PinLockActivity extends BaseActivity {
                 password = (String) SPUtils.get(context, "pin_lock", "", "DEMO");
                 Log.d(getClass().getName(), "Pin complete: " + pin);
                 if (pin.equals(password)) {
-                    openActivity(MainActivity.class, true);
+                    openActivity(LoginActivity.class, true);
                 } else {
                     mPinLockView.resetPinLockView();
                     AnimatorUtils.ShakeMode(3, mIndicatorDots);

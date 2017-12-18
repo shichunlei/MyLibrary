@@ -57,7 +57,7 @@ public class WelcomeActivity extends BaseActivity {
                 } else if (isPinLock) {
                     openActivity(PinLockActivity.class, "flag", "welcome", true);
                 } else {
-                    openActivity(MainActivity.class, true);
+                    openActivity(LoginActivity.class, true);
                 }
             }
         });

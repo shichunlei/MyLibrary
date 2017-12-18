@@ -20,4 +20,17 @@
         android:propertyName="alpha"
         android:startOffset="250"
         android:duration="0" />
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="scaleX"
+        android:startOffset="250"
+        android:valueFrom="0.8"
+        android:valueTo="1.0" />
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="scaleY"
+        android:startOffset="250"
+        android:valueFrom="0.8"
+        android:valueTo="1.0" />
 </set>

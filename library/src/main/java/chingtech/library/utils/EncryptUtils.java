@@ -14,6 +14,8 @@ import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import static chingtech.library.utils.CloseUtils.closeIO;
+
 /**
  * <p>
  * *    ***********    ***********    **
@@ -194,26 +196,6 @@ public class EncryptUtils {
             return null;
         } finally {
             closeIO(fis);
-        }
-    }
-
-    /**
-     * 关闭IO
-     *
-     * @param closeables closeables
-     */
-    public static void closeIO(final Closeable... closeables) {
-        if (closeables == null) {
-            return;
-        }
-        for (Closeable closeable : closeables) {
-            if (closeable != null) {
-                try {
-                    closeable.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

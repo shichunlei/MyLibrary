@@ -51,6 +51,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView   tvTitle;
 
+    @BindView(R.id.periscope)
+    PeriscopeLayout periscopeLayout;
+
     @BindView(R.id.bgabanner)
     BGABanner bgaBanner;
 
@@ -157,6 +160,14 @@ public class MainActivity extends BaseActivity {
         mc = new MyCountDownTimer(30000, 1000, timer, "done");
         mc.start();
 
+        double h = Double.parseDouble("12.9");
+
+        LogUtils.i("TAG", "init: " + (int) h);
+
+        double h2 = Double.parseDouble("13.45");
+
+        LogUtils.i("TAG", "init: " + (int) h2);
+
         initSeekBar();
 
         Intent intent = new Intent(this, UpdateService.class);
@@ -211,8 +222,7 @@ public class MainActivity extends BaseActivity {
         int versioncode = AppUtils.getVersionCode(MainActivity.this);
         LogUtils.i(TAG, "versioncode:" + versioncode);
 
-        CharacterParser c = new CharacterParser();
-        LogUtils.i(TAG, "我们拼音: " + c.getSelling("我们"));
+        LogUtils.i(TAG, "我们拼音: " + PinyinUtils.ccs2Pinyin("我们", " "));
 
         testTimeUtils();
 
@@ -537,10 +547,25 @@ public class MainActivity extends BaseActivity {
         });
 
         MenuItem item2 = menu.findItem(R.id.action_search2);
-        item2.setVisible(false);
+        // item2.setVisible(false);
 
         item2.setOnMenuItemClickListener(item -> {
-            showToast("=====");
+            //调用添加泡泡的方法
+            periscopeLayout.addHeart();
+            return false;
+        });
+
+        MenuItem save = menu.findItem(R.id.menu_item1);
+
+        save.setOnMenuItemClickListener(item -> {
+            openActivity(SubmitCreditCardActivity.class, false);
+            return false;
+        });
+
+        MenuItem anim = menu.findItem(R.id.action_item);
+
+        anim.setOnMenuItemClickListener(item -> {
+            openActivity(AnimtionSampleActivity.class, false);
             return false;
         });
         return true;

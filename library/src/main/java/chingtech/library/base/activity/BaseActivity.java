@@ -49,13 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 声明抽象方法
-     *
-     * 初始化操作
-     */
-    protected abstract void init();
-
-    /**
      * 设置布局资源
      *
      * @return
@@ -68,6 +61,13 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化ToolBar
      */
     protected abstract void initToolBar();
+
+    /**
+     * 声明抽象方法
+     *
+     * 初始化操作
+     */
+    protected abstract void init();
 
     protected abstract View injectTarget();
 

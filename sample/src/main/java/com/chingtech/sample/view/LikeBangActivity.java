@@ -18,7 +18,6 @@ import com.chingtech.sample.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import chingtech.library.interfaces.SmallBangListener;
 import chingtech.library.widget.SmallBang;
 
 /**
@@ -142,7 +141,7 @@ public class LikeBangActivity extends BaseActivity {
     }
 
     public void addNumber(View view) {
-        mSmallBang.bang(view, new SmallBangListener() {
+        mSmallBang.bang(view, new SmallBang.SmallBangListener() {
             @Override
             public void onAnimationStart() {
             }
@@ -161,7 +160,7 @@ public class LikeBangActivity extends BaseActivity {
 
     public void redText(View view) {
         mText.setTextColor(0xFFCD8BF8);
-        mSmallBang.bang(view, 50, new SmallBangListener() {
+        mSmallBang.bang(view, 50, new SmallBang.SmallBangListener() {
             @Override
             public void onAnimationStart() {
             }
@@ -182,7 +181,7 @@ public class LikeBangActivity extends BaseActivity {
             mImage.setImageResource(R.drawable.heart);
         }
         mSmallBang.bang(view);
-        mSmallBang.setmListener(new SmallBangListener() {
+        mSmallBang.setmListener(new SmallBang.SmallBangListener() {
             @Override
             public void onAnimationStart() {
             }

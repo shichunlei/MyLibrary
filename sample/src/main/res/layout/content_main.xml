@@ -539,6 +539,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/fl_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -686,6 +687,14 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <chingtech.library.widget.PeriscopeLayout
+        android:id="@+id/periscope"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:pl_duration="3000"
+        app:pl_enter_duration="300"
+        app:pl_scale="1.0" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

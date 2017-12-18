@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import chingtech.library.interfaces.SmallBangListener;
-
 /**
  * MyLibrary
  * Package chingtech.library.widget
@@ -292,5 +290,17 @@ public class SmallBang extends View {
     class Dot {
         int startColor;
         int endColor;
+    }
+
+    public interface SmallBangListener {
+        /**
+         * Notifies the start of the animation.
+         */
+        void onAnimationStart();
+
+        /**
+         * Notifies the end of the animation.
+         */
+        void onAnimationEnd();
     }
 }

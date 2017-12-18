@@ -65,7 +65,7 @@ public class PatternLockActivity extends BaseActivity {
                 password = (String) SPUtils.get(context, "pattern_lock", "", "DEMO");
                 if (pwd.equals(password)) {
                     mPatternLockView.clearPattern();
-                    openActivity(MainActivity.class, true);
+                    openActivity(LoginActivity.class, true);
                 } else {
                     mPatternLockView.clearPattern();
                     showToast("密码错误");

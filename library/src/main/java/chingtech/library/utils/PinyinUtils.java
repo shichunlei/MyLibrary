@@ -1,41 +1,33 @@
 package chingtech.library.utils;
 
-
-import android.util.Log;
-
 /**
- * 主要功能：将汉字转换成拼音工具类
- *
- * @Prject: CommonUtilLibrary
- * @Package: com.jingewenku.abrahamcaijin.commonutil
- * @author: AbrahamCaiJin
- * @date: 2017年05月03日 16:37
- * @Copyright: 个人版权所有
- * @Company:
- * @version: 1.0.0
+ * <p>
+ * *    ***********    ***********    **
+ * *    ***********    ***********    **
+ * *    **             **             **
+ * *    **             **             **
+ * *    **             **             **
+ * *    ***********    **             **
+ * *    ***********    **             **
+ * *             **    **             **
+ * *             **    **             **
+ * *             **    **             **
+ * *    ***********    ***********    ***********
+ * *    ***********    ***********    ***********
+ * </p>
+ * MyLibrary
+ * Package chingtech.library.utils
+ * Description: 拼音相关工具类
+ * Created by 师春雷
+ * Created at 17/12/16 上午9:09
  */
-public class CharacterParser {
+public class PinyinUtils {
 
-    private static CharacterParser appcharacterParser = new CharacterParser();
-
-    private StringBuilder buffer;
-
-    private String resource;
-
-    //单例对象
-    public static CharacterParser getAppCharacterParserInstance() {
-        return appcharacterParser;
+    private PinyinUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public String getResource() {
-        return resource;
-    }
-
-    public void setResource(String resource) {
-        this.resource = resource;
-    }
-
-    private static int[] pyvalue = new int[] {-20319, -20317, -20304, -20295, -20292, -20283,
+    private static int[] pinyinValue = new int[] {-20319, -20317, -20304, -20295, -20292, -20283,
             -20265, -20257, -20242, -20230, -20051, -20036, -20032, -20026, -20002, -19990, -19986,
             -19982, -19976, -19805, -19784, -19775, -19774, -19763, -19756, -19751, -19746, -19741,
             -19739, -19728, -19725, -19715, -19540, -19531, -19525, -19515, -19500, -19484, -19479,
@@ -73,8 +65,7 @@ public class CharacterParser {
             -10519, -10331, -10329, -10328, -10322, -10315, -10309, -10307, -10296, -10281, -10274,
             -10270, -10262, -10260, -10256, -10254};
 
-
-    public static String[] pystr = new String[] {"a", "ai", "an", "ang", "ao", "ba", "bai", "ban",
+    private static String[] pinyin = new String[] {"a", "ai", "an", "ang", "ao", "ba", "bai", "ban",
             "bang", "bao", "bei", "ben", "beng", "bi", "bian", "biao", "bie", "bin", "bing", "bo",
             "bu", "ca", "cai", "can", "cang", "cao", "ce", "ceng", "cha", "chai", "chan", "chang",
             "chao", "che", "chen", "cheng", "chi", "chong", "chou", "chu", "chuai", "chuan",
@@ -109,9 +100,8 @@ public class CharacterParser {
             "zhen", "zheng", "zhi", "zhong", "zhou", "zhu", "zhua", "zhuai", "zhuan", "zhuang",
             "zhui", "zhun", "zhuo", "zi", "zong", "zou", "zu", "zuan", "zui", "zun", "zuo"};
 
-
     //将汉字转成ASCII码
-    private int getChsAscii(String chs) {
+    private static int getChsAscii(String chs) {
         int asc = 0;
         try {
             byte[] bytes = chs.getBytes("gb2312");
@@ -128,48 +118,93 @@ public class CharacterParser {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("TAG", e.getMessage().toString());
+            LogUtils.e("TAG", e.getMessage().toString());
         }
         return asc;
     }
 
-    //单字解析
-    public String convert(String str) {
-        String result = null;
-        int    ascii  = getChsAscii(str);
-        if (ascii > 0 && ascii < 160) {
-            result = String.valueOf((char) ascii);
+    /**
+     * 单个汉字转成拼音
+     *
+     * @param cc 单个汉字(Chinese character)
+     * @return 如果字符串长度是1返回的是对应的拼音，否则返回{@code null}
+     */
+    public static String oneCc2Pinyin(String cc) {
+        int ascii = getChsAscii(cc);
+        if (ascii == -1) {
+            return null;
+        }
+        String ret = null;
+        if (0 <= ascii && ascii <= 127) {
+            ret = String.valueOf((char) ascii);
         } else {
-            for (int i = (pyvalue.length - 1); i >= 0; i--) {
-                if (pyvalue[i] <= ascii) {
-                    result = pystr[i];
+            for (int i = pinyinValue.length - 1; i >= 0; i--) {
+                if (pinyinValue[i] <= ascii) {
+                    ret = pinyin[i];
                     break;
                 }
             }
         }
-        return result;
+        return ret;
     }
 
-    //词组解析
-    public String getSelling(String chs) {
-        String key, value;
-        buffer = new StringBuilder();
-        for (int i = 0; i < chs.length(); i++) {
-            key = chs.substring(i, i + 1);
-            if (key.getBytes().length >= 2) {
-                value = convert(key);
-                if (value == null) {
-                    value = "unknown";
-                }
-            } else {
-                value = key;
-            }
-            buffer.append(value);
+    /**
+     * 获取第一个汉字首字母
+     *
+     * @param ccs 汉字字符串(Chinese characters)
+     * @return 拼音
+     */
+    public static String getPinyinFirstLetter(String ccs) {
+        if (ccs == null || ccs.trim().length() <= 0) {
+            return null;
         }
-        return buffer.toString();
+        String firstCc, py;
+        firstCc = ccs.substring(0, 1);
+        py = oneCc2Pinyin(firstCc);
+        if (py == null) {
+            return null;
+        }
+        return py.substring(0, 1);
     }
 
-    public String getSpelling() {
-        return this.getSelling(this.getResource());
+    /**
+     * 汉字转拼音
+     *
+     * @param ccs 汉字字符串(Chinese characters)
+     * @return 拼音
+     */
+    public static String ccs2Pinyin(String ccs) {
+        String        cc, py;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ccs.length(); i++) {
+            cc = ccs.substring(i, i + 1);
+            py = oneCc2Pinyin(cc);
+            if (py == null) {
+                py = "?";
+            }
+            sb.append(py);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 汉字转拼音
+     *
+     * @param ccs   汉字字符串
+     * @param split 汉字拼音之间的分隔符
+     * @return 拼音
+     */
+    public static String ccs2Pinyin(String ccs, String split) {
+        String        cc, py;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ccs.length(); i++) {
+            cc = ccs.substring(i, i + 1);
+            py = oneCc2Pinyin(cc);
+            if (py == null) {
+                py = "?";
+            }
+            sb.append(py).append(split);
+        }
+        return sb.toString();
     }
 }
