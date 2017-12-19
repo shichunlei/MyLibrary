@@ -168,6 +168,12 @@
         <activity
             android:name=".view.AnimtionSampleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.baidu_tts.MiniActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.baidu_tts.SynthActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".service.UpdateService" />
     </application>

@@ -26,6 +26,8 @@ import com.bumptech.glide.Glide;
 import com.chingtech.sample.R;
 
 import com.chingtech.sample.service.UpdateService;
+import com.chingtech.sample.view.baidu_tts.MiniActivity;
+import com.chingtech.sample.view.baidu_tts.SynthActivity;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
 import java.math.BigDecimal;
@@ -247,8 +249,9 @@ public class MainActivity extends BaseActivity {
 
         findViewById(R.id.btn_dialog2).setOnClickListener(view -> {
             dialog = new AlertDialog(MainActivity.this).builder();
-            dialog.setTitle("Title").setMsg("Message").setNegativeButton("", view14 -> {
-            }).setPositiveButton("", null).show();
+            dialog.setTitle("Title").setMsg("百度语音合成").setNegativeButton("简化版", v -> {
+                openActivity(MiniActivity.class, false);
+            }).setPositiveButton("合成Demo", v -> openActivity(SynthActivity.class, false)).show();
         });
 
         findViewById(R.id.btn_dialog3).setOnClickListener(view -> {

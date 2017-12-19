@@ -25,6 +25,8 @@ import com.baidu.ocr.ui.camera.CameraActivity;
 import com.chingtech.sample.R;
 import com.chingtech.sample.service.RecognizeService;
 
+import static com.chingtech.sample.Constant.appKey;
+import static com.chingtech.sample.Constant.secretKey;
 import static com.chingtech.sample.FileUtil.getSaveFile;
 
 /**
@@ -99,7 +101,7 @@ public class OcrMainActivity extends BaseActivity {
                 error.printStackTrace();
                 showDialog(context, "AK，SK方式获取token失败" + error.getMessage());
             }
-        }, this, "你的AK", "你的SK");
+        }, this, appKey, secretKey);
     }
 
     private void initAccessToken() {

@@ -1,6 +1,7 @@
 package com.chingtech.sample.view;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -41,6 +42,8 @@ public class LoginActivity extends BaseActivity {
     LinearLayout parent_ll;
     @BindView(R.id.no_pass_login)
     TextView     no_pass_login;
+    @BindView(R.id.login)
+    Button       login;
 
     @Override
     protected void init() {
@@ -57,6 +60,8 @@ public class LoginActivity extends BaseActivity {
                 no_pass_login.setText("使用账户登录");
             }
         });
+
+        login.setOnClickListener(view -> openActivity(MainActivity.class, true));
     }
 
     @Override
