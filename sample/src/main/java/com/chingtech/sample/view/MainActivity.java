@@ -21,6 +21,8 @@ import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.ConversionUtils;
 import chingtech.library.widget.*;
 import chingtech.library.widget.SearchView;
+import chingtech.library.widget.bottommenu.BottomMenu;
+import chingtech.library.widget.bottommenu.BottomMenuItem;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import com.bumptech.glide.Glide;
 import com.chingtech.sample.R;
@@ -117,6 +119,8 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.timer)
     TextView timer;
+
+    private BottomMenu mBottomMenu;
 
     private MyCountDownTimer mc;
 
@@ -334,7 +338,8 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.bottom_dialog2).setOnClickListener(view -> {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout, null);
+            View           v        = LayoutInflater.from(MainActivity.this)
+                                                    .inflate(R.layout.layout, null);
             final EditText username = v.findViewById(R.id.edittxt_username);
             final EditText phone    = v.findViewById(R.id.edittxt_phone);
             final EditText password = v.findViewById(R.id.edittxt_password);
@@ -352,6 +357,27 @@ public class MainActivity extends BaseActivity {
                          .setCancel("取消", null)
                          .show();
         });
+
+        mBottomMenu = new BottomMenu.Builder().attachToActivity(MainActivity.this)
+                                              .addMenuItem(new BottomMenuItem("广场",
+                                                                              getResources().getDrawable(
+                                                                             R.drawable.ic_home_white_24dp)))
+                                              .addMenuItem(new BottomMenuItem("私密",
+                                                                              getResources().getDrawable(
+                                                                             R.drawable.ic_notifications_white_24dp)))
+                                              .addMenuItem(new BottomMenuItem("家庭圈",
+                                                                              getResources().getDrawable(
+                                                                             R.drawable.ic_place_white_24dp)))
+                                              .addMenuItem(new BottomMenuItem("私密",
+                                                                              getResources().getDrawable(
+                                                                             R.drawable.ic_search_white_24dp)))
+                                              .addMenuItem(new BottomMenuItem("家庭圈",
+                                                                              getResources().getDrawable(
+                                                                             R.drawable.ic_settings_white_24dp)))
+
+                                              .setOnItemClickListener((bottomMenu, position) -> showToast(
+                                                "你点击了第" + position + "个位置"))
+                                              .build();
     }
 
     @Override
@@ -599,6 +625,10 @@ public class MainActivity extends BaseActivity {
                             showToast("Action");
                         })
                         .show();
+
+                if (mBottomMenu != null) {
+                    mBottomMenu.show();
+                }
                 break;
 
             case R.id.imgFrontCard:
