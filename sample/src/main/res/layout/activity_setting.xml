@@ -108,5 +108,11 @@
             app:textPadding="7dp"
             app:textSize="12sp"
             app:thumbSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SwitchView的使用" />
     </LinearLayout>
 </LinearLayout>

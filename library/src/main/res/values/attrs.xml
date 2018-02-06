@@ -381,6 +381,21 @@
         <attr format="dimension" name="text_selected_size" />
     </declare-styleable>
 
+    <declare-styleable name="SwitchView">
+        <attr format="dimension" name="xRadian" />      <!-- 圆角弧度 -->
+        <attr format="float" name="xASPECTRATIO" /><!-- 宽高比 -->
+        <attr format="float" name="xSLIDERRATIO" /><!-- 滑块与背景宽度比 -->
+        <attr format="dimension" name="xIconWidth" /><!-- 图片宽度 -->
+        <attr format="dimension" name="xIconHeight" /><!-- 图片高度 -->
+        <attr format="color" name="xBackgroundFromColor" /><!-- 背景起始颜色 -->
+        <attr format="color" name="xBackgroundToColor" /><!-- 背景终止颜色 -->
+        <attr format="color" name="xSliderFromColor" /><!-- 滑块起始颜色 -->
+        <attr format="color" name="xSliderToColor" /><!-- 滑块终止颜色 -->
+        <attr format="reference" name="xLeftIcon" /><!-- 滑块滑动时间 -->
+        <attr format="reference" name="xRightIcon" /><!-- 左侧图片 -->
+        <attr format="integer" name="xChangedTime" /><!-- 右侧图片 -->
+    </declare-styleable>
+
     <declare-styleable name="StateView">
         <attr format="reference" name="emptyResource" />
         <attr format="reference" name="retryResource" />

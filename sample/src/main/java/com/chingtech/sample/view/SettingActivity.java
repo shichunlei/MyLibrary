@@ -118,7 +118,7 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_pattern_lock, R.id.tv_pin_lock})
+    @OnClick({R.id.tv_pattern_lock, R.id.tv_pin_lock, R.id.btn_switch})
     public void onEvent(View view) {
         switch (view.getId()) {
             case R.id.tv_pattern_lock:
@@ -126,6 +126,9 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.tv_pin_lock:
                 openActivity(PinLockActivity.class, "flag", "setting", false);
+                break;
+            case R.id.btn_switch:
+                openActivity(SwitchSampleActivity.class, false);
                 break;
         }
 

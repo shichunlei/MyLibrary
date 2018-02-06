@@ -23,8 +23,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import chingtech.library.R;
-import chingtech.library.utils.ScreenUtils;
 import chingtech.library.utils.StringUtils;
+
+import static chingtech.library.utils.ScreenUtils.dp2px;
+import static chingtech.library.utils.ScreenUtils.sp2px;
 
 /**
  * MyLibrary
@@ -57,7 +59,7 @@ public class WaveLoadingView extends View {
     private static final float DEFAULT_WAVE_SHIFT_RATIO        = 0.0f;
     private static final int   DEFAULT_WAVE_PROGRESS_VALUE     = 50;
     private static final int   DEFAULT_WAVE_COLOR              = Color.parseColor("#212121");
-    private static final int   DEFAULT_WAVE_BACKGROUND_COLOR   = Color.TRANSPARENT;
+    private static final int   DEFAULT_WAVE_BACKGROUND_COLOR   = Color.parseColor("#00000000");
     private static final int   DEFAULT_TITLE_COLOR             = Color.parseColor("#212121");
     private static final int   DEFAULT_STROKE_COLOR            = Color.TRANSPARENT;
     private static final float DEFAULT_BORDER_WIDTH            = 0;
@@ -124,7 +126,7 @@ public class WaveLoadingView extends View {
     private ObjectAnimator waveShiftAnim;
     private AnimatorSet    mAnimatorSet;
 
-    private Context context;
+    private Context mContext;
 
     // Constructor & Init Method.
     public WaveLoadingView(final Context context) {
@@ -141,7 +143,7 @@ public class WaveLoadingView extends View {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        this.context = context;
+        mContext = context;
         // Init Wave.
         mShaderMatrix = new Matrix();
         mWavePaint = new Paint();
@@ -197,7 +199,7 @@ public class WaveLoadingView extends View {
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_borderWidth,
-                                        ScreenUtils.dp2px(DEFAULT_BORDER_WIDTH)));
+                                        dp2px(DEFAULT_BORDER_WIDTH)));
         mBorderPaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_borderColor,
                                                   DEFAULT_WAVE_COLOR));
 
@@ -209,7 +211,7 @@ public class WaveLoadingView extends View {
         mTopTitlePaint.setAntiAlias(true);
         mTopTitlePaint.setTextSize(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopSize,
-                                        ScreenUtils.sp2px(DEFAULT_TITLE_TOP_SIZE)));
+                                        sp2px(DEFAULT_TITLE_TOP_SIZE)));
 
         mTopTitleStrokePaint = new Paint();
         mTopTitleStrokePaint.setColor(
@@ -217,7 +219,7 @@ public class WaveLoadingView extends View {
                                     DEFAULT_STROKE_COLOR));
         mTopTitleStrokePaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopStrokeWidth,
-                                        ScreenUtils.dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
+                                        dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
         mTopTitleStrokePaint.setStyle(Paint.Style.STROKE);
         mTopTitleStrokePaint.setAntiAlias(true);
         mTopTitleStrokePaint.setTextSize(mTopTitlePaint.getTextSize());
@@ -233,7 +235,7 @@ public class WaveLoadingView extends View {
         mCenterTitlePaint.setAntiAlias(true);
         mCenterTitlePaint.setTextSize(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterSize,
-                                        ScreenUtils.sp2px(DEFAULT_TITLE_CENTER_SIZE)));
+                                        sp2px(DEFAULT_TITLE_CENTER_SIZE)));
 
         mCenterTitleStrokePaint = new Paint();
         mCenterTitleStrokePaint.setColor(
@@ -241,7 +243,7 @@ public class WaveLoadingView extends View {
                                     DEFAULT_STROKE_COLOR));
         mCenterTitleStrokePaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterStrokeWidth,
-                                        ScreenUtils.dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
+                                        dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
         mCenterTitleStrokePaint.setStyle(Paint.Style.STROKE);
         mCenterTitleStrokePaint.setAntiAlias(true);
         mCenterTitleStrokePaint.setTextSize(mCenterTitlePaint.getTextSize());
@@ -257,7 +259,7 @@ public class WaveLoadingView extends View {
         mBottomTitlePaint.setAntiAlias(true);
         mBottomTitlePaint.setTextSize(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomSize,
-                                        ScreenUtils.sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
+                                        sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
 
         mBottomTitleStrokePaint = new Paint();
         mBottomTitleStrokePaint.setColor(
@@ -265,7 +267,7 @@ public class WaveLoadingView extends View {
                                     DEFAULT_STROKE_COLOR));
         mBottomTitleStrokePaint.setStrokeWidth(
                 attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomStrokeWidth,
-                                        ScreenUtils.dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
+                                        dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
         mBottomTitleStrokePaint.setStyle(Paint.Style.STROKE);
         mBottomTitleStrokePaint.setAntiAlias(true);
         mBottomTitleStrokePaint.setTextSize(mBottomTitlePaint.getTextSize());
@@ -294,8 +296,7 @@ public class WaveLoadingView extends View {
             mShaderMatrix.setScale(1, mAmplitudeRatio / DEFAULT_AMPLITUDE_RATIO, 0,
                                    mDefaultWaterLevel);
             // Translate shader according to waveShiftRatio and waterLevelRatio.
-            // This decides the start position(waveShiftRatio for x, waterLevelRatio for y) of
-            // waves.
+            // This decides the start position(waveShiftRatio for x, waterLevelRatio for y) of waves.
             mShaderMatrix.postTranslate(mWaveShiftRatio * getWidth(),
                                         (DEFAULT_WATER_LEVEL_RATIO - mWaterLevelRatio)
                                                 * getHeight());
@@ -438,8 +439,7 @@ public class WaveLoadingView extends View {
 
     private void updateWaveShader() {
         // IllegalArgumentException: width and height must be > 0 while loading Bitmap from View
-        // http://stackoverflow.com/questions/17605662/illegalargumentexception-width-and-height
-        // -must-be-0-while-loading-bitmap-from
+        // http://stackoverflow.com/questions/17605662/illegalargumentexception-width-and-height-must-be-0-while-loading-bitmap-from
         if (bitmapBuffer == null || haveBoundsChanged()) {
             if (bitmapBuffer != null) {
                 bitmapBuffer.recycle();
@@ -710,7 +710,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setTopTitleSize(float topTitleSize) {
-        mTopTitlePaint.setTextSize(ScreenUtils.sp2px(topTitleSize));
+        mTopTitlePaint.setTextSize(sp2px(topTitleSize));
     }
 
     public float getsetTopTitleSize() {
@@ -718,7 +718,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setCenterTitleSize(float centerTitleSize) {
-        mCenterTitlePaint.setTextSize(ScreenUtils.sp2px(centerTitleSize));
+        mCenterTitlePaint.setTextSize(sp2px(centerTitleSize));
     }
 
     public float getCenterTitleSize() {
@@ -726,7 +726,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setBottomTitleSize(float bottomTitleSize) {
-        mBottomTitlePaint.setTextSize(ScreenUtils.sp2px(bottomTitleSize));
+        mBottomTitlePaint.setTextSize(sp2px(bottomTitleSize));
     }
 
     public float getBottomTitleSize() {
@@ -734,7 +734,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setTopTitleStrokeWidth(float topTitleStrokeWidth) {
-        mTopTitleStrokePaint.setStrokeWidth(ScreenUtils.dp2px(topTitleStrokeWidth));
+        mTopTitleStrokePaint.setStrokeWidth(dp2px(topTitleStrokeWidth));
     }
 
     public void setTopTitleStrokeColor(int topTitleStrokeColor) {
@@ -742,7 +742,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setBottomTitleStrokeWidth(float bottomTitleStrokeWidth) {
-        mBottomTitleStrokePaint.setStrokeWidth(ScreenUtils.dp2px(bottomTitleStrokeWidth));
+        mBottomTitleStrokePaint.setStrokeWidth(dp2px(bottomTitleStrokeWidth));
     }
 
     public void setBottomTitleStrokeColor(int bottomTitleStrokeColor) {
@@ -750,7 +750,7 @@ public class WaveLoadingView extends View {
     }
 
     public void setCenterTitleStrokeWidth(float centerTitleStrokeWidth) {
-        mCenterTitleStrokePaint.setStrokeWidth(ScreenUtils.dp2px(centerTitleStrokeWidth));
+        mCenterTitleStrokePaint.setStrokeWidth(dp2px(centerTitleStrokeWidth));
     }
 
     public void setCenterTitleStrokeColor(int centerTitleStrokeColor) {

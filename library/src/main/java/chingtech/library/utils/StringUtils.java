@@ -2,7 +2,6 @@ package chingtech.library.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -69,66 +68,7 @@ public class StringUtils {
         return false;
     }
 
-    /**
-     * Judge whether a array is null.
-     *
-     * @param array
-     * @return
-     */
-    public static <T> boolean isEmpty(T[] array) {
-        return (array == null || array.length == 0);
-    }
-
-    /**
-     * Judge whether a array is not null.
-     *
-     * @param array
-     * @return
-     */
-    public static <T> boolean isNotEmpty(T[] array) {
-        return !isEmpty(array);
-    }
-
     private static final String DELIMITER = ",";
-
-    /**
-     * 遍历数组
-     *
-     * @param array
-     * @param <T>
-     * @return
-     */
-    public static <T> String traverseArray(T[] array) {
-        return traverseArray(array, DELIMITER);
-    }
-
-    /**
-     * 遍历数组
-     *
-     * @param array
-     * @param delimiter
-     * @param <T>
-     * @return
-     */
-    public static <T> String traverseArray(T[] array, String delimiter) {
-        if (isNotEmpty(array)) {
-            int           len     = array.length;
-            StringBuilder builder = new StringBuilder(len);
-            int           i       = 0;
-            for (T t : array) {
-                if (t == null) {
-                    continue;
-                }
-                builder.append(t.toString());
-                i++;
-                if (i < len) {
-                    builder.append(delimiter);
-                }
-            }
-            return builder.toString();
-        }
-        return null;
-    }
 
     /**
      * 遍历List
@@ -167,26 +107,6 @@ public class StringUtils {
             return builder.toString();
         }
         return null;
-    }
-
-    /**
-     * 数组转换为List列表
-     *
-     * @param array
-     * @param <T>
-     * @return
-     */
-    public static <T> List<T> arrayToList(T[] array) {
-        if (isEmpty(array)) {
-            return null;
-        }
-
-        List<T> list = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            list.add(array[i]);
-        }
-
-        return list;
     }
 
     /**

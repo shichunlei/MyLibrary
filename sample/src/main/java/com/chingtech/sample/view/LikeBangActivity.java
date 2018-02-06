@@ -40,11 +40,6 @@ public class LikeBangActivity extends BaseActivity {
     @BindView(R.id.text)
     TextView  mText;
 
-    @BindView(R.id.threeState)
-    ThreeStateSwitch threeState;
-    @BindView(R.id.threeState1)
-    ThreeStateSwitch threeState1;
-
     @BindView(R.id.dpv_test)
     DescProgressView descProgressView;
 
@@ -77,17 +72,6 @@ public class LikeBangActivity extends BaseActivity {
         }
 
         mText.setTypeface(FontHelper.get(this, "vazir_b.ttf"));
-
-        ///////////////////////////////////////////
-        threeState.setNormalTextTypeface(FontHelper.get(this, "vazir.ttf"));
-        threeState.setSelectedTextTypeface(FontHelper.get(this, "vazir_b.ttf"));
-
-        threeState1.setNormalTextTypeface(FontHelper.get(this, "vazir.ttf"));
-        threeState1.setSelectedTextTypeface(FontHelper.get(this, "vazir_b.ttf"));
-
-        threeState1.setOnChangeListener(currentState -> {
-            showToast("状态：" + currentState);
-        });
 
         //////////////////////////////////////////
         descs = new ArrayList<>();
