@@ -1,5 +1,6 @@
 package chingtech.library.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -160,6 +161,7 @@ public class IndexLayout extends FrameLayout {
 
     private int     duration     = 1500;
     private int     WHAT_DISMISS = 0x101;
+    @SuppressLint("HandlerLeak")
     private Handler mHandler     = new Handler() {
         @Override
         public void handleMessage(Message msg) {

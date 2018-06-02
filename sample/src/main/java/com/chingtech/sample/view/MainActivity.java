@@ -6,12 +6,17 @@ import static chingtech.library.utils.StringUtils.*;
 import static chingtech.library.utils.TimeUtils.*;
 
 import android.content.*;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
@@ -25,11 +30,10 @@ import chingtech.library.widget.bottommenu.BottomMenu;
 import chingtech.library.widget.bottommenu.BottomMenuItem;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import com.bumptech.glide.Glide;
+import com.chingtech.sample.DBManager;
 import com.chingtech.sample.R;
 
 import com.chingtech.sample.service.UpdateService;
-import com.chingtech.sample.view.baidu_tts.MiniActivity;
-import com.chingtech.sample.view.baidu_tts.SynthActivity;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
 import java.math.BigDecimal;
@@ -158,6 +162,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void init() {
         //设置抽屉DrawerLayout
@@ -254,8 +259,9 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_dialog2).setOnClickListener(view -> {
             dialog = new AlertDialog(MainActivity.this).builder();
             dialog.setTitle("Title").setMsg("百度语音合成").setNegativeButton("简化版", v -> {
-                openActivity(MiniActivity.class, false);
-            }).setPositiveButton("合成Demo", v -> openActivity(SynthActivity.class, false)).show();
+
+            }).setPositiveButton("合成Demo", v -> {
+            }).show();
         });
 
         findViewById(R.id.btn_dialog3).setOnClickListener(view -> {
@@ -361,22 +367,23 @@ public class MainActivity extends BaseActivity {
         mBottomMenu = new BottomMenu.Builder().attachToActivity(MainActivity.this)
                                               .addMenuItem(new BottomMenuItem("广场",
                                                                               getResources().getDrawable(
-                                                                             R.drawable.ic_home_white_24dp)))
+                                                                                      R.drawable.ic_home_white_24dp)))
                                               .addMenuItem(new BottomMenuItem("私密",
                                                                               getResources().getDrawable(
-                                                                             R.drawable.ic_notifications_white_24dp)))
+                                                                                      R.drawable.ic_notifications_white_24dp)))
                                               .addMenuItem(new BottomMenuItem("家庭圈",
                                                                               getResources().getDrawable(
-                                                                             R.drawable.ic_place_white_24dp)))
+                                                                                      R.drawable.ic_place_white_24dp)))
                                               .addMenuItem(new BottomMenuItem("私密",
                                                                               getResources().getDrawable(
-                                                                             R.drawable.ic_search_white_24dp)))
+                                                                                      R.drawable.ic_search_white_24dp)))
                                               .addMenuItem(new BottomMenuItem("家庭圈",
                                                                               getResources().getDrawable(
-                                                                             R.drawable.ic_settings_white_24dp)))
+                                                                                      R.drawable.ic_settings_white_24dp)))
 
-                                              .setOnItemClickListener((bottomMenu, position) -> showToast(
-                                                "你点击了第" + position + "个位置"))
+                                              .setOnItemClickListener(
+                                                      (bottomMenu, position) -> showToast(
+                                                              "你点击了第" + position + "个位置"))
                                               .build();
     }
 
@@ -521,6 +528,133 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void loadData() {
+        // 初始化，只需要调用一次
+        DBManager.initManager(getApplication());
+        // 获取管理对象，因为数据库需要通过管理对象才能够获取
+        DBManager mg = DBManager.getManager();
+        // 通过管理对象获取数据库
+        SQLiteDatabase db = mg.getDatabase("area.db");
+
+        getProvinceList(db);
+        getCityList(db, 1);
+    }
+
+    /**
+     * 从本地数据库获取省份列表
+     *
+     * @return
+     */
+    public List<ProvinceBean> getProvinceList(SQLiteDatabase db) {
+        List<ProvinceBean> proList = new ArrayList<>();
+        try {
+            Cursor cursor = db.rawQuery("select * from Province", null);
+            if (null != cursor) {
+                while (cursor.moveToNext()) {
+                    int    id   = cursor.getInt(cursor.getColumnIndex("id"));
+                    String name = cursor.getString(cursor.getColumnIndex("name"));
+
+                    ProvinceBean bean = new ProvinceBean();
+                    bean.setId(id);
+                    bean.setName(name);
+
+                    proList.add(bean);
+                }
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != db) {
+                //db.close();
+            }
+        }
+        Log.i("TAG", "getProvinceList: " + proList.toString());
+        return proList;
+    }
+
+    /**
+     * 根据身份ID获取城市列表
+     *
+     * @return
+     */
+    public List<City> getCityList(SQLiteDatabase db, int proId) {
+        List<City> proList = new ArrayList<>();
+        try {
+            Cursor cursor = db.rawQuery("select * from City where province_id = " + proId, null);
+            if (null != cursor) {
+                while (cursor.moveToNext()) {
+                    int    id   = cursor.getInt(cursor.getColumnIndex("id"));
+                    String name = cursor.getString(cursor.getColumnIndex("name"));
+
+                    City bean = new City();
+                    bean.setId(id);
+                    bean.setName(name);
+
+                    proList.add(bean);
+                }
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != db) {
+                //db.close();
+            }
+        }
+        Log.i("TAG", "getCityList: " + proList.toString());
+        return proList;
+    }
+
+    public class ProvinceBean {
+        private int    id;
+        private String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "{\"id\":" + id + ", \"name\":\"" + name + "\"}";
+        }
+    }
+
+    public class City {
+        private int    id;
+        private String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "{\"id\":" + id + ", \"name\":\"" + name + "\"}";
+        }
     }
 
     /**
@@ -571,7 +705,7 @@ public class MainActivity extends BaseActivity {
         MenuItem item1 = menu.findItem(R.id.action_search1);
 
         item1.setOnMenuItemClickListener(item -> {
-            openActivity(OcrMainActivity.class, false);
+
             return false;
         });
 
