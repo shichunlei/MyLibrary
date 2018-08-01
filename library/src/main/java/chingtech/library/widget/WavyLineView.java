@@ -73,10 +73,10 @@ public class WavyLineView extends View {
 
     private void init(AttributeSet attrs) {
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.WavyLineView);
-        mColor = ta.getColor(R.styleable.WavyLineView_strokeColor, DEF_COLOR);
-        mPeriod = ta.getFloat(R.styleable.WavyLineView_period, DEF_PERIOD);
-        mAmplitude = ta.getDimensionPixelOffset(R.styleable.WavyLineView_amplitude, DEF_AMPLITUDE);
-        mStrokeWidth = ta.getDimensionPixelOffset(R.styleable.WavyLineView_strokeWidth,
+        mColor = ta.getColor(R.styleable.WavyLineView_wl_strokeColor, DEF_COLOR);
+        mPeriod = ta.getFloat(R.styleable.WavyLineView_wl_period, DEF_PERIOD);
+        mAmplitude = ta.getDimensionPixelOffset(R.styleable.WavyLineView_wl_amplitude, DEF_AMPLITUDE);
+        mStrokeWidth = ta.getDimensionPixelOffset(R.styleable.WavyLineView_wl_strokeWidth,
                                                   (int) dp2px(DEF_STROKE_WIDTH));
         ta.recycle();
 

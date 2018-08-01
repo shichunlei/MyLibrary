@@ -59,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_margin="20dp"
-                        app:strokeColor="@color/arc2" />
+                        app:wl_strokeColor="@color/arc2" />
 
                     <LinearLayout
                         android:id="@+id/ll_period"

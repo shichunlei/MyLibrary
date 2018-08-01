@@ -10,7 +10,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import chingtech.library.base.activity.BaseActivity;
 import chingtech.library.utils.FileUtils;
-import chingtech.library.utils.JsonUtils;
+import com.chingtech.sample.JsonUtils;
 import chingtech.library.utils.LogUtils;
 import chingtech.library.utils.StatusBarHelper;
 import com.chingtech.sample.R;

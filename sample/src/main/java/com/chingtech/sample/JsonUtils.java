@@ -1,4 +1,4 @@
-package chingtech.library.utils;
+package com.chingtech.sample;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

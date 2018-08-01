@@ -533,10 +533,10 @@
 
     <!-- 波浪线 -->
     <declare-styleable name="WavyLineView">
-        <attr format="float|reference" name="period" />
-        <attr format="color|reference" name="strokeColor" />
-        <attr format="dimension|reference" name="amplitude" />
-        <attr format="dimension|reference" name="strokeWidth" />
+        <attr format="float|reference" name="wl_period" />
+        <attr format="color|reference" name="wl_strokeColor" />
+        <attr format="dimension|reference" name="wl_amplitude" />
+        <attr format="dimension|reference" name="wl_strokeWidth" />
     </declare-styleable>
 
     <declare-styleable name="Ripple">
